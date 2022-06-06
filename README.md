@@ -29,7 +29,8 @@ More details about my research can be found at [this page](/pages/research).
 
 ### Group Members
 
-I presently have three students:
+I presently host three students:
+{: .fs-2 }
 
 - **M.D. student (2022-):** Siu, Greta
 - **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
