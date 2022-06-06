@@ -29,3 +29,4 @@ nav_order: 4
 - **Potentially Useful Packages for SED Analysis**
     1. *Galario :* Please check [Tazzari et al. (2018)](https://ui.adsabs.harvard.edu/abs/2018MNRAS.476.4527T/abstract) and this [Github](https://mtazzari.github.io/galario/) page.
     2. *Frankenstein :* Please check [Jenning et al. (2020)](https://ui.adsabs.harvard.edu/abs/2020MNRAS.495.3209J/abstract) and this [Github](https://github.com/discsim/frank) page.
+{: .fs-2 }

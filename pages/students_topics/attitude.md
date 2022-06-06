@@ -15,3 +15,4 @@ nav_order: 2
 6. We are working with colleagues all over the world. Do not discriminate. Do not bug anybody with political issues (if they are willing or eager to discuss, then it is OK to discuss with them. But do not try to make people feel uncomfortable. You need to know when you want to stop it).
 7. If you want someone to understand you or your work, it is your responsibility to explain yourself well. In addition, it should not require so much effort or time to understand you, such that people will tend to give up. Always try to be able to summarize what you are doing in no more than three sentences. 
 8. My recommend letters will be realistic. You can expect a very positive letter if you impress me with your work a few times, otherwise, not.
+{: .fs-2 }

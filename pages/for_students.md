@@ -11,12 +11,16 @@ has_toc: true
 (or those who are interested in joining my group)
 
 First of all, there are people who choose to stay in the academic field because *they do not want to interact with any human beings*. I acknowledge that this is part of the diversity and I fully respect their lifestyle. 
+{: .fs-2 }
 
 However, I try to maintain an inclusive and cooperative working style. Due to the interdisciplinary nature of our works, we are exposed to an extremely wide range of knowledge/skills/technology, and it is unlikely for one Master's or Ph.D. student to be fluent in all of them. Therefore, being cooperative would be extremely critical for you to become successful in my group. For those who prefer not to be socialized, please consider other supervisors (there are supervisors who welcome such kinds of students).
+{: .fs-2 }
 
 
 #### Useful General Information
+
 A minimal skill set you need would be: Linux operation system, LaTEX, one programming language (e.g., Python), general physics, and general communication skills in English (reading/writing/speaking/listening). I do not expect you to know all these at the beginning. But you need to be mentally prepared to pick up the first three shortly, and develop the English communication skills as time goes by.
+{: .fs-2 }
 
 - **Proposal deadlines** 
     1. *Submillimeter Array (SMA):* mid March and September. More in [SMAOC](http://sma1.sma.hawaii.edu/proposing.html).
@@ -40,22 +44,24 @@ A minimal skill set you need would be: Linux operation system, LaTEX, one progra
     3. You can do your work with Python. I used to be using something else but am switching over to Python. For astrophysicists, the most frequently used packages are [astropy](https://www.astropy.org/), [SciPy](https://scipy.org/), [Numpy](https://numpy.org/); we use [matplotlib](https://matplotlib.org/) or [aplpy](https://aplpy.github.io/) to produce publication-level figures. Those plotting packages are very poorly documented. If you have trouble using them, please ask other senior students in my group or ask me. Since all packages are dynamically evolving, it is necessary to maintain your packages using [Anaconda](https://www.anaconda.com/). Start using Anaconda from **day-1**. Otherwise, you will encounter infinite troubles in the future.
 - **Career Planing**
     If you need some advice, you may either discuss it with me or try to contact my former students.
-
+{: .fs-2 }
 
 
 #### Attitude
 
 You are assumed to be a mature person who is able to be responsible for your thesis and your own future. A bit of general advice is to treat people nicely and be helpful, such that people (e.g., me) would feel happy to help you want you need the help. No one is responsible for treating you extra nicely. You better earn it. For a more detailed guideline, see [this page](/pages/students_topics/attitude).
-
+{: .fs-2 }
 
 
 #### Requirement
 
 This should be defined case-by-case. But a general guideline can be found in [this page](/pages/students_topics/requirement).
-
+{: .fs-2 }
 
 #### Specific to Students in Various Research Areas
 
 Embedded for some information that I think can be useful for students on certain topics. It will look like there is a whole lot of work and learning for you, which is true. It is possible to accomplish them. Many of my former students have done so. Please routinely discuss with me your plan and schedule to ensure that you can accomplish what you are supposed to.
+{: .fs-2 }
 
 - For those who are focused on [Interstellar Dust (SED or Polarization)](/pages/students_topics/dust)
+{: .fs-2 }
