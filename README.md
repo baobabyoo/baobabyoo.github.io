@@ -1,5 +1,3 @@
-## Planet-Formation Laboratory
-
 This is *Hauyu Baobab Liu* (呂浩宇). 
 
 I am a researcher who based mostly on the [Submillimeter Array (SMA)](http://sma1.sma.hawaii.edu/smaoc.html), the [Atacama Large Millimeter Array (ALMA)](https://almascience.nao.ac.jp/) and the [Karl G. Jansky Array (JVLA)](https://science.nrao.edu/facilities/vla) to study various aspects about the interstellar medium. My present research focuses on planet-formation.
@@ -20,6 +18,11 @@ I am a researcher who based mostly on the [Submillimeter Array (SMA)](http://sma
 
 
 
+### Research
+
+More details about my research can be found at [this page](/pages/research).
+
+
 ### Group Members
 
 I presently have three students:
@@ -34,7 +37,8 @@ A full list of my present and former group members (and some of their journal pu
 
 ### Publications
 
-The full lists of my publications can be found at [ORCiD](https://orcid.org/0000-0003-2300-2626) or [Publons](https://publons.com/researcher/3928011/hauyu-baobab-liu/).
+The full lists of my publications can be found at [this page](/pages/publications)
+ or [ORCiD](https://orcid.org/0000-0003-2300-2626), or [Publons](https://publons.com/researcher/3928011/hauyu-baobab-liu/).
 
 
 
