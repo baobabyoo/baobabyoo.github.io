@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Interstellar Dust (SED or Polarization)
+title: Attitude
 parent: To my students
 nav_order: 2
 ---

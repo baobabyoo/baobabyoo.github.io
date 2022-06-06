@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Interstellar Dust (SED or Polarization)
+title: Requirement for getting a degree
 parent: To my students
 nav_order: 1
 ---
