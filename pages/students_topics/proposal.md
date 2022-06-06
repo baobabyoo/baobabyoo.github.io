@@ -10,26 +10,26 @@ nav_order: 3
 
 Research is expensive. Why does it matter? That is what you need to convincingly address in your proposal (or application to various positions/jobs).
 
-On most occasions, the reviewers will not be familiar with your work. In addition, they may not want to spend time reading your proposals/applications, at least during the initial screening (to reject the majority of applications). We need to learn to deal with such occasions.
+On most occasions, the reviewers will not be familiar with your work. In addition, during the initial screening (to reject the majority of applications), they may not want to spend time reading your proposals/applications. We need to learn to deal with such occasions.
 
 The general guidelines are:
-- **Start early** Usually, you need to polish your important proposals many times. And sometimes you need to sit on your draft for days or weeks before coming back to polish it with refreshed eyes/mind.
-- **Use a positive tone**
-- **Avoid jargon**
+- **Start early.** Usually, you need to polish your important proposals many times. And sometimes you need to sit on your draft for days or weeks before coming back to polish it with refreshed eyes/mind.
+- **Use a positive tone.**
+- **Avoid jargon.**
     If you do not have a sense of what is jargon, ask your friends who are not in the same research field to proofreading your proposal. Also, do not use too many acronyms. For people who cannot remember the actual meanings of the acronyms, your proposal will become unreadable. 
-- **Spend time preparing nice figures**
+- **Spend time preparing nice figures.**
     1. Anything appearing on your figure should be readable and understandable. The best is that people can pick up most of the ideas without reading into the caption.
     2. Use proper font sizes in the labels. 
     3. One figure should only convey one or two ideas at most. If you have many points to make, create more figures.
     4. If you are making a contour plot, do not entangle the contours of multiple images. Usually, I would not consider presently more than 2 images in a contour plot.
     5. Do not have a big blank space in your figure. Take good advantage of the space you can use.
     6. Try various color-codings or color-maps until your figure appears as a nice designed work. Do not use the saturated default RGB.
-- **Avoid typos and grammatical errors**
-- **Tailor your proposal for the prospective readers** For example, if you know someone is going to review your proposal, then do not attack their work.
-- **Be honest** Do not propose what you are not going to do.
+- **Avoid typos and grammatical errors.**
+- **Tailor your proposal for the prospective readers.** For example, if you know someone is going to review your proposal, then do not attack their work.
+- **Be honest.** Do not propose what you are not going to do.
 
 
-#### Observational Proposal
+### Observational Proposal
 
 OK, so you are coming to Stage-1.
 
@@ -62,8 +62,6 @@ A bad example would be `13CS 5-4 line observations towards molecular cloud G123.
 
 Try not to use more than 200 English words (in most cases, this is the text hard-limit).
 
-This might be a bit about style.
-
 This might be a bit about style. But if you are composing a proposal for the very first time, the following pattern might be something easy to begin with:
 
 1. One or two sentences to provide a big picture of your research area, or to convey the importance and generality of your research.
@@ -74,9 +72,8 @@ This might be a bit about style. But if you are composing a proposal for the ver
 
 The Abstract for my proposal `How to Make an Earth that is Deficient in Water?` is:
 
-```
-The asteroid belt (~2 au from the Sun) in the Solar System is made of solid material that is deficient in water. So are the Earth and Mars. Since these dry solid bodies are located within the 170 K water snowline, we are motivated to consider that they formed in-situ out of a dry path of dust grain coagulation, which implies that water-ice free dust grains are stickier than what used to be considered. In spite that this possibility has been rarely considered in the previous observational frameworks, it is supported by the latest laboratory experiments. To test our hypothesis, it is necessary to probe dust grain sizes inwards of the water snowlines in protoplanetary disks. This is challenging since these regions are very small in general (<1~2 au). We propose the 2-48 GHz radio spectro-polarimetric observations towards the nearest and the brightest FUor-like object L1551IRS5 in which the luminous accretion outburst has significantly enlarged the water snowline. Based on SED analysis and diagnosing dust linear polarization due to self-scattering, we aim to test whether or not the >1 mm sized dust grains predominately reside inwards of the snowline. This unique experiment will fundamentally advance our understanding of terrestrial planet-formation.
-```
+
+`The asteroid belt (~2 au from the Sun) in the Solar System is made of solid material that is deficient in water. So are the Earth and Mars. Since these dry solid bodies are located within the 170 K water snowline, we are motivated to consider that they formed in-situ out of a dry path of dust grain coagulation, which implies that water-ice free dust grains are stickier than what used to be considered. In spite that this possibility has been rarely considered in the previous observational frameworks, it is supported by the latest laboratory experiments. To test our hypothesis, it is necessary to probe dust grain sizes inwards of the water snowlines in protoplanetary disks. This is challenging since these regions are very small in general (<1~2 au). We propose the 2-48 GHz radio spectro-polarimetric observations towards the nearest and the brightest FUor-like object L1551IRS5 in which the luminous accretion outburst has significantly enlarged the water snowline. Based on SED analysis and diagnosing dust linear polarization due to self-scattering, we aim to test whether or not the >1 mm sized dust grains predominately reside inwards of the snowline. This unique experiment will fundamentally advance our understanding of terrestrial planet-formation.`
 
 Once you become familiarized with proposal writing, you can follow your own style. Sometimes, I also immediately point out my experimental setup in the first sentence, for example, `We request to make the first measurement of the linear polarization of the Galactic supermassive black hole, Sgr A*, at ALMA Band 8 and 9. The main science goals are ......` 
 
@@ -86,16 +83,16 @@ Once you become familiarized with proposal writing, you can follow your own styl
 
 
 
-#### Job Application
+### Job Application
 
-##### Ph.D. Position Application
+### Ph.D. Position Application
 
-##### Postdoctoral Position Application
+### Postdoctoral Position Application
 
-###### Normal Postdoc Position
+#### Normal Postdoc Position
 
-###### Independent Fellowship
+#### Independent Fellowship
 
 
 
-##### Faculty Position
+### Faculty Position
