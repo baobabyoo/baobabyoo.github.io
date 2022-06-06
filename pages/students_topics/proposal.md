@@ -9,8 +9,10 @@ nav_order: 3
 ### Proposal Writing
 
 Research is expensive. Why does it matter? That is what you need to convincingly address in your proposal (or application to various positions/jobs).
+{: .fs-1 }
 
 On most occasions, the reviewers will not be familiar with your work. In addition, during the initial screening (to reject the majority of applications), they may not want to spend time reading your proposals/applications. We need to learn to deal with such occasions.
+{: .fs-1 }
 
 The general guidelines are:
 - **Start early.** Usually, you need to polish your important proposals many times. And sometimes you need to sit on your draft for days or weeks before coming back to polish it with refreshed eyes/mind.
@@ -27,6 +29,7 @@ The general guidelines are:
 - **Avoid typos and grammatical errors.**
 - **Tailor your proposal for the prospective readers.** For example, if you know someone is going to review your proposal, then do not attack their work.
 - **Be honest.** Do not propose what you are not going to do.
+{: .fs-1 }
 
 
 ### Observational Proposal
