@@ -44,7 +44,7 @@ The full lists of my publications can be found at [this page](/pages/publication
 
 ### To Students
 
--[Here](/pages/for_students) are some useful information for my students, or those who are interested in pursuing Master's or Ph.D. degrees in my group.
+[Here](/pages/for_students) is some useful information for my students, or those who are interested in pursuing Master's or Ph.D. degrees in my group.
 
 
 ### Contact
