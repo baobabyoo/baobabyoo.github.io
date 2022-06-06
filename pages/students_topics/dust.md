@@ -2,7 +2,7 @@
 layout: default
 title: Interstellar Dust (SED or Polarization)
 parent: To my students
-nav_order: 2
+nav_order: 4
 ---
 
 #### Interstellar Dust (SED or Polarization)
