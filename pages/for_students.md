@@ -68,7 +68,7 @@ A minimal skill set you need would be: Linux operation system, LaTEX, one progra
 
 #### Specific to Students in Various Research Areas
 
--[Interstellar Dust (SED or Polarization)](/students_topics/dust)
+-[Interstellar Dust (SED or Polarization)](/pages/students_topics/dust)
 
 ##### Interstellar Dust (SED or Polarization)
 -**Background Physics**
