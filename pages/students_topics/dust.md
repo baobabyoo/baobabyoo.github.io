@@ -1,3 +1,10 @@
+---
+layout: default
+title: Interstellar Dust (SED or Polarization)
+parent: To my students
+nav_order: 2
+---
+
 #### Interstellar Dust (SED or Polarization)
 
 
@@ -17,6 +24,8 @@
 - **Interferometry**
     1. *Textbook :* It is free to download the textbook [Interferometry and Synthesis in Radio Astronomy](https://link.springer.com/book/10.1007/978-3-319-44431-4) online. You need to read through at least the first 5 chapters.
     2. *Getting hand dirty :* It is good to walk through some of these [CASA Guides](https://casaguides.nrao.edu/index.php?title=ALMAguides). The example with the observations on the [TW Hya](https://casaguides.nrao.edu/index.php?title=TWHydraBand7) protoplanetary disk may be the easiest to begin with. If you work on polarization data, you will need to walk through the case of [3C286](https://casaguides.nrao.edu/index.php?title=3C286_Polarization). If you need to calibrate the JVLA data yourself, go through cases at [here](https://casaguides.nrao.edu/index.php?title=Karl_G._Jansky_VLA_Tutorials).
+    3. *SMA :* The official package for data calibration is [MIR IDL](https://lweb.cfa.harvard.edu/~cqi/mircook.html) although there is some discussion to switch over to [CASA](https://casa.nrao.edu/index.shtml) in the future.
+    4. *Miriad Software Package :* We use it to image the calibrated SMA data or to perform polarization calibration for the SMA data. I found this package to be handy in many occasions and have been using it routinely. I am using a binary distribution that was downloaded from [here](https://www.astro.umd.edu/~teuben/miriad/). I recommend using the latest version compiled for CARMA. A documentation for individual Miriad tasks can be found [here](https://www.atnf.csiro.au/computing/software/miriad/taskindex.html).
 - **Potentially Useful Packages for SED Analysis**
     1. *Galario :* Please check [Tazzari et al. (2018)](https://ui.adsabs.harvard.edu/abs/2018MNRAS.476.4527T/abstract) and this [Github](https://mtazzari.github.io/galario/) page.
     2. *Frankenstein :* Please check [Jenning et al. (2020)](https://ui.adsabs.harvard.edu/abs/2020MNRAS.495.3209J/abstract) and this [Github](https://github.com/discsim/frank) page.

@@ -1,3 +1,11 @@
+---
+layout: default
+title: To my students
+nav_order: 2
+has_children: true
+---
+
+
 ### To my students 
 (or those who are interested in joining my group)
 
