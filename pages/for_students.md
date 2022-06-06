@@ -1,8 +1,14 @@
 ### To my students 
 (or those who are interested in joining my group)
 
+First of all, there are people who choose to staying in the academic field because *they do not want to interact with any human being*. I acknowledge that this is part of the diversity and I fully respect their life style. 
+
+However, I try to maintain an inclusive and cooperative working style. Due to the interdisciplinary nature of our works, we are exposed to an extremely wide range of knowledge/skills/technology, and it is unlikely for one Master's or Ph.D. student to be fluent at all of them. Therefore, being cooperative would be extremely critical for you to become successful in my group. For those who prefer not to be socialized, please consider other supervisor (there are supervisors who welcome such kinds of students).
+
 
 #### Useful General Information
+A minimal skill set you need would be: Linux operation system, LaTEX, one programming language (e.g., Python), general physics, and general communication skills in English (reading/writing/speaking/listening). I do not expect you know all these at the beginning. But you need to be mentally prepared to pick up the first three shortly, and develop the English communication skills as time goes by.
+
 - **Proposal deadlines** 
     1. *Submillimeter Array (SMA):* mid March and September. More in [SMAOC](http://sma1.sma.hawaii.edu/proposing.html).
     2. *Karl G. Jansky Very Large Array (JVLA):* Feb./Aug. 01 every year. More in [My NRAO](https://my.nrao.edu/) (please register an account).
@@ -12,6 +18,10 @@
 - **Literature**
     1. *New papers :* Browse [arXiv/astro-ph](https://arxiv.org/list/astro-ph/new) everyday is a good habit.
     2. *Existing journal papers :* You can use this interface [NASA/ADS](https://ui.adsabs.harvard.edu/classic-form) to find them.
+- **Data Analysis Environment**
+    1. *On Desktops :* We use the [Cent OS](https://www.centos.org/) Linux distribution, which is very similar to Redhat but is free. If you want to learn Linux, a good Chinese documentation can be found at [鳥站](https://linux.vbird.org/). If you do not read Chinese, [this page](https://ryanstutorials.net/linuxtutorial/) may be workable but there should be others.
+    2. *On Laptops :* You can either use [Cent OS](https://www.centos.org/) although I usually recommend [Ubuntu](https://ubuntu.com/).
+    3. *Other OS :* If you insist on using Windows or Mac OSX, you will likely encounter many problems that I have no ideas about how to solve. This is particularly bad when you need to visit other observatories and tentatively work there. I strongly un-recommend to use Windows. In general, I do not recommend to use Mac OSX.
 - **Editing**
     1. We use LaTEX for text editing. A good introduction of Latex can be found [here](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes). But I would recommend simply downloading a template and then start working with it instead of following through the introduction. Please register and use this online interface [Overleaf](https://www.overleaf.com/) such that I can directly revise your works online.
     2. Please use [Grammarly](https://app.grammarly.com/) to check through your text make sure there is no typos or grammatical errors before inviting me to work on it.
@@ -31,7 +41,8 @@
 3. If you want to take off (e.g., for days or weeks), let me know. Discuss with me if you want to take off for more than a week. Do not simply disappear.
 4. If you violate the typical practice of ethics in the academic field (e.g., if you use other people's work but without properly crediting them), or if you miss to meet the requirements in the second or third points multiple times (which are requirements for most of the paid jobs), I may stop paying you.
 5. I will try to pay the amount that I agreed to pay you. But that depends on whether or not I can aquire enough budget from the Ministry of Science and Technology (科技部). We need to maintain our publication records in order to continue acquiring enough budget. In case of not acquiring enough budget, the stipend will be adjusted depending on your contribution.
-6. We are working with colleagues all over the world. Do not discriminate. Do not bug anybody with political issues (if they want to discuss, then it is OK to discuss with them. But do not try to make people feel uncomfortable. You need to know when you want to stop it).
+6. We are working with colleagues all over the world. Do not discriminate. Do not bug anybody with political issues (if they are willing or eager to discuss, then it is OK to discuss with them. But do not try to make people feel uncomfortable. You need to know when you want to stop it).
+7. My recommend letters will be realistic. You can expect a very positive letter if you impress me with your work a few times, otherwise, not.
 
 
 
@@ -52,3 +63,17 @@
     
 -**Course Works**
     I do not care about your grades. Just passing them is fine for me. But if you think you need to teach any subject as a professor in the future, you better do a good job. Most of my colleagues express that they have no time (at all) to read any book during the 5~6 years of postdoc's life.
+
+
+
+#### Specific to Students in Various Research Areas
+
+-[Interstellar Dust (SED or Polarization)](/students_topics/dust)
+
+##### Interstellar Dust (SED or Polarization)
+-**Background Physics**
+    1. *General :* You need to read through this review artical [Hildebrand (1983)](https://ui.adsabs.harvard.edu/abs/1983QJRAS..24..267H/abstract).
+    2. *Dust Polarization :* You need to read through this review artical [Hildebrand (2000)](https://ui.adsabs.harvard.edu/abs/2000PASP..112.1215H/abstract).
+-**Interferometry**
+    1. *Textbook :* It is free to download the textbook [Interferometry and Synthesis in Radio Astronomy](https://link.springer.com/book/10.1007/978-3-319-44431-4) online. You need to read through at least the first 5 chapters.
+    2. *Getting hand dirty :* It is good to walk through some of these [CASA Guides](https://casaguides.nrao.edu/index.php?title=ALMAguides). The example with the observations on the [TW Hya](https://casaguides.nrao.edu/index.php?title=TWHydraBand7) protoplanetary disk may be the easiest to begin with. If you work on polarization data, you will need to walk through the case of [3C286](https://casaguides.nrao.edu/index.php?title=3C286_Polarization).
