@@ -10,4 +10,4 @@ has_toc: true
 
 ### Basic Astrophysics
 
-
+I am making some overviews for certain areas that I know. I may find other places to host the deeper discussion.
