@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Molecular Lines
 parent: Basic Astrophysics
 grand_parent: To my students

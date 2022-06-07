@@ -29,5 +29,5 @@ plugins:
   - jekyll-relative-links
   - jekyll-remote-theme
   
-markdown: maruku
+markdown: kramdown
 
