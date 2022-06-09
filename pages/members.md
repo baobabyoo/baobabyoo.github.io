@@ -8,10 +8,11 @@ has_toc: false
 
 ### Group Members 
 
-- **M.D. student (2022-):** Siu, Greta
+- **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
 - **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
 - **Ph.D. student (2020-):** Terada, Yuka (寺田由佳)
 {: .fs-2 }
+
 
 
 *Former Students*
