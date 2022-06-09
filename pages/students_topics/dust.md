@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Topic- Dust
-parent: To my students
-nav_order: 4
+title: Dust
+parent: Topic
+grand_parent: To my students
+nav_order: 1
 ---
 
 #### Interstellar Dust (SED or Polarization)
