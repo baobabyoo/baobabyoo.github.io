@@ -27,6 +27,7 @@ Besides, if we believe that the Big Bang Nuclear Synthesis (BBNS) theory can der
 
 #### How to observe the interstellar molecules
 Here I just superficially mention a few frequently adopted techniques. I may make deeper discussion about some of them in independent chapters.
+{: .fs-2 }
 
 **(\*Under construction\*)**
 
