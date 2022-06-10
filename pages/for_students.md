@@ -28,6 +28,12 @@ A minimal skill set you need would be: Linux operation system, LaTEX, one progra
     3. *Atacama Large Millimeter Array (ALMA)* Around Apr. 20 every year. More in [ALMA User Portal](https://almascience.nao.ac.jp/).
     4. *Various optical or infrared telescopes:* Mostly in March or September every year.
     5. *Others :* I may once in a while notify you (by E-mails) something worth trying.
+- **(Sub)millimeter molecular line tools** 
+    1. [Splatologue](https://splatalogue.online//): Complete, but no visualization.
+    2. [SMA Passband Visualizer](http://sma1.sma.hawaii.edu/smaPassbandViewer/smaPassbandVis2020A.html): Handy, if you are proposing to the SMA or ALMA Band 5, 6, 7, and 8.\
+    3. [The CDMS database](https://cdms.astro.uni-koeln.de/cdms/portal/): More details about the quantum numbers are explained. Can check partition function.
+- **Other tools for planning observations**
+    1. *target source visibility:*: [STARALT](http://catserver.ing.iac.es/staralt/index.php)
 - **Literature**
     1. *New papers :* Browse [arXiv/astro-ph](https://arxiv.org/list/astro-ph/new) everyday is a good habit.
     2. *Existing journal papers :* You can use this interface [NASA/ADS](https://ui.adsabs.harvard.edu/classic-form) to find them.
