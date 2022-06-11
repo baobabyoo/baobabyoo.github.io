@@ -31,5 +31,5 @@ nav_order: 1
 {: .fs-2 }
     
 -**Course Works**
-    I do not care about your grades. Just passing them is fine for me. But if you think you need to teach any subject as a professor in the future, you better do a good job. Most of my colleagues express that they have no time (at all) to read any book during the 5~6 years of postdoc's life.
+    I do not care about your grades. Just passing them is fine for me. But if you think you need to teach any subject as a professor in the future, you better do a good job. Most of my colleagues express that they have no time (at all) to read any book during the 5~6 years of postdoc's life. So now may be your last chance to prepare yourself.
 {: .fs-2 }
