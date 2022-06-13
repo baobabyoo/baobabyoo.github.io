@@ -79,16 +79,42 @@ There are also optical and infrared interferometers, for example, the [Very Larg
 
 ###### Inside the receiver cabin
 
+#### A little more about interferometry
+
+If you are already getting comfortable with the idea that, a short/long **baseline** in the interferometry array is sampling the angularly more extended/compact emission from a celestial object, I am going to introduce a little more about the underlying mathematical principle. This may help you to get a better idea about our terminology. If you feel this part is hard when reading it for the first time, you can move on to the next section first. Later you can come back to check some concepts, when it is necessary/useful. The full derivation of this principle is involving and should be introduced in a serious course. You may refer to the free textbook  [Interferometry and Synthesis in Radio Astronomy](https://link.springer.com/book/10.1007/978-3-319-44431-4) which I recommend. Also, I strongly recommend watching the videos at [2022 Submillimeter Array Interferometry School](https://lweb.cfa.harvard.edu/sma-school/program/). I am not sure whether or not this link will be permanent. If this link is broken, please let me know.
+{: .fs-2 }
+
+I assume that the three-dimensional coordinates of each telescope in our array are known exactly to bypass some complicated technical details. This assumption usually fair when you are using a modern interferometric observatory.
+{: .fs-2 }
+
+Most of the celestial objects are far enough from us. Therefore, our observations are only sensitive to the projected intensity distribution onto a plane that is perpendicular to our line of sight. In other words, we cannot know whether a sub-structure of our target source is a little closer to us or further ( relative to the mean distance of the bulk of the target source). In the following, we will call this projected plane the *spatial domain* for simplicity. It should be understood that the *spatial domain* is defined by the coordinate systems on the sky instead of those on the ground.
+{: .fs-2 }
+
+**An interferometer array incompletely samples the *spatially Fourier transformed intensity distribution* of a celestial object.**
+{: .fs-2 }
+
+In our terminology, we refer to the Fourier transformed spatial domain as the **uv domain**. The coordinates in the uv domain can be expressed by *(u, v)*. In the spatial domain, the intensity distribution at a frequency *f* is expressed as a scalar function *I<sub>f</sub>(x,y)* of the spatial coordinates *(x, y)*. I will omit the subscript *f* to avoid cluttering. In the uv domain, the intensity distribution is described by a pair of scalar function, namely the amplitude *a(u, v)* and phase *p(u, v)*: *a(u, v)* describes how bright is the emission on the angular scale (and direction) that is represented by the uv coordinates *(u, v)*; *p(u, v)* the angular offset of that emission component from a **phase referencing center** you can choose.
+{: .fs-2 }
+
+Roughly speaking, at each time, the observations of a baseline (i.e., the data taken from a pair of telescopes) let you know the *a(u, v)* and *p(u, v)* at a specific (u, v) coordinate. The separation of *(u, v)* from the origin in the Fourier transformed spatial domain, *(u<sup>2</sup>+v<sup>2</sup>)<sup>1/2</sup>*, which we can **uv distance**, is larger when the baseline is shorter. The position angle of *(u, v)* is determined by the relative orientation between the baseline and the spatial coordinate system in the sky. A baseline aligned in the north-south direction sample the intensity distribution in the north-south direction, and so on.
+{: .fs-2 }
+
+If you feel it is difficult to illustrate a two-dimensional case with an arbitrary intensity distribution *I(x, y)*, let's first look at a simplified case: a one-dimensional sky with only one coordinate *x*.
+{: .fs-2 }
+
+Assuming that the intensity distribution is *I(x)=Acos(kx)* where *A* and *k* are constants. This intensity distribution is obviously peaking at *your chosen origin of coordinate* (i.e., *x*=0), which is your **phase referencing center** in this one-dimensional space.  After you Fourier transform the intensity distribution, you obtain a delta function in the Fourier transformed domain. Mapping to the terminology of interferometry we just introduced, the Fourier transformed one-dimensional intensity distribution is described by the scalar amplitude function *a(k)* that is infinity at the spatial frequency *k* (i.e., the fourier transformed coordinate system) and is zero elsewhere. The scalar phase function *p(k)=0* for all *k*. Note that this delta function should be normalized to *A* after you integrate over the Fourier transformed coordinate. Here, an important concept to remember is that, observing a zero-phase at a certain spatial frequency *k* means that the intensity distribution on the spatial scale corresponding to *k* is centered (in the spatial domain) at your chosen phase referencing center. If you slightly offset the intensity from the phase referencing center to be *Acos(kx + phi)*, you will obtain a non-zero phase a *k* while the normalization of amplitude is unchanged. If the intensity distribution is spatially more extended, that is, if *k* is smaller, then in the Fourier transformed domain you will see the spike located closer to the origin (in the Fourier transformed coordinate system).
+{: .fs-2 }
+
+Now you illustrate that you have a device to make measurements in the Fourier transformed one-dimensional domain. If this device cannot fully sample the spatial frequency *k*, for example, if this device only makes measurements at some discrete *k<sub>i</sub>* (here *i* is just an index) non of which are equal to the *k* defined in your intensity distribution is *I(x)=Acos(kx)*, then all of the *a(k<sub>i</sub>)* and *p(k<sub>i</sub>)* returned by this device are zeros. In this case, the observed intensity distribution is not distinguishable from *I(x)=0*. This device serves as a high- and low-pass filter which leaves you with nothing detectable.
+{: .fs-2 }
+
+Talk about gaussians sources
+{: .fs-2 }
+
+You can illustrate the two-dimensional case similarly. For example, if your celestial object looks like a long strip that is centering at your phase referencing center and is aligning in the north-south direction,  then *p(u, v)* is everywhere zero in the uv domain, while *a(u, v)* is larger at the *(u, v)* coordinates in the Fourier transfomed north-south direction and is smaller in the Fourier transformed east-west direction.
+{: .fs-2 }
+
+ A sample in the uv domain is referred to as a **uv sample**, and the overall uv samples taken from a track of interferometric observations are referred to as our **uv coverage**.
+
+
 #### Observational planning and data calibration
-
-I strongly recommend watching the videos at [2022 Submillimeter Array Interferometry School](https://lweb.cfa.harvard.edu/sma-school/program/). I am not sure whether or not this link will be permanent. If this link is broken, please let me know.
-{: .fs-2 }
-
-In the following introduction, I will first assume that you only have only one target source to observe. I will very briefly introduce the strategy for performing wide-field interferometric mosaic after we go through these basics. 
-{: .fs-2 }
-
-If you are already getting comfortable with the idea that, a short/long **baseline** in the interferometry array is sampling the angularly more extended/compact emission from a celestial object, you may now simply accept the underlying mathematical principle:
-{: .fs-2 }
-
-The derivation of this principle is involving and should be introduced in a serious course.
-{: .fs-2 }
