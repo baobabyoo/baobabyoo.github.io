@@ -58,6 +58,7 @@ The dish collects the incoming light. The bigger the dish size, the more light i
 {: .fs-2 }
 
 The longer you integrate on the target source with the observations, the better sensitivity (i.e., the lower rms noise level) you can achieve. Since the noise follows the Gaussian statistics, the noise level is inversely proportional to the square-root of the on-source integration time.
+{: .fs-2 }
 
 If the total number of telescopes is fixed, enlarging the dish sizes (sometimes we call the dish(es) the **collecting area**) can make you achieve the same noise level within a shorter on-source integration time. Ideally, to yield a specified overall collecting area, it is better to build many small dishes instead of a few big dishes. You will see the reason in the following. Also note that a telescope cannot be arbitrarily small. There needs a minimum space to host the other hardware devices including the receivers and the cryogenic systems for the receivers, etc, which will also be introduced later.
 {: .fs-2 }
