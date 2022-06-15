@@ -11,6 +11,9 @@ nav_order: 9
 *If you want to use interferometry data or would like to chat about some existing interferometric observations, it may be important to take a little effort to memorize the boldfaced parts after making sure that you understand them. They come up very frequently in the conversation.*
 {: .fs-1 }
 
+**After you become a little more familiar with this material, a recommended way of using it is to use the *find* tab of your browser to search for the keywords you are puzzling at**.
+{: .fs-1 }
+
 #### Why interferometry?
 
 Analyzing interferometric data can be hard. It has been a nightmare to many astronomy/astrophysics students. This technique worths 0.5 Nobel Prize ([to Sir Martin Ryle, in 1974](https://www.nobelprize.org/prizes/physics/1974/summary/)).
