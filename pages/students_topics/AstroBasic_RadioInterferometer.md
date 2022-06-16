@@ -153,14 +153,39 @@ Now you illustrate that you have a device to make measurements in the Fourier tr
 Of course, no astronomical sources look like a simple cosine wave. Let's look at a more realistic example but still stay in the one-dimensional world: a one-dimensional Gaussian function that has a standard deviation *b*. What happens after you Fourier transform it? The answer is that it is still a Gaussian that has a standard deviation *w*. *w* is inversely proportional to *b* (in case you are really unfamiliar with Fourier transformation, see the [wiki page](https://en.wikipedia.org/wiki/Fourier_transform)). A spatially compact Gaussian function corresponds to a wide one in the Fourier domain. Now if your device only samples the small spatial frequencies *k<sub>i</sub>* around the plateau of the Fourier transformed Gaussian, you will obtain very similar amplitudes and phases at all of the sampled *k<sub>i</sub>* locations. The Gaussian function varies slowly around the plateau. In this case, if we still need to consider measurement errors, we may not be able to clearly distinguish the measurements from a Fourier transformed delta function (i.e., if the intensity distribution is a delta function in the spatial domain, the amplitude is a constant of *k* in the Fourier domain). Since small *k<sub>i</sub>* corresponds to a large spatial scale, in this case, we say that the device has a too poor **spatial resolution** (or say it has a too big beam) to resolve this Gaussian function. Conversely, if your device only sample very large *k<sub>i</sub>* such that the detected amplitudes are all close to zero, then you may not be able to clearly distinguish the measurement from a blank sky. In this case, we say the device has **resolved out** the Gaussian function.
 {: .fs-2 }
 
-You can illustrate the two-dimensional case similarly. For example, if your celestial object looks like a elongated strip that is centering at your phase referencing center and is aligning in the north-south direction,  then *p(u, v)* is everywhere zero in the uv domain, while *a(u, v)* is larger at the *(u, v)* coordinates in the Fourier transfomed north-south direction and is smaller in the Fourier transformed east-west direction.
+You can illustrate the two-dimensional case similarly. For example, if your celestial object looks like a elongated strip that is centering at your phase referencing center and is aligning in the north-south direction,  then *p(u, v)* is everywhere zero in the uv domain, while *a(u, v)* is larger at the *(u, v)* coordinates in the Fourier transformed north-south direction and is smaller in the Fourier transformed east-west direction.
 {: .fs-2 }
 
 An interferometer is a device to sample *a(u, v)* and *p(u, v)* at some (discrete) *(u, v)* coordinates. A sampled *(u, v)* coordinate is referred to as a **uv sample**, and the overall uv samples taken from a track of interferometric observations are referred to as our **uv coverage**. The magic to extract *a(u, v)* and *p(u, v)* from the signal transmitted from a pair of telescopes is called **correlation**. The hardware or software device to make correlations is called the **correlator**.
  {: .fs-2 }
 
-###### Slightly more about correlator
+###### More about correlator and data storage
+
+In the introduction above, we assumed that the incoming light is monochromatic. This is not the reality. Instead, the incoming light is a superposition of EM waves at various frequencies (or wavelengths).
+ {: .fs-2 }
+
+Remember, we still want to spectrally resolve some molecular or atomic line emission/absorption. We do not always want to approximately view the incoming light as monochromatic EM waves. In fact, in some applications of broad bandwidth observations of continuum emission (e.g., dust thermal emission, synchrotron emission, free-free emission, etc), we are still not supposed to view the incoming light as monochromatic EM waves in spite that there may not be any spectral line for us to resolve. This is because when you superimpose EM waves over a wide range of frequencies, they can cancel each other (e.g., imagining that you are adding many sine or cosine waves together). There is a similar effect when you are integrating the signal over time, if your *(u, v)* coverage changes significantly over time. These effects are namely the [bandwidth and time-averaging smearing](https://ui.adsabs.harvard.edu/abs/1999ASPC..180..371B/abstract).
+ {: .fs-2 }
+
+To mitigate the bandwidth and time-averaging smearing, a radio interferometer array cannot only store the data after making a very long integration. Instead, it needs to break the data stream (in the time domain) into short integrations and store individual of these short integrations. In our terminology, we call the duration of an **integration** the **integration time**. We call a series of consecutive (in the time domain) integrations on one target source (or calibrator source) a **scan**.
+{: .fs-2 }
+
+The better angular resolution you have, the easier it is for you to sense the variation of your *(u, v)* coverage over time. Therefore, you need to use a shorter integration time when your angular resolution is better (i.e., when the synthesized beam size is smaller). But the integration time should be just as short as is needed. If you make the integration time arbitrarily small, i.e., if you store data very frequently, the data filesize will become prohibitively large for any post-processing. Typically, SMA uses 15s or 30s integration time, except that some wide-field mosaics can adopt an integration time that is as short as 5~7 seconds (e.g., [Liu et al. 2012](https://ui.adsabs.harvard.edu/abs/2012ApJ...756..195L/abstract); [Battersby et al. 2020](https://ui.adsabs.harvard.edu/abs/2020ApJS..249...35B/abstract)). ALMA typically uses a 2s integration time. JVLA uses a 3s integration time in the B, C, and D array configuration, and uses a 2s integration time in the A array configuration. The JVLA data archive allows you to bin the data in the time domain to reduce the filesize, before downloading them. The raw data filesize of the JVLA, SMA, and ALMA can be as large as 100 GB.
+{: .fs-2 }
+
+What about the frequency domain? Similar to how we treat the data in the time domain, what we want to do is to divide the data into bins that have small frequency-widths. In our terminology, we call a bin a **spectral channel**. We call a series of consecutive spectral channels a **spectral window**.
+{: .fs-2 }
+
+The electronic signal transmitted from each telescope is a time series (of data). We obtain the information about the frequency domain by Fourier transforming this time series. Making such Fourier transforms demand hardware and/or software devices. In addition, the more spectral channels you have, the larger the data filesize.  Modern radio or (sub)millimeter interferometers such as ALMA or JVLA allow you to sample the IF signal with a few spectral windows. Each spectral window is characterized by a **central frequency**, an **overall frequency width** (i.e., coverage), and a **channel width** (in frequency units). There is some flexibility for you to configure the spectral windows to various overall frequency widths and channel widths. For example, when there is a broad line (e.g., the hydrogen recombination lines, which typically have ~10 km/s linewidths) and a narrow line (e.g., the N<sub>2</sub>D<sup>+</sup> line, which has multiple hyperfine line components each of which can be as narrow as <0.5 km/s), you can resolve them with spectral windows that have different overall frequency and channel widths. The configuration of the spectral windows is limited by the hardware/software capability and the overall data rate.
+{: .fs-2 }
+
+The **correlators** of some observatories make such time-Fourier transform for the signal transmitted from each antenna, and then cross-correlate the signals of every pair of telescopes to obtain *a(u, v)* and *p(u, v)* as functions of frequency. Such correlator is called **FX** correlator, where *F* and *X* stand for *Fourier transform* and *cross-correlation*, respectively. There are also correlators that make the cross-correlation first to obtain the time series of *a(u, v)* and *p(u, v)*, and then make the time-Fourier transform to obtain the information about the frequency domain. Such correlators are called **XF** correlators.
+{: .fs-2 }
+
+Modern correlators look like supercomputers. For example, a picture of the ALMA correlator can be found [here](https://www.almaobservatory.org/en/about-alma/how-alma-works/technologies/the-alma-main-array-correlator/).
+{: .fs-2 }
+
+#### Observational planning
 
 
-
-#### Observational planning and data calibration
+#### Data calibration
