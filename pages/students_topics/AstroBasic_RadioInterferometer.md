@@ -187,5 +187,55 @@ Modern correlators look like supercomputers. For example, a picture of the ALMA 
 
 #### Observational planning
 
+The ground-based astronomical measurements are subject to both the *atmospheric effects* and the *errors in instrumental responses*. These effects can be seen in the time or frequency domain. As we mentioned before, we need to plan the observations in a way such that our data can be calibrated.
+{: .fs-2 }
+
+
+###### Target source loop
+
+The atmosphere deflects the incoming light. When the atmosphere is perturbed, for example, by some turbulent motion in the atmosphere, it will look like the stars are wobbling around their mean locations. In the optical or infrared astronomy, this is described by a quantity called **[seeing](https://en.wikipedia.org/wiki/Astronomical_seeing)**.
+{: .fs-2 }
+
+When the seeing effect is serious, if you take a series of CCD images on a tracked star with very short integrations (i.e., snapshots), the star will locate at different pixels (relative to your tracking center) in different images. If you make a long CCD integration, the star will become a big blur instead of a sharp spot.
+{: .fs-2 }
+
+A similar effect also occurs in your radio or (sub)millimeter interferometric observations. Since the positions of the celestial source are constrained by phase *p(u, v)*, the turbulence in the atmosphere induces phase errors. The longer is a baseline (i.e., roughly speaking, the better angular resolution you use), the more it is sensitive to a small perturbation in the atmosphere. If you try to analyze the phase-uncalibrated data, it will appear like the target source structures are spatially smeared. In most cases, if you try to produce images out of phase-uncalibrated interferometric data, the images will look so rough such that no analysis can be made.
+{: .fs-2 }
+
+ So we need to know *what are the phase errors for each baseline at each time* and then calibrate the phase errors out in the post-processing.
+{: .fs-2 }
+
+To know what are the phase errors at a certain time, we can observe a reference source, in which the location and structure (or say, phase) have been well constrained by the previous observations. We refer to such a reference source as the **gain-phase calibrator** (or simply, **gain calibrator**). Let's call such a previously constrained phase the *true phase*. We can then deduce the phase errors by measuring how much the observed phase deviates from the true phase. Usually, we then plan our observations in a sequence like
+{: .fs-2 }
+
+gain -> target -> gain -> target -> gain -> target -> gain
+{: .fs-2 }
+
+We refer to this sequence of observations as the **target source loop**. The valid target source observations need to be sandwiched by the scans on the gain calibrator(s), such that you can interpolate (in time) the *phase errors you derived from the gain calibrator(s)* to your *target source scans*. If you have multiple target sources that are close by, you can replace *gain -> target -> gain* with either  *gain -> target1 -> gain -> target2 -> gain -> target3 -> gain* or *gain -> target1 -> target2 -> target3 -> gain*, and so on.
+{: .fs-2 }
+
+You need to observe the gain calibrator(s) frequently enough. Otherwise, the phase errors will look like jumping around stochastically and the interpolation will not be possible. Exactly how frequently you need to observe the gain calibrator(s) depends on the weather condition and your angular resolution. Taking the SMA for example, usually the following three scans *gain -> target -> gain* (including slewing time) have to be observed within 15-20 minutes (I personally prefer 15 minutes). We call this duration the **calibration cycle time**. The ALMA observatory plans the calibration cycles for the users. So you do not need to worry about such details. The JVLA is providing a [table](https://science.nrao.edu/facilities/vla/docs/manuals/obsguide/calibration#section-15) (There is only one table in this webpage. Just scroll down to it.) for the recommended calibration cycle time at various wavelengths and array configurations. You can see that in the high-frequency (e.g., 30-50 GHz) operations of the JVLA and in the extended array configuration (e.g., A or B), we need to rapidly switch between the observations on the target source and the gain calibrator. The cycle time of such observations can be as short as ~2 minutes. We refer to such observing strategy as the **fast-switching** technique.
+{: .fs-2 }
+
+If we make an analogy to optical or infrared photometric imaging observations again, this **gain-phase calibration** strategy is like we use a very fast camera to monitor the wobbling motions of a very bright star. Then we *undone* these motions to all of the stars that are near this bright star, before integrating the signals.
+{: .fs-2 }
+
+Is there a tip for choosing the gain calibrator?
+{: .fs-2 }
+
+We need to know its location and structure before making our *calibrated* radio or (sub)millimeter interferometric observations. In general, this is not possible. There is an exception. The high redshift quasars are very far from us, such that they can be approximated as point-sources (note that this assumption sometimes breaks down when we are performing very high angular resolution observations using the JVLA, VLBA, VLBI, or EHT). If we put the phase referencing center on the location of a quasar, then the true *p(u, v)* should be zero and the true *a(u, v)* should be a constant for all probed *(u, v)*. This simplified our derivations of phase errors. The hosts of quasars are supermassive black holes. The flux densities of the quasars can vary on the characteristic timescales that are comparable to the orbital timescales (*t<sub>q</sub>*) of the [innermost stable circular orbits](https://en.wikipedia.org/wiki/Innermost_stable_circular_orbit) around these black holes. The value of *t<sub>q</sub>* is determined by the masses of the host black holes: the more massive a black hole is, the longer is *t<sub>q</sub>*.  For the Galactic supermassive black hole, Sgr A\*, *t<sub>q</sub>* is on the order of some minutes. Most of the quasar hosts are around 100 times more massive than the Sgr A\*, such that their *t<sub>q</sub>* are a few days. Over a few hours' observations, the flux densities of these quasars may be approximated by constants. Therefore, we can also calibrate the time-varying instrumental response of the *a(u, v)* based on the observations of these **gain calibration quasars**.
+{: .fs-2 }
+
+The gain calibrator has to be bright enough such that each of your baselines can detect it at a high signal-to-noise ratio within a relatively short time. In addition, it has to have a small angular separation from your target source, such that (i) the atmospheric effects on your target source can be approximated by the atmospheric effects on this gain calibrator (i.e., they are more or less on the same part of the sky), and (ii) it does not take too much time to slew your telescopes back-and-forth.
+{: .fs-2 }
+
+If you need a very long integration time on the gain calibrator to detect it, for example, a whole night, then you cannot resolve the time dependence of the phase errors which is required in the data calibration. You actually want to spend your precious observing time integrating on your target source instead of the gain calibrator. So we should try to pick a bright gain calibrator unless there is nothing bright near our target source.
+{: .fs-2 }
+
+How bright the gain calibrator needs to be? It depends on the sensitivity of your telescopes. Many modern observatories provide online sensitivity estimators. You can use them to check: *given the total bandwidth of your observations, how bright a source needs to be such that you can achieve 5~10 sigma detection in ~2~5 minutes*. Otherwise, you can simply ask the experienced users of the observatories, e.g., they may say, for the SMA, picking a >0.7 Jy source would be OK.
+{: .fs-2 }
+
+There are occasions that the structures of our target sources have been constrained by previous observations (e.g., at other wavelengths), or the structures are relatively simple (e.g., it is dominated by a bright point-like maser source at a certain frequency). In such cases, we can also use the observations on the target source to derive phase errors. We call this technique **self-calibration**. Usually, it is an iterative procedure between reconstructing the structures of your target sources and refining the derivations of the phase errors. If you can self-calibrate the target sources, you may observe the gain calibrator less frequently. This is very important to enable some high-frequency projects of the JVLA. However, mathematically, there is no guarantee that the self-calibration iterations will converge (or converge correctly). Moreover, after performing self-calibration, you will lose the information of absolute astrometry (i.e., the precise location of your target source) in spite that the structures may be recovered. The astrometry problem may not always be serious if your observations are redundant (e.g., if you are using a big array such as ALMA). If you try to compare the observations at multiple frequencies, you should think carefully whether or not you want to self-calibrate your data, or whether or not you want to trust the scientific results derived based on self-calibrated data. Losing astrometry at some frequency bands sometimes can make your derivation of spectral indices wrong, for example.
+{: .fs-2 }
 
 #### Data calibration
