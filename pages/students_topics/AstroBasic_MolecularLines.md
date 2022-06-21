@@ -6,9 +6,9 @@ grand_parent: To my students
 nav_order: 1
 ---
 
-### Molecular Lines
+## Molecular Lines
 
-#### What are the molecules are where are they
+### What are the molecules are where are they
 Molecular clouds are interstellar gas structures that are sufficiently dense to shield their interior against interstellar UV radiation. Inside molecular clouds, molecular hydrogen (H<sub>2</sub>) can stably exist rather than being photo-dissociated or photo-ionized (e.g., to atomic hydrogen or H<sup>+</sup>). The total mass of a molecular cloud is dominated by molecular hydrogen. Typically, the molecular gas volume number-density n<sub>H2</sub>, i.e., the number of  H<sub>2</sub> molecules in a cubic centimeter, is higher than 10<sup>3</sup> cm<sup>-3</sup>. The gas temperature is usually around 20 K (e.g., [Lu et al. 2014](https://ui.adsabs.harvard.edu/abs/2014ApJ...790...84L/abstract); [Lin et al. 2017](https://ui.adsabs.harvard.edu/abs/2017ApJ...840...22L/abstract)). In some dense starless cores, the gas temperature can be as low as ~10 K (e.g., [Crapsi et al. 2007](https://ui.adsabs.harvard.edu/abs/2007A%26A...470..221C/abstract); [Lin et al. 2022b](https://ui.adsabs.harvard.edu/abs/2022arXiv220509806L/abstract)). Close to some forming young stars the gas temperature can become higher than >100 K due to radiative heating (e.g., [Lin et al. 2022a](https://ui.adsabs.harvard.edu/abs/2022A%26A...658A.128L/abstract)).
 {: .fs-2 }
 
@@ -28,14 +28,14 @@ The formation and destruction of the complex organic molecules are tightly relat
 Besides, if we believe that the Big Bang Nuclear Synthesis (BBNS) theory can derive the abundance of all atomic species precisely, then we have to accept that we have not found all of the carriers of sulfur and lithium. This is a long-standing puzzle. It is relatively difficult to observe lithium from ground-based observatories. It has been popular to observe the sulfur-bearing molecules using the ground-based millimeter observatories and discuss their chemical networks. There used to be debates like whether or not OCS forms on the surfaces of the dust grains is only released to the gas phase when the dust grains are heated or are sputtered in shocks, e.g., [Charnley (1997)](https://ui.adsabs.harvard.edu/abs/1997ApJ...481..396C/abstract). One of the earliest (to my knowledge) clean cases that spatially resolved enriched OCS in shocks is the Submillimeter array (SMA) observations reported by [Liu et al. (2012)](https://ui.adsabs.harvard.edu/abs/2012ApJ...756...10L/abstract). The follow-up observations using the Atacama Large Millimeter/submillimeter Array (ALMA) have considerably improve the quality of this image ([Minh et al. 2016](https://ui.adsabs.harvard.edu/abs/2016ApJ...824...99M/abstract)).
 {: .fs-2 }
 
-#### How to observe the interstellar molecules
+### How to observe the interstellar molecules
 Here I just superficially mention a few frequently adopted techniques. I may make deeper discussion about some of them in independent chapters.
 {: .fs-2 }
 
 **(\*Under construction\*)**
 
 
-#### The formation of molecular lines
+### The formation of molecular lines
 Usually, I do not worry so much about chemistry. But even if you do not care about chemistry at all, it is still very important to learn about molecular line emission. The H<sub>2</sub> molecule has no dipole moment  such that it cannot emit efficiently. In spite that H<sub>2</sub> dominates the molecular cloud mass, it is not possible for us to directly probe the physical properties of a molecular cloud by observing H<sub>2</sub>. Instead, we observe various molecular lines and regard them as *tracers* of physical quantities in a molecular cloud.
 {: .fs-2 }
 
@@ -48,7 +48,7 @@ A specific molecule in the space (let's call it X molecule for this moment, whic
 Now, if you have an ensemble of X molecules (i.e., a very large number of them), and if you know what are the energy states of an X molecule, for example, by a quantum mechanical recipe that is similar to the way you calculated the energy states of a helium atom (not that simple of, course), then you can describe how the ensemble of X molecules are populating in the energy states, with an *(energy) distribution function*. In the language of statistical physics, what we need to know here is the *partition function of the X molecule*. Knowing the partition function, if we observe multiple line transitions of the X molecule, it may be possible to invert the observed **line intensity ratios** of these transitions to depict the (energy) distribution function (with some approximation or assumptions, usually).
 {: .fs-2 }
 
-##### Deciphering molecular line data
+### Deciphering molecular line data
 There is a chance that you can make a further step to infer the local physical condition (e.g., gas temperature, volume-density, molecular abundances) from the depicted distribution function (more below). A typical (and fair) assumption is that the dominant collision partners for the X molecule are the molecular and atomic hydrogen gas. Neglecting the collisions between the X molecules and the molecular species other than hydrogen, the energy distribution function of molecule X serves as a proxy to probe the macroscopic properties of the molecular and atomic hydrogen gas mixture (still, dominated by molecular hydrogen in a molecular cloud).
 {: .fs-2 }
 
