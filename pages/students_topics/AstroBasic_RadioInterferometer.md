@@ -6,7 +6,7 @@ grand_parent: To my students
 nav_order: 9
 ---
 
-### Radio Interferometry (or, aperture synthesis technique)
+## Radio Interferometry (or, aperture synthesis technique)
 
 *If you want to use interferometry data or would like to chat about some existing interferometric observations, it may be important to take a little effort to memorize the boldfaced parts after making sure that you understand them. They come up very frequently in the conversation.*
 {: .fs-1 }
@@ -17,7 +17,7 @@ nav_order: 9
 **If you have learned the basic about radio interferometry and you are trying to plan your own observational project (e.g., if you are preparing an observing script), just scroll down to the check list.**
 {: .fs-1 }
 
-#### Why interferometry?
+### Why interferometry?
 
 Analyzing interferometric data can be hard. It has been a nightmare to many astronomy/astrophysics students. This technique worths 0.5 Nobel Prize ([to Sir Martin Ryle, in 1974](https://www.nobelprize.org/prizes/physics/1974/summary/)).
 In my experience, it takes a full-time student 2-6 months to master this technique, to the level that they can process data and troubleshoot independently. During this time period, both the trainer and trainee need to devote considerable amount of time. So, in fact, most of our colleagues do not pick it up. People who have mastered radio interferometry are relatively unique.
@@ -44,7 +44,7 @@ Sometimes, you still need to deal with the not-yet-so-well correlated signals by
 Fortunately, we are really coming to the era that the big interferometric radio or (sub)millimeter observatories (e.g., [ALMA](https://www.almaobservatory.org/en/about-alma/)) are offering good user support. Nowadays, one can choose to use some of them in a way that most of the complicated mathematical principles are hidden from the user. To enable you to use [ALMA](https://www.almaobservatory.org/en/about-alma/) this way, or to enable you to make query to the [archival observations of ALMA](https://almascience.nao.ac.jp/aq/), in the following, I will introduce some of the basic concept and the terminologies. Then, I will introduce how we normally use these interferometric observatories. It will mostly stay at a qualitative level, which intends to be a minimal set of knowledge that you need to know before using ALMA like taking a picture with a point-and-shoot camera. If I have time, I may host the mathematical details at other places for the advanced users. The details about the ALMA hardwares can be referenced from the official ALMA [Technical Handbook](https://almascience.nao.ac.jp/proposing/technical-handbook). If you want to be a black belt ALMA user, at some point, it may become inevitable to read through this very thick technical handbook.
 {: .fs-2 }
 
-#### How a radio interferometer look like?
+### How a radio interferometer look like?
 
 ###### Looking from outside
 
@@ -120,7 +120,7 @@ We call the low-frequency output of the mixer as the  **intermediate frequency (
 The signal obtained from the heterodyne system is then transmitted to the **correlators**, which are typically located in a bigger building, for further processing. The concept of correlating the signal will become (just) a little more clearer in the next section.
 {: .fs-2 }
 
-#### A little more about interferometry
+### A little more about interferometry
 
 If you are already getting comfortable with the idea that, a short/long **baseline** in the interferometry array is sampling the angularly more extended/compact emission from a celestial object, I am going to introduce a little more about the underlying mathematical principle. This may help you to get a better idea about our terminology. If you feel this part is hard when reading it for the first time, you can move on to the next section first. Later you can come back to check some concepts, when it is necessary/useful.
 {: .fs-2 }
@@ -196,7 +196,7 @@ The **correlators** of some observatories make such time-Fourier transformation 
 Modern correlators look like supercomputers. For example, a picture of the ALMA correlator can be found [here](https://www.almaobservatory.org/en/about-alma/how-alma-works/technologies/the-alma-main-array-correlator/).
 {: .fs-2 }
 
-#### Observational planning
+### Observational planning
 
 The ground-based astronomical measurements are subject to both the *atmospheric effects* and the *errors in instrumental responses*. These effects can be seen in the time or frequency domain. As we mentioned before, we need to plan the observations in a way such that our data can be calibrated.
 {: .fs-2 }
@@ -322,4 +322,4 @@ The calibration for the full polarization observations is a relatively advanced 
 9. **Have you specified the sufficient reference pointing calibrations**
 {: .fs-3 }
 
-#### Data calibration
+### Data calibration
