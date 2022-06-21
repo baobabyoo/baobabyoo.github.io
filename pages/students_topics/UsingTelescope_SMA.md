@@ -69,10 +69,10 @@ Check the previous section if you are not sure how to pick calibrators (the rele
 2. Click the **My Projects** tab on the left.
 3. From the list of your project, click into the relevant one. You will see the allocated observing tracks in the **Summary of tracks** section in the bottom. If there is not yet an observing script, there will be red text saying *(needs script)*.
 4. Click **Track overview & script** next to the *(needs script)* text.
-5. Scroll down to the **Observing Script** section. If you have never prepared an SMA script, then click **create new script using script generator**. If you are experienced, or if you are modifying a previously created script, you can click **manage script directory** will allows you to edit the ASCII script file.
+5. Scroll down to the **Observing Script** section. If you have never prepared an SMA script, then click **create new script using script generator**. If you are experienced, or if you are modifying a previously created script, you can click **manage script directly** will allows you to edit the ASCII script file.
 6. The online **script generator** has self-contained explanation. You can follow through what it asks you to fill.
-7. After a preliminary script is prepared using the script generator, and after you save the script, the online interface will allow you to enter the prospective UTC time of this observation and then **simulate** how the script works. After the start of a semester, a rough array configuration schedule will be provided [here](http://sma1.sma.hawaii.edu/array_config_sched.html). From there you can check in which month your project may be executed, and then use the simulator to see if all the calibrators can be observed above the elevation limit, and if the cycle time(s) of the target source loop(s) is indeed what you expect. You should definitely run this simulator and make sure there is no error message (e.g., any syntax error in your script that cause failure, or if your target source or calibrator goes above/below the elevation limit).
-8. Sometimes you may need to control the LST start/end time of your target source loops (e.g., when you have multiple groups of target sources that need different gain calibrator, or when you want to control the duration of each target source loop). You can then click **manage script directory** can use the command like the following example:
+7. After a preliminary script is prepared using the script generator, and after you save the script, the online interface will allow you to enter the prospective UTC time of this observation and then **simulate** how the script works. After the start of a semester, a rough array configuration schedule will be provided [here](http://sma1.sma.hawaii.edu/array_config_sched.html). From there you can check in which month your project may be executed, and then use the simulator to see if all the calibrators can be observed above the elevation limit, and if the cycle time(s) of the target source loop(s) is indeed what you expect. You should definitely run this simulator and make sure there is no error message (e.g., any syntax error in your script that cause failure, or if your target source or calibrator goes above/below the elevation limit [85 degrees for target source and gaincal; 81 degrees for absolute flux calibrator; 87 degrees for passband calibrator]).
+8. Sometimes you may need to control the LST start/end time of your target source loops (e.g., when you have multiple groups of target sources that need different gain calibrator, or when you want to control the duration of each target source loop). You can then click **manage script directly** can use the command like the following example:
 {: .fs-2 }
 
 ```
@@ -86,6 +86,9 @@ $LST_start=1.5; $LST_end=12;
 ```
 
 The `print` commands does not do anything to the telescopes; it just prints some text to let the operator see what the array is going to do. Do simulate the script after making such edits in case of any surprise.
+{: .fs-2 }
+
+If you are a experienced user who are preparing scripts for the SMA polarization observations, scroll down to a template in the bottom of this page.
 {: .fs-2 }
 
 ### Operation
@@ -133,4 +136,145 @@ If you are located in Taiwan, you can either ask me or my present Master's stude
 {: .fs-2 }
 
 Note that she is not obligated to work for you or answer your questions regardless of your career stage. If you are making a very big request to her, for example, if you need her to teach you or walk you through data calibrations, or even calibrate data for you, then you should regard this as a formal collaboration and should include her as a co-I when you are making a journal publication. Please appreciate that it takes a very significant effort for her to pick up this skill. She still has the right to say no to you (so be nice to her). I also have the right to say no to you for her, to ensure that she can be sufficiently focused on her thesis project.
+{: .fs-1 }
+
+
+### Polarization script
+
+Here is a template. You are likely experienced enough to understand the syntax. You should do the necessary modification. Please be sure to find all XXX using the "find" function of your browser and replace them with appropriate values.
+{: .fs-2 }
+
+You need to use the **manage script directly** method to edit in the polarization script. Please do simulate the script online.
+{: .fs-2 }
+
+```
+#!/usr/bin/perl -w
+{ BEGIN {$^W =0}
+#
+################## Script Header Info #####################
+#
+# Experiment Code: 2022A-AXXX
+# Experiment XXX
+# PI: XXX    
+# Contact Person: XXX
+# Email  : XXX
+# Cell : XXX
+# Array  : XXX 
+#
+############## SPECIAL INSTRUCTIONS ################
+#
+# Please observe the polarization calibrator 3CXXX for XXX minutes
+# before (or after) the target source loop.
+# 
+# It would be best if we can observe the polarization calibrator
+# for at least 40 minutes during its transit (or before and after
+# the transit if the calibrator transits at too high elevation).
+#
+################## Priming ################################
+
+# observe -s MyPetSource -r XX:XX:XX.XX -d -XX:XX:XX.X -e 2000 -v XX
+# dopplerTrack -r XXX.XX -u -s1 -f 0.0000 -h 10 -R h -r XXX.XX -u -s1 -f 0.0000 -h 10
+# POL_CAL: 3c279 or bllac (before target source loop) 
+#          or 3c84 (after target source loop; preferable)
+#
+################## Pointing ###############################
+#
+# Pointing: At start of track and after transit
+# Syntax Example: point -i 60 -r 3 -L -l -t -Q
+#
+################## Source, Calibrator and Limits ##########
+#
+# set scan time
+$inttime="15";
+#
+# choose which antennas with waveplates crossed during the cross RX calibration
+# !!! Antennas chosen MUST BE IN THE ARRAY !!!
+$pants='4,6';
+
+
+# POL_CAL
+$cal0="3c84"; $ncal0="12";
+$calpol0="3C84_LR -r 03:19:48.1601 -d 41:30:42.103 -e 2000 -v 0"; $ncalpol0="12";
+
+$cal1="3c279"; $ncal1="12";
+$calpol1="3C279_LR";$ncalpol1="12";
+
+$cal2="bllac"; $ncal2="12";
+$calpol2="bllac_LR";$ncalpol2="12";
+
+
+# Gain cal
+$cal3="XXXX-XXX"; $ncal3="16";
+$calpol3="XXXX-XXX_LR -r XX:XX:XX.XXXX -d -XX:XX:XX.XXX -e 2000 -v 0"; $ncalpol3="15";
+
+$targ1="MyPetSource -r XX:XX:XX.XX -d -XX:XX:XX.X -e 2000 -v XXX"; $ntarg1="24";
+
+
+# FluxCal
+$flux0="Callisto"; $nflux0="20";
+
+XXX Change all MINEL to 33 degree for the subcompact track
+$MINEL_TARG = 20; $MAXEL_TARG = 85;
+$MINEL_GAIN = 20; $MAXEL_GAIN = 85;
+$MINEL_FLUX = 20; $MAXEL_FLUX = 81;
+$MINEL_BPASS= 20; $MAXEL_BPASS= 87;
+$MINEL_CHECK= 20; 
+
+
+#
+################## Script Initialization ##################
+#
+do 'sma.pl';
+do 'sma_add.pl';
+
+checkANT();
+command("radio");
+command("integrate -t $inttime");
+$myPID=$$;
+command("project -r -p 'SMA' -d '2022A-AXXX'");
+print "----- initialization done, starting script -----\n";
+#
+################## Science Script #########################
+
+
+#
+print "####################################################\n";
+print "########### Polcal loop 3C279     ##\n";
+print "####################################################\n";
+$LST_start=XX.X; $LST_end=XX.X;
+&DoPolPass(cal1,ncal1,calpol1,ncalpol1);
+
+#
+print "#############################################\n";
+print "## Observing target source ##################\n";
+print "## Gaincal: 1743-038    ########################\n";
+print "## Cross hand phase: 1743-038_LR ########\n";
+print "## End the loop with 1743-038 ###############\n";
+print "#############################################\n";
+$LST_start=XX.X; $LST_end=XX.X;
+&DualPolLoop(calpol3,ncalpol3,cal3,ncal3,targ1,ntarg1);
+
+# 
+print "####################################################\n";
+print "######### flux Calibration loop on fluxcal ##########\n";
+print "####################################################\n";
+$LST_start=XX.X; $LST_end=XX.X;
+$max_loops=3;
+&DoPolFlux(flux0,nflux0);
+
+
+#
+print "####################################################\n";
+print "########### Polcal loop 3C84     ##\n";
+print "####################################################\n";
+$maxloops="200";
+$LST_start=XX.X; $LST_end=XX.X;
+&DoPolPass(cal0,ncal0,calpol0,ncalpol0);
+
+
+#
+print "----- Congratulations!  This is the end of the script.  -----\n";}
+#
+################## File End ###############################
+```
 {: .fs-1 }
