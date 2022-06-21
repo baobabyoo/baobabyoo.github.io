@@ -6,7 +6,7 @@ grand_parent: To my students
 nav_order: 1
 ---
 
-#### If this is your first time
+### If this is your first time
 
 If you are my postdoc, and if you need me to revise English or double check the technical setup, forward me your first draft at least **2 weeks** ahead of the proposal deadline.
 {: .fs-1 }
@@ -14,7 +14,7 @@ If you are my postdoc, and if you need me to revise English or double check the 
 If you are my student, forward me your first draft at least **4 weeks** ahead of the proposal deadline. I will spend time iterating with you many times for education purposes.
 {: .fs-1 }
 
-#### Proposing
+### Proposing
 
 **There are two proposal deadlines each year. They are normally in mid-March and mid-September but please pay attention to the call for proposals.**
 {: .fs-2 }
@@ -57,7 +57,7 @@ You can use [this page](http://sma1.sma.hawaii.edu/planetvis.html) to check whic
 A regular SMA proposal can request up to 100 hours of observing time. If you need 100~1000 hours, there is a Large Project category which is relatively hard. If you want to submit a Large Project proposal, prepare early. If you are student or postdoc in Taiwan, I would consider that it is fair to request **2~4 nights** of observing time in each proposal. If you are a Master's student and if your thesis is going to base on this SMA proposal, I would encourage you to think big and consider a project with **5~10 nights** of overall observing time. A night corresponds to 8~10 hours.
 {: .fs-2 }
 
-#### Organizing observing scripts
+### Organizing observing scripts
 
 Here is a step-by-step guide:
 {: .fs-2 }
@@ -88,12 +88,12 @@ $LST_start=1.5; $LST_end=12;
 The `print` commands does not do anything to the telescopes; it just prints some text to let the operator see what the array is going to do. Do simulate the script after making such edits in case of any surprise.
 {: .fs-2 }
 
-#### Operation
+### Operation
 
 A SMA operator will execute your observing script and will watch over the observations. So usually, there is nothing you need to do. But if you would like to participate in the operation or would like to monitor the operation, let me know.
 {: .fs-2 }
 
-#### Data calibration and imaging
+### Data calibration and imaging
 
 You will need some software. An overview of them is provided [here](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/overview/).
 {: .fs-2 }
@@ -110,7 +110,7 @@ You can also use the [CASA software package](https://lweb.cfa.harvard.edu/rtdc/S
 I usually use the [Miriad](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/miriad/) software package to image the SMA data. You can also use it to calibrate the SMA data. You can also use CASA to image your SMA data although it is a lot slower than Miriad.
 {: .fs-2 }
 
-#### Publishing
+### Publishing
 
 You are required to include the following statement in the Acknowledgement:
 {: .fs-2 }
@@ -127,7 +127,7 @@ Your are required to cite [Sault et al. (1995)](https://ui.adsabs.harvard.edu/ab
 {: .fs-2 }
 
 
-#### When you get stuck
+### When you get stuck
 
 If you are located in Taiwan, you can either ask me or my present Master's student, [Chia-Ying Chung](http://www.asiaa.sinica.edu.tw/people/cv.php?i=cychung).
 {: .fs-2 }
