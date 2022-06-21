@@ -62,7 +62,7 @@ A regular SMA proposal can request up to 100 hours of observing time. If you nee
 Here is a step-by-step guide:
 {: .fs-2 }
 
-Check the previous section if you are not sure how to pick calibrators; check [this page](https://baobabyoo.github.io/pages/students_topics/AstroBasic_RadioInterferometer.html) if you are confused about any thing.
+Check the previous section if you are not sure how to pick calibrators (the relevant parts are in between the two horizontal gray lines); check [this page](https://baobabyoo.github.io/pages/students_topics/AstroBasic_RadioInterferometer.html) if you are confused about any thing (or everything).
 {: .fs-1 }
 
 1. Log in to the [SMA Observer Center](http://sma1.sma.hawaii.edu/).
