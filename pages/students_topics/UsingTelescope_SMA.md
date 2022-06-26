@@ -581,7 +581,87 @@ WARNING: the mean time separation between the target date and the flux monitorin
 
 #### Miriad imaging
 
-##### Continuum subtraction
+If you have installed Miriad, you can source it with a Linux command (can also make an alias for this):
+{: .fs-2 }
+
+```
+source /home/hyliu/softwares/Miriad/carma/miriad/miriad_start.sh
+```
+{: .fs-1 }
+
+##### Flagging edge channels and continuum subtraction
+
+We are using the Miriad software package here, either under linux command line or using a BASH script.
+{: .fs-2 }
+
+Sometimes the edge channels of a spectral window can have poor response. You can inspect the spectral data using the Miriad command like:
+{: .fs-2 }
+
+```
+# uvspec vis=IP_Tau_track5.rx400.lsb.cal.miriad axes=freq,amp nxy=1,1 device=/xw options=nobase,avall interval=999999 select='window(1,2,3)'
+```
+{: .fs-2 }
+
+You can flag them using a BASH script like:
+{: .fs-2 }
+
+```
+#!/bin/bash
+
+config="com"
+flagval="f"
+
+targets='BP_Tau'
+sidebands='usb'
+ifbands='rx400'
+
+for field in $targets
+do
+  for sideband in $sidebands
+  do
+
+    for ifband in $ifbands
+    do
+
+       uvflag vis=$field'_track5.'$ifband'.'$sideband'.cal.miriad' edge=64,64,0 flagval=$flagval
+
+    done
+
+  done
+done
+```
+{: .fs-1 }
+
+
+After inspecting spectral lines in the data, you can perform continuum baseline fitting and subtraction using a BASH script like:
+{: .fs-2 }
+
+```
+#!/bin/bash
+
+
+config="com"
+flagval="f"
+
+targets='ChiaYing_track5'
+sidebands='usb lsb'
+ifbands='rx400'
+
+for field in $targets
+do
+
+    chans='0,6143'
+    # outputing continuum data
+    uvlin vis=$field'.rx400.lsb.cal.miriad' out=$field'.'$config'.rx400.lsb.ch0.miriad' \
+          chans=$chans mode=chan0 options=nocal,nopass,nopol,nowin order=1
+    # outputing continuum subtracted line data
+    uvlin vis=$field'.rx400.lsb.cal.miriad' out=$field'.'$config'.rx400.lsb.line.miriad' \
+          chans=$chans mode=line options=nocal,nopass,nopol,nowin order=1
+
+
+done
+```
+{: .fs-1 }
 
 ##### Single pointing, continuum imaging
 
