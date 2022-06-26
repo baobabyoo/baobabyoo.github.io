@@ -583,11 +583,11 @@ WARNING: the mean time separation between the target date and the flux monitorin
 
 ##### Continuum subtraction
 
-##### Single pointing, continuum
+##### Single pointing, continuum imaging
 
-##### Single pointing, spectral lines
+##### Single pointing, spectral lines imaging
 
-##### Mosaic
+##### Mosaic imaging
 
 
 #### Miriad self-calibration
@@ -598,6 +598,7 @@ WARNING: the mean time separation between the target date and the flux monitorin
 #### MIR Data calibration (polarization)
 
 Here I provide the example MIR IDL + Miriad scripts of calibrating the *dual RX full polarization data taken after 2017 August* and *single RX polarization data taken before 2016*. The polarization data taken in between may be subject to some hardware or software issues. If you really need to use them, it is recommended to contact Dr. Ramprasad Rao.
+{: .fs-2 }
 
 ##### Dual RX Data taken after 2017 August (under construction)
 
