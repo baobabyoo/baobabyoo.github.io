@@ -665,6 +665,56 @@ done
 
 ##### Single pointing, continuum imaging
 
+You can perform continuum imaging using a BASH script like the following one:
+{: .fs-2 }
+
+```
+#!/bin/bash
+# Miriad task list
+# https://www.atnf.csiro.au/computing/software/miriad/taskindex.html
+
+field="BP_Tau"
+
+
+# creat dirty image (i.e., inverse Fourier transform)
+rm -rf $field'.dirty'
+rm -rf $field'.beam'
+invert vis=$field'_track5.rx400.usb.cal.miriad' options=systemp,mfs,double map robust=2.0 map=$field'.dirty' beam=$field'.beam' cell=0.25 imsize=256
+
+rm -rf $field'.dirty.fits'
+rm -rf $field'.beam.fits'
+fits in=$field'.dirty' op=xyout out=$field'.dirty.fits'
+fits in=$field'.beam' op=xyout out=$field'.beam.fits'
+
+
+# deconvolve image
+rm -rf $field'.model'
+rm -rf $field'.model.fits'
+clean map=$field'.dirty' beam=$field'.beam' out=$field'.model' cutoff=0.015 niters=100
+fits in=$field'.model' op=xyout out=$field'.model.fits'
+
+
+# restore image (i.e., convolve the clean components with a clean Gaussian beam)
+rm -rf $field'.clean'
+rm -rf $field'.clean.fits'
+restor map=$field'.dirty' beam=$field'.beam' model=$field'.model' mode=clean out=$field'.clean'
+fits in=$field'.clean' op=xyout out=$field'.clean.fits'
+
+# generate residual image
+rm -rf $field'.residual'
+rm -rf $field'.residual.fits'
+restor map=$field'.dirty' beam=$field'.beam' model=$field'.model' mode=residual out=$field'.residual'
+fits in=$field'.residual' op=xyout out=$field'.residual.fits'
+
+
+# Perform primary beam correction
+rm -rf $field'.clean.pbcor'
+rm -rf $field'.clean.pbcor.fits'
+linmos in=$field'.clean' out=$field'.clean.pbcor'
+fits in=$field'.clean.pbcor' op=xyout out=$field'.clean.pbcor.fits'
+```
+{: .fs-1 }
+
 ##### Single pointing, spectral lines imaging
 
 ##### Mosaic imaging
