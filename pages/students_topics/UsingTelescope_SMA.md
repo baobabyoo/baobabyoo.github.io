@@ -16,6 +16,8 @@ If you are my student, forward me your first draft at least **4 weeks** ahead of
 
 ### Proposing
 
+#### Timeline and interface
+
 **There are two proposal deadlines each year. They are normally in mid-March and mid-September but please pay attention to the call for proposals.**
 {: .fs-2 }
 
@@ -25,9 +27,19 @@ Please register an **account** at the [SMA Observer Center](http://sma1.sma.hawa
 Usually, you try to form a rough idea about what you are going to propose (target source(s), resolution, spectral setup, and sensitivity). Let's say, this is at least 1~1.5 months ahead of the proposal deadline. If you are my student and postdoc, please come discuss with me about this rough idea.
 {: .fs-2 }
 
+#### Preparation-1: Feasibility, complementary data, and duplication
+
 **After we agree that this idea is worth pursuing and is technically feasible
-, you should use the [SMA Data Archive](https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl) to check whether or not you are duplicating historical or ongoing projects.** In the case that you are duplicating, you can (1) give up and try to come up with other proposal ideas, or (2) download the archival data can see if the calibrated data can achieve the quality that is needed for your science purpose. If the quality of the archival data is fair, then just continue to use that data to proceed with your research. If there is no archival data or if the quality of the archival data is poor, you can go ahead to complete the preparation of your proposal. **You need to explicitly and convincingly explain what was the problem with the archival data if it exists. So prepare your proposal well ahead of the deadline** in case you really need to look into some archival data or need other colleagues to check the archival for you. Close to the deadline, they (and I) have to prepare their own proposals thus may refuse to help you. **Do not waster your (and my) time to prepare a proposal that has a problem with unnecessary duplication. Such proposals will be rejected for 100% sure.**
+, you should use the [SMA Data Archive](https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl) to check whether or not you are duplicating historical or ongoing projects.** In the case that you are duplicating, you can (1) give up and try to come up with other proposal ideas, or (2) download the archival data can see if the calibrated data can achieve the quality that is needed for your science purpose. If the quality of the archival data is fair, then just continue to use that data to proceed with your research. If there is no archival data or if the quality of the archival data is poor, you can go ahead to complete the preparation of your proposal. **You need to explicitly and convincingly explain what was the problem with the archival data if it exists. So prepare your proposal well ahead of the deadline** in case you really need to look into some archival data or need other colleagues to check the archival for you. Close to the deadline, they (and I) have to prepare their own proposals thus may refuse to help you.
 {: .fs-2 }
+
+**Do not waster your (and my) time to prepare a proposal that has a problem with unnecessary duplication. Such proposals will be rejected for 100% sure.**
+{: .fs-2 }
+
+When making the duplication checks mentioned above, you may find that there are other observations on your target source(s) which can help your science case to some extent although they do not fully resolve the problem. For example, you may find that some short-spacing observations for your high-angular resolution experiment already exist. In this case, **explicitly mentioning how** you will make use of such complementary data in the proposal is a plus. Just mentioning you will use those data but without saying how usually does not help. If you have also checked the data archive of the observatories (e.g., ALMA, JVLA, Herschel, Spitzer, etc) and found some useful complementary data, you can also mention how you will make use of them in a joint analysis.
+{: .fs-2 }
+
+#### Preparation-2: Scientific justification and technical details
 
 To complete the proposal submission, you need a **title**, an **Abstract**, a PDF scientific justifications with **2 pages of text and 2 pages of Figures/Tables**. If you are not sure about how to compose the Abstract or the 2+2 pages scientific justification, check [here](https://baobabyoo.github.io/pages/students_topics/proposal_obs.html).
 {: .fs-2 }
@@ -54,7 +66,9 @@ You can use [this page](http://sma1.sma.hawaii.edu/planetvis.html) to check whic
 
 ******************************************************************************
 
-A regular SMA proposal can request up to 100 hours of observing time. If you need 100~1000 hours, there is a Large Project category which is relatively hard. If you want to submit a Large Project proposal, prepare early. If you are student or postdoc in Taiwan, I would consider that it is fair to request **2~4 nights** of observing time in each proposal. If you are a Master's student and if your thesis is going to base on this SMA proposal, I would encourage you to think big and consider a project with **5~10 nights** of overall observing time. A night corresponds to 8~10 hours.
+#### Preparation-3: Scopes (being sufficiently ambitious)
+
+A regular SMA proposal can request up to 100 hours of observing time. If you need 100~1000 hours, there is a Large Project category which is relatively hard. If you want to submit a Large Project proposal, prepare early. If you are student or postdoc in Taiwan, I would consider that it is fair to request **2~4 nights** of observing time in each proposal. If you are a Master's student and if your thesis is going to base on this SMA proposal, I would encourage you to think big and consider a project with **5~10 nights** of overall observing time. A night corresponds to 8~10 hours. **Pick a problem that can be solved by such an investment resource.**
 {: .fs-2 }
 
 ### Organizing observing scripts
@@ -84,6 +98,7 @@ print "----- main science target observe loop (v1143ori, v1183ori, nyori)-----\n
 $LST_start=1.5; $LST_end=12;
   &ObsLoop(cal0,targ1,targ2,targ3);
 ```
+{: .fs-1 }
 
 The `print` commands does not do anything to the telescopes; it just prints some text to let the operator see what the array is going to do. Do simulate the script after making such edits in case of any surprise.
 {: .fs-2 }
@@ -97,6 +112,8 @@ A SMA operator will execute your observing script and will watch over the observ
 {: .fs-2 }
 
 ### Data calibration and imaging
+
+#### Software
 
 You will need some software. An overview of them is provided [here](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/overview/).
 {: .fs-2 }
@@ -112,6 +129,56 @@ You can also use the [CASA software package](https://lweb.cfa.harvard.edu/rtdc/S
 
 I usually use the [Miriad](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/miriad/) software package to image the SMA data. You can also use it to calibrate the SMA data. You can also use CASA to image your SMA data although it is a lot slower than Miriad.
 {: .fs-2 }
+
+#### Overview
+
+No matter which sofware we use steps we are going through the following steps:
+1. Load raw SMA data to MIR IDL format (and store it if you like).
+2. Inspect data and flag (bad) the problematic data. You can then omit using the *flagged data* by unselecting them.
+3. Convert the raw visibility amplitudes to physically meaningful units (e.g., Jy) and undone the atmospheric attenuation exp(-tau<sub>atm</sub>). This step is called **T<sub>sys</sub>** application.
+4. Perform passband calibration.
+5. Derive the absolute flux level of the gain calibrator by referencing to an absolute flux calibrator (e.g., usually a planet, planet moon, or the young star MWC349a).
+6. Perform complex gain calibration.
+7. Export data to Miriad or FITS format.
+{: .fs-2 }
+
+
+You may have some confusion about T<sub>sys</sub> application since:
+- In some textbook, T<sub>sys</sub> is defined as (T<sub>rx</sub> + n<sub>eff</sub>T<sub>sky</sub> + (1- n<sub>eff</sub>)T<sub>ambient</sub>)/n<sub>eff</sub>, where n<sub>eff</sub> if the forward efficiency of the telescope, T<sub>rx</sub>, T<sub>sky</sub>, and T<sub>ambient</sub> are the receiver temperature, sky temperature, and the ambient temperature, respectively. SMA and ALMA defines T<sub>sys</sub> as (T<sub>rx</sub> + n<sub>eff</sub>T<sub>sky</sub> + (1- n<sub>eff</sub>)T<sub>ambient</sub>) / ( exp(-tau<sub>atm</sub>) n<sub>eff</sub> ).
+- Some observatories already converted the raw data to physically meaningful units, while the raw SMA visibilities represent the *fraction* of correlated signal.
+{: .fs-2 }
+
+The T<sub>sys</sub> application step multiplies the raw SMA visibility with the T<sub>sys</sub> values to undone the atmospheric attenuation and to rescale the visibility  to Jansky (or Kelvin) units.
+{: .fs-2 }
+
+#### MIR Data calibration (no polarization)
+
+
+
+#### Miriad imaging
+
+##### Continuum subtraction
+
+##### Single pointing, continuum
+
+##### Single pointing, spectral lines
+
+##### Mosaic
+
+
+#### Miriad self-calibration
+
+#### CASA Data calibration and imaging (under construction)
+
+
+#### MIR Data calibration (polarization)
+
+Here I provide the example MIR IDL + Miriad scripts of calibrating the *dual RX full polarization data taken after 2017 August* and *single RX polarization data taken before 2016*. The polarization data taken in between may be subject to some hardware or software issues. If you really need to use them, it is recommended to contact Dr. Ramprasad Rao.
+
+##### Dual RX Data taken after 2017 August (under construction)
+
+##### Single RX Data taken before 2016 (under construction)
+
 
 ### Publishing
 
@@ -129,6 +196,8 @@ You are required to cite [Ho et al. (2004)](https://ui.adsabs.harvard.edu/abs/20
 Your are required to cite [Sault et al. (1995)](https://ui.adsabs.harvard.edu/abs/1995ASPC...77..433S/abstract), [Qi et al. (2003)](https://ui.adsabs.harvard.edu/abs/2003cdsf.conf..393Q/abstract), or [McMullin et al. (2007)](https://ui.adsabs.harvard.edu/abs/2007ASPC..376..127M/abstract) if you use Miriad, MIR IDL, or CASA to process your data.
 {: .fs-2 }
 
+When you are carrying out a *precision experiment* instead of a *detection experiment* you may want/need to refer to the [SMA Calibrator List](http://sma1.sma.hawaii.edu/callist/callist.html). If you are quoting the records explicitly in your paper, you need to make an E-mail contact with Dr. Mark Gurwell and obtain his agreement. You need to inquire how he would like to be credited (e.g., as a co-author or being mentioned in the acknowledgement).
+{: .fs-2 }
 
 ### When you get stuck
 
@@ -139,7 +208,7 @@ Note that she is not obligated to work for you or answer your questions regardle
 {: .fs-1 }
 
 
-### Polarization script
+### Polarization observing script
 
 Here is a template. You are likely experienced enough to understand the syntax. You should do the necessary modification. Please be sure to find all XXX using the "find" function of your browser and replace them with appropriate values.
 {: .fs-2 }
@@ -159,13 +228,13 @@ You need to use the **manage script directly** method to edit in the polarizatio
 # Contact Person: XXX
 # Email  : XXX
 # Cell : XXX
-# Array  : XXX 
+# Array  : XXX
 #
 ############## SPECIAL INSTRUCTIONS ################
 #
 # Please observe the polarization calibrator 3CXXX for XXX minutes
 # before (or after) the target source loop.
-# 
+#
 # It would be best if we can observe the polarization calibrator
 # for at least 40 minutes during its transit (or before and after
 # the transit if the calibrator transits at too high elevation).
@@ -174,7 +243,7 @@ You need to use the **manage script directly** method to edit in the polarizatio
 
 # observe -s MyPetSource -r XX:XX:XX.XX -d -XX:XX:XX.X -e 2000 -v XX
 # dopplerTrack -r XXX.XX -u -s1 -f 0.0000 -h 10 -R h -r XXX.XX -u -s1 -f 0.0000 -h 10
-# POL_CAL: 3c279 or bllac (before target source loop) 
+# POL_CAL: 3c279 or bllac (before target source loop)
 #          or 3c84 (after target source loop; preferable)
 #
 ################## Pointing ###############################
@@ -218,7 +287,7 @@ $MINEL_TARG = 20; $MAXEL_TARG = 85;
 $MINEL_GAIN = 20; $MAXEL_GAIN = 85;
 $MINEL_FLUX = 20; $MAXEL_FLUX = 81;
 $MINEL_BPASS= 20; $MAXEL_BPASS= 87;
-$MINEL_CHECK= 20; 
+$MINEL_CHECK= 20;
 
 
 #
@@ -254,7 +323,7 @@ print "#############################################\n";
 $LST_start=XX.X; $LST_end=XX.X;
 &DualPolLoop(calpol3,ncalpol3,cal3,ncal3,targ1,ntarg1);
 
-# 
+#
 print "####################################################\n";
 print "######### flux Calibration loop on fluxcal ##########\n";
 print "####################################################\n";
