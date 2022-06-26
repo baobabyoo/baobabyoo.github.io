@@ -722,6 +722,10 @@ fits in=$field'.clean.pbcor' op=xyout out=$field'.clean.pbcor.fits'
 
 ##### Mosaic imaging
 
+##### Combining single dish and interferometric observations
+
+For a Miriad based procedure, please check my documentation under the [ALMICA](https://github.com/baobabyoo/almica) repository.
+{: .fs-2 }
 
 #### Miriad self-calibration
 
