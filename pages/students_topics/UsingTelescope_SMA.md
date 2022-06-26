@@ -589,6 +589,9 @@ source /home/hyliu/softwares/Miriad/carma/miriad/miriad_start.sh
 ```
 {: .fs-1 }
 
+For an online documentation for the individual Miriad tasks, please check the [Miriad task list](https://www.atnf.csiro.au/computing/software/miriad/taskindex.html).
+{: .fs-2 }
+
 ##### Flagging edge channels and continuum subtraction
 
 We are using the Miriad software package here, either under linux command line or using a BASH script.
