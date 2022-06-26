@@ -68,7 +68,10 @@ You can use [this page](http://sma1.sma.hawaii.edu/planetvis.html) to check whic
 
 #### Preparation-3: Scopes (being sufficiently ambitious)
 
-A regular SMA proposal can request up to 100 hours of observing time. If you need 100~1000 hours, there is a Large Project category which is relatively hard. If you want to submit a Large Project proposal, prepare early. If you are student or postdoc in Taiwan, I would consider that it is fair to request **2~4 nights** of observing time in each proposal. If you are a Master's student and if your thesis is going to base on this SMA proposal, I would encourage you to think big and consider a project with **5~10 nights** of overall observing time. A night corresponds to 8~10 hours. **Pick a problem that can be solved by such an investment resource.**
+A regular SMA proposal can request up to 100 hours of observing time. If you need 100~1000 hours, there is a Large Project category which is relatively hard. If you want to submit a Large Project proposal, prepare early. If you are student or postdoc in Taiwan, I would consider that it is fair to request **2~4 nights** of observing time in each proposal. If you are a Master's student and if your thesis is going to base on this SMA proposal, I would encourage you to think big and consider a project with **5~10 nights** of overall observing time. A night corresponds to 8~10 hours.
+{: .fs-2 }
+
+**Pick a problem that can be solved by such an investment resource.** You can think bigger once you have enough reputation to convince the reviewers that you can manage a larger-scale project.
 {: .fs-2 }
 
 ### Organizing observing scripts
@@ -133,17 +136,21 @@ I usually use the [Miriad](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/mir
 #### Overview
 
 No matter which sofware we use steps we are going through the following steps:
+{: .fs-2 }
+
 1. Load raw SMA data to MIR IDL format (and store it if you like).
 2. Inspect data and flag (bad) the problematic data. You can then omit using the *flagged data* by unselecting them.
-3. Convert the raw visibility amplitudes to physically meaningful units (e.g., Jy) and undone the atmospheric attenuation exp(-tau<sub>atm</sub>). This step is called **T<sub>sys</sub>** application.
-4. Perform passband calibration.
-5. Derive the absolute flux level of the gain calibrator by referencing to an absolute flux calibrator (e.g., usually a planet, planet moon, or the young star MWC349a).
-6. Perform complex gain calibration.
+3. Convert the raw visibility amplitudes to physically meaningful units (e.g., Jy) and undone the atmospheric attenuation exp(-tau<sub>atm</sub>). This step is called **T<sub>sys</sub> application**.
+4. Perform **passband calibration**.
+5. Derive the absolute flux level of the gain calibrator by referencing to an absolute flux calibrator (e.g., usually a planet, planet moon, or the young star MWC349a). We call this step the **absolute flux calibration**.
+6. Perform **complex gain calibration**.
 7. Export data to Miriad or FITS format.
 {: .fs-2 }
 
 
 You may have some confusion about T<sub>sys</sub> application since:
+{: .fs-2 }
+
 - In some textbook, T<sub>sys</sub> is defined as (T<sub>rx</sub> + n<sub>eff</sub>T<sub>sky</sub> + (1- n<sub>eff</sub>)T<sub>ambient</sub>)/n<sub>eff</sub>, where n<sub>eff</sub> if the forward efficiency of the telescope, T<sub>rx</sub>, T<sub>sky</sub>, and T<sub>ambient</sub> are the receiver temperature, sky temperature, and the ambient temperature, respectively. SMA and ALMA defines T<sub>sys</sub> as (T<sub>rx</sub> + n<sub>eff</sub>T<sub>sky</sub> + (1- n<sub>eff</sub>)T<sub>ambient</sub>) / ( exp(-tau<sub>atm</sub>) n<sub>eff</sub> ).
 - Some observatories already converted the raw data to physically meaningful units, while the raw SMA visibilities represent the *fraction* of correlated signal.
 {: .fs-2 }
@@ -153,7 +160,424 @@ The T<sub>sys</sub> application step multiplies the raw SMA visibility with the 
 
 #### MIR Data calibration (no polarization)
 
+##### Environment
 
+I assume you are in an x86_64 Linux (e.g., CentOS, Ubuntu, Rocky, Redhat, etc) environment. If you have installed MIR IDL, or if somebody has installed it (e.g., if you are using a workstation at ASIAA), you need to *source* the setup file to enable using it. For example, I have my own installation, then type (revise to your own path):
+{: .fs-2 }
+
+```
+(base) [hyliu@hyliu ~]$ source /home/hyliu/softwares/astro_reduction/MIR/sma-mir/setup.bsh
+```
+{: .fs-1 }
+
+If you do not want to type this every time you launch a new terminal, you can include the following alias in your .bashrc file:
+{: .fs-2 }
+
+```
+alias getmir="source /home/hyliu/softwares/astro_reduction/MIR/sma-mir/setup.bsh"
+```
+{: .fs-1 }
+
+Then you can source MIR IDL and launch by typing:
+{: .fs-2 }
+
+```
+(base) [hyliu@hyliu ~]$ getmir
+(base) [hyliu@hyliu ~]$ idl
+IDL 8.7.3 (linux x86_64 m64).
+(c) 2020, Harris Geospatial Solutions, Inc.
+
+Licensed for use by: Academia Sinica
+License: 60400
+% Compiled module: PRO_MIR_INIT.
+% Compiled module: PRO_SETUP_ENV.
+% Compiled module: PRO_CONSTANTS.
+idl_startup completed
+```
+{: .fs-1 }
+
+Type the following command to allow using color instead of black/white only.
+{: .fs-2 }
+
+```
+IDL> device, decomposed=0, retain=2
+```
+{: .fs-1 }
+
+##### Full procedure
+
+I am taking the calibration of Chia-Ying's project SMA 2021B-A011 (one receiver and one sideband) as an example. I have binned every 16 spectral channels using the `SMARechunker` code at a workstation of SMA in Hawaii:
+{: .fs-2 }
+
+```
+# under linux command line
+/application/bin/SMARechunker -i /data/science/mir_data/220524_05:57:34 -o ./sma_2021Ba011_track1 -r 16
+```
+{: .fs-1 }
+
+Until the data become archival, please contact us if you need the raw data for an exercise. The following is a full MIR IDL procedure. Each line is a command for an IDL command line (i.e., you copy and paste the command to the command line). Lines starting with a `#` symbol are comment lines. **If you are my student, you are required to preserve your calibration commands in such a format in case any of us (me, your co-Is, or the reviewers of your paper, etc) need to check certain details. Do Bookkeep everything strange or suspecious in the Notes sections.**
+{: .fs-2 }
+
+```
+##### Read Data in MIR IDL ###############################################
+
+# load raw data
+readdata, dir='sma_2021Ba011_track1'
+
+# check what is in the Data
+select
+
+# Inspect the spectra to find a suitable range of spectral channels
+# to generate continuum data (used in most steps of calibrations)
+# Here we select the passband calibrator 3C279 and the upper sidebands
+select, /p, /reset, source=['3c279'], sideband='u'
+# Here we select the RX345 receiver. "wt" gt "0" means unflagged (i.e., healthy) data.
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_spectra, color_var ='band'
+
+# re-generate continuum data by performing spectral averaging
+# over the 6 spectral windows
+select, /p, /reset, band=['c1','s1','s2','s3','s4','s5','s6']
+uti_avgband, swmch1=60, swmch2=964
+plot_continuum
+
+# Examining the calibrator data
+select, /p, /reset, source=['1517-243']
+plot_continuum, x='int'
+
+# flag phase jump
+select, /p, /reset
+result=dat_filter(s_f, '"blcd" like "2" or "blcd" like "5" ')
+result=dat_filter(s_f, '"int" gt "256" and "int" lt "311"')
+flag,/flag
+
+select, /p, /reset
+result=dat_filter(s_f, '"blcd" like "4" or "blcd" like "6" ')
+result=dat_filter(s_f, '"int" gt "504" and "int" lt "559"')
+flag,/flag
+
+# Check and remove spectral spikes
+select, /p, /reset
+uti_checkspike, source='3c279', /baseline, threshold=5, /fix, sample=1
+
+select, /p, /reset
+uti_checkspike, source='bllac', /baseline, threshold=5, /fix, sample=1
+
+select, /p, /reset
+uti_checkspike, source='1517-243', /baseline, threshold=5, /fix, sample=1
+
+# inspect spectra
+select, /p, /reset, sideband='u', source=['3c279']
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_spectra, x_var='channel', y_vars='amp,pha', frame_vars='blcd', color_vars='band', frames_per_page=4
+
+select, /p, /reset, sideband='u', band='s3', source=['3c279']
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_spectra, x_var='channel', y_vars='amp,pha', frame_vars='blcd', color_vars='band', frames_per_page=4
+
+select, /p, /reset, band='s3'
+uti_chanfix, chan=284
+
+# regenerate continuum
+select, /p, /reset, band=['c1','s1','s2','s3','s4','s5','s6']
+uti_avgband, swmch1=60, swmch2=964
+plot_continuum, x='int'
+# check the data was flagged correctly
+
+# examing the calibrator data again
+select, /p, /reset, source=['1517-243']
+plot_continuum, x='int'
+
+# save MIR format data
+select, /p, /reset
+mir_save, 'ChiaYing_track1.mir', /new
+
+### Notes ################################################################
+#
+# Calibrating the RX345 USB
+#
+# passband: 3c279
+# source  :
+# Flux    : Callisto
+# gain    : 1517-243
+#
+# (tau_225 GHz: 0.05~0.06) after 07:30 UTC
+#
+##########################################################################
+
+
+
+##### Inspect elevation ################################
+
+result = plo_var('dhrs','el',frames_per_page=1)
+
+##### Notes ############################################
+#
+# Elevation of Neptune in between 25 and 35 deg.
+#
+########################################################
+
+
+
+##### Initial Data Insepction ############################################
+
+select, /p, /reset, source=['1517-243','HBC_266'], sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_continuum, x = 'int'
+
+
+##### Flag the ipoint Data and Strange data ##############################
+
+select, /p, /reset, sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+result=dat_filter(s_f, '"int" gt "1576" and "int" lt "1682" ')
+flag,/flag
+
+# check the continuum again
+select, /p, /reset
+plot_continuum, x = 'int'
+
+select, /p, /reset
+mir_save, 'ChiaYing_track1.flag.mir'
+
+##### Notes ##############################################################
+#
+# You may need to iterate through data inspection and flagging a few times.
+#
+##########################################################################
+
+
+
+#### Tsys Application  ###################################################
+
+# inspect Tsys
+select,/p,/reset
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_var, frames_p=6
+
+select,/p,/reset
+apply_tsys
+plot_continuum, x='int'
+
+select, /p, /reset, source=['3c279','1517-243','bllac'], sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_continuum, x = 'int'
+
+select,/p,/reset
+mir_save, 'ChiaYing_track1.tsys.mir'
+
+## Notes #################################################################
+#
+# Except for ant 8
+#    345 GHz: Tsys is 700-1300 K in the target loop
+# baseline with ant 8 has 800-1700 K Tsys
+#
+#########################################################################
+
+
+
+#### Passband Calibration ################################################
+
+select, /p, /reset
+result=dat_filter(s_f, ' "wt" gt "0" and "nch" eq "1024" ', /reset)
+pass_cal, cal_type='pha', smoothing=16, ntrim=64, frames_p=16,refant=1
+# all no
+# 3c279 yes
+
+select, /p, /reset, band=['c1','s1','s2','s3','s4','s5']
+uti_avgband, swmch1=60, swmch2=964
+
+# re-inspect passband splikes
+select, /p, /reset, sou='3c279', sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_spectra, x_var='channel', y_vars='amp,pha', frame_vars='blcd', color_vars='band', frames_per_page=4
+
+select, /p, /reset
+result=dat_filter(s_f, ' "wt" gt "0" and "nch" eq "1024" ', /reset)
+pass_cal, cal_type='amp', smoothing=16, ntrim=64, frames_p=16, refant=1
+
+select, /p, /reset
+mir_save, 'ChiaYing_track1.tsys.bp.mir'
+
+## Notes #################################################################
+
+# http://sma1.sma.hawaii.edu/planetvis.html
+# Callisto: 12.1  Jy @ 357 GHz
+May 24
+
+# http://sma1.sma.hawaii.edu/callist/callist.html
+# J1517-243
+ 850   04 Apr 2014 12:59   SMA       350.06   0.979 +/-  0.050    mgurwell  
+ 850   15 Apr 2014 12:31   SMA       356.05   1.059 +/-  0.072    mgurwell  
+ 850   27 Mar 2021 14:40   SMA       346.97   1.099 +/-  0.061    mgurwell  
+
+# 3c279
+ 850   08 Jun 2021 03:08   SMA       350.24   8.820 +/-  0.562    mgurwell  
+ 850   13 Aug 2021 04:10   SMA       346.28   8.930 +/-  0.447    mgurwell  
+ 850   23 Nov 2021 15:36   SMA       340.98   9.151 +/-  0.458    mgurwell  
+
+# bllac
+ 850   08 Jul 2021 17:02   SMA       346.02   3.631 +/-  0.190    mgurwell  
+ 850   13 Aug 2021 11:29   SMA       346.28   6.363 +/-  0.318    mgurwell  
+ 850   23 Nov 2021 04:16   SMA       340.98   5.554 +/-  0.278    mgurwell  
+
+##########################################################################
+
+
+
+#### Measure the Absolute Flux ###########################################
+
+select, /p, /reset, band='c1', sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+gain_cal, cal_type='pha', x='hours', /connect, /non_point, tel_bsl='telescope', refant=2
+# all no
+# 1517-243 yes 1
+# bllac yes 1
+# 3c279 yes 1
+# Callisto yes 1
+
+select,/p,/re,int=[0,50]
+flag,/flag
+
+select, /p, /reset, band='c1', sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+gain_cal, cal_type='amp', x='hours', poly=0, tel_bsl='telescope', refant=6, /preavg, /non_point
+# all no
+# Callisto yes 12.1
+
+select, /p, /reset, band='c1', sideband='u', source=['3c279','bllac','1517-243','Callisto']
+result=dat_filter(s_f, ' "el" gt "25" and "el" lt "40"' )
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+flux_measure
+
+# Scalar average:
+#   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
+#   1517-243            105    1.1226     227      9.83      1.1132     -0.0016
+#   Callisto      g      40    5.3998      43     14.59      5.0955     -0.0109
+
+# Vector average:
+#   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
+#   1517-243            105    1.1132     223      9.83      1.1132     -0.0016
+#   Callisto      g      40    5.0955      35     14.59      5.0955     -0.0109
+
+
+select, /p, /reset, band='c1', sideband='u', source=['3c279','bllac','1517-243','Callisto']
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+flux_measure
+
+Scalar average:
+#   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
+#     3c279            160    8.3092    1252      6.46      8.3083      0.0029
+#  1517-243            221    1.1515     343      9.82      1.1420     -0.0015
+#     bllac            264    6.0733    1323     14.06      6.0719     -0.0020
+#  Callisto      g      40    5.3998      43     14.59      5.0955     -0.0109
+
+# Vector average:
+#   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
+#     3c279            160    8.3083    1251      6.46      8.3083      0.0029
+#  1517-243            221    1.1420     336      9.82      1.1420     -0.0015
+#     bllac            264    6.0719    1322     14.06      6.0719     -0.0020
+#  Callisto      g      40    5.0955      35     14.59      5.0955     -0.0109
+
+## Notes #################################################################
+
+# apply :
+# RX 345
+#   USB
+#   1517-243 yes 1.1132
+
+##########################################################################
+
+
+
+#### Gain Calibration and Miriad Files Output ############################
+
+mir_restore, 'ChiaYing_track1.tsys.bp.mir'
+
+select, /p, /reset, source=['1517-243', 'DoAr_33'], sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_continuum, x = 'int'
+
+select, /p, /reset, sideband='u'
+result=dat_filter(s_f, '"blcd" like "2"')
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+result=dat_filter(s_f, '"int" gt "567" and "int" lt "618" ')
+flag,/flag
+
+select, /p, /reset, sideband='u'
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+gain_cal, x='hours', cal_type='pha', tel_bsl='telescope', refant=6, /connect, /preavg, /non_point
+# apply :
+  all no
+#   1517-243 yes 1.1132
+
+gain_cal, x='hours',cal_type='amp',tel_bsl='telescope',refant=6,  smoothing=1, /preavg, /non_point
+
+# check gain calibrator again
+select, /p, /reset, sideband='u', source=['DoAr_44','1517-243']
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+plot_continuum, x='int'
+
+select,/p,/reset
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+mir_save, 'ChiaYing_track1.rx345.usb.cal.mir', /new
+
+select, /p, /reset, sideband='u'
+result=dat_filter(s_f, '"blcd" like "4" and "blcd" like "8"')
+result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+result=dat_filter(s_f, '"int" gt "1513" and "int" lt "1700" ')
+flag,/flag
+
+idl2miriad, dir='DoAr_16_track1.rx345.usb.cal.miriad',sideband='u',source='DoAr_16',band=['s1','s2','s3','s4']
+
+```
+{: .fs-1 }
+
+
+Sometimes I also check the ALMA Calibrator Grid Survey and see if we can get consistent absolute flux measurement:
+{: .fs-2 }
+
+```
+# In CASA 5 command line
+import sys
+sys.path.append("./analysis_scripts")
+import analysisUtils as au
+
+# 1517-243
+CASA <27>: au.getALMAFlux('J1517-243', '357GHz', lowband=3, highband=7, date='20220524')
+  Closest Band 3 measurement: 1.850 +- 0.030 (age=+5 days) 103.5 GHz (will extrapolate from this datum using spectral index)
+  Closest Band 3 measurement: 1.890 +- 0.030 (age=+5 days) 91.5 GHz (will extrapolate from this datum using spectral index)
+  Closest Band 7 measurement: 1.117 +- 0.100 (age=+1 days) 362.7 GHz
+  Closest Band 7 measurement: 1.100 +- 0.114 (age=+1 days) 362.7 GHz
+getALMAFluxCSV(Cycle6): Fitting for spectral index with 1 measurement pair of age -4.0 days from 20220524, with age separation of 2 days
+  20220529 -- 20220531: freqs=[91.47, 350.5], fluxes=[1.86, 1.236]
+Median Monte-Carlo result for 357.000000 = 1.231747 +- 0.149251 (scaled MAD = 0.147478)
+Result using spectral index of -0.304237 for 357.000 GHz from 1.870 Jy at 97.485 GHz = 1.259895 +- 0.149251 Jy
+
+# 3c279
+CASA <28>: au.getALMAFlux('J1256-057', '357GHz', lowband=3, highband=7, date='20220524')
+  Closest Band 3 measurement: 16.970 +- 0.150 (age=+2 days) 103.5 GHz (will extrapolate from this datum using spectral index)
+  Closest Band 3 measurement: 16.667 +- 0.537 (age=+2 days) 92.9 GHz (will extrapolate from this datum using spectral index)
+  Closest Band 3 measurement: 17.820 +- 0.220 (age=+2 days) 91.5 GHz (will extrapolate from this datum using spectral index)
+  Closest Band 7 measurement: 8.759 +- 0.453 (age=+1 days) 341.5 GHz
+getALMAFluxCSV(Cycle6): Fitting for spectral index with 1 measurement pair of age 1.5 days from 20220524, with age separation of 1 days
+  20220522 -- 20220523: freqs=[103.5, 92.9, 91.47, 341.5], fluxes=[16.97, 16.667, 17.82, 8.759]
+Median Monte-Carlo result for 357.000000 = 8.771665 +- 1.036714 (scaled MAD = 1.012588)
+Result using spectral index of -0.523435 for 357.000 GHz from 17.152 Jy at 95.957 GHz = 8.622924 +- 1.036714 Jy
+
+# bllac
+CASA <7>: au.getALMAFlux('J2202+422', '357GHz', lowband=3, highband=7, date='20220524')
+  Closest Band 3 measurement: 8.910 +- 0.450 (age=+3858 days) 109.8 GHz (will extrapolate from this datum using spectral index)
+  Closest Band 3 measurement: 8.960 +- 0.450 (age=+3858 days) 97.7 GHz (will extrapolate from this datum using spectral index)
+  Closest Band 7 measurement: 1.109 +- 0.055 (age=+1384 days) 343.5 GHz
+getALMAFluxCSV(Cycle6): Fitting for spectral index with 1 measurement pair of age 3223.5 days from 20220524, with age separation of 1269 days
+  20111031 -- 20150422: freqs=[109.8, 97.7, 334.92], fluxes=[8.91, 8.96, 3.2]
+Median Monte-Carlo result for 357.000000 = 3.040985 +- 0.402249 (scaled MAD = 0.393821)
+Result using spectral index of -0.867940 for 357.000 GHz from 8.935 Jy at 103.750 GHz = 3.056952 +- 0.402249 Jy
+WARNING: the mean time separation between the target date and the flux monitoring observations is 3858 days
+
+```
+{: .fs-1 }
 
 #### Miriad imaging
 
