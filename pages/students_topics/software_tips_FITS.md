@@ -26,7 +26,9 @@ Since the binary data are not human readable, we cannot handle the FITS files wi
 
 
 
-### Viewers
+### (Pre)Viewers
+The following software may be useful for a quick preview of your FITS images or tables, which are particularly handy during a casual discussion with the other colleagues. The links to them are provided. They are all reasonably easy to install.
+{: .fs-2 }
 
 ###### ds9
 For any astronomer, [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9) would be one of the most handy FITS image viewers. It is trivial to install no matter whether you are using Linux, Windows, or Mac OSX. There is no reason not using it. After installation, you can launch it by double-clicking its icon, otherwise, by typing
@@ -49,4 +51,92 @@ If you are a radio astronomer, it is most likely that you have installed the [CA
 
 ###### Karma kvis
 
-We used the  [karma](https://www.atnf.csiro.au/computing/software/karma/) package a lot in the old days. The `kvis` function is very useful when you are interactively examining the gas kinematics of an astronomical object with a spectral line image cube.
+We used the  [karma](https://www.atnf.csiro.au/computing/software/karma/) package a lot in the old days. The `kvis` function is very useful when you are interactively examining the gas kinematics of an astronomical object with a spectral line image cube. I myself still use it once in a while although not everybody uses it nowadays.
+{: .fs-2 }
+
+
+
+### Converting images in various formats
+
+###### Miriad
+After sourcing the [Miriad](https://www.astro.umd.edu/~teuben/miriad/) software package, which is often used in the imaging of the SMA data, you can use the following commands to convert between the Miriad and FITS format images:
+{: .fs-2 }
+
+```
+# The file names in in='' and out='' (string variables) 
+# need to be replaced with your filenames
+
+# converting from Miriad format to FITS format
+fits in='mytarget.image.miriad' op=xyout out='mytarget.image.fits'
+
+# converting from FITS to Miriad format
+fits in='mytarget.image.fits' op=xyin out='mytarget.image.miriad'
+```
+{: .fs-1 }
+
+They can be executed either by directly entering in a Linux/OSX command line or by executing as a BASH or CSH script. We can then program other software languages to manipulate or analyze the FITS format images, such as C/Fortran, IDL, or Python.
+{: .fs-2 }
+
+You can regrid two Miriad images or image cubes to have identical spatial or spectral coordinates using the following command:
+{: .fs-2 }
+```
+# The '\' symbols denotes line-breaking
+regrid in='image1.image.miriad'  \
+       out='image1.regrided.image.miriad' \
+       axes=1,2 \
+       tin='image2.image.miriad'
+```
+{: .fs-1 }
+
+This is useful when you want to align the pixels of two images before any further analyses. In this example, `axes=1,2` means that we are regridding the two spatial axes. When you want to also regrid the spectral axis, you can use `axes=1,2,3`. It loads 'image1.image.miriad' and regrids it according to the header information in 'image2.image.miriad', and then outout the regridded image1 as a new file 'image1.image.miriad'.
+{: .fs-2 }
+
+###### CASA
+
+You can use the following [CASA Software Package](https://casa.nrao.edu/) commands to convert between the Miriad and FITS format images:
+{: .fs-2 }
+
+```
+
+# The file names (string variables) in imagename and fitsimage need 
+# to be replaced with your filenames.
+
+# converting from CASA format to FITS format
+exportfits(
+           imagename = 'mytarget.image',
+           fitsimage = 'mytarget.image.fits',
+           overwrite = True
+          )
+          
+# converting from CASA format to FITS format
+importfits(
+           imagename = 'mytarget.image',
+           fitsimage = 'mytarget.image.fits',
+           overwrite = True
+          )
+          
+# If your CASA image have redundant spectral or polarization dimension,
+# and if you want to drop those redundant dimension, you can include the
+# relevant options (dropstokes or dropdeg) like:
+exportfits(
+           imagename = 'mytarget.image',
+           fitsimage = 'mytarget.image.fits',
+           overwrite = True, dropdeg = True, dropstokes = True
+          )
+# This can be very useful since not all Python package can recognize 
+# high-dimensional FITS images.
+```
+{: .fs-1 }
+
+They can be executed either by directly entering in a Linux/OSX command line or by executing as a Python3 script. We can then program other software languages to manipulate or analyze the FITS format images, such as C/Fortran, IDL, or Python.
+{: .fs-2 }
+
+
+### Working with FITS using software languages
+
+If you are programming C or Fortran, then [CFITSIO](https://heasarc.gsfc.nasa.gov/fitsio/) is the package you need. I do not think this is the way you will be going but am providing a reference to it just in case (e.g., sometimes you may need to check other people's programs which utilized this package). 
+{: .fs-2 }
+
+###### Python
+
+###### IDL
