@@ -88,3 +88,9 @@ Embedded for some information that I think can be useful for students on certain
 
 - For those who are focused on [Interstellar Dust (SED or Polarization)](/pages/students_topics/dust)
 {: .fs-2 }
+
+
+#### Tips of Using Certain Telescopes or Software
+
+I try to provide some of those in the [Telescope Tips](/pages/students_topics/UsingTelescope) and [Software Tips](/pages/students_topics/software_tips) pages. Please let me know when any update is necessary.
+{: .fs-2 }
