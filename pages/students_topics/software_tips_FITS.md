@@ -97,7 +97,6 @@ You can use the following [CASA Software Package](https://casa.nrao.edu/) comman
 {: .fs-2 }
 
 ```
-
 # The file names (string variables) in imagename and fitsimage need 
 # to be replaced with your filenames.
 
@@ -171,7 +170,7 @@ imsmooth(
          outfile   = image + '.smooth', 
          # whether or not overwritting the output file
          overwrite = True
-          )
+        )
 ```
 {: .fs-2 }
 
@@ -203,5 +202,216 @@ If you are programming C or Fortran, then [CFITSIO](https://heasarc.gsfc.nasa.go
 {: .fs-2 }
 
 ###### Python
+
+If you are analyzing images, you might build a conda environment by the following Linux/OSX command line commands:
+{: .fs-2 }
+```
+conda create --name astroimgAna python=3.9
+pip install --upgrade pip
+pip install jupyter
+pip install astropy scipy
+pip install jupyter matplotlib h5py aplpy pyregion PyAVM healpy
+pip install pandas
+```
+{: .fs-1 }
+
+I often make most of the following imports:
+{: .fs-2 }
+```
+import os
+import numpy as np
+
+from astropy.io.fits import getdata
+from astropy import wcs
+from astropy.io import fits
+from astropy import units as u
+from astropy import constants as con
+from astropy.coordinates import SkyCoord
+
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import matplotlib
+
+import aplpy
+
+matplotlib.use('PDF')
+```
+{: .fs-1 }
+
+The following code is an example of importing FITS image as a [Header Data Unit ](https://docs.astropy.org/en/stable/io/fits/api/hdus.html) (HDU) and extracting certain header information in Python:
+{: .fs-2 }
+```
+intensitymap = 'mytarget_StokesI.fits'
+intensity_scale = 1000.0
+if_success = False
+try:
+  
+  # importing FITS image to a HDU
+  Ihdu   = fits.open(intensitymap)
+  
+  # editing the FITS image by multiplying a scaling factor
+  Ihdu[0].data = Ihdu[0].data * intensity_scale
+  
+  if_success = True
+
+except:
+  print('Unable to read the intensity FITS image. Please double check the image file.')
+  print(intensitymap)
+
+if ( if_success == True ):
+  # Reading FITS header
+  try:
+    naxis1 = Ihdu[0].header['naxis1']
+    naxis2 = Ihdu[0].header['naxis2']
+    crval1 = Ihdu[0].header['crval1']
+    crpix1 = Ihdu[0].header['crpix1']
+    cdelt1 = Ihdu[0].header['cdelt1']
+    crval2 = Ihdu[0].header['crval2']
+    crpix2 = Ihdu[0].header['crpix2']
+    cdelt2 = Ihdu[0].header['cdelt2']
+    hduwcs = wcs.WCS( Ihdu[0].header)
+  except:
+    print( 'Warning. No coordinate headers' )
+
+  try:
+    bmaj = Ihdu[0].header['bmaj']
+    bmin = Ihdu[0].header['bmin']
+    bpa  = Ihdu[0].header['bpa']
+  except:
+    print('Warnning. No header for synthesized beam size')
+```
+{: .fs-1 }
+
+After having these header information, we can make conversion between the world coordiante system (i.e., astronomical coordinate systems) and the pixel coordinate system using the some methods of [astropy.wcs](https://docs.astropy.org/en/stable/wcs/index.html). The following example convert the central pixel in the image to the R.A. and Decl. values and then convert them back ot the x and y pixel numbers:
+{: .fs-2 }
+```
+xpix_temp = int(round( naxis1/2.0 ))
+ypix_temp = int(round( naxis2/2.0 ))
+
+world = hduwcs.wcs_pix2world([ [xpix_temp, ypix_temp] ], 0)
+ra_center  = world[0][0]
+dec_center = world[0][1]
+
+pixcrd = hduwcs.wcs_world2pix([ [ra_center, dec_center] ], 0)
+ra_center_pix  = pixcrd[0][0]
+dec_center_pix = pixcrd[0][1]
+```
+{: .fs-1 }
+
+The value of a certain pixel in a (two dimensional image) is simply:
+{: .fs-2 }
+```
+value = Ihdu[0].data[ypix][xpix]
+```
+{: .fs-1 }
+
+This allows you to analyze the image, for example, measuring aperature photometry.
+{: .fs-2 }
+
+The (two-dimensional) image can be output as a plot using the APLpy commands like:
+{: .fs-2 }
+```
+figsize = [9.0, 9.0]
+cmap           = 'viridis'
+plot_ticks     = True
+tick_font      = 25
+tick_ypad      = 0
+plot_colorbar  = True
+colorbar_location = 'top'
+colorbar_width = 0.3
+colorbar_pad = 0.3
+colorbar_font = 15
+colorbar_label = 'Colorbar'
+colorbar_labelpad = 0.3
+colorbar_labelfont = 20
+width = 1.0
+height = 1.0
+plot_scalebar = True
+distance      = 140.0
+scalebar_size = 100.0
+scalebar_text = '100 au'
+scalebar_color = (0,0,0)
+scalebar_font = 25.0
+scalebar_linewidth = 3.0
+plot_beam = True
+beam_color = 'black'
+
+if_plot = False
+try:
+    self.fig = aplpy.FITSFigure(Ihdu, figsize=(figsize[0], figsize[1]))
+    if_plot = True
+
+except:
+    print('Unable to load or plot hdu. Please double check the image file.')
+
+if ( if_plot == True ):
+    vmax = np.nanmax(Ihdu[0].data)*1.2
+    vmin = 0.0
+
+    fig.show_colorscale(
+                        vmax = vmax, vmin = vmin,
+                        interpolation = 'bicubic',
+                        cmap = cmap
+                       )
+
+# ticks
+fig.tick_labels.set_font(size=tick_font)
+fig.axis_labels.set_font(size=tick_font)
+fig.axis_labels.set_ypad(tick_ypad)
+if (plot_ticks != True):
+    fig.axis_labels.hide_x()
+    fig.axis_labels.hide_y()
+    fig.tick_labels.hide_x()
+    fig.tick_labels.hide_y()
+
+# recentering
+if ( (ra_center != 0) or (dec_center !=0) ):
+    print('recentering')
+    fig.recenter(ra_center, dec_center, width=width, height=height)
+
+# plot color bar
+if (plot_colorbar == True):
+    fig.add_colorbar()
+    fig.colorbar.show()
+    fig.colorbar.set_location(colorbar_location)
+    fig.colorbar.set_width(colorbar_width)
+    fig.colorbar.set_pad(colorbar_pad)
+    fig.colorbar.set_font(size=colorbar_font, weight='medium', \
+                               stretch='normal', family='sans-serif', \
+                               style='normal', variant='normal')
+
+    fig.colorbar.set_axis_label_text(colorbar_label)
+    fig.colorbar.set_axis_label_font(size=colorbar_labelfont)
+    fig.colorbar.set_axis_label_pad(colorbar_labelpad)
+    
+# plot scalebar
+if (plot_scalebar == True):
+
+    fig.add_scalebar( scalebar_size * (1.0/distance) / 3600.0)
+    fig.scalebar.set_label(scalebar_text)
+    fig.scalebar.set_color(scalebar_color)
+    fig.scalebar.set_font(size=scalebar_font)
+    fig.scalebar.set_linewidth(scalebar_linewidth)
+```
+{: .fs-1 }
+
+If you would like to overplot another image as contours, try loading as another HDU (e.g., `chdu` in the following example) and complete the commands like:
+```
+fig.show_contour(chdu, colors=ccolor, linestyles=clinestyle,
+                       levels=clevels,
+                       linewidths=clinewidth)
+```
+{: .fs-1 }
+
+Finally, to save an output figure, try ty complete the command like:
+{: .fs-2 }
+```
+fig.save(outfigname, transparent=True)
+```
+{: .fs-1 }
+
+You will make plots routinely. It is recommended to integrate the above commands in a script or a wrapper in a way that is convenient to you. If anything in this part is not clear to you, you can check the documentation for [APLpy]([APLpy](https://aplpy.github.io/)). You might need some patience and may need to try some things since not everything has been very clearly documented.
+{: .fs-2 }
 
 ###### IDL
