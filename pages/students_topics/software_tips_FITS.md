@@ -15,15 +15,15 @@ In brief, FITS is a binary format to store astronomical data (either image(s) or
 {: .fs-2 }
 
 In light of this, a FITS file usually contains two parts:
-one or more binary **data table**
-one or more **header files** that contain the necessary information to understand the data.
+- one or more binary **data table**
+- one or more **header files** that contain the necessary information to understand the data.
 {: .fs-2 }
 
-Since the binary data are not human readable, we cannot handle the FITS files with a text editor (e.g., vim) or other commercial or open resource software like MS Excel or Open Office. Here I provide some simple tips for manipulating FITS images that can be useful to radio astronomers.
+Since the binary data are not human readable, we cannot handle the FITS files with a text editor (e.g., vim) or other commercial or open resource software like MS Excel or Open Office. Here I provide some simple tips for manipulating FITS images that can be useful to radio astronomers. If you are a graduate student or researcher, I recommend at least installing the [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9),  [CASA](https://casa.nrao.edu/), [Miriad](https://www.astro.umd.edu/~teuben/miriad/) software and the [Astropy](https://www.astropy.org/) and [APLpy](https://aplpy.github.io/) Python packages. If you have access to IDL, you should also install the [IDL Astronomy User's Library](https://idlastro.gsfc.nasa.gov/).
 {: .fs-2 }
 
-
-
+If you know something that is very useful, please recommend to me.
+{: .fs-2 }
 
 
 ### (Pre)Viewers
@@ -74,7 +74,7 @@ fits in='mytarget.image.fits' op=xyin out='mytarget.image.miriad'
 ```
 {: .fs-1 }
 
-They can be executed either by directly entering in a Linux/OSX command line or by executing as a BASH or CSH script. We can then program other software languages to manipulate or analyze the FITS format images, such as C/Fortran, IDL, or Python.
+They can be executed either by directly entering in a Linux/OSX command line or by executing as a BASH or CSH script. We can then program other software languages to manipulate or analyze the FITS format images, such as C/Fortran, IDL, or Python. For online documentation of the Miriad tasks please check the [Miriad task index](https://www.atnf.csiro.au/computing/software/miriad/taskindex.html).
 {: .fs-2 }
 
 You can regrid two Miriad images or image cubes to have identical spatial or spectral coordinates using the following command:
@@ -128,7 +128,72 @@ exportfits(
 ```
 {: .fs-1 }
 
-They can be executed either by directly entering in a Linux/OSX command line or by executing as a Python3 script. We can then program other software languages to manipulate or analyze the FITS format images, such as C/Fortran, IDL, or Python.
+To crop a sub-image in CASA, you can use the CASA `umsubimage` task like:
+{: .fs-2 }
+```
+# # box[[x1, y1], [x2, y2]] region
+subimregion = "box[[1500pix, 1500pix], [4499pix, 4499pix]]"
+
+img_name = 'mytarget'
+imsubimage(imagename = img_name + '.image',
+           outfile   = img_name + '.subim.image',
+           region    = subimregion
+          )
+```
+{: .fs-1 }
+
+We also often use the CASA `imregrid` and `imsmooth` tasks to regrid a set of CASA format images to the same coordiante system and then smooth same synthesized beam size before exporting to FITS files for further analyses. Example of these commands are:
+{: .fs-2 }
+```
+imregrid(
+         # name of the image to be regrided
+         imagename = imagename,
+         # an existing image to serve as a template of coordiante grids
+         template  = template_imagename,
+         # output filename
+         output    = imagename + '.regrid',
+         # options in the regridding
+         axes      = [0, 1], interpolation = 'linear',
+         # whether or not overwritting the output file
+         overwrite = True
+        )
+          
+imsmooth(
+         # name of the image to be smoothed
+         imagename = image,
+         # Shape of the smoothing kernel or final synthesized beam.
+         # This example specified that the final synthesized beam should
+         # be a gaussian beam with 0.53 arcsecond FWHM in the major and minor axes
+         kernel    = 'gauss',
+             major = '0.53arcsec', minor = '0.53arcsec', pa = '0deg',
+             targetres = True,
+         # output file name
+         outfile   = image + '.smooth', 
+         # whether or not overwritting the output file
+         overwrite = True
+          )
+```
+{: .fs-2 }
+
+These CASA commands can be executed either by directly entering in a Linux/OSX command line or by executing as a Python3 script. 
+{: .fs-2 }
+
+To see a full list of available CASA tasks, please check [this webpage](https://casadocs.readthedocs.io/en/stable/api/casatasks.html). For online documentation of the CASA tasks please check the [CASA docs](https://casa.nrao.edu/casadocs). In the CASA command line, you can also check the documentation and input variables by entering `help taskname` and `inp`, e.g., in this case:
+{: .fs-2 }
+
+```
+# check the documentation for importfits/exportfits
+CASA> help importfits
+CASA> help exportfits
+
+# load the task importfits
+CASA> tget importfits
+# check the input variable of the loaded task
+CASA> inp
+```
+{: .fs-1 }
+
+After obtaining the FITS images, we can then program other software languages to manipulate or analyze the FITS format images, such as C/Fortran, IDL, or Python.
 {: .fs-2 }
 
 
