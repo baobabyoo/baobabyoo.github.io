@@ -172,7 +172,7 @@ imsmooth(
          overwrite = True
         )
 ```
-{: .fs-2 }
+{: .fs-1 }
 
 These CASA commands can be executed either by directly entering in a Linux/OSX command line or by executing as a Python3 script. 
 {: .fs-2 }
