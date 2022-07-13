@@ -8,4 +8,4 @@ has_toc: false
 
 # Radio Interferometry
 
-**2021-Jul-08/12 @ NTNU :** *Principle of interferometry, noise, and calibration strategy.* ( [Lecture Notes (PDF)](https://ui.adsabs.harvard.edu/abs/2021ApJ...923..270L/abstract) )
+**2021-Jul-08/12 @ NTNU :** *Principle of interferometry, noise, and calibration strategy.* ( [Lecture Notes (PDF)](https://github.com/baobabyoo/baobabyoo.github.io/blob/main/pages/files/lecture_notes/2022/Radio_interferometry_2022Jul.pdf) )
