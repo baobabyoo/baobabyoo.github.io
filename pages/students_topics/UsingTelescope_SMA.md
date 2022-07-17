@@ -729,6 +729,45 @@ For a Miriad based procedure, please check my documentation under the [ALMICA](h
 
 #### Miriad self-calibration
 
+If you have imaged your SMA data using the Miriad software package, and if the residual phase errors appear large, you may try a few iterations of gain phase self-calibration using the Miriad software package.
+Embedded is an example using an image model to self-calibrate multiple epochs of observations on the same target source, Z CMa. It is written in C-shell, but it is not hard to revise it to a BASH script.
+{: .fs-2 }
+
+```
+#!/bin/csh
+
+foreach vis(ZCMa_2013Oct25.ext2v3.usb.if1.ch0.miriad ZCMa_2013Oct25.ext2v3.lsb.if1.ch0.miriad ZCMa_2013Oct25.ext2v3.usb.if2.ch0.miriad ZCMa_2013Oct25.ext2v3.lsb.if2.ch0.miriad ZCMa_2013Oct26.ext3.usb.if1.ch0.miriad ZCMa_2013Oct26.ext3.lsb.if1.ch0.miriad ZCMa_2013Oct26.ext3.usb.if2.ch0.miriad ZCMa_2013Oct26.ext3.lsb.if2.ch0.miriad )
+
+   if ( -e 'sel1p.gain' ) then
+      rm -rf sel1p.gain
+   endif
+
+   set model='ZCMa.model.temp'
+   set interval='5'
+
+   selfcal vis=$vis model=$model interval=$interval options='phase'
+
+
+   if ( -e $vis'.sel') then
+      rm -rf $vis'.sel'
+   endif
+
+   uvaver vis=$vis options=nopass,nopol out=$vis'.sel'
+
+
+end
+```
+{: .fs-1 }
+
+In this case, the gain-phase self-calibration solutions for the upper and lower sidebands were derived independently using the `selfcal` task. The target-source model in the self-calibration procedure was a clean-model constructed from the observations taken in good weather conditions, `ZCMa.model.temp`. In principle, you can use observations taken at slightly different frequencies, or even the observations taken with ALMA, to initialize your self-calibration procedure. If there is no such a priori high-quality target-source model available for your self-calibration, you can iterate between imaging and self-calibration a few times, which may be done with a script. You can use the Miriad task `cgcurs` to set clean boxes interactively if it is needed.
+{: .fs-2 }
+
+The solution interval was set to be 5 minutes; you have to adjust your solution intervals case-by-case to ensure that the solutions were derived at high signal-to-noise ratios.
+{: .fs-2 }
+
+The solution tables were stored in your visibility files. You can use the Miriad task `gplist` to check what tables have been stored in a visibility file. You can use the Miriad task `gpplt` to inspect the solution tables, to ensure that the solutions are not jumping around randomly (in most cases, this is a sign of poor solution quality). You can use the Miriad task `gpedit` to edit the self-calibration solution tables. If you know what you are doing, this can sometimes improve the self-calibration (e.g., lowing the noise level and enhancing the peak intensity). But you should only do this edit when you really know what you are doing. Finally, the script used the `uvaver` task to apply the solution table.
+{: .fs-2 }
+
 #### CASA Data calibration and imaging (under construction)
 
 
