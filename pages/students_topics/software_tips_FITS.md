@@ -130,7 +130,7 @@ exportfits(
 ```
 {: .fs-1 }
 
-To crop a sub-image in CASA, you can use the CASA `umsubimage` task like:
+To crop a sub-image in CASA, you can use the CASA `imsubimage` task like:
 {: .fs-2 }
 ```
 # # box[[x1, y1], [x2, y2]] region
