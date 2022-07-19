@@ -93,7 +93,10 @@ This is useful when you want to align the pixels of two images before any furthe
 
 ###### CASA
 
-You can use the following [CASA Software Package](https://casa.nrao.edu/) commands to convert between the Miriad and FITS format images:
+After launching CASA, you can type `viewer` in the CASA command line environment to launch the GUI image previewer.
+{: .fs-2 }
+
+You can use the following [CASA Software Package](https://casa.nrao.edu/) commands to convert between the CASA and FITS format images:
 {: .fs-2 }
 
 ```
