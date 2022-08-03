@@ -730,32 +730,110 @@ For a Miriad based procedure, please check my documentation under the [ALMICA](h
 #### Miriad self-calibration
 
 If you have imaged your SMA data using the Miriad software package, and if the residual phase errors appear large, you may try a few iterations of gain phase self-calibration using the Miriad software package.
-Embedded is an example using an image model to self-calibrate multiple epochs of observations on the same target source, Z CMa. It is written in C-shell, but it is not hard to revise it to a BASH script.
+Embedded is an example using an image model to self-calibrate multiple epochs of observations on the same target source. Note that the Miriad task `selcal` can only deal with Stokes I, Q, U, and V. If your data were stored as XX, YY, RR, LL correlations, then you need to use the `uvaver` task to cover the data to Stokes I.
 {: .fs-2 }
 
 ```
 #!/bin/csh
 
-foreach vis(ZCMa_2013Oct25.ext2v3.usb.if1.ch0.miriad ZCMa_2013Oct25.ext2v3.lsb.if1.ch0.miriad ZCMa_2013Oct25.ext2v3.usb.if2.ch0.miriad ZCMa_2013Oct25.ext2v3.lsb.if2.ch0.miriad ZCMa_2013Oct26.ext3.usb.if1.ch0.miriad ZCMa_2013Oct26.ext3.lsb.if1.ch0.miriad ZCMa_2013Oct26.ext3.usb.if2.ch0.miriad ZCMa_2013Oct26.ext3.lsb.if2.ch0.miriad )
+targets='AB_Aur'
+tracks='track6'
+rxs='rx400'
+sidebands='usb lsb'
 
-   if ( -e 'sel1p.gain' ) then
-      rm -rf sel1p.gain
-   endif
+refant='3'
 
-   set model='ZCMa.model.temp'
-   set interval='5'
-
-   selfcal vis=$vis model=$model interval=$interval options='phase'
-
-
-   if ( -e $vis'.sel') then
-      rm -rf $vis'.sel'
-   endif
-
-   uvaver vis=$vis options=nopass,nopol out=$vis'.sel'
+# creating a directory to host self-calibrated data
+rm -rf selcal_Miriad
+mkdir selcal_Miriad
 
 
-end
+
+# looping over observations on varios target sources
+for target in $targets
+do
+  for track in $tracks
+  do
+
+    datadir='../../calibrated_Miriad/'$track'/'
+    imdir='../../imaging/ch0/'$track'/'$target'/'
+
+    for rx in $rxs
+    do
+
+      # set reference antenna and solution interval
+      if [ $track = 'track6' ]
+      then
+        interval='0.1'
+        refant='3'
+      fi
+
+
+
+      for sideband in $sidebands
+      do
+
+        # copy over visibility data
+        vis=$target'_'$track'.'$rx'.'$sideband'.cal.miriad'
+        cp -r $datadir$vis ./
+
+        # copy over image model
+        model=$target'.rx345.usb.model'
+        cp -r $imdir$model ./
+
+        # convert to Stokes I data
+        rm -rf $vis'.i'
+        uvaver vis=$vis options=nopass,nocal,nopol out=$vis'.i' stokes=ii
+ 
+        # produce ascii output for the self-calibration solution
+        gaintable=$target'_'$track'.'$rx'.'$sideband'.1p.gain'
+        rm -rf $gaintable
+        int='0.1'
+        selfcal vis=$vis'.i' model=$model \
+                out=$gaintable \
+                options='pha,mfs' \
+                interval=$interval refant=$refant
+
+
+        # perform gain self-claibration solution
+        selfcal vis=$vis'.i' model=$model \
+                options='pha,mfs' \
+                interval=$interval refant=$refant
+ 
+
+        # inspecting the solution and yield ascii output for solution table
+        rm -rf $gaintable'.txt'
+        gpplt vis=$gaintable yaxis=phase nxy=1,1 log=$gaintable'.txt' # device=/xw
+
+        # apply calibration solution
+        rm -rf $vis'.sel'
+        uvaver vis=$vis'.i' options=nopass,nopol out=$vis'.sel'
+
+        # creating non-self-calibrated dirty image
+        rm -rf $vis'.map'
+        rm -rf $vis'.beam'
+        invert vis=$vis map=$vis'.map' beam=$vis'.beam' \
+               imsize=512,512 cell=0.1,0.1 robust=2.0 options=systemp,double,mfs
+
+        # creating self-calibrated dirty image
+        rm -rf $vis'.sel.map'
+        rm -rf $vis'.sel.beam'
+        invert vis=$vis'.sel' map=$vis'.sel.map' beam=$vis'.sel.beam' \
+               imsize=512,512 cell=0.1,0.1 robust=2.0 options=systemp,double,mfs
+
+
+        # collecting self-calibrated visibilities into a folder
+        mv *.sel ./selcal_Miriad
+
+        # collecting solution tables into the folder
+        mv *.gain ./selcal_Miriad
+        mv *.gain.txt ./selcal_Miriad
+
+      done
+    done
+  done
+done
+
 ```
 {: .fs-1 }
 
