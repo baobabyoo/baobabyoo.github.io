@@ -160,6 +160,26 @@ The T<sub>sys</sub> application step multiplies the raw SMA visibility with the 
 
 #### MIR Data calibration (no polarization)
 
+##### Reducing filesize
+
+The raw data files of the SMA can be as large as 50~100 GB. If you load a raw data file with the MIR IDL software package, it will requires a memory that is at least twice your raw data file size, due to converting the data to double precision. If the memory of your workstation is not so big, you have to reduce the filesize by binning the spectral channels. This can be achived by running the c code, [SMARechunker](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/rechunk/). Following are the commands to download and compile it.
+{: .fs-2 }
+
+```
+git clone https://github.com/Smithsonian/SMARechunker
+cd SMARechunker
+make
+```
+{: .fs-1 }
+
+This will produce an executable, `SMARechunker`. You can then set alias in your start-up shell, e.g., .bashrc. The following command bin every 4 spectral channels, which will produce a file that is 4 times smaller than the raw SMA data file. The file format is the same as the raw SMA data file.
+{: .fs-2 }
+
+```
+SMARechunker -i input_filename -o output_filename -r 4
+```
+{: .fs-1 }
+
 ##### Environment
 
 I assume you are in an x86_64 Linux (e.g., CentOS, Ubuntu, Rocky, Redhat, etc) environment. If you have installed MIR IDL, or if somebody has installed it (e.g., if you are using a workstation at ASIAA), you need to *source* the setup file to enable using it. For example, I have my own installation, then type (revise to your own path):
