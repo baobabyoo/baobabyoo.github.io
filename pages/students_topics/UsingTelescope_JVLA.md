@@ -79,12 +79,37 @@ If you are a Ph.D. student who already know what is your thesis project, and if 
 
 ### Chapter 2. Organizing observing scripts
 
-You need to do it on the [NRAO online interface](my.nrao.edu). It is recommended to use Firefox, although I sometimes also use Google Chrome. Other web browsers are not necessarily well supported. After you login, click the `Obs Prep` tab. Then click into `Login to the Observation Preparation Tool (OPT)` to launch the interface.
+You need to do it on the [NRAO online interface](my.nrao.edu). It is recommended to use Firefox, although I sometimes also use Google Chrome. Other web browsers are not necessarily well supported. After you login, click the `Obs Prep` tab. Then click into `Login to the Observation Preparation Tool (OPT)` to launch the **OPT** interface.
 {: .fs-2 }
 
-You will see a complicated web-based interface. Before you do anything with it, you need to learn the following things:
+You will see a complicated web-based interface. Before you do anything with it, you need to learn the following two things:
 {: .fs-2 }
 
-1. The interface itself. If this is the first time you use it, please carefully read this [tutorial](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual/opt-tutorial-1). For a full reference manual, you can click into [this page](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual).
-2. 
+1. **The interface itself.** If this is your first time to organize a JVLA observing script, please carefully read this [tutorial](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual/opt-tutorial-1). For a full reference manual, you can click into [this page](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual).
+2. **The concept of data calibration.** Please read through this [webpage](https://science.nrao.edu/facilities/vla/docs/manuals/obsguide/calibration).
+{: .fs-2 }
+
+After you have an idea, please open the proposal you submitted and the disposition letter. You will need to reference them when you are preparing the observing scripts.
+{: .fs-2 }
+
+#### 1.1 Receiver and correlator resources
+
+The first thing you need to do is to configure the receiver and correlator resources. If you are performing standard continuum-mode observations, you can simply use the NRAO defaults. In that case, to prepare the resources, click the `Instrument Configurations` tab in the OPT interface. You will see the *NRAO Defaults* and *your project code* on the left. Click into the *NRAO Defaults* and then click into the relevant category. A list of receiver and correlator setups will appear on the right. You should be able to understand what do they mean after reading the aforementioned  [tutorial](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual/opt-tutorial-1). Check the boxes for the ones that you are going to use, and then click `Edit`->`Copy`->`Instrument Cfgs`. Then click *your project code* on the left, and then click `Edit`->`Paste`->`Instrument Cfgs` to paste it into your project.
+{: .fs-2 }
+
+This task is a lot more complicated when you are performing spectral line observations. Please read into the details of
+[this page](https://science.nrao.edu/facilities/vla/docs/manuals/oss/widar#section-7).
+{: .fs-2 }
+
+#### 1.2 Calibrator selections
+
+#### 1.2.1 Absolute Flux Calibrator
+
+#### 1.2.2 Gain Calibrator
+
+#### 1.2.3 Passband Calibrator
+
+#### 1.2.4 Polarization Calibrator
+
+If this is what you are doing, you should be a relatively advanced user already. You can find all the information you need in [this page](https://science.nrao.edu/facilities/vla/docs/manuals/obsguide/modes/pol). You can contact and ask me if there is something that you are not so sure about, otherwise, contact the NRAO helpdesk.
 {: .fs-2 }
