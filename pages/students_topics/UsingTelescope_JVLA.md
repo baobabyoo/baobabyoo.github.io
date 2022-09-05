@@ -101,13 +101,28 @@ This task is a lot more complicated when you are performing spectral line observ
 [this page](https://science.nrao.edu/facilities/vla/docs/manuals/oss/widar#section-7).
 {: .fs-2 }
 
-#### 1.2 Calibrator selections
+#### 1.2 Selecting calibrators
+
+You need to understand the JVLA calibrator list from [this page](https://science.nrao.edu/facilities/vla/observing/callist). In particular, you need to pay attention to the meanings of the **calibrator quality code**. To prepare the calibrators for your project, in the **OPT** interface, click the `Sources` tab in the OPT interface. You will see *VLA* and *your project code* on the left. You can click the plus sign on the left of the *VLA* catalogue on the left to unfold this catalog. Then you can look you the calibrators you will use (more below) in certain RA Groups. After you click into a specific *RA Group*, you will see a list of calibration quasar on the right. Check the box of your calibrator and then click `Edit`->`Copy`->`Sources`, and then click *your project code* on the left and click `Edit`->`Paste`->`Source` to copy it into your own project.
+{: .fs-2 }
 
 #### 1.2.1 Absolute Flux Calibrator
 
+There are only a few options for the JVLA, which can be looked up in [this page](https://science.nrao.edu/facilities/vla/docs/manuals/oss/performance/fdscale). Pick the one that is close to your target source and avoid the one that is flaring.
+{: .fs-2 }
+
 #### 1.2.2 Gain Calibrator
 
+In the **OPT** interface, click the `Sources` tab and then click the plus sign on the left of *your project code* to unfold it. You will see the list of your source groups. If you click into a specific source group, you will see the list of target sources in that group on the right. To find the gain calibrator that is close to a target source, click the `Sky Map` symbol in the right-most column. From the pop-up tab in your web browser, you can pick the suitable Gain calibrator that is bright, spatially compact enough for your observations, and is not too far from your target source.
+{: .fs-2 }
+
+There might be multiple options. When you are observing a large number of target sources in one scheduling block, you can try to make the combination that is minimizing the slewing time.
+{: .fs-2 }
+
 #### 1.2.3 Passband Calibrator
+
+This calibrator need to be bright. It is also better that this calibrator is not extremely far from your target source, to avoid the long slewing time. For continuum observations, your absolute flux calibrator may also be used for this purpose. Otherwise, some sources I used before include 3C84, 3C273, 3C279, bllac, J1924-292, 3C454.3, and so on.
+{: .fs-2 }
 
 #### 1.2.4 Polarization Calibrator
 
