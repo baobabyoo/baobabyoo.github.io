@@ -74,3 +74,17 @@ If you are a Ph.D. student who already know what is your thesis project, and if 
 
 **Pick a problem that can be solved by such an investment resource.** You can think bigger once you have enough reputation to convince the reviewers that you can manage a larger-scale project.
 {: .fs-2 }
+
+
+
+### Chapter 2. Organizing observing scripts
+
+You need to do it on the [NRAO online interface](my.nrao.edu). It is recommended to use Firefox, although I sometimes also use Google Chrome. Other web browsers are not necessarily well supported. After you login, click the `Obs Prep` tab. Then click into `Login to the Observation Preparation Tool (OPT)` to launch the interface.
+{: .fs-2 }
+
+You will see a complicated web-based interface. Before you do anything with it, you need to learn the following things:
+{: .fs-2 }
+
+1. The interface itself. If this is the first time you use it, please carefully read this [tutorial](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual/opt-tutorial-1). For a full reference manual, you can click into [this page](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual).
+2. 
+{: .fs-2 }
