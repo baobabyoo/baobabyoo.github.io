@@ -194,3 +194,16 @@ After changing the scans such that there is no errors, click into `Validation an
 
 Sometimes you may have to create various versions of scheduling blocks for the observations of the same target source groups. For example, sometimes you may need to observe different absolute flux and/or passband calibrators when using different LST ranges. Sometimes you also need to use different scan lengths. In such cases, you can submit various versions of scheduling blocks and then **link** them following this [instruction](https://science.nrao.edu/facilities/vla/docs/manuals/opt-manual/observation-preparation-tool/linking-sbs). Do not make a mistake with this. Otherwise, you may bill too much time for the observations on certain target sources groups while leaving no time for the rest.
 {: .fs-2 }
+
+
+### Chapter 3. Data calibration
+
+#### 3.1 Pipeline calibration
+
+Please find the pipeline [here](https://science.nrao.edu/facilities/vla/data-processing/pipeline). It may work OK when you are working at low-frequency standard continuum observations. This is rarely what I do. So I have not used it myself. Good luck.
+{: .fs-2 }
+
+#### 3.2 Manual CASA calibration
+
+If you have not done this before, be ready to spend several weeks of full-time working in order to pick this up. 
+{: .fs-2 }
