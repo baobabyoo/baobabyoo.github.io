@@ -84,7 +84,7 @@ If you are a Ph.D. student who already know what is your thesis project, and if 
 
 You may find [this PDF document](https://events.asiaa.sinica.edu.tw/workshop/20120903/talk/EmmanuelMomjian1.pdf) useful.
 
-You need to do it on the [NRAO online interface](my.nrao.edu). It is recommended to use Firefox, although I sometimes also use Google Chrome. Other web browsers are not necessarily well supported. After you login, click the `Obs Prep` tab. Then click into `Login to the Observation Preparation Tool (OPT)` to launch the **OPT** interface.
+You need to do it on the [NRAO online interface](https://my.nrao.edu/). It is recommended to use Firefox, although I sometimes also use Google Chrome. Other web browsers are not necessarily well supported. After you login, click the `Obs Prep` tab. Then click into `Login to the Observation Preparation Tool (OPT)` to launch the **OPT** interface.
 {: .fs-2 }
 
 You will see a complicated web-based interface. Before you do anything with it, you need to learn the following two things:
@@ -121,7 +121,7 @@ There are only a few options for the JVLA, which can be looked up on [this page]
 In the **OPT** interface, click the `Sources` tab and then click the plus sign on the left of *your project code* to unfold it. You will see the list of your source groups. If you click into a specific source group, you will see the list of target sources in that group on the right. To find the gain calibrator that is close to a target source, click the `Sky Map` symbol in the right-most column. From the pop-up tab in your web browser, you can pick the suitable Gain calibrator that is bright, spatially compact enough for your observations, and is not too far from your target source.
 {: .fs-2 }
 
-There might be multiple options. When you are observing a large number of target sources in one scheduling block, you can try to make a combination that is minimizing the slewing time. If you have any question about slewing time, you are more than welcome to contact my Master's student [Chia-Ying Chung](https://baobabyoo.github.io/pages/members.html). She can help you with this as part of a collaboration.
+There might be multiple options. When you are observing a large number of target sources in one scheduling block, you can try to make a combination that is minimizing the slewing time. If you have any question about slewing time, you are more than welcome to contact my Master's student [Chia-Ying Chung and Yuka Terada](https://baobabyoo.github.io/pages/members.html). She can help you with this as part of a collaboration.
 {: .fs-2 }
 
 ##### 2.2.3 Passband Calibrator
@@ -161,7 +161,10 @@ You need to look up the recommended **calibrator cycle time** for your target so
 
 ##### 2.3.3 Reference pointing
 
-For high-frequency observations, we need to include a reference pointing scan every time we slew to a new field, e.g., before your first calibration scan (of any purpose), when you slew from passband to absolute flux calibrator (and vice versa), when you slew from any of these calibrators to the gain calibrator, etc. Here, a *new field* can be defined by an AZ-EL direction that is offset from the current pointing direction by over 20 degrees. Note that even if you are approximately staying around the same field, we still need to do reference pointing calibration approximately every 40 minutes when carrying out nighttime observations. In the daytime observations, we may want to do it every 20~30 minutes. We should use the standard X-point resource configuration if possible.
+Without calibration, the naiive pointing accuracy of the JVLA is ~2 arcmin. When your field of view is considerably bigger than that ([check here](https://science.nrao.edu/facilities/vla/docs/manuals/oss/performance/fov)), such pointing error does not lead to a big amplitude error. When the field of view is large, pointing calibration only matters when you are carrying out high dynamic-range imaging or mosaic observations, or polarization observations.
+{: .fs-2 }
+
+When the field of view is comparably smaller than the typical pointing errors, for example, in high-frequency observations, we need to include a reference pointing scan every time we slew to a new field, e.g., before your first calibration scan (of any purpose), when you slew from passband to absolute flux calibrator (and vice versa), when you slew from any of these calibrators to the gain calibrator, etc. Here, a *new field* can be defined by an AZ-EL direction that is offset from the current pointing direction by over **20 degrees**. Note that even if you are approximately staying around the same field, we still need to do reference pointing calibration approximately every 40 minutes when carrying out nighttime observations. In the daytime observations, we may want to do it every 20~30 minutes. We should use the standard X-point resource configuration if possible.
 {: .fs-2 }
 
 In most cases, you can use the calibrator that you are going to integrate on to calibrator reference pointing, e.g., you can perform the standard X-band pointing observations on your passband calibrator before you integrate on your passband calibrator at any other frequency bands. The minimum allowable on-source time for reference pointing calibration is **2m30s**. If the on-source time is less than that, your pointing calibration will likely fail. You can perform reference pointing calibration with an arbitrarily longer duration but that will reduce the time for you to integrate on your target source.
