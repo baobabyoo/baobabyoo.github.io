@@ -609,6 +609,15 @@ source /home/hyliu/softwares/Miriad/carma/miriad/miriad_start.sh
 ```
 {: .fs-1 }
 
+Note that you may need two packages in order to run Miriad tasks, `libquadmath` and `libgfortran.so.3`. The former can be installed by typing in the Linux command line (if using CentOS linux)
+```
+yum install libquadmath
+```
+{: .fs-1 }
+
+You can try to find a pre-compiled `libgfortran.so.3` and copy it into your `/lib64` directory. I found one in the `/lib` directory in the CASA software package. If you still cannot find one, please contact me. I can send you a copy.  
+{: .fs-2 }
+
 For an online documentation for the individual Miriad tasks, please check the [Miriad task list](https://www.atnf.csiro.au/computing/software/miriad/taskindex.html).
 {: .fs-2 }
 
@@ -804,7 +813,7 @@ do
         # convert to Stokes I data
         rm -rf $vis'.i'
         uvaver vis=$vis options=nopass,nocal,nopol out=$vis'.i' stokes=ii
- 
+
         # produce ascii output for the self-calibration solution
         gaintable=$target'_'$track'.'$rx'.'$sideband'.1p.gain'
         rm -rf $gaintable
@@ -819,7 +828,7 @@ do
         selfcal vis=$vis'.i' model=$model \
                 options='pha,mfs' \
                 interval=$interval refant=$refant
- 
+
 
         # inspecting the solution and yield ascii output for solution table
         rm -rf $gaintable'.txt'
