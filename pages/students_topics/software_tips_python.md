@@ -23,6 +23,14 @@ chmod +x installer.sh
 This should be able to complete the installation.
 {: .fs-2 }
 
+You can also use `wget` to download the installer:
+{: .fs-2 }
+```
+wget https://repo.anaconda.com/archive/Anaconda3-latest-Linux-x86_64.sh
+bash Anaconda3-latest-Linux-x86_64.sh
+```
+{: .fs-1 }
+
 Then you can create/remove an conda environment by typing
 {: .fs-2 }
 
@@ -90,5 +98,5 @@ ssh -L XXXX:localhost:XXXX remoteUSRNAME@remoteDOMAIN
 ```
 {: .fs-1 }
 
-Then you can open a web browser in the local computer, and connect to `http://localhost:XXXX/logout` to launch your remote Jupyter Notebook.
+Then you can open a web browser in the local computer, and connect to `http://localhost:XXXX/logout` to launch your remote Jupyter Notebook. You will be asked to insert a `token`. From the remote sever, you can type `jupyter notebook list` in the command line to list all of the token you have, and then copy the one that corresponds to the port you are using to the web browser.
 {: .fs-2 }
