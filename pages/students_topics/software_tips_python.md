@@ -62,3 +62,33 @@ conda list
 {: .fs-1 }
 
 ### 2. Using Jupyter Notebook from a Remote Server
+
+You need to install Jupyter Notebook in the remote sever (e.g., under a conda environment) by typing
+{: .fs-2 }
+
+```
+pip install jupyter
+```
+{: .fs-1 }
+
+At the remote server, launch Jupyter notebook by typing
+{: .fs-2 }
+
+```
+jupyter notebook --no-browser --port=XXXX
+```
+{: .fs-1 }
+Remember to activate the conda environment in the remote server before doing this step.
+{: .fs-2 }
+
+Here `XXXX` is a for digit port number, for example, 8080.
+In the local computer, setup ssh tunnel by typing
+{: .fs-2 }
+
+```
+ssh -L XXXX:localhost:XXXX remoteUSRNAME@remoteDOMAIN
+```
+{: .fs-1 }
+
+Then you can open a web browser in the local computer, and connect to `http://localhost:XXXX/logout` to launch your remote Jupyter Notebook.
+{: .fs-2 }
