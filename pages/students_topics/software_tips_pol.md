@@ -6,7 +6,7 @@ grand_parent: To my students
 nav_order: 1
 ---
 
-### Creating polarization images using CASA
+### 1. Creating polarization images using CASA
 
 If you need more explanation, you can also read into this [CASA Guide](https://casaguides.nrao.edu/index.php?title=3C286_Band6Pol_Imaging_for_CASA_5.4) and scroll down to the section *Constructing Polarization Intensity and Angle Images*.
 {: .fs-2 }
@@ -83,7 +83,7 @@ if(mystep in thesteps):
 
 
 
-### Creating polarization images using Miriad
+### 2. Creating polarization images using Miriad
 
 Here I provide a Miriad script that I often adopt to create polarization PI, Per, and PA images. It first imports FITS images to Miriad format and then derives the polarization quantities with the `impol` Miriad task.
 {: .fs-2 }
@@ -177,7 +177,7 @@ end
 {: .fs-1 }
 
 
-### Plotting
+### 3. Plotting
 
 If you are handling the polarization data using Python, especially, if you are creating figures using the [APLpy](https://aplpy.github.io/) package, you will sometimes face a problem that the package(s) you use cannot recognize the Stokes dimension. In this case you can try to import the images to CASA and then drop the dummy dimension(s) when you are exporting back to FITS, for example:
 {: .fs-2 }
@@ -209,3 +209,58 @@ for imname in [Imap, PImap, pamap, Permap]:
 ```
 {: .fs-1 }
 
+I use the following code to plot the polarization line segments (you need to create your own code to define sampling positions). This is a function in a big class. I am reluctant to edit it now. You should be able to more or less know how it works and edit to the way that fits your code the best, given that you are likely already experienced. 
+{: .fs-2 }
+```
+    def plot_segments(self, length_arcsec=-999.0, color=(0,0,0), linestyle='solid', linewidth=2.0, delraperyr_mas=0.0, deldecperyr_mas=0.0, delyr=0.0):
+        '''
+        Plot the polarization line segments.
+
+        Input :
+
+        length_arc    [float] : Default: 1/3 of the synthesized beam FWHM of the intensity map
+
+        Keywords :
+        
+        delraperyr_mas    [float] : For correcting proper motions (delta ra per year). Units: mas. Default: 0.0
+        deldecperyr_mas   [float] : For correcting proper motions (delta dec per year). Units: mas. Default: 0.0
+        delyr             [float] : For correcting proper motions. (date-to-go-to minus data-of-observation)
+
+        '''
+
+        delra_deg  = delraperyr_mas  * delyr * 0.001 / 3600.0
+        deldec_deg = deldecperyr_mas * delyr * 0.001 / 3600.0
+        delra_pix  = delra_deg  / self.cdelt1
+        deldec_pix = deldec_deg / self.cdelt2
+
+
+        if (length_arcsec == -999.0):
+            length_arcsec = ( np.sqrt( self.bmaj * self.bmin ) * 3600.0 ) / 3.0
+
+        halflength_pix = 0.5 * length_arcsec / (self.cdelt2 * 3600.0)
+
+        for i in range(0, self.num_samplings):
+
+            xpix = int(round(self.xpixgrid_list[i] ))
+            ypix = int(round(self.ypixgrid_list[i] ))
+
+            pa = self.paimage[ypix][xpix]
+
+            xbeg = self.xpixgrid_list[i] + delra_pix  - halflength_pix * np.sin( np.pi * (pa/180.0) )
+            ybeg = self.ypixgrid_list[i] + deldec_pix + halflength_pix * np.cos( np.pi * (pa/180.0) )
+            xend = self.xpixgrid_list[i] + delra_pix  + halflength_pix * np.sin( np.pi * (pa/180.0) )
+            yend = self.ypixgrid_list[i] + deldec_pix - halflength_pix * np.cos( np.pi * (pa/180.0) )
+
+            world1 = self.hduwcs.wcs_pix2world([ [ xbeg, ybeg ] ], 0)
+            world2 = self.hduwcs.wcs_pix2world([ [ xend, yend ] ], 0)
+
+            linelist = [np.array([
+                                  [  world1[0][0], world2[0][0]  ],
+                                  [  world1[0][1], world2[0][1]  ]
+                                 ])]
+
+            if ( np.isfinite(pa) == True ):
+                self.fig.show_lines(linelist,
+                                    color=color, linestyle=linestyle, linewidth=linewidth)
+```
+{: .fs-1 }

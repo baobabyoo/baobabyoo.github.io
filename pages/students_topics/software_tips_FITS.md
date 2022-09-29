@@ -6,7 +6,7 @@ grand_parent: To my students
 nav_order: 1
 ---
 
-### What are FITS images?
+### 1. What are FITS images?
 
 FITS stands for Flexible Image Transport System. The complete documentation can be found on this [webpage](https://fits.gsfc.nasa.gov/fits_documentation.html) hosted by NASA. 
 {: .fs-2 }
@@ -26,11 +26,11 @@ If you know something that is very useful, please recommend to me.
 {: .fs-2 }
 
 
-### (Pre)Viewers
+### 2. (Pre)Viewers
 The following software may be useful for a quick preview of your FITS images or tables, which are particularly handy during a casual discussion with the other colleagues. The links to them are provided. They are all reasonably easy to install.
 {: .fs-2 }
 
-###### ds9
+###### 2.1 ds9
 For any astronomer, [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9) would be one of the most handy FITS image viewers. It is trivial to install no matter whether you are using Linux, Windows, or Mac OSX. There is no reason not using it. After installation, you can launch it by double-clicking its icon, otherwise, by typing
 {: .fs-2 }
 ```
@@ -40,25 +40,25 @@ For any astronomer, [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9) 
 in a Linux or OSX comand line. 
 {: .fs-2 }
 
-###### fv
+###### 2.2 fv
 [fv](https://heasarc.gsfc.nasa.gov/ftools/fv/) is a simple graphical interface for you to preview FITS tables. It can also export data to ASCII format. It is also very easy to install.
 {: .fs-2 }
 
-###### CASA-Viewer and CARTA
+###### 2.3 CASA-Viewer and CARTA
 
 If you are a radio astronomer, it is most likely that you have installed the [CASA Software Package](https://casa.nrao.edu/). The `viewer` function of CASA is handy when you are previewing the radio interferometric images, although it crashes once in a while. It may be replaced by [CARTA](https://cartavis.org/) at some point although I have not adapted myself to it. If you are new to astronomy, I recommend beginning with CARTA. When your image file is large (e.g., >100 GB), presently, only CARTA allows you to preview the images reasonably smoothly.
 {: .fs-2 }
 
-###### Karma kvis
+###### 2.4 Karma kvis
 
 We used the  [karma](https://www.atnf.csiro.au/computing/software/karma/) package a lot in the old days. The `kvis` function is very useful when you are interactively examining the gas kinematics of an astronomical object with a spectral line image cube. I myself still use it once in a while although not everybody uses it nowadays.
 {: .fs-2 }
 
 
 
-### Converting images in various formats
+### 3. Converting images in various formats
 
-###### Miriad
+###### 3.1 Miriad
 After sourcing the [Miriad](https://www.astro.umd.edu/~teuben/miriad/) software package, which is often used in the imaging of the SMA data, you can use the following commands to convert between the Miriad and FITS format images:
 {: .fs-2 }
 
@@ -91,7 +91,7 @@ regrid in='image1.image.miriad'  \
 This is useful when you want to align the pixels of two images before any further analyses. In this example, `axes=1,2` means that we are regridding the two spatial axes. When you want to also regrid the spectral axis, you can use `axes=1,2,3`. It loads 'image1.image.miriad' and regrids it according to the header information in 'image2.image.miriad', and then outout the regridded image1 as a new file 'image1.image.miriad'.
 {: .fs-2 }
 
-###### CASA
+###### 3.2 CASA
 
 After launching CASA, you can type `viewer` in the CASA command line environment to launch the GUI image previewer.
 {: .fs-2 }
@@ -199,12 +199,12 @@ After obtaining the FITS images, we can then program other software languages to
 {: .fs-2 }
 
 
-### Working with FITS using software languages
+### 4. Working with FITS using software languages
 
 If you are programming C or Fortran, then [CFITSIO](https://heasarc.gsfc.nasa.gov/fitsio/) is the package you need. I do not think this is the way you will be going but am providing a reference to it just in case (e.g., sometimes you may need to check other people's programs which utilized this package). 
 {: .fs-2 }
 
-###### Python
+###### 4.1 Python
 
 If you are analyzing images, you might build a conda environment by the following Linux/OSX command line commands:
 {: .fs-2 }
@@ -400,6 +400,7 @@ if (plot_scalebar == True):
 {: .fs-1 }
 
 If you would like to overplot another image as contours, try loading as another HDU (e.g., `chdu` in the following example) and complete the commands like:
+{: .fs-2 }
 ```
 fig.show_contour(chdu, colors=ccolor, linestyles=clinestyle,
                        levels=clevels,
@@ -417,7 +418,7 @@ fig.save(outfigname, transparent=True)
 You will make plots routinely. It is recommended to integrate the above commands in a script or a wrapper in a way that is convenient to you. If anything in this part is not clear to you, you can check the documentation for [APLpy]([APLpy](https://aplpy.github.io/)). You might need some patience and may need to try some things since not everything has been very clearly documented.
 {: .fs-2 }
 
-We can also use APLpy to create 3-color (RGB) figures, for example, see [this page](https://stackoverflow.com/questions/36423879/rgb-image-components-misaligned). However, my experience of trying this function was not very smooth. Following are some tips. First, we need three independent FITS images (e.g., the observations on the same area in the sky, at different wavelengths). Before using APLpy to generate a 3-color figure from them, we need to first regrid them to the same dimension (using either the CASA [imregrid](https://casa.nrao.edu/casadocs/casa-6.1.0/global-task-list/task_imregrid/examples) task or the Miriad [regrid](https://www.atnf.csiro.au/computing/software/miriad/doc/regrid.html) task). Then we have to use the following CASA commands to produce the subimages (the area to be presented) and to remove the frequency/velocity and/or Stokes axes:
+We can also [use APLpy to create 3-color (RGB) figures](https://aplpy.readthedocs.io/en/stable/rgb.html), for example, see [this page](https://stackoverflow.com/questions/36423879/rgb-image-components-misaligned). However, my experience of trying this function was not very smooth. Following are some tips. First, we need three independent FITS images (e.g., the observations on the same area in the sky, at different wavelengths). Before using APLpy to generate a 3-color figure from them, we need to first regrid them to the same dimension (using either the CASA [imregrid](https://casa.nrao.edu/casadocs/casa-6.1.0/global-task-list/task_imregrid/examples) task or the Miriad [regrid](https://www.atnf.csiro.au/computing/software/miriad/doc/regrid.html) task, see [above](https://baobabyoo.github.io/pages/students_topics/software_tips_FITS.html#casa)). Then we have to use the following CASA commands to produce the subimages (the area to be presented) and to remove the frequency/velocity and/or Stokes axes:
 {: .fs-2 }
 
 ```
@@ -504,4 +505,5 @@ f.savefig('g10_rgb.pdf')
 The commands to change/include the fontsize, ticks, labeling, beam, etc are identical to those for the single-color image, which have been introduced above.
 {: .fs-2 }
 
-###### IDL
+###### 4.2 IDL
+(I used to use IDL to make plots. I just found that most of my old IDL codes can not anymore be compiled. Let's forget about this part unless you are interested in archaeology or anthropology.)
