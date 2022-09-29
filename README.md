@@ -8,7 +8,8 @@ I am a researcher who based mostly on the [Submillimeter Array (SMA)](http://sma
 ### Bio
 
 *Position :*
-- Assistant Research Fellow : Academia Sinica Institute of Astronomy and Astrophysics (2018-)
+- Associated Research Fellow (Tenured) : Academia Sinica Institute of Astronomy and Astrophysics (2022-)
+- Assistant Research Fellow : Academia Sinica Institute of Astronomy and Astrophysics (2018-2022)
 - ESO Fellow : European Southern Observatory, Garching, Germany (2015-2018)
 - Postdoctoral Fellow : Academia Sinica Institute of Astronomy and Astrophysics (2012-2015)
 - Predoctoral Fellow : Harvard-Smithsonian Center for Astrophysics (SAO CfA)
@@ -29,9 +30,10 @@ More details about my research can be found at [this page](/pages/research).
 
 ### Group Members
 
-I presently host three students:
+I presently host four students:
 {: .fs-2 }
 
+- **Undergraduate (2022-):**Lai, P.-S. (賴品憲)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
 - **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
 - **Ph.D. student (2020-):** Terada, Yuka (寺田由佳)
