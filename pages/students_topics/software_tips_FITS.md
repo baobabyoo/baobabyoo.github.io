@@ -417,4 +417,91 @@ fig.save(outfigname, transparent=True)
 You will make plots routinely. It is recommended to integrate the above commands in a script or a wrapper in a way that is convenient to you. If anything in this part is not clear to you, you can check the documentation for [APLpy]([APLpy](https://aplpy.github.io/)). You might need some patience and may need to try some things since not everything has been very clearly documented.
 {: .fs-2 }
 
+We can also use APLpy to create 3-color (RGB) figures, for example, see [this page](https://stackoverflow.com/questions/36423879/rgb-image-components-misaligned). However, my experience of trying this function was not very smooth. Following are some tips. First, we need three independent FITS images (e.g., the observations on the same area in the sky, at different wavelengths). Before using APLpy to generate a 3-color figure from them, we need to first regrid them to the same dimension (using either the CASA [imregrid](https://casa.nrao.edu/casadocs/casa-6.1.0/global-task-list/task_imregrid/examples) task or the Miriad [regrid](https://www.atnf.csiro.au/computing/software/miriad/doc/regrid.html) task). Then we have to use the following CASA commands to produce the subimages (the area to be presented) and to remove the frequency/velocity and/or Stokes axes:
+{: .fs-2 }
+
+```
+import os
+
+path = './'
+Rmap = path = '5ch3oh0_2_mnt0.img'  # my red image
+Gmap = path = '5ch3oh2_2_mnt0.img'  # my green image
+Bmap = path = '5ch3oh3_2_mnt0.img'  # my blue image
+
+for imname in [Rmap, Gmap, Bmap]:
+    importfits(
+                fitsimage = imname + '.FITS',
+                imagename = imname + '.image',
+                overwrite = True
+                )
+                
+    imsubimage(
+                imagename = imname + 'image',
+                outfile = imname + '.subim.image',
+                box = '174,174,324,324', # the box sub-region to be plotted (blcx, blcy, trcx, trcy),
+                dropdeg = True, overwrite = True
+                )
+                
+    exportfits(
+                imagename = imname + 'subim.image',
+                fitsimage = imname + '.dropdeg.fits',
+                overwrite = True, dropdeg = True, dropstokes = True
+                )
+```
+{: .fs-1 }
+
+Then the following Python code and produce the PDF figure:
+{: .fs-2 }
+
+```
+# importing packages
+import os
+import numpy as np
+
+from astropy.io.fits import getdata
+from astropy import wcs
+from astropy.io import fits
+from astropy import units as u
+from astropy import constants as con
+from astropy.coordinates import SkyCoord
+
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import matplotlib
+
+import aplpy
+from astropy.io import fits
+
+matplotlib.use('PDF')
+
+# defining input image names
+fits_r = '5CH3OH0_2.MNT0.IMG.dropdeg.fits'
+fits_g = '5CH3OH2_2.MNT0.IMG.dropdeg.fits'
+fits_b = '5CH3OH3_2.MNT0.IMG.dropdeg.fits'
+
+
+# Combing the 3 independent FITS images to a single FITS image cube
+os.system('rm -rf g10_rgb_cube.fits')
+aplpy.make_rgb_cube([fits_r, fits_g, fits_b], 'g10_rgb_cube.fits')
+
+# Make an RGB image (PNG figure)
+aplpy.make_rgb_image('g10_rgb_cube.fits', 'g10_rgb.png')
+
+# Insert a header item CTYPE3 such that APLpy will know what we are trying to do
+fits.setval('g10_rgb_cube.fits','CTYPE3',value='RGB')
+
+# Plot the RGB image using the 2d image to indicate the projection
+fig = plt.figure(figsize=(7, 7))
+f = aplpy.FITSFigure('g10_rgb_cube.fits', dimensions=[0,1], slices=[2],
+                    figure=fig, subplot=[0.1, 0.1, 0.8, 0.8]
+                    )
+f.show_rgb('g10_rgb.png')
+f.savefig('g10_rgb.pdf')
+```
+{: .fs-1 }
+
+The commands to change/include the fontsize, ticks, labeling, beam, etc are identical to those for the single-color image, which have been introduced above.
+{: .fs-2 }
+
 ###### IDL
