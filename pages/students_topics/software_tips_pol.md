@@ -209,7 +209,7 @@ for imname in [Imap, PImap, pamap, Permap]:
 ```
 {: .fs-1 }
 
-I use the following code to plot the polarization line segments (you need to create your own code to define sampling positions). This is a function in a big class. I am reluctant to edit it now. You should be able to more or less know how it works and edit to the way that fits your code the best, given that you are likely already experienced. 
+I use the following code to plot the polarization line segments (you need to create your own code to define sampling positions). This is a function in a big class. I am reluctant to edit it now. You should be able to more or less know how it works and edit to the way that fits your code the best, given that you are likely already experienced. You can feel free to contact my student, Greta Siu, in case of any problem.
 {: .fs-2 }
 ```
     def plot_segments(self, length_arcsec=-999.0, color=(0,0,0), linestyle='solid', linewidth=2.0, delraperyr_mas=0.0, deldecperyr_mas=0.0, delyr=0.0):
