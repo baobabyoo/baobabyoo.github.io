@@ -9,6 +9,8 @@ has_toc: false
 # Radio Interferometry
 
 **2022-Oct-5/Nov-30 @ NTNU :** *Practical Radio Interferometry* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct)). I am not yet good at using Github. But let's learn this together.
+    {: .fs-1 }
+
     1. [Lecture notes: Principle of radiation and basic observational parameters](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct/blob/main/lecture_notes/RadioAstronomy_2022Oct_lecture1_NTNU.pdf)
 {: .fs-1 }
 
