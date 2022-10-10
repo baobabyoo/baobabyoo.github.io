@@ -43,6 +43,16 @@ A full list of my present and former group members (and some of their journal pu
 {: .fs-2 }
 
 
+### Honor and Awards
+
+###### PI
+- 2022 NSTC Ta-You Wu Memorial Award
+- 2015-2018 ESO Fellow
+
+###### Students
+- 2022 ASROC Excellent Poster (Yuka Terada 寺田由佳)
+
+{: .fs-2 }
 
 ### Publications
 
