@@ -6,7 +6,7 @@ grand_parent: To my students
 nav_order: 1
 ---
 
-### Observational Proposal
+## Observational Proposal
 
 OK, so you are coming to Stage-1.
 {: .fs-2 }
@@ -32,7 +32,7 @@ Depending on where you are, every 10~30 Ph.D. students, only one will get a rese
  Some tips for composing those parts of a proposal are outlined below.
 {: .fs-2 }
 
-##### Title
+##### 1. Title
 
 Try not to use more than 90 English characters (in many cases, this is the text hard-limit).
 {: .fs-2 }
@@ -47,7 +47,7 @@ A bad example would be `13CS 5-4 line observations towards molecular cloud G123.
 {: .fs-2 }
 
 
-##### Abstract
+##### 2. Abstract
 
 Try not to use more than 200 English words (in most cases, this is the text hard-limit).
 {: .fs-2 }
@@ -66,12 +66,21 @@ The Abstract for my proposal `How to Make an Earth that is Deficient in Water?` 
 {: .fs-2 }
 
 
-`The asteroid belt (~2 au from the Sun) in the Solar System is made of solid material that is deficient in water. So are the Earth and Mars. Since these dry solid bodies are located within the 170 K water snowline, we are motivated to consider that they formed in-situ out of a dry path of dust grain coagulation, which implies that water-ice free dust grains are stickier than what used to be considered. In spite that this possibility has been rarely considered in the previous observational frameworks, it is supported by the latest laboratory experiments. To test our hypothesis, it is necessary to probe dust grain sizes inwards of the water snowlines in protoplanetary disks. This is challenging since these regions are very small in general (<1~2 au). We propose the 2-48 GHz radio spectro-polarimetric observations towards the nearest and the brightest FUor-like object L1551IRS5 in which the luminous accretion outburst has significantly enlarged the water snowline. Based on SED analysis and diagnosing dust linear polarization due to self-scattering, we aim to test whether or not the >1 mm sized dust grains predominately reside inwards of the snowline. This unique experiment will fundamentally advance our understanding of terrestrial planet-formation.`
-{: .fs-2 }
+The asteroid belt (~2 au from the Sun) in the Solar System is made of solid material that is deficient in water. So are the Earth and Mars. Since these dry solid bodies are located within the 170 K water snowline, we are motivated to consider that they formed in-situ out of a dry path of dust grain coagulation, which implies that water-ice free dust grains are stickier than what used to be considered. In spite that this possibility has been rarely considered in the previous observational frameworks, it is supported by the latest laboratory experiments. To test our hypothesis, it is necessary to probe dust grain sizes inwards of the water snowlines in protoplanetary disks. This is challenging since these regions are very small in general (<1~2 au). We propose the 2-48 GHz radio spectro-polarimetric observations towards the nearest and the brightest FUor-like object L1551IRS5 in which the luminous accretion outburst has significantly enlarged the water snowline. Based on SED analysis and diagnosing dust linear polarization due to self-scattering, we aim to test whether or not the >1 mm sized dust grains predominately reside inwards of the snowline. This unique experiment will fundamentally advance our understanding of terrestrial planet-formation.
+{: .fs-3 }
 
 Once you become familiarized with proposal writing, you can follow your own style. Sometimes, I also immediately point out my experimental setup in the first sentence, for example, `We request to make the first measurement of the linear polarization of the Galactic supermassive black hole, Sgr A*, at ALMA Band 8 and 9. The main science goals are ......` 
 {: .fs-2 }
 
-##### Science Justification
+##### 3. Science Justification
 
-##### Technical Justification
+##### 4. Technical Justification
+
+##### 5. Figures
+
+1. Spend time on creating high-quality figures 
+2. Use PDF as far as possible 
+3. A figure should not be a stack of information. Know what you want to convey and leave out anything irrelevant to what you want to convey with this specific figure. When you want to convey multiple things, create multiple figures.
+4. Make it pretty and eye-catching. 
+5. Not every reviewer is familiar with your research area. Everything should be well explained.
+{: .fs-2 }
