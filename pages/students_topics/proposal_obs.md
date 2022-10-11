@@ -76,6 +76,19 @@ Once you become familiarized with proposal writing, you can follow your own styl
 
 ##### 4. Technical Justification
 
+The following information is required. The order of them depends on your logic flow. Note that quantities such as angular resolution or on-source observing time need to be **quantitatively and explicitly** explained.
+{: .fs-2 }
+
+1. Target source selection strategy if this is a survey (this part can also be explained in the Science Justification).
+2. The required angular resolution and maximum recoverable angular scales.
+3. The spectral setup (e.g., frequency tunings, spectral resolutions, etc).
+4. Required sensitivity (e.g., in units of Jy beam<sup>-1</sup>).
+5. Ancillary data (e.g., has the target source been observed by the same observatory before? If so, what is the reason of proposing new observations?)
+6. Target source availability (if relevant). For example, if your observations require fix date observations (e.g., observing comets/asteroids), or target of opportunity observations (e.g., gamma ray bursts, etc).
+7. Analysis plan (this part can also be explained in the Science Justification).
+8. Any other specific technical requirements (e.g., polarization calibration, VLBI, etc).
+{: .fs-2 }
+
 ##### 5. Figures
 
 1. Spend time on creating high-quality figures 
