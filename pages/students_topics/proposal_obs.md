@@ -82,7 +82,7 @@ The following information is required. The order of them depends on your logic f
 1. Target source selection strategy if this is a survey (this part can also be explained in the Science Justification).
 2. The required angular resolution and maximum recoverable angular scales.
 3. The spectral setup (e.g., frequency tunings, spectral resolutions, etc).
-4. Required sensitivity (e.g., in units of Jy beam<sup>-1</sup>).
+4. Required sensitivity (e.g., in units of Jy beam<sup>-1</sup>). Usually, we need the target source to be detected at 3-sigma significance. Be very careful with this. The required observing time to achieve 6-sigma significance is 4 times the required observing time to achieve 3-sigma significance. If it requires only 1 full night for you to achieve 3-sigma significance, but you request to observe 4 nights to achieve 6-sigma significance, then the proposal would need to justify why 6-sigma significance is definitely necessary to meet your science goal (sometimes this is indeed necessary, just it has to be explained convincingly).
 5. Ancillary data (e.g., has the target source been observed by the same observatory before? If so, what is the reason of proposing new observations?)
 6. Target source availability (if relevant). For example, if your observations require fix date observations (e.g., observing comets/asteroids), or target of opportunity observations (e.g., gamma ray bursts, etc).
 7. Analysis plan (this part can also be explained in the Science Justification).
