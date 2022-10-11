@@ -74,19 +74,37 @@ Once you become familiarized with proposal writing, you can follow your own styl
 
 ##### 3. Science Justification
 
+If you are not an experienced proposer, then you may organize your proposal in the following way:
+{: .fs-2 }
+
+1. First paragraph can make a broad overview of the research field including some general understanding.
+2. In the second paragraph, you can point out what is not yet understood, why it is not yet understood, and why it is important to understant it. It would be good if we can say that the problem could not be understood due to the limitation of the previous observing capability, and the proposed observing capability will enable our attempt for the first time.
+3. If possible, make an explicit question, or an explicit hypothesis to test. If you have done some research before that has led you to your present hypothesis, you can phrase in a way such that people can see (1) you have novel ideas in this research area, and (2) you are capable of analyzing the data.
+4. With the above justifications, you should be able to smoothly continue to what you want to propose, and then to the detailed experimental setup in the Technical justification.
+{: .fs-2 }
+
+If you are an experienced proposer, or if you are working on a very well known problem, it is also OK to leave out most of the background introduction and begin straightly with your novel ideas to make a step forward. This is to some extent free-style.  
+{: .fs-2 }
+
+Preparing good figures is very important for making an excellent scientific jusitfication. Never underestimate the importance of making a nice figure. People will only spend 5 minutes reading the scientific justication. In this case, figures are usuallly more efficient than text to convey some key ideas.
+{: .fs-2 }
+
 ##### 4. Technical Justification
 
 The following information is required. The order of them depends on your logic flow. Note that quantities such as angular resolution or on-source observing time need to be **quantitatively and explicitly** explained.
 {: .fs-2 }
 
-1. Target source selection strategy if this is a survey (this part can also be explained in the Science Justification).
-2. The required angular resolution and maximum recoverable angular scales.
+1. Target source selection strategy if this is a survey (this part can also be explained in the Science Justification). You may select them from a previous survey based on certain cuts such as distance, luminosity, etc. Be explicit and explanatory if you are carrying out a statistical study in which target source selection can induce serious systematic errors.
+2. The required angular resolution and maximum recoverable angular scales. If you would like to perform high dynamic-range imaging, you might also need to carry out a simulation, to justify that you can achieve good enough *uv* coverage.
 3. The spectral setup (e.g., frequency tunings, spectral resolutions, etc).
-4. Required sensitivity (e.g., in units of Jy beam<sup>-1</sup>). Usually, we need the target source to be detected at 3-sigma significance. Be very careful with this. The required observing time to achieve 6-sigma significance is 4 times the required observing time to achieve 3-sigma significance. If it requires only 1 full night for you to achieve 3-sigma significance, but you request to observe 4 nights to achieve 6-sigma significance, then the proposal would need to justify why 6-sigma significance is definitely necessary to meet your science goal (sometimes this is indeed necessary, just it has to be explained convincingly).
+4. Required sensitivity (e.g., in units of Jy beam<sup>-1</sup>). Usually, we need the target source to be detected at 3-sigma significance. Be very careful with this. The required observing time to achieve 6-sigma significance is 4 times the required observing time to achieve 3-sigma significance. If it requires only 1 full night for you to achieve 3-sigma significance, but you request to observe 4 nights to achieve 6-sigma significance, then the proposal would need to justify why 6-sigma significance is definitely necessary to meet your science goal (sometimes this is indeed necessary, just it has to be explained convincingly). For example, we may argue that we need to achieve X-sigma detection, such that the error in spectral index can be smaller than Y, which is needed to discern hypothesis Z. If your target source has never been observed before, you may make an estimated either based on the previous observations on similar target sources or on a theoretical model.
 5. Ancillary data (e.g., has the target source been observed by the same observatory before? If so, what is the reason of proposing new observations?)
-6. Target source availability (if relevant). For example, if your observations require fix date observations (e.g., observing comets/asteroids), or target of opportunity observations (e.g., gamma ray bursts, etc).
+6. Target source availability (if relevant). For example, if your observations require fix date observations (e.g., observing comets/asteroids), or target of opportunity observations (e.g., gamma ray bursts, etc). Do check the target source visibility using the [STARALT](http://catserver.ing.iac.es/staralt/index.php) interface (should check the elevation limits of the telescopes). 
 7. Analysis plan (this part can also be explained in the Science Justification).
 8. Any other specific technical requirements (e.g., polarization calibration, VLBI, etc).
+{: .fs-2 }
+
+Ideally, you want to convince the reviewers that the telescope is the best for your science case. Conversely, your science case is good for the observatory (e.g., it can be regarded as a major achievement of the observatory).
 {: .fs-2 }
 
 ##### 5. Figures
