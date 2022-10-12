@@ -14,9 +14,9 @@ If you are my postdoc, and if you need me to revise English or double check the 
 If you are my student, forward me your first draft at least **4 weeks** ahead of the proposal deadline. I will spend time iterating with you many times for education purposes.
 {: .fs-1 }
 
-### Proposing
+### 1. Proposing
 
-#### Timeline and interface
+#### 1.1 Timeline and interface
 
 **There are two proposal deadlines each year. They are normally in mid-March and mid-September but please pay attention to the call for proposals.**
 {: .fs-2 }
@@ -27,7 +27,7 @@ Please register an **account** at the [SMA Observer Center](http://sma1.sma.hawa
 Usually, you try to form a rough idea about what you are going to propose (target source(s), resolution, spectral setup, and sensitivity). Let's say, this is at least 1~1.5 months ahead of the proposal deadline. If you are my student and postdoc, please come discuss with me about this rough idea.
 {: .fs-2 }
 
-#### Preparation-1: Feasibility, complementary data, and duplication
+#### 1.2 Preparation-1: Feasibility, complementary data, and duplication
 
 **After we agree that this idea is worth pursuing and is technically feasible
 , you should use the [SMA Data Archive](https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl) to check whether or not you are duplicating historical or ongoing projects.** In the case that you are duplicating, you can (1) give up and try to come up with other proposal ideas, or (2) download the archival data can see if the calibrated data can achieve the quality that is needed for your science purpose. If the quality of the archival data is fair, then just continue to use that data to proceed with your research. If there is no archival data or if the quality of the archival data is poor, you can go ahead to complete the preparation of your proposal. **You need to explicitly and convincingly explain what was the problem with the archival data if it exists. So prepare your proposal well ahead of the deadline** in case you really need to look into some archival data or need other colleagues to check the archival for you. Close to the deadline, they (and I) have to prepare their own proposals thus may refuse to help you.
@@ -39,7 +39,7 @@ Usually, you try to form a rough idea about what you are going to propose (targe
 When making the duplication checks mentioned above, you may find that there are other observations on your target source(s) which can help your science case to some extent although they do not fully resolve the problem. For example, you may find that some short-spacing observations for your high-angular resolution experiment already exist. In this case, **explicitly mentioning how** you will make use of such complementary data in the proposal is a plus. Just mentioning you will use those data but without saying how usually does not help. If you have also checked the data archive of the observatories (e.g., ALMA, JVLA, Herschel, Spitzer, etc) and found some useful complementary data, you can also mention how you will make use of them in a joint analysis.
 {: .fs-2 }
 
-#### Preparation-2: Scientific justification and technical details
+#### 1.3 Preparation-2: Scientific justification and technical details
 
 To complete the proposal submission, you need a **title**, an **Abstract**, a PDF scientific justifications with **2 pages of text and 2 pages of Figures/Tables**. If you are not sure about how to compose the Abstract or the 2+2 pages scientific justification, check [here](https://baobabyoo.github.io/pages/students_topics/proposal_obs.html).
 {: .fs-2 }
@@ -66,7 +66,7 @@ You can use [this page](http://sma1.sma.hawaii.edu/planetvis.html) to check whic
 
 ******************************************************************************
 
-#### Preparation-3: Scopes (being sufficiently ambitious)
+#### 1.4 Preparation-3: Scopes (being sufficiently ambitious)
 
 A regular SMA proposal can request up to 100 hours of observing time. If you need 100~1000 hours, there is a Large Project category which is relatively hard. If you want to submit a Large Project proposal, prepare early. If you are student or postdoc in Taiwan, I would consider that it is fair to request **2~4 nights** of observing time in each proposal. If you are a Master's student and if your thesis is going to base on this SMA proposal, I would encourage you to think big and consider a project with **5~10 nights** of overall observing time. A night corresponds to 8~10 hours.
 {: .fs-2 }
@@ -74,7 +74,7 @@ A regular SMA proposal can request up to 100 hours of observing time. If you nee
 **Pick a problem that can be solved by such an investment resource.** You can think bigger once you have enough reputation to convince the reviewers that you can manage a larger-scale project.
 {: .fs-2 }
 
-### Organizing observing scripts
+### 2. Organizing observing scripts
 
 Here is a step-by-step guide:
 {: .fs-2 }
@@ -109,14 +109,14 @@ The `print` commands does not do anything to the telescopes; it just prints some
 If you are a experienced user who are preparing scripts for the SMA polarization observations, scroll down to a template in the bottom of this page.
 {: .fs-2 }
 
-### Operation
+### 3. Operation
 
 A SMA operator will execute your observing script and will watch over the observations. So usually, there is nothing you need to do. But if you would like to participate in the operation or would like to monitor the operation, let me know.
 {: .fs-2 }
 
-### Data calibration and imaging
+### 4. Data calibration and imaging
 
-#### Software
+#### 4.1 Software
 
 You will need some software. An overview of them is provided [here](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/overview/).
 {: .fs-2 }
@@ -133,7 +133,7 @@ You can also use the [CASA software package](https://lweb.cfa.harvard.edu/rtdc/S
 I usually use the [Miriad](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/miriad/) software package to image the SMA data. You can also use it to calibrate the SMA data. You can also use CASA to image your SMA data although it is a lot slower than Miriad.
 {: .fs-2 }
 
-#### Overview
+#### 4.2 Overview
 
 No matter which sofware we use steps we are going through the following steps:
 {: .fs-2 }
@@ -158,9 +158,9 @@ You may have some confusion about T<sub>sys</sub> application since:
 The T<sub>sys</sub> application step multiplies the raw SMA visibility with the T<sub>sys</sub> values to undone the atmospheric attenuation and to rescale the visibility  to Jansky (or Kelvin) units.
 {: .fs-2 }
 
-#### MIR Data calibration (no polarization)
+#### 4.3 MIR Data calibration (no polarization)
 
-##### Reducing filesize
+##### 4.3.1 Reducing filesize
 
 The raw data files of the SMA can be as large as 50~100 GB. If you load a raw data file with the MIR IDL software package, it will requires a memory that is at least twice your raw data file size, due to converting the data to double precision. If the memory of your workstation is not so big, you have to reduce the filesize by binning the spectral channels. This can be achived by running the c code, [SMARechunker](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/rechunk/). Following are the commands to download and compile it.
 {: .fs-2 }
@@ -180,7 +180,7 @@ SMARechunker -i input_filename -o output_filename -r 4
 ```
 {: .fs-1 }
 
-##### Environment
+##### 4.3.2 Environment
 
 I assume you are in an x86_64 Linux (e.g., CentOS, Ubuntu, Rocky, Redhat, etc) environment. If you have installed MIR IDL, or if somebody has installed it (e.g., if you are using a workstation at ASIAA), you need to *source* the setup file to enable using it. For example, I have my own installation, then type (revise to your own path):
 {: .fs-2 }
@@ -224,7 +224,7 @@ IDL> device, decomposed=0, retain=2
 ```
 {: .fs-1 }
 
-##### Full procedure
+##### 4.3.3 Full procedure
 
 I am taking the calibration of Chia-Ying's project SMA 2021B-A011 (one receiver and one sideband) as an example. I have binned every 16 spectral channels using the `SMARechunker` code at a workstation of SMA in Hawaii:
 {: .fs-2 }
@@ -599,7 +599,7 @@ WARNING: the mean time separation between the target date and the flux monitorin
 ```
 {: .fs-1 }
 
-#### Miriad imaging
+#### 4.4 Miriad imaging
 
 If you have installed Miriad, you can source it with a Linux command (can also make an alias for this):
 {: .fs-2 }
@@ -621,7 +621,7 @@ You can try to find a pre-compiled `libgfortran.so.3` and copy it into your `/li
 For an online documentation for the individual Miriad tasks, please check the [Miriad task list](https://www.atnf.csiro.au/computing/software/miriad/taskindex.html).
 {: .fs-2 }
 
-##### Flagging edge channels and continuum subtraction
+##### 4.4.1 Flagging edge channels and continuum subtraction
 
 We are using the Miriad software package here, either under linux command line or using a BASH script.
 {: .fs-2 }
@@ -695,7 +695,7 @@ done
 ```
 {: .fs-1 }
 
-##### Single pointing, continuum imaging
+##### 4.4.2 Single pointing, continuum imaging
 
 You can perform continuum imaging using a BASH script like the following one:
 {: .fs-2 }
@@ -747,16 +747,16 @@ fits in=$field'.clean.pbcor' op=xyout out=$field'.clean.pbcor.fits'
 ```
 {: .fs-1 }
 
-##### Single pointing, spectral lines imaging
+##### 4.4.3 Single pointing, spectral lines imaging
 
-##### Mosaic imaging
+##### 4.4.4 Mosaic imaging
 
-##### Combining single dish and interferometric observations
+##### 4.4.5 Combining single dish and interferometric observations
 
 For a Miriad based procedure, please check my documentation under the [ALMICA](https://github.com/baobabyoo/almica) repository.
 {: .fs-2 }
 
-#### Miriad self-calibration
+#### 4.5 Miriad self-calibration
 
 If you have imaged your SMA data using the Miriad software package, and if the residual phase errors appear large, you may try a few iterations of gain phase self-calibration using the Miriad software package.
 Embedded is an example using an image model to self-calibrate multiple epochs of observations on the same target source. Note that the Miriad task `selcal` can only deal with Stokes I, Q, U, and V. If your data were stored as XX, YY, RR, LL correlations, then you need to use the `uvaver` task to cover the data to Stokes I.
@@ -875,20 +875,20 @@ The solution interval was set to be 5 minutes; you have to adjust your solution 
 The solution tables were stored in your visibility files. You can use the Miriad task `gplist` to check what tables have been stored in a visibility file. You can use the Miriad task `gpplt` to inspect the solution tables, to ensure that the solutions are not jumping around randomly (in most cases, this is a sign of poor solution quality). You can use the Miriad task `gpedit` to edit the self-calibration solution tables. If you know what you are doing, this can sometimes improve the self-calibration (e.g., lowing the noise level and enhancing the peak intensity). But you should only do this edit when you really know what you are doing. Finally, the script used the `uvaver` task to apply the solution table.
 {: .fs-2 }
 
-#### CASA Data calibration and imaging (under construction)
+#### 4.6 CASA Data calibration and imaging (under construction)
 
 
-#### MIR Data calibration (polarization)
+#### 4.7 MIR Data calibration (polarization)
 
 Here I provide the example MIR IDL + Miriad scripts of calibrating the *dual RX full polarization data taken after 2017 August* and *single RX polarization data taken before 2016*. The polarization data taken in between may be subject to some hardware or software issues. If you really need to use them, it is recommended to contact Dr. Ramprasad Rao.
 {: .fs-2 }
 
-##### Dual RX Data taken after 2017 August (under construction)
+##### 4.7.1 Dual RX Data taken after 2017 August (under construction)
 
-##### Single RX Data taken before 2016 (under construction)
+##### 4.7.2 Single RX Data taken before 2016 (under construction)
 
 
-### Publishing
+### 5. Publishing
 
 You are required to include the following statement in the Acknowledgement:
 {: .fs-2 }
@@ -907,7 +907,7 @@ Your are required to cite [Sault et al. (1995)](https://ui.adsabs.harvard.edu/ab
 When you are carrying out a *precision experiment* instead of a *detection experiment* you may want/need to refer to the [SMA Calibrator List](http://sma1.sma.hawaii.edu/callist/callist.html). If you are quoting the records explicitly in your paper, you need to make an E-mail contact with Dr. Mark Gurwell and obtain his agreement. You need to inquire how he would like to be credited (e.g., as a co-author or being mentioned in the acknowledgement).
 {: .fs-2 }
 
-### When you get stuck
+### 6. When you get stuck
 
 If you are located in Taiwan, you can either ask me or my present Master's student, [Chia-Ying Chung](http://www.asiaa.sinica.edu.tw/people/cv.php?i=cychung).
 {: .fs-2 }
@@ -916,7 +916,7 @@ Note that she is not obligated to work for you or answer your questions regardle
 {: .fs-1 }
 
 
-### Polarization observing script
+### 7. Polarization observing script
 
 Here is a template. You are likely experienced enough to understand the syntax. You should do the necessary modification. Please be sure to find all XXX using the "find" function of your browser and replace them with appropriate values.
 {: .fs-2 }
