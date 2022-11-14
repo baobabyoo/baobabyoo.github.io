@@ -239,91 +239,120 @@ Until the data become archival, please contact us if you need the raw data for a
 {: .fs-2 }
 
 ```
+##### Software ###########################################################
+
+# (Data reduction in RTDC 5)
+linux> source /home/hlu/software/MIR/mir/setup
+IDL> device, decomposed=0, retain=2
+
+# ASIAA (Please ssh -Y to almat5, almat6, alma7, alma8)
+# linux> source /asiaa/home/hyliu/software/MIR/sma-mir/setup.bsh
+# IDL> device, decomposed=0, retain=2
+##########################################################################
+
+
+
+
+
+##### Way to check helpfile ##############################################
+
+# prints help comments from beginning of .pro files.
+IDL> pro_hlp
+
+pro_lkf
+# looks for a routine with a keyword in its first comment line.
+IDL> pro_lkf
+
+# provides brief online description of several routines and wrappers related to the SMA data-reduction.
+mirhelp
+
+# For example:
+#
+#      IDL> pro_hlp,variable=<'variable_name'>
+#              to get help on a variable.
+#
+#      IDL> pro_hlp,structure=<'structure_name'>
+#              to get help on a structure.
+#
+#      IDL> pro_hlp,/program
+#              to get help on a program and print out the basic
+#              introduction and usage of the function.
+#
+#      IDL> mirhelp,'<task name>'
+#              to get help on a wrapper program, e.g. gain_cal etc.
+#
+##########################################################################
+
+
+
+
+
 ##### Read Data in MIR IDL ###############################################
 
+# science data (PWV: 0.1)
+
 # load raw data
-readdata, dir='sma_2021Ba011_track1'
+# readdata, dir='SMA2022B_A007_all'
 
-# check what is in the Data
-select
+# load MIR IDL format SMA data
+mir_restore, 'ntnulecture_demo.mir'
 
-# Inspect the spectra to find a suitable range of spectral channels
-# to generate continuum data (used in most steps of calibrations)
-# Here we select the passband calibrator 3C279 and the upper sidebands
-select, /p, /reset, source=['3c279'], sideband='u'
-# Here we select the RX345 receiver. "wt" gt "0" means unflagged (i.e., healthy) data.
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_spectra, color_var ='band'
+# Set the number of spectral channel of the continuum spectral window to be 1
+select,/p,/re,band='c1'
+sp[psf].nch = 1
 
-# re-generate continuum data by performing spectral averaging
-# over the 6 spectral windows
-select, /p, /reset, band=['c1','s1','s2','s3','s4','s5','s6']
-uti_avgband, swmch1=60, swmch2=964
+# re-generate continuum data by performing spectral averaging over the first 4 spectral windows
+select, /p, /reset, band=['c1','s1','s2','s3','s4']
+uti_avgband, swmch1=240, swmch2=3856
 plot_continuum
 
-# Examining the calibrator data
-select, /p, /reset, source=['1517-243']
-plot_continuum, x='int'
-
-# flag phase jump
-select, /p, /reset
-result=dat_filter(s_f, '"blcd" like "2" or "blcd" like "5" ')
-result=dat_filter(s_f, '"int" gt "256" and "int" lt "311"')
-flag,/flag
-
-select, /p, /reset
-result=dat_filter(s_f, '"blcd" like "4" or "blcd" like "6" ')
-result=dat_filter(s_f, '"int" gt "504" and "int" lt "559"')
-flag,/flag
-
-# Check and remove spectral spikes
-select, /p, /reset
-uti_checkspike, source='3c279', /baseline, threshold=5, /fix, sample=1
-
-select, /p, /reset
-uti_checkspike, source='bllac', /baseline, threshold=5, /fix, sample=1
-
-select, /p, /reset
-uti_checkspike, source='1517-243', /baseline, threshold=5, /fix, sample=1
-
-# inspect spectra
-select, /p, /reset, sideband='u', source=['3c279']
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_spectra, x_var='channel', y_vars='amp,pha', frame_vars='blcd', color_vars='band', frames_per_page=4
-
-select, /p, /reset, sideband='u', band='s3', source=['3c279']
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_spectra, x_var='channel', y_vars='amp,pha', frame_vars='blcd', color_vars='band', frames_per_page=4
-
-select, /p, /reset, band='s3'
-uti_chanfix, chan=284
-
-# regenerate continuum
-select, /p, /reset, band=['c1','s1','s2','s3','s4','s5','s6']
-uti_avgband, swmch1=60, swmch2=964
-plot_continuum, x='int'
-# check the data was flagged correctly
-
-# examing the calibrator data again
-select, /p, /reset, source=['1517-243']
-plot_continuum, x='int'
+# examing the calibrator data
+select,/p,/reset,source=['1924-292','Neptune','3c111']
+plot_continuum
 
 # save MIR format data
 select, /p, /reset
-mir_save, 'ChiaYing_track1.mir', /new
+mir_save, 'ntnulecture_all.mir', /new
+
+# inspect spectra
+select,/p,/reset, source='1924-292'
+plot_spectra,x_var='fsky',y_vars='amp,pha', frame_vars='blcd', color_vars='band',frames_per_page=4
+plot_spectra,x_var='channel',y_vars='amp,pha', frame_vars='blcd', color_vars='band',frames_per_page=4
+select,/p,/reset
 
 ### Notes ################################################################
+
+# passband: 1924-292
+# source  : zztauirs
+# Flux    : Neptune
+# gain    : 3c111
+
+# (PWV: oscillating between 0.05 and 0.15)
 #
-# Calibrating the RX345 USB
+# Issues:
+# rx240, antenna5 have no signal
+
+##########################################################################
+
+
+
+
+
+##### Baseline Correction ################################################
+# IDL> select,/p,/reset
+# IDL> sma_cal_bas
+
+## Notes #################################################################
 #
-# passband: 3c279
-# source  :
-# Flux    : Callisto
-# gain    : 1517-243
-#
-# (tau_225 GHz: 0.05~0.06) after 07:30 UTC
+# This step is not needed.
+#    
+#     # Example steps to correct antenna files
+#     Enter the current ANTENNAS file: ./120520_07:02:06/antennas
+#     Enter the new ANTENNAS file: ./ant_tab/antennas
 #
 ##########################################################################
+
+
 
 
 
@@ -333,222 +362,276 @@ result = plo_var('dhrs','el',frames_per_page=1)
 
 ##### Notes ############################################
 #
-# Elevation of Neptune in between 25 and 35 deg.
+# Elevation of Neptune in between 50 and 55 deg.
+# There is a scan on Neptune at ~20 deg El that has poor SNR
 #
 ########################################################
 
 
 
+
 ##### Initial Data Insepction ############################################
 
-select, /p, /reset, source=['1517-243','HBC_266'], sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_continuum, x = 'int'
+select, /p, /reset, source=['1924-292','3c111']
+result=dat_filter(s_f,' "rec" eq "230" and  "wt" gt "0" ')
+plot_continuum
+plot_continuum, preavg, frames_p=4, y='amp'
+plot_continuum, frames_p=4, y='pha'
 
-
-##### Flag the ipoint Data and Strange data ##############################
-
-select, /p, /reset, sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-result=dat_filter(s_f, '"int" gt "1576" and "int" lt "1682" ')
-flag,/flag
-
-# check the continuum again
-select, /p, /reset
-plot_continuum, x = 'int'
+select, /p, /reset, source=['1924-292','2232+117','2348-165','3c111','0501-019']
+result=dat_filter(s_f,' "rec" eq "240" and  "wt" gt "0" ')
+plot_continuum
 
 select, /p, /reset
-mir_save, 'ChiaYing_track1.flag.mir'
 
-##### Notes ##############################################################
+## Notes #################################################################
 #
-# You may need to iterate through data inspection and flagging a few times.
+# 1. ipoint:
+#
+# 2. Reference antenna: 1
 #
 ##########################################################################
 
 
 
-#### Tsys Application  ###################################################
+
+##### Flag the ipoint Data and Strange data ##############################
+
+# flag bad telescope
+select,/p,/reset
+result=dat_filter(s_f, '"blcd" like "5"  ')
+result=dat_filter(s_f,' "rec" eq "240" and  "wt" gt "0" ')
+flag,/flag
+
+# flag lot amplitude integration on Neptune
+select, /p, /reset
+result=dat_filter(s_f, '"int" gt "170" and "int" lt "177" ')
+flag,/flag
+
+select, /p, /reset
+plot_continuum
+
+mir_save, 'ntnulecture_all.flag.mir'
+
+
+## Notes #################################################################
+
+# Data quality is good
+
+##########################################################################
+
+
+
+
+
+#### Tsys Correction  ####################################################
 
 # inspect Tsys
 select,/p,/reset
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+result=dat_filter(s_f,' "rec" eq "230" and  "wt" gt "0" ')
+plot_var, frames_p=6
+
+select,/p,/reset
+result=dat_filter(s_f,' "rec" eq "240" and  "wt" gt "0" ')
 plot_var, frames_p=6
 
 select,/p,/reset
 apply_tsys
 plot_continuum, x='int'
 
-select, /p, /reset, source=['3c279','1517-243','bllac'], sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_continuum, x = 'int'
-
-select,/p,/reset
-mir_save, 'ChiaYing_track1.tsys.mir'
+mir_save, 'ntnulecture_all.tsys.mir'
 
 ## Notes #################################################################
 #
-# Except for ant 8
-#    345 GHz: Tsys is 700-1300 K in the target loop
-# baseline with ant 8 has 800-1700 K Tsys
+#    230 GHz: Tsys is 250-400 K in the target loop
+#    240 GHz: Tsys is 200-350 K in the target loop
 #
-#########################################################################
+##########################################################################
+
 
 
 
 #### Passband Calibration ################################################
 
+# remove spikes from passband calibrator
+select,/p,/reset
+uti_checkspike,source='1924-292',/baseline,ntrim=100, threshold=5, /fix, sample=1
+
+# remove spikes from passband calibrator
+select,/p,/re,band='s3'
+result=dat_filter(s_f,' "rec" eq "240" and  "wt" gt "0" ')
+result=dat_filter(s_f,' "blcd" like "1" and  "blcd" like "8" ')
+uti_chanfix,chan=417, sample=2
+uti_chanfix,chan=418, sample=2
+
 select, /p, /reset
-result=dat_filter(s_f, ' "wt" gt "0" and "nch" eq "1024" ', /reset)
-pass_cal, cal_type='pha', smoothing=16, ntrim=64, frames_p=16,refant=1
+result=dat_filter(s_f, ' "wt" gt "0" and "nch" eq "4096" ', /reset)
+pass_cal, cal_type='pha', smoothing=64, ntrim=64, frames_p=16,refant=1
 # all no
-# 3c279 yes
+# 1924-292 yes
 
-select, /p, /reset, band=['c1','s1','s2','s3','s4','s5']
-uti_avgband, swmch1=60, swmch2=964
-
-# re-inspect passband splikes
-select, /p, /reset, sou='3c279', sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_spectra, x_var='channel', y_vars='amp,pha', frame_vars='blcd', color_vars='band', frames_per_page=4
+select, /p, /reset, band=['c1','s1','s2','s3','s4','s5','s6']
+uti_avgband, swmch1=240, swmch2=3856
 
 select, /p, /reset
-result=dat_filter(s_f, ' "wt" gt "0" and "nch" eq "1024" ', /reset)
-pass_cal, cal_type='amp', smoothing=16, ntrim=64, frames_p=16, refant=1
+result=dat_filter(s_f, ' "wt" gt "0" and "nch" eq "4096" ', /reset)
+pass_cal, cal_type='amp', smoothing=64, ntrim=64, frames_p=16,refant=1
 
 select, /p, /reset
-mir_save, 'ChiaYing_track1.tsys.bp.mir'
+mir_save, 'ntnulecture_all.tsys.bp.mir'
+
+select,/p,/reset, band='c1', source=['1924-292','3c111','Neptune']
+mir_save, 'flux.mir',/new
 
 ## Notes #################################################################
+# 1. Data should be ok.
 
 # http://sma1.sma.hawaii.edu/planetvis.html
-# Callisto: 12.1  Jy @ 357 GHz
-May 24
+# Neptune: 15.224  Jy @ 240 GHz
 
 # http://sma1.sma.hawaii.edu/callist/callist.html
-# J1517-243
- 850   04 Apr 2014 12:59   SMA       350.06   0.979 +/-  0.050    mgurwell  
- 850   15 Apr 2014 12:31   SMA       356.05   1.059 +/-  0.072    mgurwell  
- 850   27 Mar 2021 14:40   SMA       346.97   1.099 +/-  0.061    mgurwell  
+# 3c111
+ 1mm   13 Aug 2022 15:51   SMA       225.93   1.406 +/-  0.073    mgurwell  
+ 1mm   03 Sep 2022 15:22   SMA       225.54   1.457 +/-  0.073    mgurwell  
 
-# 3c279
- 850   08 Jun 2021 03:08   SMA       350.24   8.820 +/-  0.562    mgurwell  
- 850   13 Aug 2021 04:10   SMA       346.28   8.930 +/-  0.447    mgurwell  
- 850   23 Nov 2021 15:36   SMA       340.98   9.151 +/-  0.458    mgurwell  
-
-# bllac
- 850   08 Jul 2021 17:02   SMA       346.02   3.631 +/-  0.190    mgurwell  
- 850   13 Aug 2021 11:29   SMA       346.28   6.363 +/-  0.318    mgurwell  
- 850   23 Nov 2021 04:16   SMA       340.98   5.554 +/-  0.278    mgurwell  
+# 1924-292
+ 1mm   13 May 2022 15:14   SMA       225.53   6.173 +/-  0.312    mgurwell  
+ 1mm   05 Sep 2022 05:11   SMA       229.55   5.719 +/-  0.286    mgurwell
 
 ##########################################################################
+
 
 
 
 #### Measure the Absolute Flux ###########################################
 
-select, /p, /reset, band='c1', sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-gain_cal, cal_type='pha', x='hours', /connect, /non_point, tel_bsl='telescope', refant=2
-# all no
-# 1517-243 yes 1
-# bllac yes 1
-# 3c279 yes 1
-# Callisto yes 1
+select,/p,/reset, ant='-5'
+gain_cal,cal_type='pha',x_var='hours',tel_bsl='telescope',refant=1,/connect,/non_point
+# all yes
 
-select,/p,/re,int=[0,50]
+select,/p,/reset
+result=dat_filter(s_f, '"int" gt "1670" and "int" lt "1715" ')
 flag,/flag
 
-select, /p, /reset, band='c1', sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-gain_cal, cal_type='amp', x='hours', poly=0, tel_bsl='telescope', refant=6, /preavg, /non_point
+
+select, /p, /reset, ant='-5'
+gain_cal,cal_type='amp',x_var='hours',tel_bsl='telescope',refant=1,/non_point,poly=0,/preavg
 # all no
-# Callisto yes 12.1
+# Neptune yes 1
 
-select, /p, /reset, band='c1', sideband='u', source=['3c279','bllac','1517-243','Callisto']
-result=dat_filter(s_f, ' "el" gt "25" and "el" lt "40"' )
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+select,/p,/re,rx=230,sideband='l'
+result=dat_filter(s_f, ' "el" gt "50" and "el" lt "55"' )
 flux_measure
 
-# Scalar average:
+Vector average:
 #   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
-#   1517-243            105    1.1226     227      9.83      1.1132     -0.0016
-#   Callisto      g      40    5.3998      43     14.59      5.0955     -0.0109
+     3c111            113    1.3061     251      9.06      1.3060     -0.0115
 
-# Vector average:
-#   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
-#   1517-243            105    1.1132     223      9.83      1.1132     -0.0016
-#   Callisto      g      40    5.0955      35     14.59      5.0955     -0.0109
-
-
-select, /p, /reset, band='c1', sideband='u', source=['3c279','bllac','1517-243','Callisto']
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
+select,/p,/re,rx=230,sideband='u'
+result=dat_filter(s_f, ' "el" gt "50" and "el" lt "55"' )
 flux_measure
 
-Scalar average:
+Vector average:
 #   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
-#     3c279            160    8.3092    1252      6.46      8.3083      0.0029
-#  1517-243            221    1.1515     343      9.82      1.1420     -0.0015
-#     bllac            264    6.0733    1323     14.06      6.0719     -0.0020
-#  Callisto      g      40    5.3998      43     14.59      5.0955     -0.0109
+     3c111             20    1.1951     120      8.97      1.1951      0.0024
 
-# Vector average:
+select,/p,/re,rx=240,sideband='l'
+result=dat_filter(s_f, ' "el" gt "50" and "el" lt "55"' )
+flux_measure
+
+Vector average:
 #   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
-#     3c279            160    8.3083    1251      6.46      8.3083      0.0029
-#  1517-243            221    1.1420     336      9.82      1.1420     -0.0015
-#     bllac            264    6.0719    1322     14.06      6.0719     -0.0020
-#  Callisto      g      40    5.0955      35     14.59      5.0955     -0.0109
+     3c111             20    1.1741     140      8.97      1.1741      0.0014
+
+select,/p,/re,rx=240,sideband='u'
+result=dat_filter(s_f, ' "el" gt "50" and "el" lt "55"' )
+flux_measure
+
+Vector average:
+#   Source   Flags   Nscans  Flux(Jy)   SNR    meantime    REAL       IMAG
+     3c111             20    1.1458     127      8.97      1.1458      0.0028
+
+select,/p,/re
+mir_save,/new,'flux.mir'
 
 ## Notes #################################################################
-
-# apply :
-# RX 345
-#   USB
-#   1517-243 yes 1.1132
 
 ##########################################################################
 
 
 
+
 #### Gain Calibration and Miriad Files Output ############################
+# IDL> device, decomposed=0, retain=2
+# IDL> .compile idl2miriad
 
-mir_restore, 'ChiaYing_track1.tsys.bp.mir'
+mir_restore, 'ntnulecture_all.tsys.bp.mir'
 
-select, /p, /reset, source=['1517-243', 'DoAr_33'], sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_continuum, x = 'int'
+# gain phase calibration
+select,/p,/reset, rx=230
+gain_cal,cal_type='pha',x_var='hours',tel_bsl='telescope',refant=1,/connect,/non_point,/preavg
+3c111 yes 1
 
-select, /p, /reset, sideband='u'
-result=dat_filter(s_f, '"blcd" like "2"')
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-result=dat_filter(s_f, '"int" gt "567" and "int" lt "618" ')
-flag,/flag
+select,/p,/reset, rx=240, ant='-5'
+gain_cal,cal_type='pha',x_var='hours',tel_bsl='telescope',refant=1,/connect,/non_point,/preavg
 
-select, /p, /reset, sideband='u'
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-gain_cal, x='hours', cal_type='pha', tel_bsl='telescope', refant=6, /connect, /preavg, /non_point
-# apply :
-  all no
-#   1517-243 yes 1.1132
 
-gain_cal, x='hours',cal_type='amp',tel_bsl='telescope',refant=6,  smoothing=1, /preavg, /non_point
 
-# check gain calibrator again
-select, /p, /reset, sideband='u', source=['DoAr_44','1517-243']
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-plot_continuum, x='int'
+# gain amplitude calibration
+select,/p,/reset, rx=230, sideband='l'
+gain_cal,cal_type='amp',x_var='hours',tel_bsl='telescope',refant=1,/non_point,smooth=1.,/preavg
+all no
+3c111 yes 1.3061
 
+
+select,/p,/reset, rx=230, sideband='u'
+gain_cal,cal_type='amp',x_var='hours',tel_bsl='telescope',refant=1,/non_point,smooth=1.,/preavg
+all no
+3c111     yes 1.1951
+
+
+select,/p,/reset, rx=240, sideband='l', ant='-5'
+gain_cal,cal_type='amp',x_var='hours',tel_bsl='telescope',refant=1,/non_point,smooth=1.,/preavg
+all no
+3c111 yes  1.1741
+
+
+select,/p,/reset, rx=240, sideband='u', ant='-5'
+gain_cal,cal_type='amp',x_var='hours',tel_bsl='telescope',refant=1,/non_point,smooth=1.,/preavg
+all no
+3c111 yes 1.1458
+
+
+select, /p, /reset, source=['1924-292','3c111','Neptune']
+plot_continuum
+
+
+# save calibrated data
 select,/p,/reset
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-mir_save, 'ChiaYing_track1.rx345.usb.cal.mir', /new
+mir_save, 'ntnulecture_all.cal.mir', /new
 
-select, /p, /reset, sideband='u'
-result=dat_filter(s_f, '"blcd" like "4" and "blcd" like "8"')
-result=dat_filter(s_f,' "rec" eq "345" and  "wt" gt "0" ')
-result=dat_filter(s_f, '"int" gt "1513" and "int" lt "1700" ')
-flag,/flag
 
-idl2miriad, dir='DoAr_16_track1.rx345.usb.cal.miriad',sideband='u',source='DoAr_16',band=['s1','s2','s3','s4']
+# Export Miriad format data
+
+rx=230
+targ_list = ['zztauirs']
+spw_list = ['s1', 's2','s3','s4','s5','s6']
+sideband_list = ['l','u']
+select,/p,/reset, rx=rx
+foreach spw, spw_list do foreach sideband, sideband_list do foreach targ, targ_list do idl2miriad, dir=targ+'.rx'+string(rx)+'.'+sideband+'sb'+'.'+spw+'.cal.miriad', sideband=sideband, source=targ, band=[spw]
+
+rx=240
+targ_list = ['zztauirs']
+spw_list = ['s1', 's2','s3','s4','s5','s6']
+sideband_list = ['l','u']
+select,/p,/reset, rx=rx
+foreach spw, spw_list do foreach sideband, sideband_list do foreach targ, targ_list do idl2miriad, dir=targ+'.rx'+string(rx)+'.'+sideband+'sb'+'.'+spw+'.cal.miriad', sideband=sideband, source=targ, band=[spw]
+
+
+## Notes #################################################################
+#
+#
+##########################################################################
 
 ```
 {: .fs-1 }
