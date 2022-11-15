@@ -6,10 +6,10 @@ has_children: false
 has_toc: false
 ---
 
-### Group Members 
+### Group Members
 
-- **Undergraduate (2022-):**Chen, Ting-Chen (陳亭蓁)
-- **Undergraduate (2022-):**Lai, Pin-Hsien (賴品憲)
+- **Undergraduate (2022-):** Chen, Ting-Chen (陳亭蓁)
+- **Undergraduate (2022-):** Lai, Pin-Hsien (賴品憲)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
 - **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
 - **Ph.D. student (2020-):** Terada, Yuka (寺田由佳)
@@ -27,6 +27,6 @@ has_toc: false
 *Other closely collaborated students*
 - Joaquin Zamponi (MPE; [Publication](https://ui.adsabs.harvard.edu/abs/2021MNRAS.508.2583Z/abstract))
 - Paolo Cazzoletti (Leiden; [Publication](https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..11C/abstract))
-- Kristina Monsch (MPE; [Publication](https://ui.adsabs.harvard.edu/abs/2018ApJ...861...77M/abstract)) 
+- Kristina Monsch (MPE; [Publication](https://ui.adsabs.harvard.edu/abs/2018ApJ...861...77M/abstract))
 - Carmen Juarez (CSIC-IEEC; [Publication](https://ui.adsabs.harvard.edu/abs/2019A%26A...621A.140J/abstract))
 {: .fs-2 }

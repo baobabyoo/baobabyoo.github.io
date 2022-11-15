@@ -1,4 +1,4 @@
-This is *Hauyu Baobab Liu* (呂浩宇). 
+This is *Hauyu Baobab Liu* (呂浩宇).
 
 I am a researcher who based mostly on the [Submillimeter Array (SMA)](http://sma1.sma.hawaii.edu/smaoc.html), the [Atacama Large Millimeter Array (ALMA)](https://almascience.nao.ac.jp/) and the [Karl G. Jansky Array (JVLA)](https://science.nrao.edu/facilities/vla) to study various aspects about the interstellar medium. My present research focuses on planet-formation.
 {: .fs-2 }
@@ -33,8 +33,8 @@ More details about my research can be found at [this page](/pages/research).
 I presently host four students:
 {: .fs-2 }
 
-- **Undergraduate (2022-):**Chen, Ting-Chen (陳亭蓁)
-- **Undergraduate (2022-):**Lai, Pin-Hsien (賴品憲)
+- **Undergraduate (2022-):** Chen, Ting-Chen (陳亭蓁)
+- **Undergraduate (2022-):** Lai, Pin-Hsien (賴品憲)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
 - **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
 - **Ph.D. student (2020-):** Terada, Yuka (寺田由佳)
@@ -75,4 +75,3 @@ The full lists of my publications can be found at [this page](/pages/publication
 
 Please check my official webpage at [ASIAA](http://www.asiaa.sinica.edu.tw/people/cv.php?i=hyliu).
 {: .fs-1 }
-
