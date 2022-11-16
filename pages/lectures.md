@@ -14,7 +14,8 @@ has_toc: false
 1. [Lecture notes: Principle of radiation and basic observational parameters](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct/blob/main/lecture_notes/RadioAstronomy_2022Oct_lecture1_NTNU.pdf)
 2. [Lecture notes: Understanding the response of single-dish telescopes, angular resolution](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct/blob/main/lecture_notes/RadioAstronomy_2022Oct_lecture2_NTNU.pdf)
 3. [Lecture notes: Principle of radio interferometry](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct/blob/main/lecture_notes/RadioAstronomy_2022Oct_lecture3_NTNU.pdf)
-3. [Lecture notes: Principle of data calibration](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct/blob/main/lecture_notes/RadioAstronomy_2022Oct_lecture4_NTNU.pdf)
+4. [Lecture notes: Principle of data calibration](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct/blob/main/lecture_notes/RadioAstronomy_2022Oct_lecture4_NTNU.pdf)
+5. [Lecture notes: Error recognition](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct/blob/main/lecture_notes/RadioAstronomy_2022Oct_lecture5_NTNU.pdf)
 {: .fs-1 }
 
 **2022-Jul-08/12 @ NTNU :** *Principle of interferometry, noise, and calibration strategy.* ( [Lecture Notes PDF](https://github.com/baobabyoo/baobabyoo.github.io/blob/main/pages/files/lecture_notes/2022/Radio_interferometry_2022Jul.pdf); go to the address and then click the **Download** button to download). These are my quick notes, which are not necessarily fully correct and may not be comphresensitve to those who did not attend the classes.
