@@ -723,12 +723,14 @@ You can flag them using a BASH script like:
 ```
 #!/bin/bash
 
+
 config="com"
 flagval="f"
 
-targets='BP_Tau'
-sidebands='usb'
-ifbands='rx400'
+targets='zztauirs'
+sidebands='usb lsb'
+ifbands='rx230 rx240'
+spws='s1 s2 s3 s4 s5 s6'
 
 for field in $targets
 do
@@ -737,9 +739,13 @@ do
 
     for ifband in $ifbands
     do
+      for spw in $spws
+      do
 
-       uvflag vis=$field'_track5.'$ifband'.'$sideband'.cal.miriad' edge=64,64,0 flagval=$flagval
+        uvflag vis=$field'.'$ifband'.'$sideband'.'$spw'.cal.miriad' \
+	       edge=256,256,0 flagval=$flagval
 
+      done
     done
 
   done
@@ -758,22 +764,88 @@ After inspecting spectral lines in the data, you can perform continuum baseline 
 config="com"
 flagval="f"
 
-targets='ChiaYing_track5'
+targets='zztauirs'
 sidebands='usb lsb'
-ifbands='rx400'
+ifbands='rx230 rx240'
+spws='s1 s2 s3 s4 s5 s6'
+
+ch0quicklook='yes'
+linequicklook='no'
 
 for field in $targets
 do
+  for sideband in $sidebands
+  do
 
-    chans='0,6143'
-    # outputing continuum data
-    uvlin vis=$field'.rx400.lsb.cal.miriad' out=$field'.'$config'.rx400.lsb.ch0.miriad' \
-          chans=$chans mode=chan0 options=nocal,nopass,nopol,nowin order=1
-    # outputing continuum subtracted line data
-    uvlin vis=$field'.rx400.lsb.cal.miriad' out=$field'.'$config'.rx400.lsb.line.miriad' \
-          chans=$chans mode=line options=nocal,nopass,nopol,nowin order=1
+    for ifband in $ifbands
+    do
+      for spw in $spws
+      do
+
+        vishead=$field'.'$ifband'.'$sideband'.'$spw
+        echo $vishead
+
+        # obtain continuum channel by directly averaging over spectral domain
+        # syntax of the line parameter: nchan, start, width, step
+#	rm -rf $vishead'.ch0.miriad'
+#	uvaver vis=$vishead'.cal.miriad' \
+#	       out=$vishead'.ch0.miriad' \
+#	       line='channel,1,1,4096,1' options='nocal,nopass,nopol'
+
+        # obtain continuum channel by performing polynomial fitting
+        rm -rf $vishead'.ch0.miriad'
+        uvlin vis=$vishead'.cal.miriad' \
+              out=$vishead'.ch0.miriad' \
+              chans='64,4032' \
+              mode=chan0 options=nocal,nopass,nopol,nowin order=1
+
+        # obtain continuum channel by performing polynomial fitting
+        rm -rf $vishead'.line.miriad'
+        uvlin vis=$vishead'.cal.miriad' \
+              out=$vishead'.line.miriad' \
+              chans='64,4032' \
+              mode=line options=nocal,nopass,nopol,nowin order=1
+
+        # generating quicklook continuum dirty images
+        if [ $ch0quicklook = "yes" ]
+        then
+          rm -rf $vishead'.ch0.map'
+          rm -rf $vishead'.ch0.beam'
+          invert vis=$vishead'.ch0.miriad' \
+                 map=$vishead'.ch0.map' \
+                 beam=$vishead'.ch0.beam' \
+                 options=systemp,double,mfs robust=2.0 \
+                 imsize=128 cell=0.3
+
+          # producing quicklook continuum FITS image
+          rm -rf map=$vishead'.ch0.fits'
+          fits in=$vishead'.ch0.map' op=xyout \
+               out=$vishead'.ch0.fits'
+        fi
+
+        # generating quicklook line dirty images
+        if [ $linequicklook = "yes" ]
+        then
+          rm -rf $vishead'.line.map'
+          rm -rf $vishead'.line.beam'
+          invert vis=$vishead'.line.miriad' \
+                 map=$vishead'.line.map' \
+                 beam=$vishead'.line.beam' \
+                 line='channel,100,257,1,1' \
+                 options=systemp,double robust=2.0 \
+                 imsize=128 cell=0.3
+
+          # producing quicklook line FITS image
+          rm -rf map=$vishead'.line.fits'
+          fits in=$vishead'.line.map' op=xyout \
+               out=$vishead'.line.fits'
+        fi
 
 
+      done
+    done
+
+  done
 done
 ```
 {: .fs-1 }
