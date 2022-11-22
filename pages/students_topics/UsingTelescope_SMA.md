@@ -904,6 +904,69 @@ fits in=$field'.clean.pbcor' op=xyout out=$field'.clean.pbcor.fits'
 
 ##### 4.4.3 Single pointing, spectral lines imaging
 
+You can either image the entire *continuum-subtracted* line visibility files, or using the following script to extract the line you want to image. This procedure includes (1) inputing the rest-frequency information of the spectral line into the header information, (2) performing off-line doppler correction, and (3) re-grid the velocity channels:
+{: .fs-2 }
+
+```
+#!/bin/bash
+
+config="com"
+flagval="f"
+
+targets='zztauirs'
+sidebands='usb'
+ifbands='rx230'
+spws='s2'
+
+linename='co'
+restfreq='230.538'
+lineparms='velocity,50,-30.0.0,1.2,1.2'
+
+for field in $targets
+do
+  for sideband in $sidebands
+  do
+
+    for ifband in $ifbands
+    do
+      for spw in $spws
+      do
+
+      vishead=$field'.'$ifband'.'$sideband'.'$spw
+      invis=$vishead'.line.miriad'
+      outvis=$field'.'$linename'.miriad'
+      rm -rf $outvis
+
+      # include the information of spectraline
+      rm -rf $vishead'.miriad.temp'
+      uvputhd vis=$invis type=d \
+              hdvar=restfreq varval=$restfreq \
+              out=$vishead'.miriad.temp'
+
+      # offline doppler correction
+      rm -rf $vishead'.miriad.temp2'
+      uvredo vis=$vishead'.miriad.temp' \
+             options='velocity,nopass,nocal,nopol' \
+             out=$vishead'.miriad.temp2' velocity=lsr
+
+      # regridding velocity channel
+      uvaver vis=$vishead'.miriad.temp2' line=$lineparms= \
+             out=$outvis
+
+      rm -rf *.temp
+      rm -rf *.temp2
+
+      done
+    done
+
+  done
+done
+```
+{: .fs-1 }
+
+The commands to image the spectral line data (i.e., `invert`, `clean`, `restor`, and `linmos`) are similar to those for continuum imaging, just we should omit `mfs` in the `options` keyword of `invert`.
+{: .fs-1 }
+
 ##### 4.4.4 Mosaic imaging
 
 ##### 4.4.5 Combining single dish and interferometric observations
