@@ -866,7 +866,7 @@ field="BP_Tau"
 # creat dirty image (i.e., inverse Fourier transform)
 rm -rf $field'.dirty'
 rm -rf $field'.beam'
-invert vis=$field'_track5.rx400.usb.cal.miriad' options=systemp,mfs,double map robust=2.0 map=$field'.dirty' beam=$field'.beam' cell=0.25 imsize=256
+invert vis=$field'_track5.rx400.usb.cal.miriad' options=systemp,mfs,double robust=2.0 map=$field'.dirty' beam=$field'.beam' cell=0.25 imsize=256
 
 rm -rf $field'.dirty.fits'
 rm -rf $field'.beam.fits'
