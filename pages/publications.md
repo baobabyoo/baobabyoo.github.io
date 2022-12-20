@@ -53,7 +53,7 @@ has_toc: false
 
 ###### Other publications
 99. Maureira, M. J., Gong, M., Pineda, J. E., **Liu, H. B.**, Silsbee, K., Caselli, P., Zamponi, J., Segura-Cox, D. M., Schmiedeke, A., *Dust hot spots at 10 au scales around the Class 0 binary IRAS 16293-2422 A:
-evidence of shock heating*, ApJL, in press (2022)
+evidence of shock heating*, ApJL, in press (2022) [ADS](https://ui.adsabs.harvard.edu/abs/2022ApJ...941L..23M/abstract)
 98. Hashimoto, J., **Liu, H. B.**, Dong, R., Liu, B., Muto, T., *Grain Growth in the Asymmetric Dust Ring around Very Low Mass Star ZZ~Tau~IRS with JVLA*, ApJ, in press (2022) [ADS](https://ui.adsabs.harvard.edu/abs/2022arXiv221101570H/abstract)
 97. De Simone, M., Ceccarelli, C., Codella, C., Svoboda, B. E., Chandler, C., Bouvier, M., Yamamoto, S., Sakai, N., Yang, Y.-L., Caselli, P., Lefloch, B., **Liu, H. B.**, Lopez-Sepulcre, A., Loinard, L., Pineda, J. E., Testi, L., *Tracking the ice mantle history in the Solar-type Protostars of NGC 1333 IRAS 4*, ApJL, 935, 14 (2022) [ADS](https://ui.adsabs.harvard.edu/abs/2022ApJ...935L..14D/abstract)
 96. Francis, L., van der Marel, N., Johnstone, D., Akiyama, E., Bruderer, S., Dong, R., Hashimoto, J.,  **Liu, H. B.**, Muto, T., Yang, Y., *Gap Opening and Inner Disk Structure in the Strongly Accreting Transition Disk of DM Tau*, AJ, 164, 105 (2022) [ADS](https://ui.adsabs.harvard.edu/abs/2022AJ....164..105F/abstract)
