@@ -8,7 +8,8 @@ I am a researcher who based mostly on the [Submillimeter Array (SMA)](http://sma
 ### Bio
 
 *Position :*
-- Associated Research Fellow (Tenured) : Academia Sinica Institute of Astronomy and Astrophysics (2022-)
+- Associated Professor (Tenured) : Department of Physics, National Sun Yat-sen University (2023-)
+- Associated Research Fellow (Tenured) : Academia Sinica Institute of Astronomy and Astrophysics (2022-2023)
 - Assistant Research Fellow : Academia Sinica Institute of Astronomy and Astrophysics (2018-2022)
 - ESO Fellow : European Southern Observatory, Garching, Germany (2015-2018)
 - Postdoctoral Fellow : Academia Sinica Institute of Astronomy and Astrophysics (2012-2015)
@@ -73,5 +74,7 @@ The full lists of my publications can be found at [this page](/pages/publication
 
 ### Contact
 
-Please check my official webpage at [ASIAA](http://www.asiaa.sinica.edu.tw/people/cv.php?i=hyliu).
+- **Department of Physics, NSYSU Office :** 理SC2006-3
+- **Center Of Astronomy And Gravitation, NTNU Office* :** Room SE809
+- *for more contact information please check [this page](https://phys.nsysu.edu.tw/p/412-1181-9040.php?Lang=zh-tw)*
 {: .fs-1 }
