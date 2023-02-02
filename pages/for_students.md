@@ -7,16 +7,16 @@ has_toc: true
 ---
 
 
-### To my students 
+### To my students
 (or those who are interested in joining my group)
 
-First of all, there are people who choose to stay in the academic field because *they do not want to interact with any human beings*. I acknowledge that this is part of the diversity and I fully respect their lifestyle. 
+First of all, there are people who choose to stay in the academic field because *they do not want to interact with any human beings*. I acknowledge that this is part of the diversity and I fully respect their lifestyle.
 {: .fs-2 }
 
 However, I try to maintain an inclusive and cooperative working style. Due to the interdisciplinary nature of our works, we are exposed to an extremely wide range of knowledge/skills/technology, and it is unlikely for one Master's or Ph.D. student to be fluent in all of them. Therefore, being cooperative would be extremely critical for you to become successful in my group. For those who prefer not to be socialized, please consider other supervisors (there are supervisors who welcome such kinds of students).
 {: .fs-2 }
 
-I on average spend 5~10 hours on each of my student every week, to discuss with them about their projects, read and revise the English document they wrote, or read the papers they both of us need to read. I take supervision seriously. Therefore, you may feel pressure, and I will not supervise too many students at the same time. When I am too busy to work with you in person (e.g., when I am having multiple international travels in a short time period), I may introduce somebody else to help you (e.g., my former students or my long-term collaborators). In that case, you should trust me and the person I introduce to you, cooperate, and interact with that person nicely and politely. 
+I on average spend 5~10 hours on each of my student every week, to discuss with them about their projects, read and revise the English document they wrote, or read the papers they both of us need to read. I take supervision seriously. Therefore, you may feel pressure, and I will not supervise too many students at the same time. When I am too busy to work with you in person (e.g., when I am having multiple international travels in a short time period), I may introduce somebody else to help you (e.g., my former students or my long-term collaborators). In that case, you should trust me and the person I introduce to you, cooperate, and interact with that person nicely and politely.
 {: .fs-2 }
 
 #### Timeline
@@ -25,27 +25,29 @@ Here I am giving an overview of what typically will happen. Make your **own** pl
 {: .fs-2 }
 
 
-- **Master's student** 
+- **Master's student**
     1. *First year:* You may spend most of your time taking courses. The first winter vacation will be a window for you to kick off some research work. If you can start doing some research in the summer before you enroll in the school, the timeline may be a little more relaxed.
     2. *The end of your first academic year, starting from late June:* If you want to apply to Ph.D. programme abroad, it may take you 3~6 months full time to prepare for the exams (English and subject) and 1 month full time to check schools and compose your application. The application deadlines are typically in October-December. If you need me to write good recommendation letters for you, let me know at least three weeks ahead of the deadline. And by the time you submit the application, you need to accomplish some tasks that are worth mentioning in a recommendation letter. If this is what you want to do, I would encourage it. Plan your time very carefully (including the first year or even before your first year), and be ready to overwork yourself. I help those people who help themselves.
-    3. *The 2nd half of the 2nd year:* A preliminary draft of your thesis should be ready for my revision by late April. I will make you write down what you do immediately after you do that. Do so. Do not defer the writing task; do not try to write up the whole thesis at once in the 2nd half of your 2nd year. If deferring writing is the main reason why you cannot accomplish the thesis on time, you may not get a degree on time, or you may not get a degree. 
+    3. *The 2nd half of the 2nd year:* A preliminary draft of your thesis should be ready for my revision by late April. I will make you write down what you do immediately after you do that. Do so. Do not defer the writing task; do not try to write up the whole thesis at once in the 2nd half of your 2nd year. If deferring writing is the main reason why you cannot accomplish the thesis on time, you may not get a degree on time, or you may not get a degree.
 - **Ph.D. student** (under construction)
 - **Postdoc** (under construction)     
 {: .fs-2 }
 
-    
+
 #### Useful General Information
 
 A minimal skill set you need would be: Linux operation system, LaTEX, one programming language (e.g., Python), general physics, and general communication skills in English (reading/writing/speaking/listening). I do not expect you to know all these at the beginning. But you need to be mentally prepared to pick up the first three shortly, and develop the English communication skills as time goes by.
 {: .fs-2 }
 
-- **Proposal deadlines** 
+- **Proposal deadlines**
     1. *Submillimeter Array (SMA):* mid March and September. More in [SMAOC](http://sma1.sma.hawaii.edu/proposing.html).
     2. *Karl G. Jansky Very Large Array (JVLA):* Feb./Aug. 01 every year. More in [My NRAO](https://my.nrao.edu/) (please register an account).
     3. *Atacama Large Millimeter Array (ALMA)* Around Apr. 20 every year. More in [ALMA User Portal](https://almascience.nao.ac.jp/).
     4. *Various optical or infrared telescopes:* Mostly in March or September every year.
     5. *Others :* I may once in a while notify you (by E-mails) something worth trying.
-- **(Sub)millimeter molecular line tools** 
+- **List of Star-formation related conference and workshops**
+    1. [Star-Formation News Letters](https://www.starformation.news/community/meetings).
+- **(Sub)millimeter molecular line tools**
     1. [Splatologue](https://splatalogue.online//): Complete, but no visualization.
     2. [SMA Passband Visualizer](http://sma1.sma.hawaii.edu/smaPassbandViewer/smaPassbandVis2020A.html): Handy, if you are proposing to the SMA or ALMA Band 5, 6, 7, and 8.
     3. [The CDMS database](https://cdms.astro.uni-koeln.de/cdms/portal/): More details about the quantum numbers are explained. Can check partition function.
