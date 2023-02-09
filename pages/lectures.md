@@ -6,6 +6,12 @@ has_children: false
 has_toc: false
 ---
 
+# General Physics (II)
+
+**2023-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb)).
+
+1. [Lecture notes: Special relativity Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/SpecialRelativity_part1.pdf)
+
 # Radio Interferometry
 
 **2022-Oct-5/Nov-30 @ NTNU :** *Practical Radio Interferometry* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct)). I am not yet good at using Github. But let's learn this together.
