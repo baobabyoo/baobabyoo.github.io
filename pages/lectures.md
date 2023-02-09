@@ -9,8 +9,10 @@ has_toc: false
 # General Physics (II)
 
 **2023-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb)).
+{: .fs-1 }
 
 1. [Lecture notes: Special relativity Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/SpecialRelativity_part1.pdf)
+{: .fs-1 }
 
 # Radio Interferometry
 
