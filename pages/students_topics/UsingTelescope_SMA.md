@@ -135,7 +135,7 @@ I usually use the [Miriad](https://lweb.cfa.harvard.edu/rtdc/SMAdata/process/mir
 
 #### 4.2 Overview
 
-No matter which sofware we use steps we are going through the following steps:
+No matter which software we use steps we are going through the following steps:
 {: .fs-2 }
 
 1. Load raw SMA data to MIR IDL format (and store it if you like).
