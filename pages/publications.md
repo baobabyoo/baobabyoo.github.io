@@ -52,7 +52,9 @@ has_toc: false
 
 
 ###### Other publications
-100. Galv\'an-Madrid, R., Zhang, Q., Izquierdo, A., Law, C. J., Peters, T., Keto, E., **Liu, H. B.**, Ho, P. T.-P., Ginsburg, A., Carrasco-Gonz\'alez, C., "Clustered Formation of Massive Stars within an Ionized Rotating Disk", ApJL, in press (2022) [ADS](https://ui.adsabs.harvard.edu/abs/2022arXiv221205633G/abstract)
+102. Orihara, R., Momose, M., Muto, T., Hashimoto, J., **Liu, H. B.**, Tsukagoshi, T., Kudo, T., Takahashi, S., Yang, Y., Hasegawa, Y., Dong, R., Konishi, M., Akiyama, E., "ALMA Band 6 high-resolution observations of the transitional disk around SY Cha", ApJ in press (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2023arXiv230205659O/abstract)
+101. Liu, J., Zhang, Q., Koch, P. M., **Liu, H. B.**, Li, Z.-Y., Li, S., Girart, J. M., Chen, H.-R. V., Ching, T.-C., Ho, P. T. P., Lai, S.-P., Qiu, K., Rao, R., Tang, Y.-W., "Multi-scale physical properties of NGC 6334 as revealed by local relative orientations between magnetic fields, density gradients, velocity gradients, and gravity", ApJ in press (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2022arXiv221100152L/abstract)
+100. Galv\'an-Madrid, R., Zhang, Q., Izquierdo, A., Law, C. J., Peters, T., Keto, E., **Liu, H. B.**, Ho, P. T.-P., Ginsburg, A., Carrasco-Gonz\'alez, C., "Clustered Formation of Massive Stars within an Ionized Rotating Disk", ApJL, in 942, 7 (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2023ApJ...942L...7G/abstract)
 99. Maureira, M. J., Gong, M., Pineda, J. E., **Liu, H. B.**, Silsbee, K., Caselli, P., Zamponi, J., Segura-Cox, D. M., Schmiedeke, A., *Dust hot spots at 10 au scales around the Class 0 binary IRAS 16293-2422 A:
 evidence of shock heating*, ApJL, 941, 23 (2022) [ADS](https://ui.adsabs.harvard.edu/abs/2022ApJ...941L..23M/abstract)
 98. Hashimoto, J., **Liu, H. B.**, Dong, R., Liu, B., Muto, T., *Grain Growth in the Asymmetric Dust Ring around Very Low Mass Star ZZ~Tau~IRS with JVLA*, ApJ, 941, 66 (2022) [ADS](https://ui.adsabs.harvard.edu/abs/2022ApJ...941...66H/abstract)
