@@ -12,13 +12,19 @@ has_toc: false
 ([Lecture Homepage](https://github.com/baobabyoo/Lecture_DataAnalysis)).
 {: .fs-1 }
 
+1. [Lecture notes: General Concepts and Chi-Square fittings](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part1.pdf)
+1. [Lecture notes: Chi-Squre fittings in linear problem](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part2.pdf)
+1. [Lecture notes: Non-linear Chi-Square minimization and goodness-of-fittings](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part3.pdf)
+{: .fs-1 }
+
 ## General Physics (II)
 
 **2023-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb)).
 {: .fs-1 }
 
 1. [Lecture notes: Special relativity Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/SpecialRelativity_part1.pdf)
-{: .fs-1 }
+2. [Lecture notes: Special relativity Part II](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/SpecialRelativity_part2.pdf)
+3. [Lecture notes: Quantum Physics Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/QuantumPhysics_part1.pdf)
 
 ## Radio Interferometry
 
