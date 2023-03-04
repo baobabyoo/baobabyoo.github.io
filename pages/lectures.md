@@ -13,8 +13,9 @@ has_toc: false
 {: .fs-1 }
 
 1. [Lecture notes: General Concepts and Chi-Square fittings](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part1.pdf)
-1. [Lecture notes: Chi-Squre fittings in linear problem](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part2.pdf)
-1. [Lecture notes: Non-linear Chi-Square minimization and goodness-of-fittings](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part3.pdf)
+2. [Lecture notes: Chi-Squre fittings in linear problem](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part2.pdf)
+3. [Lecture notes: Non-linear Chi-Square minimization and goodness-of-fittings](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part3.pdf)
+4. [Lecture notes: Markov Chain Monte Carlo method](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part4.pdf)
 {: .fs-1 }
 
 ## General Physics (II)
