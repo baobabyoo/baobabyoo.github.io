@@ -52,6 +52,7 @@ has_toc: false
 
 
 ###### Other publications
+103. Yang, Y., **Liu, H. B.**, Muto, T., Hashimoto, J., Dong, R., Kanagawa, K., Momose, M., Akiyama, E., Hasegawa, Y., Tsukagoshi, T., Konishi, M., Tamura, M., "Multiple Rings and Asymmetric Structures in the Disk of SR 21", ApJ, in press (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2023arXiv230305064Y/abstract)
 102. Orihara, R., Momose, M., Muto, T., Hashimoto, J., **Liu, H. B.**, Tsukagoshi, T., Kudo, T., Takahashi, S., Yang, Y., Hasegawa, Y., Dong, R., Konishi, M., Akiyama, E., "ALMA Band 6 high-resolution observations of the transitional disk around SY Cha", ApJ in press (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2023arXiv230205659O/abstract)
 101. Liu, J., Zhang, Q., Koch, P. M., **Liu, H. B.**, Li, Z.-Y., Li, S., Girart, J. M., Chen, H.-R. V., Ching, T.-C., Ho, P. T. P., Lai, S.-P., Qiu, K., Rao, R., Tang, Y.-W., "Multi-scale physical properties of NGC 6334 as revealed by local relative orientations between magnetic fields, density gradients, velocity gradients, and gravity", ApJ in press (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2022arXiv221100152L/abstract)
 100. Galv\'an-Madrid, R., Zhang, Q., Izquierdo, A., Law, C. J., Peters, T., Keto, E., **Liu, H. B.**, Ho, P. T.-P., Ginsburg, A., Carrasco-Gonz\'alez, C., "Clustered Formation of Massive Stars within an Ionized Rotating Disk", ApJL, in 942, 7 (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2023ApJ...942L...7G/abstract)
