@@ -209,7 +209,7 @@ Please find the pipeline [here](https://science.nrao.edu/facilities/vla/data-pro
 #### 3.2 Manual CASA calibration
 
 If you have not done this before, be ready to spend several weeks of full-time working in order to pick this up. Below is a *ALMA script generator style script* that I organized. It is compatible with CASA6 but not with any earlier version of CASA. You need to edit the section *##### Setting the basic information of the script ###########*. This script is not automatic, in particular, there is no automatic flagging. It is recommended to run it step-by-step. If this is the first time you use it, it may be necessary for you to visually check the options/parameters used for the tasks in each step and make sure those are what you really want. You should pay extra care if you would like to perform polarization calibration (you may need to manually update the polarization of the calibrators). And unfortunately, you have to manually created a file `pola_flux.txt` which should be an ASCII file with 2 columns: the first is the index of the spectral window, the second is the flux density of your polarization position angle calibrator. This information can be obtained during step 15 and is loaded in step 16 (i.e., to evaluate Stokes I, Q, U, and V of the calibrator based on the Stokes I flux density, polarization percentage, and polarization position angle).
-
+{: .fs-2 }
 
 If you use this script for your journal publication, it would be very much appreciated if you could include the following acknowledgement:
 {: .fs-2 }
