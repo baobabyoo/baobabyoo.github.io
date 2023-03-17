@@ -208,7 +208,10 @@ Please find the pipeline [here](https://science.nrao.edu/facilities/vla/data-pro
 
 #### 3.2 Manual CASA calibration
 
-If you have not done this before, be ready to spend several weeks of full-time working in order to pick this up. Below is a *ALMA script generator style script* that I organized. It is compatible with CASA6 but not with any earlier version of CASA. You need to edit the section *##### Setting the basic information of the script ###########*. This script is not automatic, in particular, there is no automatic flagging. It is recommended to run it step-by-step. If this is the first time you use it, it may be necessary for you to visually check the options/parameters used for the tasks in each step and make sure those are what you really want. You should pay extra care if you would like to perform polarization calibration (you may need to manually update the polarization of the calibrators). If you use this script for your journal publication, it would be very much appreciated if you could include the following acknowledgement:
+If you have not done this before, be ready to spend several weeks of full-time working in order to pick this up. Below is a *ALMA script generator style script* that I organized. It is compatible with CASA6 but not with any earlier version of CASA. You need to edit the section *##### Setting the basic information of the script ###########*. This script is not automatic, in particular, there is no automatic flagging. It is recommended to run it step-by-step. If this is the first time you use it, it may be necessary for you to visually check the options/parameters used for the tasks in each step and make sure those are what you really want. You should pay extra care if you would like to perform polarization calibration (you may need to manually update the polarization of the calibrators). And unfortunately, you have to manually created a file `pola_flux.txt` which should be an ASCII file with 2 columns: the first is the index of the spectral window, the second is the flux density of your polarization position angle calibrator. This information can be obtained during step 15 and is loaded in step 16 (i.e., to evaluate Stokes I, Q, U, and V of the calibrator based on the Stokes I flux density, polarization percentage, and polarization position angle).
+
+
+If you use this script for your journal publication, it would be very much appreciated if you could include the following acknowledgement:
 {: .fs-2 }
 
 ```
@@ -376,6 +379,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 1
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -398,6 +402,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 2
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -412,7 +417,6 @@ if(mystep in thesteps):
   timerange = ''
   flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan, timerange=timerange)
 
-
   # flag dummy spw
   mode = 'manual'
   antenna = ''
@@ -421,7 +425,6 @@ if(mystep in thesteps):
   scan = ''
   timerange = ''
   flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan, timerange=timerange)
-
 
   # flag edge channls
   mode = 'manual'
@@ -438,7 +441,6 @@ if(mystep in thesteps):
 
 
   # Initial data flagging
-
     # RFI
   mode = 'manual'
   antenna = ''
@@ -450,6 +452,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 3
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -458,6 +461,7 @@ if(mystep in thesteps):
   mode = 'save'
   versionname = 'initial'
   flagmanager(vis=vis, mode=mode, versionname=versionname)
+
 
 
 
@@ -513,11 +517,11 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 6
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
   print ('Step ', mystep, step_title[mystep])
-
 
   # phase-vs.-time only calibration
   passband_gPtable = filename + '.G0'
@@ -573,6 +577,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 7
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -601,6 +606,7 @@ if(mystep in thesteps):
 
   os.system('rm -rf ' + filename + '.B0.plots' )
   es.checkCalTable(BP_table, msName=vis, interactive=False)
+
 
 
 
@@ -731,14 +737,6 @@ if(mystep in thesteps):
               selectdata=selectdata, scan=scan, spw=spw, gaintype=gaintype,
               refant=refant, solint=solint, minsnr=minsnr)
 
-      '''
-      xaxis = 'antenna'
-      yaxis = 'delay'
-      figfile = filename + '.K0.b.png'
-      os.system( 'rm -rf ' + figfile)
-      plotcal(caltable=delay_table2, xaxis=xaxis, yaxis=yaxis, figfile=figfile)
-      '''
-
       BP_table2 = filename + '.B0.b'
       solnorm   = False
       bandtype  = 'B'
@@ -769,10 +767,13 @@ if(mystep in thesteps):
     os.system('cp -r ' + BP_table + ' ' + BP_table2)
 
 
+
+
 mystep = 10
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
   print ('Step ', mystep, step_title[mystep])
+
 
 
 
@@ -784,6 +785,7 @@ if(mystep in thesteps):
   mode = 'save'
   versionname = 'BeforeGain'
   flagmanager(vis=vis, mode=mode, versionname=versionname)
+
 
 
 
@@ -851,9 +853,9 @@ if(mystep in thesteps):
               append=True
            )
 
-
   os.system('rm -rf ' + filename + '.G1.int.plots' )
   es.checkCalTable(gPint_table, msName=vis, interactive=False)
+
 
 
 
@@ -881,6 +883,7 @@ if(mystep in thesteps):
 
   os.system('rm -rf ' + filename + '.G1.inf.plots' )
   es.checkCalTable(gPinf_table, msName=vis, interactive=False)
+
 
 
 
@@ -1005,6 +1008,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 15
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -1024,6 +1028,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 16
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -1040,7 +1045,6 @@ if(mystep in thesteps):
     ### #########################
     spix = np.log( flux_freqmin / flux_freqmax ) / np.log( freq_min / freq_max )
     print( 'spectral index', spix )
-
 
     # using value after 2019
     if angle_calibrator == '3C286':
@@ -1211,7 +1215,6 @@ if(mystep in thesteps):
                          -27.0
                         ])
 
-
     windowfreq_dict = {}
     ms.open(vis)
     spwInfo = ms.getspectralwindowinfo()
@@ -1323,6 +1326,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 17
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -1360,6 +1364,7 @@ if(mystep in thesteps):
     figfile = filename + '.Kcross-delay.png'
     os.system( 'rm -rf ' + figfile)
     plotms(vis=CrossHand_table, xaxis=xaxis, yaxis=yaxis, plotfile=figfile, coloraxis='antenna1')
+
 
 
 
@@ -1418,6 +1423,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 19
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -1449,6 +1455,7 @@ if(mystep in thesteps):
 
 
 
+
 mystep = 20
 if(mystep in thesteps):
   casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
@@ -1477,6 +1484,7 @@ if(mystep in thesteps):
            #######################################################################################
        gaintable=gaintable, gainfield=gainfield, interp=interp,
        selectdata=True)
+
 
 
 
@@ -1604,6 +1612,7 @@ if(mystep in thesteps):
                gaintable=gaintable, gainfield=gainfield, interp=interp,
                calwt=False, selectdata=True
         )
+
 
 
 
