@@ -208,5 +208,1432 @@ Please find the pipeline [here](https://science.nrao.edu/facilities/vla/data-pro
 
 #### 3.2 Manual CASA calibration
 
-If you have not done this before, be ready to spend several weeks of full-time working in order to pick this up. 
+If you have not done this before, be ready to spend several weeks of full-time working in order to pick this up. Below is a *ALMA script generator style script* that I organized. It is compatible with CASA6 but not with any earlier version of CASA. You need to edit the section *##### Setting the basic information of the script ###########*. This script is not automatic, in particular, there is no automatic flagging. It is recommended to run it step-by-step. If this is the first time you use it, it may be necessary for you to visually check the options/parameters used for the tasks in each step and make sure those are what you really want. You should pay extra care if you would like to perform polarization calibration (you may need to manually update the polarization of the calibrators). If you use this script for your journal publication, it would be very much appreciated if you could include the following acknowledgement:
+{: .fs-2 }
+
+```
+The manual JVLA data calibrations were performed using the procedure shared on the personal webpage of Hauyu Baobab Liu (https://baobabyoo.github.io/pages/students_topics/UsingTelescope_JVLA.html).
+```
+{: .fs-2 }
+
+The script can be executed by
+{: .fs-2 }
+
+```
+# for example, to execute step 0 only:
+CASA> mysteps = [0]
+CASA> execfile('script.py')
+```
+{: .fs-2 }
+
+
+```
+import os
+import re
+import numpy as np
+
+##### Script Info ###########################################
+#
+# CASA version: CASA 6.5.1.23
+# Contact: Hauyu Baobab Liu
+#
+#############################################################
+
+##### Setting the basic information of the script ###########
+
+### Calibration options
+if_importasdm       = True
+PolCalibration      = True
+plot_interactive    = True
+angle_calibrator = '3C286'
+
+### Data related parameters
+filename     = '21A-122.sb39327279.eb39551241.59304.42862680556'
+vis          = filename + '.ms'
+Band         = 'Q'
+config       = 'D'
+EBid         = 'eb39551241'
+num_antenna  = 27
+refant       = 'ea05'
+
+# name the calibrator field
+BP   = '3'      # J2253+1608 (3C454.3)
+GN   = '1'      # J1851+0035
+TG   = '2'      # G31p41pol
+POLD = '4'      # J2355+4950
+POLA = '0'      # 3C286
+FL   = '0'      # 3C286
+
+# name scans:
+GNscan = '10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36,  40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64'
+BPscan = '68'
+FLscan = '6'
+POLDscan = '72'
+POLAscan = '6'
+TGscan   = '11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35,  41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63'
+
+# name the spectral window ranges:
+allspw     = '0~64'
+sciencespw = '2~64'
+bandcenters = '2~64:0~63'
+beginspw   = '2'
+endspw     = '64'
+num_spw    = 63
+
+### CASA related parameters
+# fluxmodelpth = '/home/hyliu/softwares/CASA/casa-release-5.7.0-134.el7/data/nrao/VLA/CalModels/'
+fluxmodelim  = '3C286_Q.im'
+fluxstandard = 'Perley-Butler 2017'
+
+### Important:
+# Using CASA 5.3.0-143 and after, using Perley+17 flux standard
+
+### Naming calibration tables (Do not edit this section)
+antenna_table     = filename + '.antpos'
+gaincurve_table   = filename + '.gaincurve'
+opacity_table     = filename + '.opacity'
+requantizer_table = filename + '.requantizer'
+passband_gPtable  = filename + '.G0'
+delay_table       = filename + '.K0'
+BP_table          = filename + '.B0'
+bootstrapgP_table = filename + '.G1'
+BPflux_table      = filename + '.F1'
+passband_gPtable2 = filename + '.G0.b'
+delay_table2      = filename + '.K0.b'
+BP_table2         = filename + '.B0.b'
+gPint_table       = filename + '.G1.int'
+gPinf_table       = filename + '.G1.inf'
+gAint_table       = filename + '.G2'
+flux_table        = filename + '.F2'
+CrossHand_table   = filename + '.Kcross'
+leakage_table     = filename + '.D1'
+leakage_table2    = filename + '.D2'
+POLPA_table       = filename + '.X1'
+#############################################################
+
+
+thesteps = []
+step_title = {
+              0: 'Listobs and plot antennas',
+              1: 'Initial flagging and Data inspects',
+              2: 'Manual flaggings',
+              3: 'Save initial flags',
+              4: 'Set flux density scale',
+              5: 'Generate antenna position, gain curve, Tropospheric opacity, Requantizer gain table',
+              6: 'First iteration of delay calibration',
+              7: 'First iteration of passband calibration',
+              8: 'Derive flux model for the passband calibrator',
+              9: 'Second iteration of delay and passband calibration',
+              10: 'Final manual flaggings',
+              11: 'Save flags before final gain calibration',
+              12: 'Per integration gain phase calibration',
+              13: 'Per scan gain phase calibration',
+              14: 'Gain amplitude calibration',
+              15: 'Absolute flux scaling',
+              16: 'Set polarizatoin flux standard',
+              17: 'Solve crosshand delay',
+              18: 'Set leakage calibrator flux standard',
+              19: 'Solving for leakage terms',
+              20: 'Solving for the R-L polarization angle',
+              21: 'Applying calibration table',
+              22: 'Splitting calibrated data',
+             }
+
+try:
+  print ('List of steps to be executed ...', mysteps)
+  thesteps = mysteps
+except:
+  print ('global variable mysteps not set.')
+if (thesteps==[]):
+  thesteps = range(0,len(step_title))
+  print ('Executing all steps: ', thesteps)
+
+
+
+mystep = 0
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if if_importasdm == True:
+      importasdm(
+                 asdm = filename, vis = vis,
+                 createmms = False,
+                 ocorr_mode = 'co', with_pointing_correction = True,
+                 process_flags = True, applyflags = True,
+                 savecmds = True, overwrite = True
+                )
+
+  listfile = filename + '.listobs'
+  os.system('rm -rf ' + listfile)
+  listobs(vis=vis, listfile=listfile)
+
+  figfile  = filename + '.plotants.png'
+  os.system('rm -rf ' + figfile)
+  plotants(vis=vis, figfile=figfile)
+
+  clearstat()
+
+
+
+mystep = 1
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  # apply online flaggs (required when imported ASDM instead of downloading MS)
+  flagcmd(vis=vis, inpmode='table', action='apply',
+          flagbackup=False)
+
+  # listing online flaggs
+  plotfile = filename + '.onlineflags.png'
+  os.system('rm -rf ' + plotfile)
+  flagcmd(vis=vis, inpmode='table', action='plot', \
+          useapplied=True, plotfile=plotfile)
+
+  mode = 'shadow'
+  spw = ''
+  flagbackup=False
+  flagdata(vis=vis, mode=mode, spw=spw, flagbackup=flagbackup)
+
+
+
+mystep = 2
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  # flag dummy scans and pointings
+  mode = 'manual'
+  antenna = ''
+  spw = ''
+  flagbackup=False
+  scan = '1~5, 7~9, 37~39, 65~67, 69~71'
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan, timerange=timerange)
+
+
+  # flag dummy spw
+  mode = 'manual'
+  antenna = ''
+  spw = '0,1'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan, timerange=timerange)
+
+
+  # flag edge channls
+  mode = 'manual'
+  antenna = ''
+  spw = '2~64:0~3;60~63'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  # flag initial integration
+  mode = 'quack'
+  flagdata(vis=vis, mode=mode, quackinterval=6.0, quackmode = 'beg', flagbackup=False)
+
+
+  # Initial data flagging
+
+    # RFI
+  mode = 'manual'
+  antenna = ''
+  spw = '2:42;43,9:38,11:18~21;42;43;47~63,12:19~24,13:11;12;28~31;43;44;49;50,14:41;48~52,15:17,16:21;33;34,27:44~64,29:16~20;25~27;45~47,41:51;52,42:10~12,43:16~18;22~24;32~37,44:4~6;19;20;27~30;39~41;45~50,45:11;12;24;25;35,46:19~21,53:15~17;27~29,55:4,57:4;5;35~37,58:31~34,59:22~24,60:51'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+
+
+mystep = 3
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  mode = 'save'
+  versionname = 'initial'
+  flagmanager(vis=vis, mode=mode, versionname=versionname)
+
+
+
+mystep = 4
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  delmod(vis)
+  field = FL
+  scalebychan = True
+  standard    = fluxstandard
+  model = fluxmodelim
+  setjy(vis=vis, field=field, spw=sciencespw,
+        scalebychan=scalebychan, standard=standard, model=model)
+
+  plotfile = vis + '.fluxmodel.png'
+  os.system('rm -rf ' + plotfile)
+  plotms(vis=vis, field=FL, antenna=refant, xaxis='freq', yaxis='amp', ydatacolumn='model',
+        plotfile=plotfile)
+
+
+
+mystep = 5
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  antenna_table = filename + '.antpos'
+  caltype       = 'antpos'
+  antenna       = ''
+  os.system('rm -rf ' + antenna_table)
+  gencal(vis=vis, caltable=antenna_table, caltype=caltype, antenna=antenna)
+
+  gaincurve_table = filename + '.gaincurve'
+  caltype         = 'gc'
+  os.system('rm -rf ' + gaincurve_table)
+  gencal(vis=vis, caltable=gaincurve_table, caltype=caltype)
+
+  doPlot = True
+  myTau = plotweather(vis=vis, doPlot=doPlot)
+
+  opacity_table = filename + '.opacity'
+  caltype       = 'opac'
+  spw = allspw
+  os.system('rm -rf ' + opacity_table)
+  gencal(vis=vis, caltable=opacity_table, caltype=caltype, spw=spw, parameter=myTau)
+
+  requantizer_table = filename + '.requantizer'
+  caltype = 'rq'
+  os.system('rm -rf ' +  requantizer_table)
+  gencal(vis=vis, caltable=requantizer_table, caltype=caltype)
+
+
+
+mystep = 6
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+
+  # phase-vs.-time only calibration
+  passband_gPtable = filename + '.G0'
+  field            = BP
+  spw              = bandcenters
+  if os.path.exists(antenna_table) == True:
+    gaintable = [antenna_table, gaincurve_table, requantizer_table, opacity_table]
+  else:
+    gaintable = [gaincurve_table, requantizer_table, opacity_table]
+
+  gaintype  = 'G'
+  calmode   = 'p'
+  solint    = 'int'
+  minsnr    = 3
+  selectdata = True
+  scan       = BPscan
+  os.system('rm -rf ' + filename + '.G0.plotCal' )
+  os.system('rm -rf ' + passband_gPtable)
+  gaincal(vis=vis, caltable=passband_gPtable, field=field, spw='',
+        gaintable=gaintable,
+        gaintype=gaintype, refant=refant,
+        calmode=calmode, solint=solint, minsnr=minsnr,
+        # corrdepflags=False, # this line only works in older casa
+        selectdata=selectdata, scan=scan)
+
+  os.system('rm -rf ' + filename + '.G0.plots' )
+  es.checkCalTable(passband_gPtable, msName=vis, interactive=False)
+
+
+  delay_table = filename + '.K0'
+  spw         = sciencespw
+  antenna     = ''
+  gaintype    = 'K'
+  solint      = 'inf'
+  minsnr      = 3
+  if os.path.exists(antenna_table) == True:
+    gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, passband_gPtable]
+  else:
+    gaintable   = [gaincurve_table, requantizer_table, opacity_table, passband_gPtable]
+
+  os.system( 'rm -rf ' + delay_table )
+  gaincal(vis=vis, caltable=delay_table,
+          gaintable=gaintable,
+          field=field,
+          scan=scan, selectdata=selectdata, spw=spw, antenna=antenna,
+          gaintype=gaintype, refant=refant, solint=solint, minsnr=minsnr)
+
+  xaxis = 'spw'
+  yaxis = 'delay'
+  figfile = filename + '.K0.png'
+  os.system( 'rm -rf ' + figfile)
+  plotms(vis=delay_table, xaxis=xaxis, yaxis=yaxis, plotfile=figfile, coloraxis='antenna1')
+
+
+
+mystep = 7
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  field        = BP
+  selectdata   = True
+  scan         = BPscan
+  BP_table = filename + '.B0'
+  solnorm  = False
+  bandtype = 'B'
+  if os.path.exists(antenna_table) == True:
+    gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, passband_gPtable, delay_table]
+  else:
+    gaintable   = [gaincurve_table, requantizer_table, opacity_table, passband_gPtable, delay_table]
+
+  solint   = 'inf'
+  os.system('rm -rf ' + '.B0.plotCal' )
+  os.system('rm -rf ' + BP_table)
+  bandpass(vis=vis, caltable=BP_table, gaintable=gaintable,
+           field=field, selectdata=selectdata, scan=scan,
+           refant=refant, solnorm=solnorm, bandtype=bandtype,
+           solint=solint
+           # spw = '0,1,3~5, 7~11, 13~14, 16~17', append=False
+           )
+
+  os.system('rm -rf ' + filename + '.B0.plots' )
+  es.checkCalTable(BP_table, msName=vis, interactive=False)
+
+
+
+mystep = 8
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+
+  if (BP != FL):
+
+
+      field             = BP + ',' + FL
+      bootstrapgP_table = filename + '.G1'
+      gaintype          = 'G'
+      calmode           = 'ap'
+      solint            = 'int'
+      minsnr            = 3
+      selectdata        = True
+      scan              = BPscan + ',' + FLscan
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table, BP_table]
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table, BP_table]
+
+      os.system('rm -rf ' + bootstrapgP_table+'.p')
+      gaincal(vis=vis, caltable=bootstrapgP_table+'.p', field=field,
+            gaintable=gaintable,
+            gaintype='G', refant=refant, calmode='p', solint=solint, minsnr=3)
+
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table, BP_table, bootstrapgP_table+'.p']
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table, BP_table, bootstrapgP_table+'.p']
+
+      os.system('rm -rf ' + bootstrapgP_table)
+      gaincal(vis=vis, field=field, caltable=bootstrapgP_table, gaintype=gaintype,
+              ###### flux calibrator spatially resolved out; limit uv range to improve solution #####
+              # uvrange='0~400klambda',
+              #######################################################################################
+              gaintable=gaintable, refant=refant, calmode=calmode, solint='inf', minsnr=minsnr,
+              selectdata=selectdata, scan=scan)
+
+      BPflux_table = filename + '.F1'
+      reference    = FL
+      transfer     = BP
+      listfile     = 'BP.fluxinfo'
+      fitorder     = 1
+      os.system('rm -rf ' + 'BP.fluxinfo')
+      os.system('rm -rf ' + BPflux_table)
+      flux1 = fluxscale(vis=vis, caltable=bootstrapgP_table, fluxtable=BPflux_table,
+                      reference=reference, transfer=transfer, listfile=listfile, fitorder=fitorder)
+
+      freq = flux1['freq'] / 1e9
+      spw_list = range(0, num_spw)
+      spw_str = []
+      for i in spw_list:
+        thisspw = str(i)
+        spw_str.append(thisspw)
+
+      bootstrapped_fluxes = []
+      bootstrapped_freq   = []
+      for j in spw_str:
+        thisflux = flux1[BP][j]['fluxd'][0]
+        thisfreq = flux1['freq'][int(j)]
+        if (thisflux ==None) or (thisflux < 0.0) or ( thisfreq < 0.0 ):
+            continue
+        else:
+            bootstrapped_freq.append(thisfreq)
+            bootstrapped_fluxes.append(thisflux)
+
+      z = np.polyfit( np.log10(bootstrapped_freq) , np.log10(bootstrapped_fluxes), 1)
+      print ( "spectral index: ", z[0] )
+
+      p = np.poly1d(z)
+
+      setjy(vis=vis, field=BP, scalebychan=True, standard = 'fluxscale', fluxdict=flux1)
+
+      plotfile = vis + '.fluxmodel.BP.png'
+      os.system('rm -rf ' + plotfile)
+      plotms(vis=vis, field=BP, antenna=refant, xaxis='freq', yaxis='amp', ydatacolumn='model',
+             plotfile=plotfile)
+
+
+
+mystep = 9
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+
+  if (BP != FL):
+      passband_gPtable2  = filename + '.G0.b'
+      field              = BP
+      spw                = bandcenters
+      selectdata         = True
+      scan               = BPscan
+      gaintype           = 'G'
+      calmode            = 'p'
+      solint             = 'int'
+      minsnr             = 3
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table]
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table]
+
+      os.system('rm -rf ' + passband_gPtable2)
+      os.system('rm -rf ' + filename + '.G0.b.plotCal' )
+      gaincal(vis=vis, field=field, spw=spw, selectdata=selectdata, scan=scan,
+            caltable=passband_gPtable2, gaintable=gaintable, gaintype=gaintype,
+            refant=refant, calmode=calmode, solint=solint, minsnr=minsnr)
+
+      os.system('rm -rf ' + filename + '.G0.b.plots' )
+      es.checkCalTable(passband_gPtable2, msName=vis, interactive=False)
+
+
+      delay_table2      = filename + '.K0.b'
+      spw               = sciencespw
+      gaintype          = 'K'
+      solint            = 'inf'
+      if os.path.exists(antenna_table) == True:
+        gaintable         = [antenna_table, gaincurve_table, requantizer_table, opacity_table, passband_gPtable2]
+      else:
+        gaintable         = [gaincurve_table, requantizer_table, opacity_table, passband_gPtable2]
+
+      os.system('rm -rf ' + delay_table2)
+      gaincal(vis=vis, caltable=delay_table2, gaintable=gaintable, field=field,
+              selectdata=selectdata, scan=scan, spw=spw, gaintype=gaintype,
+              refant=refant, solint=solint, minsnr=minsnr)
+
+      '''
+      xaxis = 'antenna'
+      yaxis = 'delay'
+      figfile = filename + '.K0.b.png'
+      os.system( 'rm -rf ' + figfile)
+      plotcal(caltable=delay_table2, xaxis=xaxis, yaxis=yaxis, figfile=figfile)
+      '''
+
+      BP_table2 = filename + '.B0.b'
+      solnorm   = False
+      bandtype  = 'B'
+      solint    = 'inf,1000kHz'
+      if os.path.exists(antenna_table) == True:
+        gaintable         = [antenna_table, gaincurve_table, requantizer_table, opacity_table, passband_gPtable2, delay_table2]
+      else:
+        gaintable         = [gaincurve_table, requantizer_table, opacity_table, passband_gPtable2, delay_table2]
+
+      os.system('rm -rf ' + BP_table2)
+      os.system('rm -rf ' + filename + '.B0.b.plotCal' )
+      solint   = 'inf'
+      bandpass(vis=vis, caltable=BP_table2, gaintable=gaintable,
+               field=field, selectdata=selectdata, scan=scan,
+               refant=refant, solnorm=solnorm, bandtype=bandtype,
+               solint=solint,
+               # spw = '0,1,3~5, 7~11, 13~14, 16~17', append=False
+               )
+
+      os.system('rm -rf ' + filename + '.B0.b.plots' )
+      es.checkCalTable(BP_table2, msName=vis, interactive=False)
+
+  else:
+
+    os.system('rm -rf ' + delay_table2)
+    os.system('cp -r ' + delay_table + ' ' + delay_table2)
+    os.system('rm -rf ' + BP_table2)
+    os.system('cp -r ' + BP_table + ' ' + BP_table2)
+
+
+mystep = 10
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+
+
+mystep = 11
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  mode = 'save'
+  versionname = 'BeforeGain'
+  flagmanager(vis=vis, mode=mode, versionname=versionname)
+
+
+
+mystep = 12
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if os.path.exists(antenna_table) == True:
+    gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2]
+  else:
+    gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2]
+
+  os.system('rm -rf ' + gPint_table)
+  os.system('rm -rf ' + filename + '.G1.int.plotCal' )
+  gaincal(
+          vis=vis, caltable=gPint_table, gaintable=gaintable,
+          field       = FL,
+          scan        = FLscan,
+          solint      = 'int',
+          gaintype    = 'G',
+          calmode     = 'p',
+          refantmode  = 'strict',
+          refant=refant, solnorm=False, selectdata=True,
+          append=False
+         )
+
+  if (BP != FL):
+    gaincal(
+          vis=vis, caltable=gPint_table, gaintable=gaintable,
+          field       = BP,
+          scan        = BPscan,
+          solint      = 'int',
+          gaintype    = 'G',
+          calmode     = 'p',
+          refantmode  = 'strict',
+          refant=refant, solnorm=False, selectdata=True,
+          append=True
+         )
+
+  if (GN != BP):
+    gaincal(
+            vis=vis, caltable=gPint_table, gaintable=gaintable,
+            field       = GN,
+            scan        = GNscan,
+            solint      = 'int',
+            gaintype    = 'G',
+            calmode     = 'p',
+            refantmode  = 'strict',
+            refant=refant, solnorm=False, selectdata=True,
+            append=True
+           )
+
+  if PolCalibration == True:
+    if (POLD != BP):
+      gaincal(
+              vis=vis, caltable=gPint_table, gaintable=gaintable,
+              field       = POLD,
+              scan        = POLDscan,
+              solint      = 'int',
+              gaintype    = 'G',
+              calmode     = 'p',
+              refantmode  = 'strict',
+              refant=refant, solnorm=False, selectdata=True,
+              append=True
+           )
+
+
+  os.system('rm -rf ' + filename + '.G1.int.plots' )
+  es.checkCalTable(gPint_table, msName=vis, interactive=False)
+
+
+
+mystep = 13
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if os.path.exists(antenna_table) == True:
+    gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2]
+  else:
+    gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2]
+
+  os.system('rm -rf ' + gPinf_table)
+  os.system('rm -rf ' + filename + '.G1.inf.plotCal' )
+  gaincal(vis=vis, caltable=gPinf_table, gaintable=gaintable,
+          field       = GN,
+          scan        = GNscan,
+          solint      = 'inf',
+          gaintype    = 'G',
+          calmode     = 'p',
+          refant=refant,
+          solnorm=False
+         )
+
+  os.system('rm -rf ' + filename + '.G1.inf.plots' )
+  es.checkCalTable(gPinf_table, msName=vis, interactive=False)
+
+
+
+mystep = 14
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  delmod(vis)
+
+  table_created = False
+  append        = False
+
+  field = FL
+  scalebychan = True
+  standard    = fluxstandard
+  model = fluxmodelim
+  setjy(vis=vis, spw=sciencespw,
+        field=field, scalebychan=scalebychan, standard=standard, model=model)
+
+  os.system('rm -rf ' + gAint_table)
+  os.system('rm -rf ' + filename + '.G2.plotCal' )
+
+
+  field = BP
+  if os.path.exists(antenna_table) == True:
+    gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table]
+    gainfield   = ['','','','',BP,BP,field]
+    interp      = ['','','','','nearest','nearest','nearest']
+  else:
+    gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table]
+    gainfield   = ['','','',BP,BP,field]
+    interp      = ['','','','nearest','nearest','nearest']
+
+  if (BP != FL):
+     gaincal(vis=vis, caltable=gAint_table, gaintable=gaintable, gainfield=gainfield, interp=interp,
+          field=field, refant=refant, solnorm=False,
+          scan          = BPscan,
+          solint        = 'inf',
+          gaintype      = 'G',
+          calmode       = 'a',
+          append        = append,
+          spw           = sciencespw,
+          selectdata=True)
+     table_created = True
+
+
+  if PolCalibration == True:
+    if (POLD != BP):
+
+      field = POLD
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table]
+        gainfield   = ['','','','',BP,BP,field]
+        interp      = ['','','','','nearest','nearest','nearest']
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table]
+        gainfield   = ['','','',BP,BP,field]
+        interp      = ['','','','nearest','nearest','nearest']
+
+      if ( table_created == True ):
+        append = True
+
+
+      gaincal(vis=vis, caltable=gAint_table, gaintable=gaintable, gainfield=gainfield, interp=interp,
+          field=field, refant=refant, solnorm=False,
+          scan          = POLDscan,
+          solint        = 'inf',
+          gaintype      = 'G',
+          calmode       = 'a',
+          append        = append,
+          spw           = sciencespw,
+          selectdata=True)
+      table_created = True
+
+
+
+  field = GN
+  if os.path.exists(antenna_table) == True:
+    gainfield   = ['','','','',BP,BP,field]
+  else:
+    gainfield   = ['','','',BP,BP,field]
+
+  if ( table_created == True ):
+    append = True
+
+  if (GN != BP):
+    gaincal(vis=vis, caltable=gAint_table, gaintable=gaintable, gainfield=gainfield, interp=interp,
+            field=field, refant=refant, solnorm=False,
+            scan          = GNscan,
+            solint        = 'inf',
+            gaintype      = 'G',
+            calmode       = 'a',
+            append        = append,
+            spw           = sciencespw,
+            selectdata=True)
+
+    table_created = True
+
+
+  field = FL
+  if os.path.exists(antenna_table) == True:
+    gainfield   = ['','','','',BP,BP,field]
+  else:
+    gainfield   = ['','','',BP,BP,field]
+
+  if ( table_created == True ):
+    append = True
+
+  gaincal(vis=vis, caltable=gAint_table, gaintable=gaintable, gainfield=gainfield, interp=interp,
+          field=field, refant=refant, solnorm=False,
+          scan          = FLscan,
+          solint        = 'inf',
+          gaintype      = 'G',
+          calmode       = 'a',
+          append        = append,
+          spw           = sciencespw,
+          selectdata=True)
+
+  os.system('rm -rf ' + filename + '.G2.plots' )
+  es.checkCalTable(gAint_table, msName=vis, interactive=False)
+
+
+
+mystep = 15
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  reference   = FL
+  listfile    = vis + '.fluxscale'
+  os.system('rm -rf ' + flux_table)
+  os.system('rm -rf ' + filename + '.F2.plotCal')
+  os.system('rm -rf ' + listfile)
+  flux2 = fluxscale(vis=vis, caltable=gAint_table,
+                    listfile     = listfile,
+                    fluxtable=flux_table, reference=reference)
+
+  os.system('rm -rf ' + filename + '.F2.plots' )
+  es.checkCalTable(flux_table, msName=vis, interactive=False)
+
+
+
+mystep = 16
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if PolCalibration == True:
+    delmod(vis)
+
+    ### REMEMBER TO EDIT THIS ###
+    freq_min = 4.1896e+10
+    freq_max = 4.7896e+10
+    flux_freqmin = 1.5712
+    flux_freqmax = 1.4207
+    ### #########################
+    spix = np.log( flux_freqmin / flux_freqmax ) / np.log( freq_min / freq_max )
+    print( 'spectral index', spix )
+
+
+    # using value after 2019
+    if angle_calibrator == '3C286':
+      polfreq_Hz = np.array([
+                            1.02,
+                            1.47,
+                            1.87,
+                            2.57,
+                            3.57,
+                            4.89,
+                            6.68,
+                            8.43,
+                            11.3,
+                            14.1,
+                            16.6,
+                            19.1,
+                            25.6,
+                            32.1,
+                            37.1,
+                            42.1,
+                            48.1
+                         ]) * 1e9
+      polper_percent = np.array([
+                            8.6,
+                            9.8,
+                            10.1,
+                            10.6,
+                            11.2,
+                            11.5,
+                            11.9,
+                            12.1,
+                            12.3,
+                            12.3,
+                            12.5,
+                            12.6,
+                            12.7,
+                            13.1,
+                            13.5,
+                            13.4,
+                            14.6
+                         ])
+      polang_degree = np.array([
+                            33.0,
+                            33.0,
+                            33.0,
+                            33.0,
+                            33.0,
+                            33.0,
+                            33.0,
+                            33.0,
+                            34.0,
+                            34.0,
+                            35.0,
+                            35.0,
+                            36.0,
+                            36.0,
+                            36.0,
+                            37.0,
+                            36.0,
+                        ])
+
+
+    if angle_calibrator == '3C147':
+      polfreq_Hz = np.array([
+                         4.89,
+                         6.68,
+                         8.43,
+                         11.3,
+                         14.1,
+                         16.6,
+                         19.1,
+                         25.6,
+                         32.1,
+                         37.1,
+                         42.1,
+                         48.1
+                         ]) * 1e9
+      polper_percent = np.array([
+                         0.16,
+                         0.51,
+                         0.48,
+                         0.85,
+                         1.8,
+                         2.4,
+                         2.9,
+                         3.4,
+                         4.0,
+                         4.5,
+                         4.9,
+                         6.0
+                         ])
+      polang_degree = np.array([
+                         -13.0,
+                         -57.0,
+                         -19.0,
+                          27.0,
+                          53.0,
+                          60.0,
+                          66.0,
+                          79.0,
+                          83.0,
+                          87.0,
+                          87.0,
+                          85.0
+                        ])
+
+    if angle_calibrator == '3C48':
+      polfreq_Hz = np.array([
+                           14.6,
+                           15.5,
+                           18.1,
+                           19.0,
+                           22.4,
+                           23.3,
+                           36.5,
+                           43.5
+                         ]) * 1e9
+      polper_percent = np.array([
+                          6.4,
+                          6.4,
+                          6.9,
+                          7.1,
+                          7.7,
+                          7.8,
+                          7.4,
+                          7.5
+                         ])
+      polang_degree = np.array([
+                         -63.0,
+                         -64.0,
+                         -66.0,
+                         -67.0,
+                         -70.0,
+                         -70.0,
+                         -77.0,
+                         -85.0
+                        ])
+
+    if angle_calibrator == '3C138':
+      polfreq_Hz = np.array([
+                           14.6,
+                           15.5,
+                           18.1,
+                           19.0,
+                           22.4,
+                           23.3,
+                           36.5,
+                           43.5
+                         ]) * 1e9
+      polper_percent = np.array([
+                          7.7,
+                          7.4,
+                          6.7,
+                          6.5,
+                          6.7,
+                          6.6,
+                          6.6,
+                          6.5
+                         ])
+      polang_degree = np.array([
+                         -8.0,
+                         -9.0,
+                         -12.0,
+                         -13.0,
+                         -16.0,
+                         -17.0,
+                         -24.0,
+                         -27.0
+                        ])
+
+
+    windowfreq_dict = {}
+    ms.open(vis)
+    spwInfo = ms.getspectralwindowinfo()
+    for window in spwInfo:
+       if ( spwInfo[window]['ChanWidth'] > 0.0 ):
+         bandlow = spwInfo[window]['Chan1Freq']
+         bandup  = spwInfo[window]['Chan1Freq'] + spwInfo[window]['TotalWidth']
+       else:
+         bandlow = spwInfo[window]['Chan1Freq'] - spwInfo[window]['TotalWidth']
+         bandup  = spwInfo[window]['Chan1Freq']
+       bandmean = (bandlow + bandup) / 2.0
+       windowfreq_dict[window] = bandmean
+
+    # print( windowfreq_dict )
+    ms.close()
+
+    fluxfilename  =  'pola_flux.txt'
+    window_ids   =  np.loadtxt(
+                        fluxfilename,
+                        comments = '#',
+                        usecols  = [0]
+                        )
+    window_fluxJys =  np.loadtxt(
+                        fluxfilename,
+                        comments = '#',
+                        usecols  = [1]
+                        )
+
+
+    spw_list = range( int(beginspw) , int(endspw) + 1)
+    for j in spw_list:
+      thisspw = str(j)
+
+      windowfreq = windowfreq_dict[ thisspw ]
+      index = np.where( window_ids == j )
+      id0   =index[0][0]
+
+      for i in range( np.size( polfreq_Hz ) -1 ):
+        if (
+            ( polfreq_Hz[i] <= windowfreq )
+            and
+            ( polfreq_Hz[i+1] >= windowfreq )
+           ):
+          freq_id_l = i
+          freq_id_h = i+1
+
+          freq_l = polfreq_Hz[i]
+          freq_h = polfreq_Hz[i+1]
+          polper_percent_l = polper_percent[i]
+          polper_percent_h = polper_percent[i+1]
+          polang_degree_l = polang_degree[i]
+          polang_degree_h = polang_degree[i+1]
+
+          freq_interp = np.array( [freq_l, freq_h] )
+          polper_percent_interp = np.array( [polper_percent_l, polper_percent_h] )
+          polang_degree_interp  = np.array( [polang_degree_l,polang_degree_h] )
+
+          polper = np.interp(windowfreq, freq_interp, polper_percent_interp)
+          polang = np.interp(windowfreq, freq_interp, polang_degree_interp)
+
+      # print( window_ids[id0], windowfreq, window_fluxJys[id0], polper, polang )
+
+      thisflux = window_fluxJys[id0]
+      thisfreq = str(windowfreq) + 'Hz'
+
+      i0 = thisflux
+      percentage = polper * 0.01
+      polposang  = polang
+      p0 = percentage * i0
+      q0 = p0 * np.cos((2.0*polposang*np.pi)/180.0)
+      u0 = p0 * np.sin((2.0*polposang*np.pi)/180.0)
+
+      standard = 'manual'
+      field    = POLA
+      fluxdensity = [i0,q0,u0,0]
+      thisspix        = [spix, 0]
+      reffreq     = thisfreq
+      # print( thisfreq, fluxdensity )
+      setjy(
+            vis=vis,
+            field=POLA,
+            standard='manual',
+            spw=thisspw,
+            fluxdensity=fluxdensity,
+            reffreq=thisfreq,
+            spix=thisspix,
+            scalebychan=True,
+            usescratch=False
+           )
+
+    plotfile = vis + '.Polfluxmodel_RRamp.png'
+    os.system('rm -rf ' + plotfile)
+    plotms(vis=vis, field=POLA, antenna=refant, xaxis='freq', yaxis='amp', ydatacolumn='model',
+           correlation = 'RR',
+           plotfile=plotfile)
+
+    plotfile = vis + '.Polfluxmodel_RLamp.png'
+    os.system('rm -rf ' + plotfile)
+    plotms(vis=vis, field=POLA, antenna=refant, xaxis='freq', yaxis='amp', ydatacolumn='model',
+           correlation = 'RL',
+           plotfile=plotfile)
+
+    plotfile = vis + '.Polfluxmodel_RLphase.png'
+    os.system('rm -rf ' + plotfile)
+    plotms(vis=vis, field=POLA, antenna=refant, xaxis='freq', yaxis='phase', ydatacolumn='model',
+           correlation = 'RL',
+           plotrange   = [-1,-1,-180,180],
+           plotfile=plotfile)
+
+
+
+mystep = 17
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if PolCalibration == True:
+
+    if os.path.exists(antenna_table) == True:
+      gaintable = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table]
+      gainfield = ['','','','','','',POLA,POLA]
+      interp    = ['','','','','nearest','nearest','linear','linear']
+    else:
+      gaintable = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table]
+      gainfield = ['','','','','',POLA, POLA]
+      interp    = ['','','','nearest','nearest','linear','linear']
+
+    os.system('rm -rf ' + CrossHand_table)
+    gaincal(vis=vis, caltable=CrossHand_table,
+            field           = POLA,
+            scan            = POLAscan,
+            spw             = sciencespw,
+            solint          = 'inf',
+            ###### flux calibrator spatially resolved out; limit uv range to improve solution #####
+            # uvrange='0~400klambda',
+            #######################################################################################
+            combine         = 'scan',
+            parang          = True,
+            gaintype='KCROSS', refant=refant, selectdata=True,
+            gaintable=gaintable, gainfield=gainfield, interp=interp)
+
+    # Inspect the solution. Should have a similar order of magnitude
+    # with the parallel-hand delays (?)
+    xaxis = 'spw'
+    yaxis = 'delay'
+    figfile = filename + '.Kcross-delay.png'
+    os.system( 'rm -rf ' + figfile)
+    plotms(vis=CrossHand_table, xaxis=xaxis, yaxis=yaxis, plotfile=figfile, coloraxis='antenna1')
+
+
+
+mystep = 18
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if PolCalibration == True:
+
+    reference   = FL
+    os.system('rm -rf ' + 'POLDflux_table_temp')
+    flux2 = fluxscale(vis=vis, caltable=gAint_table,
+                      fluxtable='POLDflux_table_temp',
+                      reference=reference)
+    os.system('rm -rf ' + 'POLDflux_table_temp')
+
+    freq = flux2['freq'] / 1e9
+    spw_list = range( int(beginspw) , int(endspw) + 1)
+    spw_str = []
+    for i in spw_list:
+      thisspw = str(i)
+      spw_str.append(thisspw)
+
+    bootstrapped_fluxes = []
+    bootstrapped_freq   = []
+    # print(flux2)
+    for j in spw_str:
+      thisflux = flux2[POLD][j]['fluxd'][0]
+      thisfreq = flux2['freq'][int(j)]
+      if (thisflux ==None) or ( thisfreq < 0.0 ):
+        continue
+      else:
+        bootstrapped_freq.append(thisfreq)
+        bootstrapped_fluxes.append(thisflux)
+
+    z = np.polyfit( np.log10(bootstrapped_freq) , np.log10(bootstrapped_fluxes), 1)
+    print ( "spectral index: ", z[0] )
+
+    for j in spw_str:
+      standard    = 'manual'
+      thisflux = flux2[POLD][j]['fluxd'][0]
+      thisfreq = str( flux2['freq'][int(j)] ) + 'Hz'
+      thisspix = [ z[0], 0]
+
+      # print( thisfreq, thisflux, thisspix )
+      setjy(vis=vis,
+            field = POLD,
+            spw   = j,
+            scalebychan=True,
+            standard='manual',
+            fluxdensity=[thisflux, 0, 0, 0],
+            reffreq=thisfreq,
+            spix=thisspix
+           )
+
+
+
+mystep = 19
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if PolCalibration == True:
+
+    plot_interactive = True
+
+    if os.path.exists(antenna_table) == True:
+      gaintable = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table, CrossHand_table]
+      gainfield = ['','','','','','',BP, BP, '']
+      interp    = ['','','','','nearest','nearest','linear','linear','nearest']
+    else:
+      gaintable = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table, CrossHand_table]
+      gainfield = ['','','','','',BP, BP, '']
+      interp    = ['','','','nearest','nearest','linear','linear','nearest']
+
+    os.system('rm -rf ' + leakage_table)
+    polcal(vis=vis, caltable=leakage_table,
+          field         = POLD,
+          scan          = POLDscan,
+          spw           = sciencespw,
+          solint        = 'inf',
+          poltype       = 'D',
+          refant=refant, combine='',
+          selectdata=True,
+          gaintable=gaintable,interp=interp, gainfield=gainfield)
+
+
+
+mystep = 20
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  if PolCalibration == True:
+
+    if os.path.exists(antenna_table) == True:
+      gaintable = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table, CrossHand_table, leakage_table]
+      gainfield = ['','','','','','',POLA, POLA, '','']
+      interp    = ['','','','','nearest','nearest','linear', 'linear','nearest','nearest']
+    else:
+      gaintable = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table, CrossHand_table, leakage_table]
+      gainfield = ['','','','','',POLA, POLA, '','']
+      interp    = ['','','','nearest','nearest','linear','linear','nearest','nearest']
+
+    os.system('rm -rf ' + POLPA_table)
+    polcal(vis=vis, caltable=POLPA_table,
+           field             =  POLA,
+           combine           =  'scan',
+           poltype           =  'Xf',
+           solint            =  'inf',
+           scan              =  POLAscan,
+           ###### flux calibrator spatially resolved out; limit uv range to improve solution #####
+           # uvrange='0~500klambda',
+           #######################################################################################
+       gaintable=gaintable, gainfield=gainfield, interp=interp,
+       selectdata=True)
+
+
+
+mystep = 21
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  other_calibrators = [GN]
+  targets           = [TG]
+
+  if PolCalibration == True:
+
+    # Flux calibrator  
+    if os.path.exists(antenna_table) == True:
+      gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table, CrossHand_table, leakage_table, POLPA_table]
+      gainfield   = ['','','','','','',FL,FL,'','','']
+      interp      = ['','','','','nearest','nearest','linear','nearest','','','']
+    else:
+      gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table, CrossHand_table, leakage_table, POLPA_table]
+      gainfield   = ['','','','','',FL,FL,'','','']
+      interp      = ['','','','nearest','nearest','linear','nearest','','','']
+
+    applycal(vis=vis,
+         field     = FL,
+         scan      = FLscan,
+         parang    = True,
+         gaintable=gaintable, gainfield=gainfield, interp=interp,
+         calwt=False, selectdata=True
+        )
+
+    # Other calibrators
+    for field in other_calibrators:
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, flux_table, CrossHand_table, leakage_table, POLPA_table]
+        gainfield   = ['','','','','','',field,field,'','','']
+        interp      = ['','','','','nearest','nearest','linear','nearest','','','']
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, flux_table, CrossHand_table, leakage_table, POLPA_table]
+        gainfield   = ['','','','','',field,field,'','','']
+        interp      = ['','','','nearest','nearest','linear','nearest','','','']
+
+      applycal(vis=vis,
+               field     = field,
+               parang    = True,
+               gaintable=gaintable, gainfield=gainfield, interp=interp,
+               calwt=False, selectdata=True
+        )
+
+    # Target source and check sources
+    for field in targets:
+      print('Applying calibration Tables to source: ' + field )
+
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPinf_table, flux_table, CrossHand_table, leakage_table, POLPA_table]
+        gainfield   = ['','','','','','',GN,GN,'','','']
+        interp      = ['','','','','nearest','nearest','linear','linear','','','']
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPinf_table, flux_table, CrossHand_table, leakage_table, POLPA_table]
+        gainfield   = ['','','','','',GN,GN,'','','']
+        interp      = ['','','','nearest','nearest','linear','linear','','','']
+
+      applycal(vis=vis,
+               field     = field,
+               parang    = True,
+               gaintable=gaintable, gainfield=gainfield, interp=interp,
+               calwt=False, selectdata=True
+        )
+
+
+  else:
+
+    # Flux calibrator  
+    if os.path.exists(antenna_table) == True:
+      gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table]
+      gainfield   = ['','','','','','',FL,FL]
+      interp      = ['','','','','nearest','nearest','linear','nearest']
+    else:
+      gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, gAint_table]
+      gainfield   = ['','','','','',FL,FL]
+      interp      = ['','','','nearest','nearest','linear','nearest']
+
+    applycal(vis=vis,
+         field     = FL,
+         scan      = FLscan,
+         parang    = True,
+         gaintable=gaintable, gainfield=gainfield, interp=interp,
+         calwt=False, selectdata=True
+        )
+
+    # Other calibrators
+    for field in other_calibrators:
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, flux_table]
+        gainfield   = ['','','','','','',field,field]
+        interp      = ['','','','','nearest','nearest','linear','nearest']
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPint_table, flux_table]
+        gainfield   = ['','','','','',field,field]
+        interp      = ['','','','nearest','nearest','linear','nearest']
+
+      applycal(vis=vis,
+               field     = field,
+               parang    = True,
+               gaintable=gaintable, gainfield=gainfield, interp=interp,
+               calwt=False, selectdata=True
+        )
+
+    # Target source and check sources
+    for field in targets:
+      print('##### Applying calibration Tables to source: ' + field )
+
+      if os.path.exists(antenna_table) == True:
+        gaintable   = [antenna_table, gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPinf_table, flux_table]
+        gainfield   = ['','','','','','',GN,GN]
+        interp      = ['','','','','nearest','nearest','linear','linear']
+      else:
+        gaintable   = [gaincurve_table, requantizer_table, opacity_table, delay_table2, BP_table2, gPinf_table, flux_table]
+        gainfield   = ['','','','','',GN,GN]
+        interp      = ['','','','nearest','nearest','linear','linear']
+
+      applycal(vis=vis,
+               field     = field,
+               parang    = True,
+               gaintable=gaintable, gainfield=gainfield, interp=interp,
+               calwt=False, selectdata=True
+        )
+
+
+
+mystep = 22
+if(mystep in thesteps):
+  casalog.post('Step '+str(mystep)+' '+step_title[mystep],'INFO')
+  print ('Step ', mystep, step_title[mystep])
+
+  targets           = [
+                       'G31p41pol',
+                      ]
+  for field in targets:
+
+    print( '##### Splitting calibrated data for :' + field )
+
+    avgspw      = sciencespw
+    keepflags   = False
+    chanavgvis  = field + '_' + Band + 'band_' + config + '_' + EBid + '.21A122.polcal.uvaver.ms'
+    width       = 64
+    datacolumn  = 'corrected'
+    os.system('rm -rf ' + chanavgvis)
+    mstransform(
+                vis=vis,
+                outputvis=chanavgvis,
+                field=field,
+                spw=avgspw,
+                datacolumn=datacolumn,
+                keepflags=keepflags,
+                chanaverage=True,
+                chanbin=width
+               )
+```
 {: .fs-2 }
