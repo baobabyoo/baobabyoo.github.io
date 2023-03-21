@@ -26,6 +26,7 @@ has_toc: false
 1. [Lecture notes: Special relativity Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/SpecialRelativity_part1.pdf)
 2. [Lecture notes: Special relativity Part II](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/SpecialRelativity_part2.pdf)
 3. [Lecture notes: Quantum Physics Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/QuantumPhysics_part1.pdf)
+4. [Lecture notes: Quantum Physics Part II](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/QuantumPhysics_part2.pdf)
 {: .fs-1 }
 
 ## Radio Interferometry
