@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Molecular Lines
+title: Data Modelings
 parent: Basic Astrophysics
 grand_parent: To my students
 nav_order: 1
