@@ -58,7 +58,32 @@ After this you should be able to launch CASA 6.
 
 #### 4.2 Simple imaging scripts
 
-##### 4.3 Continuum imaging (with flow control)
+##### 4.2.1 Continuum imaging (with flow control)
+
+This procedure first list the details of the observations using the CASA **listobs()** task. Then it plots the visibility amplitudes versus spectral channels using the CASA **plotms()** task to allow visually inspecting whether or not there are strong emission/absorption lines in our passband (note that the visibility amplitudes are positively definite and therefore the absorption lines will also appear as positive peaks). Then it runs the inverse Fourier transform and deconvolution using the CASA **tclean()** task, and then corrects the [primary beam response function](https://baobabyoo.github.io/pages/students_topics/AstroBasic_RadioInterferometer.html#how-a-radio-interferometer-look-like) using the **impbcor** task. Here you have to carefully understand the parameters/keywords in the tclean task to be able to use it properly; they need to be optimized case-by-case. Finally, it uses the CASA **exportfits()** task to export the results of imaging to the FITS format binary files.
+{: .fs-2 }
+
+You can copy the content of this script to an ASCII file, e.g., imaging.py. To run the script from begin to end, in the CASA ipython interface, enter
+{: .fs-2 }
+
+```
+CASA> execfile('imaging.py')
+```
+{: .fs-2 }
+
+To execute one or a few steps at a time, try something like the following:
+{: .fs-2 }
+
+```
+CASA> mysteps = [1,2]
+CASA> execfile('imaging.py')
+```
+{: .fs-2 }
+```
+CASA> mysteps = [3]
+CASA> execfile('imaging.py')
+```
+{: .fs-2 }
 
 ```
 import os
@@ -194,3 +219,6 @@ if(mystep in thesteps):
                           )
 ```
 {: .fs-2 }
+
+
+##### 4.2.2 Spectral line imaging (with flow control)
