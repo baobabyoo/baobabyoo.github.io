@@ -229,5 +229,157 @@ if(mystep in thesteps):
 
 ##### 4.2.2 Spectral line imaging (with flow control)
 
-The procedure to perform spectral line imaging is not too different from that of the continuum imaging. A major difference is that we need to use other `specmode` options in the CASA **tclean()** task. In addition, you may want to reset the **rest-frequency** to conveniently make the velocity griddings. In addition, before running CASA **tclean()**, we usually (which is not always necessary, depending on your science case) visually inspect the visibility spectra using the CASA **plotms()** task, and seperate the continuum and line emission using the CASA **uvcontsub()** task.
+The procedure to perform spectral line imaging is not too different from that of the continuum imaging. A major difference is that we need to use other `specmode` options in the CASA **tclean()** task. In addition, you may want to reset the **rest-frequency** to conveniently make the velocity gridding. You can look up the rest frequency of most of the molecular transitions that you might be interested in on the [Splatologue](https://splatalogue.online//) webpage. In addition, before running CASA **tclean()**, we usually (which is not always necessary, depending on your science case) visually inspect the visibility spectra using the CASA **plotms()** task, and separate the continuum and line emission using the CASA **uvcontsub()** task.
+{: .fs-2 }
+
+```
+import os
+
+##### flow control #######################################
+thesteps = []
+step_title = {
+                0: 'List observational details',
+                1: 'Inspecting spectrum',
+                2: 'Separating continuum and line',
+                3: 'Perform imaging',
+                4: 'Primary beam correction',
+                5: 'exporting FITS image'
+             }
+
+try:
+  print ('List of steps to be executed ...', mysteps)
+  thesteps = mysteps
+except:
+  print ('global variable mysteps not set.')
+if (thesteps==[]):
+  thesteps = range(0,len(step_title))
+  print ('Executing all steps: ', thesteps)
+##########################################################
+
+##### Setup parameters ###################################
+filename = 'nh3'
+fields    = ['l429']
+stokes    = ['I']
+interactive = True
+dropdeg     = True
+##########################################################
+
+mystep = 0
+if(mystep in thesteps):
+    print ('Step ', mystep, step_title[mystep])
+
+    os.system('rm -rf ' + filename + '.listobs')
+    listobs(vis = filename + '.ms',
+            listfile = filename + '.listobs'
+           )
+
+
+mystep = 1
+if(mystep in thesteps):
+    print ('Step ', mystep, step_title[mystep])
+
+    for field in fields:
+        outfig = filename + '_' + field + '.spectrum.png'
+        os.system('rm -rf ' + outfig)
+        plotms( vis   = filename + '.ms',
+                xaxis = 'channel', yaxis = 'amplitude',
+                field = field,
+                coloraxis = 'antenna1',
+                plotfile  = outfig
+              )
+
+
+
+mystep = 2
+if(mystep in thesteps):
+    print ('Step ', mystep, step_title[mystep])
+
+    fitspec = {
+               '0': {'0': {'chan': '111~283;356~444;512~591;662~851', 'fitorder': 0} }
+              }
+
+    linems = filename + '_contsub.ms'
+    os.system('rm -rf ' + linems)
+    uvcontsub(
+              vis        = filename + '.ms',
+              outputvis  = linems,
+              fitspec    = fitspec, # check the help file with 'CASA> help uvcontsub' to see how to set this
+              datacolumn = 'data',
+              writemodel = False
+             )
+
+
+mystep = 3
+if(mystep in thesteps):
+    print ('Step ', mystep, step_title[mystep])
+
+    linems = filename + '_contsub.ms'
+    for stoke in stokes:
+        for field in fields:
+
+            imagename = field + '_' + stoke
+            os.system('rm -rf ' + imagename + '.*')
+            tclean( vis   = linems,
+                    selectdata = True,
+                        field = field,
+                        spw   = '0',
+                    datacolumn = 'data',
+                    imagename  = imagename,
+                    cell       = ['0.5arcsec'], imsize = [300,300],
+                    stokes     = stoke,
+                    specmode   = 'cube',  # Spectral line imaging with one or more channels
+                        nchan = 200,
+                        start = 400,
+                        width = 1,
+                        outframe = 'LSRK', # reference system of velocity (LSRK: local standard of rest system)
+                        veltype  = 'radio',
+                        restfreq = ['23.69449550GHz'],   # rest frequency of the NH3 hyperfine inversion line
+                        interpolation = 'linear',
+                    gridder    = 'standard',
+                    pblimit    = 0.2,
+                    deconvolver = 'hogbom',
+                    weighting   = 'briggs',
+                        robust  = 2.0,
+                    restoringbeam =    'common',
+                    niter      = 0,
+                    interactive = interactive,
+                    restart     = True,
+                    threshold = '5e-3Jy'
+              )
+
+
+mystep = 4
+if(mystep in thesteps):
+    print ('Step ', mystep, step_title[mystep])
+
+
+    for stoke in stokes:
+        for field in fields:
+
+            imagename = field + '_' + stoke
+            outfile   = field + '_' + stoke + '.pbcor.image'
+            os.system('rm -rf ' + outfile)
+            impbcor(imagename = imagename + '.image',
+                    pbimage   = imagename + '.pb',
+                    outfile   = outfile
+                   )
+
+mystep = 5
+if(mystep in thesteps):
+    print ('Step ', mystep, step_title[mystep])
+
+
+    for stoke in stokes:
+        for field in fields:
+
+            imagename = field + '_' + stoke
+            suffixes  = ['.image', '.pbcor.image']
+            for suffix in suffixes:
+                exportfits(
+                            imagename = imagename + suffix,
+                            fitsimage = imagename + suffix + '.fits',
+                            overwrite = True,
+                            dropdeg   = dropdeg
+                          )
+```
 {: .fs-2 }
