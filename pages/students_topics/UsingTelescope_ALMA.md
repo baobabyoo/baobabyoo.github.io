@@ -60,7 +60,10 @@ After this you should be able to launch CASA 6.
 
 ##### 4.2.1 Continuum imaging (with flow control)
 
-This procedure first list the details of the observations using the CASA **listobs()** task. Then it plots the visibility amplitudes versus spectral channels using the CASA **plotms()** task to allow visually inspecting whether or not there are strong emission/absorption lines in our passband (note that the visibility amplitudes are positively definite and therefore the absorption lines will also appear as positive peaks). Then it runs the inverse Fourier transform and deconvolution using the CASA **tclean()** task, and then corrects the [primary beam response function](https://baobabyoo.github.io/pages/students_topics/AstroBasic_RadioInterferometer.html#how-a-radio-interferometer-look-like) using the **impbcor** task. Here you have to carefully understand the parameters/keywords in the tclean task to be able to use it properly; they need to be optimized case-by-case. Finally, it uses the CASA **exportfits()** task to export the results of imaging to the FITS format binary files.
+This procedure first list the details of the observations using the CASA **listobs()** task. Then it plots the visibility amplitudes versus spectral channels using the CASA **plotms()** task to allow visually inspecting whether or not there are strong emission/absorption lines in our passband (note that the visibility amplitudes are positively definite and therefore the absorption lines will also appear as positive peaks). Then it runs the inverse Fourier transform and deconvolution using the CASA **tclean()** task, and then corrects the [primary beam response function](https://baobabyoo.github.io/pages/students_topics/AstroBasic_RadioInterferometer.html#how-a-radio-interferometer-look-like) using the **impbcor** task. Here you have to carefully understand the parameters/keywords in the tclean task to be able to use it properly; they need to be optimized case-by-case. For example, in tclean(), we use the keyword `specmode   =  'mfs'` to produce a continuum image using the aggregated bandwidth provided by all (selected) spectral channels. For imaging the observations on a single field, we can use `gridder  =  'standard'`; to image the Stokes I mosaic observations (i.e., an image made with multiple antennae pointings), we have to use `gridder  =  'mosaicft'`; to image the full polarization mosaic observations, we have to use `gridder  =  'awprojectft'`.
+{: .fs-2 }
+
+Finally, this procedure uses the CASA **exportfits()** task to export the results of imaging to the FITS format binary files.
 {: .fs-2 }
 
 You can copy the content of this script to an ASCII file, e.g., imaging.py. To run the script from begin to end, in the CASA ipython interface, enter
@@ -83,6 +86,9 @@ CASA> execfile('imaging.py')
 CASA> mysteps = [3]
 CASA> execfile('imaging.py')
 ```
+{: .fs-2 }
+
+Below is the procedure:
 {: .fs-2 }
 
 ```
@@ -222,3 +228,6 @@ if(mystep in thesteps):
 
 
 ##### 4.2.2 Spectral line imaging (with flow control)
+
+The procedure to perform spectral line imaging is not too different from that of the continuum imaging. A major difference is that we need to use other `specmode` options in the CASA **tclean()** task. In addition, you may want to reset the **rest-frequency** to conveniently make the velocity griddings. In addition, before running CASA **tclean()**, we usually (which is not always necessary, depending on your science case) visually inspect the visibility spectra using the CASA **plotms()** task, and seperate the continuum and line emission using the CASA **uvcontsub()** task.
+{: .fs-2 }
