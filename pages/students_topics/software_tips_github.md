@@ -65,6 +65,9 @@ Then in any connection (e.g., http), when the prompted message request you to en
 
 #### 2.3 Some commands
 
+You may use the following commands frequently:
+{: .fs-2 }
+
 ```
 # Pushing a code to your own github repository
 git add ./code.py
