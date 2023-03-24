@@ -3,7 +3,7 @@ layout: default
 title: Github
 parent: Software Tips
 grand_parent: To my students
-nav_order: 1
+nav_order: 4
 ---
 
 ### 1. General user
