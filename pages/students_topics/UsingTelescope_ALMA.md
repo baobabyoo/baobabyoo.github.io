@@ -70,26 +70,35 @@ Officially, the proposers for the regular proposal queue (e.g., instead of Large
 {: .fs-2 }
 
 However, there are situations that we cannot avoid revealing the identity to a certain extent, e.g., when you are based on the data that are still in the proprietary period to justify your follow-up project. Below I explicitly quoted from the [ALMA Dual-Anonymous Guide](https://almascience.nao.ac.jp/proposing/alma-proposal-review/dual-anonymous):
+{: .fs-2 }
 
 -Instead of
+{: .fs-2 }
 
 1. "Our Cycle 5 program showed…"
 2. "The data from our pilot program…"
 3. "Our previous disk survey…"
+{: .fs-2 }
 
 proposers can write
+{: .fs-2 }
 
 4. "The data from a Cycle 5 program (private communication) …"
 5. "The data from program 2017.1.00105.S …"
 6. "The survey from Smith et al. (2018) ..."
+{: .fs-2 }
 
 -Instead of
+{: .fs-2 }
 
 1. "This is a resubmission of our ongoing grade B program 2021.1.02045.S (PI: Smith). Half of our targets have been observed and we are resubmitting the proposal to obtain the remaining half."
+{: .fs-2 }
 
 proposers can write
+{: .fs-2 }
 
 2. "This is a resubmission of our ongoing program. Half of the targets have been observed and we are resubmitting the proposal to observe the remaining half."
+{: .fs-2 }
 
 ### 2. Organizing observing scripts
 
