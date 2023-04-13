@@ -64,6 +64,33 @@ To submit a proposal, you need an account on the [ALMA User Portal](https://alma
 When making the duplication checks mentioned above, you may find that there are other observations on your target source(s) which can help your science case to some extent although they do not fully resolve the problem. For example, you may find that some short-spacing observations for your high-angular resolution experiment already exist. In this case, **explicitly mentioning how** you will make use of such complementary data in the proposal is a plus. Just mentioning you will use those data but without saying how usually does not help. If you have also checked the data archive of the observatories (e.g., ALMA, JVLA, Herschel, Spitzer, etc) and found some useful complementary data, you can also mention how you will make use of them in a joint analysis.
 {: .fs-2 }
 
+##### 1.2.2 Dual anonymity
+
+Officially, the proposers for the regular proposal queue (e.g., instead of Large Project) are required to maintain the (dual) anonymity. The proposal is not permitted to reveal the identity of the PI or co-Is in any way.
+{: .fs-2 }
+
+However, there are situations that we cannot avoid revealing the identity to a certain extent, e.g., when you are based on the data that are still in the proprietary period to justify your follow-up project. Below I explicitly quoted from the [ALMA Dual-Anonymous Guide](https://almascience.nao.ac.jp/proposing/alma-proposal-review/dual-anonymous):
+
+-Instead of
+
+1. "Our Cycle 5 program showed…"
+2. "The data from our pilot program…"
+3. "Our previous disk survey…"
+
+proposers can write
+
+4. "The data from a Cycle 5 program (private communication) …"
+5. "The data from program 2017.1.00105.S …"
+6. "The survey from Smith et al. (2018) ..."
+
+-Instead of
+
+1. "This is a resubmission of our ongoing grade B program 2021.1.02045.S (PI: Smith). Half of our targets have been observed and we are resubmitting the proposal to obtain the remaining half."
+
+proposers can write
+
+2. "This is a resubmission of our ongoing program. Half of the targets have been observed and we are resubmitting the proposal to observe the remaining half."
+
 ### 2. Organizing observing scripts
 
 Your observing script is usually automatically generated. You will be contacted by staff in the ALMA Regional Center to proofread your observing script. Please make sure the coordinates and the spectral setups are indeed what you intend to use (in most cases, the problems were due to users' mistakes). In some cases you also need to make sure that the calibration will be carried out in the way you need (or say, not be carried out in the way that you cannot use. For example, in the earlier cycles, the algorithm would choose Sgr A\* as your calibrator even when your target source is also Sgr A\*. There needs extra work for the staff to avoid such issues.)
