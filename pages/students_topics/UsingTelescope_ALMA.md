@@ -31,6 +31,7 @@ The ALMA array is routinely being upgraded. Therefore, the array capability vari
 {: .fs-2 }
 
 In addition, in a cycle (i.e., a year's observations), ALMA may optimize its array configuration schedule either for high angular resolution observations (e.g., mostly in the spatially compact array configurations) or for high-frequency or sensitive line observations (e.g., mostly in the spatially extended array configurations). It will likely focus on the extended array configuration in Cycle-10 (late 2023 to late 2024), focus on the compact array configurations in Cycle-11, focus on the extended array configurations in Cycle-12, and so on. Therefore, you need to plan ahead your experiment and make sure you do not miss the deadline (otherwise, you can only come back to propose the same experiment after 2 years).
+{: .fs-2 }
 
 The exact capability of a cycle and the array configuration schedule is announced a month ahead of the proposal deadline. You can check them through the [Proposer's Guide](https://almascience.nao.ac.jp/proposing/proposers-guide) and [Technical Handbook](https://almascience.nao.ac.jp/proposing/technical-handbook) (Please change to the edition that is relevant to your proposal. The guides for the previous cycle is not totally usable.)
 {: .fs-2 }
