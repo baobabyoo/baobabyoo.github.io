@@ -28,6 +28,7 @@ has_toc: false
 3. [Lecture notes: Quantum Physics Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/QuantumPhysics_part1.pdf)
 4. [Lecture notes: Quantum Physics Part II](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/QuantumPhysics_part2.pdf)
 5. [Lecture notes: Quantum Physics Part III](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/QuantumPhysics_part3.pdf)
+6. [Lecture notes: Electromagnetic Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/Electromagnetic_part1.pdf)
 {: .fs-1 }
 
 ## Radio Interferometry
