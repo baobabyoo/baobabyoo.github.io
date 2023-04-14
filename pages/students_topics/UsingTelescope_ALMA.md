@@ -17,6 +17,9 @@ If you are my student, forward me your first draft at least **4 weeks** ahead of
 If you are my student/postdoc and if you are not a native English speaker, use [Grammarly](https://www.grammarly.com/) and/or [chatGPT](https://openai.com/blog/chatgpt) to at least remove the typos and basic grammatical errors.
 {: .fs-1 }
 
+I gave a presentation about tips for ALMA proposal preparation in 2023 April. You may consult my [slides](https://github.com/baobabyoo/baobabyoo.github.io/blob/main/pages/files/presentations/Liu2023_ASIAA_ALMApropsTips.pdf). Please do not take it over-seriously unless you are my student. *If you are my student, do take it seriously.*
+{: .fs-1 }
+
 ### 1. Proposing
 
 #### 1.1 Timeline and interface
