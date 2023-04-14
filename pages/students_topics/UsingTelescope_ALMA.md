@@ -100,6 +100,53 @@ proposers can write
 2. "*This is a resubmission of our ongoing program. Half of the targets have been observed and we are resubmitting the proposal to observe the remaining half.*"
 {: .fs-2 }
 
+##### 1.2.3 Proposal types (scopes)
+
+- Regular proposal:
+  1. **<50 hours** on the *12-m Array*,
+  2. or **<150 hours** on the *7-m Array* in stand-alone mode.
+  3. Regular proposals may involve time-critical, multiple-epoch observations, and the monitoring of a target over a fixed time interval.
+  4. Most Cycle-9 regular projects requested **2~20 hours of 12m-Array observing time**. The acceptance rate depends weakly on the requested observing time unless it exceeds 30 hours.
+- Target of Opportunity (ToO)
+  1. The target source is not known by the time of proposing.
+- Large Projects
+  1. Cannot use the newest capability (Band1, full polarization, solar observations, VLBI, Phased Array mode, Astrometric observations)
+  2. Cannot do ToO observations.
+  3. The team needs to deliver value-added data products and a documentation to it.
+- Joint Proposal (Proposers can submit a Joint Proposal to ALMA that also requests time on any or all of the partner facilities or submit a proposal to one of **JWST**, **VLA**, or **VLT** that requests ALMA time.) **PIs must submit their Joint Proposals to the observatory that requires the most observing time. Duplication is not permitted.** Proposers need to provide technical details for all involved observatories. Joint Proposals accepted by ALMA will be assigned Grade A; they will have high observing priority and will remain in the queue for a period of up to two years.
+  1. JWST (can allocate 115 hours to each of ALMA, ACA, and TP)
+  2. JVLA (can allocate 50 hours to each of ALMA, ACA, and TP)
+  3. VLT (can allocate 115 hours to each of ALMA, ACA, and TP)
+{: .fs-2 }
+
+##### 1.2.4 Scientific justification and how your proposals will be reviewed
+
+To complete the proposal submission, you need a **title**, an **Abstract**, a PDF scientific justifications with **4 pages of text and Figures/Tables for regular projects** (up to 6 pages for Large Projects). If you are not sure about how to compose the Abstract or the 4 or 6 pages scientific justification, check [here](https://baobabyoo.github.io/pages/students_topics/proposal_obs.html).
+{: .fs-2 }
+
+Usually, we prepare the 4 pages justifications using LaTEX. Download the latest version of the [ALMA proposal template](https://almascience.nao.ac.jp/proposing/proposal-template) and use it without changing anything about page setup or format. If you are my student/postdoc, please use the [Overleaf](https://www.overleaf.com/) interface to edit the proposal and share the link with me, *if you need my revision*. Use **fontsize 12pt which is strictly required by ALMA.** *Do not use smaller fontsize for your figure captions.* Do not use a very small margin. Try not to make your proposal over-texty. No reviewer wants to spend more than **5 minutes** reading your proposal. Do not make it necessary for them to do so.
+{: .fs-2 }
+
+Although you are not required to justify the technical details of your experimental setups (e.g., angular resolution, sensitivity, mosaic field of view, spectral setup, etc) in the Scientific Justification, I still strongly recommend you to do so. This is because not everybody read into the technical justification pages carefully.
+{: .fs-2 }
+
+After exporting the PDF file of your scientific justification, you need to attach it to the project you created with [ALMA-OT](https://almascience.nao.ac.jp/proposing/observing-tool/installer-page).
+{: .fs-2 }
+
+The team of every submitted regular proposal needs to share the duty of reviewing 10 regular proposals. The PI of every regular proposal must designate themselves or a Co-I as a reviewer at the time of submission. **In addition, starting from Cycle-10 (proposal deadline in 2023 May), no one is permitted to review more than 5 proposals.** *(e.g., if you write 6 proposals as PI, you have to designate at least one of your co-I as a reviewer for at least one of those 6 projects)*.
+{: .fs-2 }
+
+This means that you have to plan ahead in case you do not find a suitable person to designate the reviewing duty. **And you can see that the 10 reviewers of every one of your regular proposal are just like you and me: some are real experts but most are inexperienced with the analyses that you propose to do. The goal of the proposal writing is to make all 10 of them happy: your proposal can be rejected just because of receiving bad grade from one or two of them, in particular, when you are attempting non-standard capability or high frequency observations.**
+{: .fs-2 }
+
+**Therefore, the proposal cannot be over-basic that upset the experts, while it also cannot be over-advanced such that it loses the general reviewers at hello. I do not find a general strategy to tackle this problem yet (e.g., every time there are reviewers complaining that position-velocity diagrams are too difficult to understand; at the same time, there are also reviewers who questioned why I did not prepare a position-velocity diagram which is the best way of revealing the kinematics features). After ALMA started using such distributed peer review, my best proposals have always been rejected at bottom rating........** I am certainly not the only person making such complaints. After all, the proposing process may become a lottery to a large extent, Urrrrr.......
+{: .fs-2 }
+
+##### 1.2.5 Technical justification
+
+You will need to include your **observing time requests** through the online interface at the [SMA Observer Center](http://sma1.sma.hawaii.edu/). The observation for **each target source** at **each array configuration** with **each receiver tuning** need an independent observing time request that states how many hours you need for that target source at that setup. Based on the record(s) of your observing time request, the reviewers will check whether or not you are duplicating historical or ongoing projects unnecessarily.
+{: .fs-2 }
+
 ### 2. Organizing observing scripts
 
 Your observing script is usually automatically generated. You will be contacted by staff in the ALMA Regional Center to proofread your observing script. Please make sure the coordinates and the spectral setups are indeed what you intend to use (in most cases, the problems were due to users' mistakes). In some cases you also need to make sure that the calibration will be carried out in the way you need (or say, not be carried out in the way that you cannot use. For example, in the earlier cycles, the algorithm would choose Sgr A\* as your calibrator even when your target source is also Sgr A\*. There needs extra work for the staff to avoid such issues.)
