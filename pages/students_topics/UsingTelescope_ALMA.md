@@ -53,6 +53,7 @@ To submit a proposal, you need an account on the [ALMA User Portal](https://alma
 
 ##### 1.2.1 Feasibility, complementary data, and duplication
 
+**Check array configuration schedule in the [Proposer's Guide]( https://almascience.nao.ac.jp/proposing/proposers-guide#autotoc-item-autotoc-51) early and make sure that your target source can be covered with the desired angular resolution.** In the case that your first choice of target sources are not available, you should consider redesigning your experiment (e.g., swapping target source, changing frequency band, or compromise your science goal, etc.)
 
 **After we agree that this idea is worth pursuing and is technically feasible
 , you should use the [ALMA Data Archive](https://almascience.nao.ac.jp/aq/) to check whether or not you are duplicating historical or ongoing projects.** In the case that you are duplicating, you can (1) give up and try to come up with other proposal ideas, or (2) download the archival data can see if the calibrated data can achieve the quality that is needed for your science purpose. If the quality of the archival data is fair, then just continue to use that data to proceed with your research. If there is no archival data or if the quality of the archival data is poor, you can go ahead to complete the preparation of your proposal. **You need to explicitly and convincingly explain what was the problem with the archival data if it exists. So prepare your proposal well ahead of the deadline** in case you really need to look into some archival data or need other colleagues to check the archival for you. Close to the deadline, they (and I) have to prepare their own proposals thus may refuse to help you.
@@ -144,7 +145,13 @@ This means that you have to plan ahead in case you do not find a suitable person
 
 ##### 1.2.5 Technical justification
 
-You will need to include your **observing time requests** through the online interface at the [SMA Observer Center](http://sma1.sma.hawaii.edu/). The observation for **each target source** at **each array configuration** with **each receiver tuning** need an independent observing time request that states how many hours you need for that target source at that setup. Based on the record(s) of your observing time request, the reviewers will check whether or not you are duplicating historical or ongoing projects unnecessarily.
+You need to include your target sources and set the spectral step(s), angular resolution(s), largest recoverable angular scale(s), and sensitivity on the [ALMA-OT](https://almascience.nao.ac.jp/proposing/observing-tool/installer-page) file.
+{: .fs-2 }
+
+The selected spectral setups, angular resolution(s), and sensitivity also need to be explicitly explained on the ALMA-OT file. The quantitative needs to be quantative and comprehensive. Do not leave any open question in the technical justifications, e.g., if you say you need to detect your target source at 10-sigma significance, then it would be good to explain why you need it to be 10-sigma instead of 5-sigma: the former requires 4 times longer on-source integration time than the latter!
+{: .fs-2 }
+
+*Finally, when you design a project, you should keep in mind that the minimum length of a scheduling block (the unit of observation) is 0.5 hours (for polarization project it is 3 hours). Historically, not many observations were executed with longer than 2 hours' scheduling blocks.*
 {: .fs-2 }
 
 ### 2. Organizing observing scripts
