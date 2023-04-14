@@ -163,6 +163,11 @@ The selected spectral setups, angular resolution(s), and sensitivity also need t
 Your observing script is usually automatically generated. You will be contacted by staff in the ALMA Regional Center to proofread your observing script. Please make sure the coordinates and the spectral setups are indeed what you intend to use (in most cases, the problems were due to users' mistakes). In some cases you also need to make sure that the calibration will be carried out in the way you need (or say, not be carried out in the way that you cannot use. For example, in the earlier cycles, the algorithm would choose Sgr A\* as your calibrator even when your target source is also Sgr A\*. There needs extra work for the staff to avoid such issues.)
 {: .fs-2 }
 
+### 3. Operation
+
+ALMA staff will execute your observing script and will watch over the observations. So usually, there is nothing you need to do.
+{: .fs-2 }
+
 ### 4. Data calibration and imaging
 
 #### 4.1 Software
