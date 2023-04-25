@@ -20,6 +20,10 @@ If you are my student/postdoc and if you are not a native English speaker, use [
 I gave a presentation about tips for ALMA proposal preparation in 2023 April. You may consult my [slides](https://github.com/baobabyoo/baobabyoo.github.io/blob/main/pages/files/presentations/Liu2023_ASIAA_ALMApropsTips.pdf). Please do not take it over-seriously unless you are my student. *If you are my student, do take it seriously.*
 {: .fs-1 }
 
+Some Python based
+[ALMA Data Analysis Utilities](https://confluence.alma.cl/display/EAPR/ALMA+Data+Analysis+Utilities) seems fairly handy. I would like to thank my former colleague, Dirk Petry, who pointed me to this link.
+{: .fs-1 }
+
 ### 1. Proposing
 
 #### 1.1 Timeline and interface
