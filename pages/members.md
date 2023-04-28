@@ -8,6 +8,10 @@ has_toc: false
 
 ### Group Members
 
+- **Dog (always...囧rz):** Liu, Hauyu Baobab (呂浩宇)
+{: .fs-2 }
+
+- **Undergraduate (2023-):** Huang, Hank Ting-Jing (黃珽靖)
 - **Undergraduate (2022-):** Chen, Ting-Chen (陳亭蓁)
 - **Undergraduate (2022-):** Lai, Pin-Hsien (賴品憲)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
