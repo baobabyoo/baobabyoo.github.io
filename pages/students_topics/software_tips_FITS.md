@@ -221,17 +221,17 @@ pip install pandas
 In 2023, after updating astropy to version >5.0, it may become impossible to install aplpy successfully. If that is what happens to you, you can try the following command:
 
 ```
-# conda create --name test python=3.7
-# pip install --upgrade pip
-# pip install numpy
-# pip install astropy==4.3.1
-# pip install aplpy==2.0.3
-# pip install jupyter
-# pip install scipy
-# pip install matplotlib h5py
-# conda install -c conda-forge pyregion
-# pip install PyAVM healpy
-# pip install pandas
+conda create --name test python=3.7
+pip install --upgrade pip
+pip install numpy
+pip install astropy==4.3.1
+pip install aplpy==2.0.3
+pip install jupyter
+pip install scipy
+pip install matplotlib h5py
+conda install -c conda-forge pyregion
+pip install PyAVM healpy
+pip install pandas
 ```
 {: .fs-1 }
 
