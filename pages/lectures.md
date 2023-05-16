@@ -32,6 +32,8 @@ has_toc: false
 7. [Lecture notes: Electromagnetic Part II](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/Electromagnetic_part2.pdf)
 8. [Lecture notes: Electromagnetic Part III](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/Electromagnetic_part3.pdf)
 9. [Lecture notes: Electromagnetic Part IV](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/Electromagnetic_part4.pdf)
+10. [Lecture notes: Physical Optics](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/Optics_part1.pdf)
+11. [Lecture notes: Geometric Optics](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/Optics_part2.pdf)
 {: .fs-1 }
 
 ## Radio Interferometry
