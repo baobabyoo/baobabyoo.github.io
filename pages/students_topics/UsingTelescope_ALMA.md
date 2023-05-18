@@ -180,6 +180,21 @@ ALMA staff will execute your observing script and will watch over the observatio
 #### 4.1 Software
 
 The official software package for processing ALMA data is the [CASA software package](https://casa.nrao.edu/).
+The CASA-pipeline versions for the data taken from each cycle can be checke [here](https://almascience.nao.ac.jp/processing/science-pipeline).
+{: .fs-2 }
+
+'''
+Cycle-0: ?
+Cycle-1: ?
+Cycle-2: casapy-42.2.30986-pipe-1-64b.tar.gz
+Cycle-3: casa-release-4.5.3-el6.tar.gz
+Cycle-4: casa-release-4.7.2-el7.tar.gz
+Cycle-5: casa-release-5.1.1-5.el7.tar.gz
+Cycle-6: casa-release-5.4.0-70.el7.tar.gz
+Cycle-7: casa-6.1.1-15-pipeline-2020.1.0.40.tar.xz
+Cycle-8: casa-6.2.1-7-pipeline-2021.2.0.128.tar.xz
+Cycle-9: casa-6.4.1-12-pipeline-2022.2.0.68-py3.6.tar.xz
+'''
 {: .fs-2 }
 
 You can try using the previewer [CARTA](https://cartavis.org/) which can open very large (TB size) image files very quickly/smoothly.
