@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Dust
+title: Astro-chemistry
 parent: Topic
 grand_parent: To my students
 nav_order: 2
