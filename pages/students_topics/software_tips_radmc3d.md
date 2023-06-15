@@ -11,6 +11,7 @@ nav_order: 4
 This is a software package for carrying out 3D Monte-Carlo radiative transfer simulations.
 The official webpage is [here](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/index.php).
 The latest version (in 2023 Jun) is 2.0, which can be obtained via [Github](https://github.com/dullemond/radmc3d-2.0/tree/master).
+Note that this code sticks with the cgs units.
 {: .fs-2 }
 
 An online documentation can be found in [this webpage](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/index.html).
@@ -18,8 +19,12 @@ The PDF version of the document can be found in [this link](https://www.ita.uni-
 {: .fs-2 }
 
 ### 2. Installing
+A very detailed instruction is [here](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/installation.html). In spite that it may not be necessary, I recommend you to read through this instruction.
 
 #### 2.1 Setting up the environment:
+A very detailed instruction is [here](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/overview.html). In the following I provide some of my commands/experiences if you want to just follow blindly without understanding anything.
+
+**Note that if you would like to be benefited by parallel computing, remember to use** 'FF = ifort -openmp' **when editing the make file of radmc3d** (see below).
 
 #### Using Linux CentOS:
 
