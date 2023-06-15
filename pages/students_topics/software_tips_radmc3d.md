@@ -24,7 +24,7 @@ A very detailed instruction is [here](https://www.ita.uni-heidelberg.de/~dullemo
 #### 2.1 Setting up the environment:
 A very detailed instruction is [here](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/overview.html). In the following I provide some of my commands/experiences if you want to just follow blindly without understanding anything.
 
-**Note that if you would like to be benefited by parallel computing, remember to use** 'FF = ifort -openmp' **when editing the make file of radmc3d** (see below).
+**Note that if you would like to be benefited by parallel computing, remember to use** `FF = ifort -openmp` **when editing the make file of radmc3d** (see below).
 
 #### Using Linux CentOS:
 
