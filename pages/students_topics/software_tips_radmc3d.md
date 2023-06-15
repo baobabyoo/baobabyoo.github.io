@@ -57,3 +57,5 @@ in the path yourself (in the .tcshrc file if you use the tcsh shell...)
 If you do it now, don't forget to type 'rehash'.
 ```
 I included this line `export PATH=//Users/hyliu/bin:$PATH` in my `~/.bashrc`.
+
+If you are using Mac, some Python scripts for basic analyses may be located in the path similar to `/Users/hyliu/bin/python/radmc3d_tools`.
