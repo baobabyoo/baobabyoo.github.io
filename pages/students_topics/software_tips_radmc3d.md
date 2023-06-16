@@ -71,12 +71,28 @@ If you are using Mac, some Python scripts for basic analyses may be located in t
 Please find the [instruction](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/installation.html#how-to-install-and-use-the-python-radmc3d-tools).
 
 
-#### 2.5 Running simulations
+### 3. Installing
 
 The steps to conduct your own simulations are:
 1. Using your own program to write the ASCII (or binary) input files that defines the model (e.g., density distribution, stellar spectral energy distribution, etc)
 2. Use the RADMC-3D code to read your model and run simulations
 3. Analyze the output images or spectra
+
+Usually, the commands to run dust radiative transfer simulations in the Linux command lines are:
+
+```
+# 1. Creating input files from your own python codes
+python problem_setup.py
+
+# 2. Evaluating dust temperature
+radmc3d mctherm
+
+# 3. Evaluate spectrum or images
+radmc3d sed incl 45.
+
+# 4. remove all of the outputs of the RADMC3D-codes (need to copy the make file some the example directory)
+make cleanmodel
+```
 
 The quickest way to startup is to modify the example-programs under the `/example` directory that can create the input files for certain physical problems (e.g., protoplanetary disks).
 
