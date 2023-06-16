@@ -64,3 +64,26 @@ If you do it now, don't forget to type 'rehash'.
 I included this line `export PATH=//Users/hyliu/bin:$PATH` in my `~/.bashrc`.
 
 If you are using Mac, some Python scripts for basic analyses may be located in the path similar to `/Users/hyliu/bin/python/radmc3d_tools`.
+
+
+#### 2.4 Using the provided Python analysis tools
+
+Please find the [instruction](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/installation.html#how-to-install-and-use-the-python-radmc3d-tools).
+
+
+#### 2.5 Running simulations
+
+The steps to conduct your own simulations are:
+1. Using your own program to write the ASCII (or binary) input files that defines the model (e.g., density distribution, stellar spectral energy distribution, etc)
+2. Use the RADMC-3D code to read your model and run simulations
+3. Analyze the output images or spectra
+
+The quickest way to startup is to modify the example-programs under the `/example` directory that can create the input files for certain physical problems (e.g., protoplanetary disks).
+
+When building a model (e.g., with a Python code), you need to specify
+- the grid structure
+- the dust and/or gas density distributions
+- dust opacity table
+- the stellar positions and properties
+
+We need to provide RADMC-3D a discrete wavelength table and RADMC-3D will make calculations at those wavelengths.
