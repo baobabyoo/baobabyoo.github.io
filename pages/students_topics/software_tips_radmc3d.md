@@ -87,8 +87,9 @@ python problem_setup.py
 # 2. Evaluating dust temperature
 radmc3d mctherm
 
-# 3. Evaluate spectrum or images
+# 3. Evaluate spectrum (at 45 deg source inclination) or images (at 10 um wavelength)
 radmc3d sed incl 45.
+radmc3d image lambda 10
 
 # 4. remove all of the outputs of the RADMC3D-codes (need to copy the make file some the example directory)
 make cleanmodel
