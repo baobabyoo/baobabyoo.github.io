@@ -39,7 +39,7 @@ has_toc: false
 
 
 ###### Publications as supervisor/advisor or initiator
-
+9. Terada, Y., **Liu, H. B.**, Mkrtichian, D., Sai, J., Konishi, M., Jiang, I.-G., Muto, T., Hashimoto, J., Tamura, M., *Anisotropic Ionizing Illumination from an M-type Pre-main Sequence Star*, ApJ, in press (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2023arXiv230609013T/abstract)
 8. Ko, C.-L., **Liu, H. B.**, Lai, S.-P., Ching, T.-C., Rao, R., Girart, J.-M., *Resolving linear polarization due to emission and extinction of aligned dust grains on NGC1333 IRAS4A with JVLA and ALMA*, ApJ, 889, 172 (2020) [ADS](https://ui.adsabs.harvard.edu/abs/2020ApJ...889..172K/abstract)
 7. Ju\'arez, C, **Liu, H. B.**, Girart, J. M., Palau, A., Busquet, G., Galv\'an-Madrid, R., Hirano, N., Lin, Y., *Extreme fragmentation and converging flows at the center of the L1287 cloud*, A&A, 621, 140 (2019) [ADS](https://ui.adsabs.harvard.edu/abs/2019A%26A...621A.140J/abstract)
 6. Monsch, K., Pineda, J. E., **Liu, H. B.**, Zucker, C., Chen, H. H.-H., Pattle, K., Offner, S. S. R., Di Francesco, J., Ginsburg, A., Ercolano, B., Arce, H. G., Friesen, R., Kirk, H., Caselli, P., Goodman, A. A., *Dense gas kinematics and a narrow filament in the Orion A OMC1 region using NH3*, ApJ, 861, 77 (2018) [ADS](https://ui.adsabs.harvard.edu/abs/2018ApJ...861...77M/abstract)
