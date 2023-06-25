@@ -17,7 +17,7 @@ has_toc: false
 - **Undergraduate (2022-):** Lai, Pin-Hsien (賴品憲)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
 - **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
-- **Ph.D. student (2020-):** Terada, Yuka (寺田由佳)
+- **Ph.D. student (2020-):** Terada, Yuka (寺田由佳; [Publication-1](https://ui.adsabs.harvard.edu/abs/2023arXiv230609013T/abstract))
 {: .fs-2 }
 
 
