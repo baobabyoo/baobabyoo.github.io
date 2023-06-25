@@ -97,6 +97,8 @@ make cleanmodel
 
 The quickest way to startup is to modify the example-programs under the `/example` directory that can create the input files for certain physical problems (e.g., protoplanetary disks).
 
+To set the number of photons to be used in the Monte-Carlo radiative transfer simulations, or to switch on/off certain modes of running simulations, edit the input file `radmc3d.inp`.
+
 When building a model (e.g., with a Python code), you need to specify
 - the grid structure
 - the dust and/or gas density distributions

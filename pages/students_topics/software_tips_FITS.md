@@ -16,18 +16,18 @@ In brief, FITS is a binary format to store astronomical data (either image(s) or
 
 In light of this, a FITS file usually contains two parts:
 - one or more binary **data table**
-- one or more **header files** that contain the necessary information to understand the data.
+- one or more **[header files](https://danmoser.github.io/notes/gai_fits-imgs.html)** that contain the necessary information to understand the data.
 {: .fs-2 }
 
 Since the binary data are not human readable, we cannot handle the FITS files with a text editor (e.g., vim) or other commercial or open resource software like MS Excel or Open Office. Here I provide some simple tips for manipulating FITS images that can be useful to radio astronomers. If you are a graduate student or researcher, I recommend at least installing the [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9),  [CASA](https://casa.nrao.edu/), [Miriad](https://www.astro.umd.edu/~teuben/miriad/) software and the [Astropy](https://www.astropy.org/) and [APLpy](https://aplpy.github.io/) Python packages. If you have access to IDL, you should also install the [IDL Astronomy User's Library](https://idlastro.gsfc.nasa.gov/).
 {: .fs-2 }
 
-If you know something that is very useful, please recommend to me.
+If you know something that is very useful, please recommend it to me.
 {: .fs-2 }
 
 
 ### 2. (Pre)Viewers
-The following software may be useful for a quick preview of your FITS images or tables, which are particularly handy during a casual discussion with the other colleagues. The links to them are provided. They are all reasonably easy to install.
+The following software may be useful for a quick preview of your FITS images or tables, which are particularly handy during a casual discussion with other colleagues. The links to them are provided. They are all reasonably easy to install.
 {: .fs-2 }
 
 ###### 2.1 ds9
