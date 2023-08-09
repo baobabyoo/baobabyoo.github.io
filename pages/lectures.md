@@ -18,6 +18,11 @@ has_toc: false
 4. [Lecture notes: Markov Chain Monte Carlo method](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part4.pdf)
 {: .fs-1 }
 
+## Seminar (I) 
+
+**2023-Sep-04/Dec-22 @ NSYSU :** *Attending talks* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_SeminarI_2023Sep_PhysDept)).
+{: .fs-1 }
+
 ## General Physics (I)
 
 **2023-Sep-04/Dec-22 @ NSYSU :** *rigid body motion, elasticity, fluid, thermal physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept)).
@@ -58,3 +63,4 @@ has_toc: false
 
 **2022-Jul-08/12 @ NTNU :** *Principle of interferometry, noise, and calibration strategy.* ( [Lecture Notes PDF](https://github.com/baobabyoo/baobabyoo.github.io/blob/main/pages/files/lecture_notes/2022/Radio_interferometry_2022Jul.pdf); go to the address and then click the **Download** button to download). These are my quick notes, which are not necessarily fully correct and may not be comphresensitve to those who did not attend the classes.
 {: .fs-1 }
+
