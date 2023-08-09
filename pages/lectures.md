@@ -18,6 +18,11 @@ has_toc: false
 4. [Lecture notes: Markov Chain Monte Carlo method](https://github.com/baobabyoo/Lecture_DataAnalysis/blob/main/lecture_notes/DataAnalysis_part4.pdf)
 {: .fs-1 }
 
+## General Physics (I)
+
+**2023-Sep-04/Dec-22 @ NSYSU :** *rigid body motion, elasticity, fluid, thermal physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept)).
+{: .fs-1 }
+
 ## General Physics (II)
 
 **2023-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb)).
