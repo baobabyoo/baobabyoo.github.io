@@ -237,7 +237,7 @@ import numpy as np
 
 ##### Script Info ###########################################
 #
-# CASA version: CASA 6.5.1.23
+# CASA version: CASA 6.5.2.26
 # Contact: Hauyu Baobab Liu
 #
 #############################################################
@@ -247,33 +247,34 @@ import numpy as np
 ### Calibration options
 if_importasdm       = True
 PolCalibration      = True
-plot_interactive    = True
+plot_interactive    = False
 angle_calibrator = '3C286'
+post2019            = True
 
 ### Data related parameters
-filename     = '21A-122.sb39327279.eb39551241.59304.42862680556'
+filename     = '19A-262.sb36833530.eb37361201.58770.40095413194'
 vis          = filename + '.ms'
 Band         = 'Q'
-config       = 'D'
-EBid         = 'eb39551241'
-num_antenna  = 27
-refant       = 'ea05'
+config       = 'A'
+EBid         = 'eb37361201'
+num_antenna  = 26
+refant       = 'ea10'
 
 # name the calibrator field
-BP   = '3'      # J2253+1608 (3C454.3)
-GN   = '1'      # J1851+0035
-TG   = '2'      # G31p41pol
-POLD = '4'      # J2355+4950
-POLA = '0'      # 3C286
-FL   = '0'      # 3C286
+BP   = '0'      # J0319+4130 (3C84)
+GN   = '2'      # J0431+1731
+TG   = '3'      # DMtau
+POLD = '0'      # J0319+4130
+POLA = '1'      # 3C138
+FL   = '1'      # 3C138
 
 # name scans:
-GNscan = '10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36,  40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64'
-BPscan = '68'
-FLscan = '6'
-POLDscan = '72'
-POLAscan = '6'
-TGscan   = '11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35,  41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63'
+GNscan = '14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58,  62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100, 102, 104, 106'
+BPscan = '6'
+FLscan = '10'
+POLDscan = '6'
+POLAscan = '10'
+TGscan   = '15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57,  63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99, 101, 103, 105'
 
 # name the spectral window ranges:
 allspw     = '0~64'
@@ -285,7 +286,7 @@ num_spw    = 63
 
 ### CASA related parameters
 # fluxmodelpth = '/home/hyliu/softwares/CASA/casa-release-5.7.0-134.el7/data/nrao/VLA/CalModels/'
-fluxmodelim  = '3C286_Q.im'
+fluxmodelim  = '3C138_Q.im'
 fluxstandard = 'Perley-Butler 2017'
 
 ### Important:
@@ -413,7 +414,7 @@ if(mystep in thesteps):
   antenna = ''
   spw = ''
   flagbackup=False
-  scan = '1~5, 7~9, 37~39, 65~67, 69~71'
+  scan = '1~5, 7~9, 11~13, 59~61'
   timerange = ''
   flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan, timerange=timerange)
 
@@ -441,15 +442,153 @@ if(mystep in thesteps):
 
 
   # Initial data flagging
-    # RFI
+    # low amplitude
   mode = 'manual'
-  antenna = ''
-  spw = '2:42;43,9:38,11:18~21;42;43;47~63,12:19~24,13:11;12;28~31;43;44;49;50,14:41;48~52,15:17,16:21;33;34,27:44~64,29:16~20;25~27;45~47,41:51;52,42:10~12,43:16~18;22~24;32~37,44:4~6;19;20;27~30;39~41;45~50,45:11;12;24;25;35,46:19~21,53:15~17;27~29,55:4,57:4;5;35~37,58:31~34,59:22~24,60:51'
+  antenna = 'ea01'
+  spw = '2~64'
   flagbackup=False
   scan = ''
   timerange = ''
   flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
 
+  mode = 'manual'
+  antenna = 'ea23'
+  spw = '14'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea07'
+  spw = ''
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea08,ea12'
+  spw = '2~33'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea24'
+  spw = '54~56'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea10&ea11'
+  spw = ''
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea19'
+  spw = '10~33'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  # zeros
+  mode = 'manual'
+  antenna = 'ea19&ea24'
+  spw = '39'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea19&ea23'
+  spw = '39'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea19&ea25'
+  spw = '39'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea19&ea26'
+  spw = '39'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea04'
+  spw = '50'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+
+  # large number of missing scans
+  mode = 'manual'
+  antenna = 'ea22'
+  spw = ''
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+
+   # RFI
+  mode = 'manual'
+  antenna = ''
+  spw = '10:28;29,11:20;21;54;55,12:0~6;21~23;51~55,13:9;49~50,15:19,17:36~39,27:47;48;56;57,28:46;47,29:46;47,36:40;41,37:11;23;25;26;59,38:17~19;27;39;40;44;45;50;51,39:14;18;34;43;44,52:50,54:21;22;50;55;56,55:33~35;58;59'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+
+  # clip zeros
+  flagdata(vis=vis, mode='clip', clipzeros=True, flagbackup=False)
+
+  # phase error
+  mode = 'manual'
+  antenna = 'ea02'
+  spw = ''
+  flagbackup=False
+  scan = '45,51~53,85'
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  mode = 'manual'
+  antenna = 'ea04,ea15'
+  spw = ''
+  flagbackup=False
+  scan = '49~51'
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
+
+  # high amplitude
+  mode = 'manual'
+  antenna = ''
+  spw = '33'
+  flagbackup=False
+  scan = ''
+  timerange = ''
+  flagdata(vis=vis, mode=mode, antenna=antenna, spw=spw, flagbackup=flagbackup, scan=scan)
 
 
 
@@ -1038,182 +1177,575 @@ if(mystep in thesteps):
     delmod(vis)
 
     ### REMEMBER TO EDIT THIS ###
-    freq_min = 4.1896e+10
+    freq_min = 4.0104e+10
     freq_max = 4.7896e+10
-    flux_freqmin = 1.5712
-    flux_freqmax = 1.4207
+    flux_freqmin = 0.82535
+    flux_freqmax = 0.7295
     ### #########################
     spix = np.log( flux_freqmin / flux_freqmax ) / np.log( freq_min / freq_max )
     print( 'spectral index', spix )
 
     # using value after 2019
     if angle_calibrator == '3C286':
-      polfreq_Hz = np.array([
-                            1.02,
-                            1.47,
-                            1.87,
-                            2.57,
-                            3.57,
-                            4.89,
-                            6.68,
-                            8.43,
-                            11.3,
-                            14.1,
-                            16.6,
-                            19.1,
-                            25.6,
-                            32.1,
-                            37.1,
-                            42.1,
-                            48.1
-                         ]) * 1e9
-      polper_percent = np.array([
-                            8.6,
-                            9.8,
-                            10.1,
-                            10.6,
-                            11.2,
-                            11.5,
-                            11.9,
-                            12.1,
-                            12.3,
-                            12.3,
-                            12.5,
-                            12.6,
-                            12.7,
-                            13.1,
-                            13.5,
-                            13.4,
-                            14.6
-                         ])
-      polang_degree = np.array([
-                            33.0,
-                            33.0,
-                            33.0,
-                            33.0,
-                            33.0,
-                            33.0,
-                            33.0,
-                            33.0,
-                            34.0,
-                            34.0,
-                            35.0,
-                            35.0,
-                            36.0,
-                            36.0,
-                            36.0,
-                            37.0,
-                            36.0,
-                        ])
+      if post2019 == True:
+        polfreq_Hz = np.array([
+                               1.02,
+                               1.47,
+                               1.87,
+                               2.57,
+                               3.57,
+                               4.89,
+                               6.68,
+                               8.43,
+                               11.3,
+                               14.1,
+                               16.6,
+                               19.1,
+                               25.6,
+                               32.1,
+                               37.1,
+                               42.1,
+                               48.1
+                             ]) * 1e9
+        polper_percent = np.array([
+                               8.6,
+                               9.8,
+                               10.1,
+                               10.6,
+                               11.2,
+                               11.5,
+                               11.9,
+                               12.1,
+                               12.3,
+                               12.3,
+                               12.5,
+                               12.6,
+                               12.7,
+                               13.1,
+                               13.5,
+                               13.4,
+                               14.6
+                             ])
+        polang_degree = np.array([
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               34,
+                               34,
+                               35,
+                               35,
+                               36,
+                               36,
+                               36,
+                               37,
+                               36
+                             ])
+
+      else:
+
+        polfreq_Hz = np.array([
+                               1.05,
+                               1.45,
+                               1.64,
+                               1.95,
+                               2.45,
+                               2.95,
+                               3.25,
+                               3.75,
+                               4.50,
+                               5.00,
+                               6.50,
+                               7.25,
+                               8.10,
+                               8.80,
+                               12.8,
+                               13.7,
+                               14.6,
+                               15.5,
+                               18.1,
+                               19.0,
+                               22.4,
+                               23.3,
+                               36.5,
+                               43.5
+                           ]) * 1e9
+        polper_percent = np.array([
+                               8.6,
+                               9.5,
+                               9.9,
+                               10.1,
+                               10.5,
+                               10.8,
+                               10.9,
+                               11.1,
+                               11.3,
+                               11.4,
+                               11.6,
+                               11.7,
+                               11.9,
+                               11.9,
+                               11.9,
+                               11.9,
+                               12.1,
+                               12.2,
+                               12.5,
+                               12.5,
+                               12.6,
+                               12.6,
+                               13.1,
+                               13.2
+                           ])
+        polang_degree = np.array([
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               33,
+                               34,
+                               34,
+                               34,
+                               34,
+                               34,
+                               34,
+                               34,
+                               35,
+                               35,
+                               35,
+                               36,
+                               36
+                          ])
 
 
     if angle_calibrator == '3C147':
-      polfreq_Hz = np.array([
-                         4.89,
-                         6.68,
-                         8.43,
-                         11.3,
-                         14.1,
-                         16.6,
-                         19.1,
-                         25.6,
-                         32.1,
-                         37.1,
-                         42.1,
-                         48.1
-                         ]) * 1e9
-      polper_percent = np.array([
-                         0.16,
-                         0.51,
-                         0.48,
-                         0.85,
-                         1.8,
-                         2.4,
-                         2.9,
-                         3.4,
-                         4.0,
-                         4.5,
-                         4.9,
-                         6.0
-                         ])
-      polang_degree = np.array([
-                         -13.0,
-                         -57.0,
-                         -19.0,
-                          27.0,
-                          53.0,
-                          60.0,
-                          66.0,
-                          79.0,
-                          83.0,
-                          87.0,
-                          87.0,
-                          85.0
-                        ])
+      if post2019 == True:
+        polfreq_Hz = np.array([
+                               1.02,
+                               1.47,
+                               1.87,
+                               2.57,
+                               3.57,
+                               4.89,
+                               6.68,
+                               8.43,
+                               11.3,
+                               14.1,
+                               16.6,
+                               19.1,
+                               25.6,
+                               32.1,
+                               37.1,
+                               42.1,
+                               48.1
+                             ]) * 1e9
+        polper_percent = np.array([
+                               0.0,
+                               0.0,
+                               0.0,
+                               0.0,
+                               0.0,
+                               0.16,
+                               0.51,
+                               0.48,
+                               0.85,
+                               1.8,
+                               2.4,
+                               2.9,
+                               3.4,
+                               4.0,
+                               4.5,
+                               4.9,
+                               6.0
+                             ])
+        polang_degree = np.array([
+                               0,
+                               0,
+                               0,
+                               0,
+                               0,
+                               -13,
+                               -57,
+                               -19,
+                               27,
+                               53,
+                               60,
+                               66,
+                               79,
+                               83,
+                               87,
+                               87,
+                               85
+                             ])
+
+      else:
+
+        polfreq_Hz = np.array([
+                              1.05,
+                              1.45,
+                              1.64,
+                              1.95,
+                              2.45,
+                              2.95,
+                              3.25,
+                              3.75,
+                              4.50,
+                              5.00,
+                              6.50,
+                              7.25,
+                              8.10,
+                              8.80,
+                              12.8,
+                              13.7,
+                              14.6,
+                              15.5,
+                              18.1,
+                              19.0,
+                              22.4,
+                              23.3,
+                              36.5,
+                              43.5
+                           ]) * 1e9
+        polper_percent = np.array([
+                              0.0,
+                              0.0,
+                              0.0,
+                              0.0,
+                              0.0,
+                              0.0,
+                              0.0,
+                              0.0,
+                              0.1,
+                              0.3,
+                              0.3,
+                              0.6,
+                              0.7,
+                              0.8,
+                              2.2,
+                              2.4,
+                              2.7,
+                              2.9,
+                              3.4,
+                              3.5,
+                              3.8,
+                              3.8,
+                              4.4,
+                              5.2
+                           ])
+        polang_degree = np.array([
+                              0,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0,
+                              -100,
+                              0,
+                              -65,
+                              -39,
+                              -24,
+                              -11,
+                              43,
+                              48,
+                              53,
+                              59,
+                              67,
+                              68,
+                              75,
+                              76,
+                              85,
+                              86
+                          ])
 
     if angle_calibrator == '3C48':
-      polfreq_Hz = np.array([
-                           14.6,
-                           15.5,
-                           18.1,
-                           19.0,
-                           22.4,
-                           23.3,
-                           36.5,
-                           43.5
-                         ]) * 1e9
-      polper_percent = np.array([
-                          6.4,
-                          6.4,
-                          6.9,
-                          7.1,
-                          7.7,
-                          7.8,
-                          7.4,
-                          7.5
-                         ])
-      polang_degree = np.array([
-                         -63.0,
-                         -64.0,
-                         -66.0,
-                         -67.0,
-                         -70.0,
-                         -70.0,
-                         -77.0,
-                         -85.0
-                        ])
+      if post2019 == True:
+        polfreq_Hz = np.array([
+                              1.02,
+                              1.47,
+                              1.87,
+                              2.57,
+                              3.57,
+                              4.89,
+                              6.68,
+                              8.43,
+                              11.3,
+                              14.1,
+                              16.6,
+                              19.1,
+                              25.6,
+                              32.1,
+                              37.1,
+                              42.1,
+                              48.1
+                             ]) * 1e9
+        polper_percent = np.array([
+                              0.3,
+                              0.5,
+                              0.9,
+                              1.6,
+                              2.9,
+                              4.3,
+                              5.4,
+                              5.4,
+                              5.7,
+                              6.1,
+                              6.3,
+                              6.5,
+                              7.2,
+                              6.4,
+                              6.7,
+                              5.6,
+                              6.8
+                             ])
+        polang_degree = np.array([
+                              4.3,
+                              -34,
+                              23,
+                              67.1,
+                              -84,
+                              -72,
+                              -66,
+                              -63,
+                              -62,
+                              -63,
+                              -64,
+                              -68,
+                              -72,
+                              -76,
+                              -77,
+                              -84,
+                              -84
+                             ])
+
+      else:
+
+        polfreq_Hz = np.array([
+                            1.05,
+                            1.45,
+                            1.64,
+                            1.95,
+                            2.45,
+                            2.95,
+                            3.25,
+                            3.75,
+                            4.50,
+                            5.00,
+                            6.50,
+                            7.25,
+                            8.10,
+                            8.80,
+                            12.8,
+                            13.7,
+                            14.6,
+                            15.5,
+                            18.1,
+                            19.0,
+                            22.4,
+                            23.3,
+                            36.5,
+                            43.5
+                           ]) * 1e9
+        polper_percent = np.array([
+                            0.3,
+                            0.5,
+                            0.7,
+                            0.9,
+                            1.4,
+                            2.0,
+                            2.5,
+                            3.2,
+                            3.8,
+                            4.2,
+                            5.2,
+                            5.2,
+                            5.3,
+                            5.4,
+                            6.0,
+                            6.1,
+                            6.4,
+                            6.4,
+                            6.9,
+                            7.1,
+                            7.7,
+                            7.8,
+                            7.4,
+                            7.5
+                           ])
+        polang_degree = np.array([
+                            25,
+                            140,
+                            -5,
+                            -150,
+                            -120,
+                            -100,
+                            -92,
+                            -84,
+                            -75,
+                            -72,
+                            -68,
+                            -67,
+                            -64,
+                            -62,
+                            -62,
+                            -62,
+                            -63,
+                            -64,
+                            -66,
+                            -67,
+                            -70,
+                            -70,
+                            -77,
+                            -85    
+                          ])
 
     if angle_calibrator == '3C138':
-      polfreq_Hz = np.array([
-                           14.6,
-                           15.5,
-                           18.1,
-                           19.0,
-                           22.4,
-                           23.3,
-                           36.5,
-                           43.5
-                         ]) * 1e9
-      polper_percent = np.array([
-                          7.7,
-                          7.4,
-                          6.7,
-                          6.5,
-                          6.7,
-                          6.6,
-                          6.6,
-                          6.5
-                         ])
-      polang_degree = np.array([
-                         -8.0,
-                         -9.0,
-                         -12.0,
-                         -13.0,
-                         -16.0,
-                         -17.0,
-                         -24.0,
-                         -27.0
-                        ])
+      if post2019 == True:
+        polfreq_Hz = np.array([
+                             1.02,
+                             1.47,
+                             1.87,
+                             2.57,
+                             3.57,
+                             4.89,
+                             6.68,
+                             8.43,
+                             11.3,
+                             14.1,
+                             16.6,
+                             19.1,
+                             25.6,
+                             32.1,
+                             37.1,
+                             42.1,
+                             48.1
+                             ]) * 1e9
+        polper_percent = np.array([
+                             5.5,
+                             7.8,
+                             9.0,
+                             9.9,
+                             10.3,
+                             10.5,
+                             10.2,
+                             10.9,
+                             9.1,
+                             8.2,
+                             8.2,
+                             8.4,
+                             8.4,
+                             8.5,
+                             8.7,
+                             8.8,
+                             9.2
+                             ])
+        polang_degree = np.array([
+                             -13,
+                             -9.6,
+                             -9.3,
+                             -10,
+                             -9.5,
+                             -10.5,
+                             -11.5,
+                             -9.4,
+                             -7.9,
+                             -11,
+                             -13,
+                             -16,
+                             -18,
+                             -19,
+                             -20,
+                             -23,
+                             -24
+                             ])
+      else:
+
+        polfreq_Hz = np.array([
+                            1.05,
+                            1.45,
+                            1.64,
+                            1.95,
+                            2.45,
+                            2.95,
+                            3.25,
+                            4.50,
+                            5.00,
+                            6.50,
+                            7.25,
+                            8.10,
+                            8.80,
+                            12.8,
+                            13.7,
+                            14.6,
+                            15.5,
+                            18.1,
+                            19.0,
+                            22.4,
+                            23.3,
+                            36.5,
+                            43.5    
+                           ]) * 1e9
+        polper_percent = np.array([
+                            5.6,
+                            7.5,
+                            8.4,
+                            9.0,
+                            10.4,
+                            10.7,
+                            10.0,
+                            10.0,
+                            10.4,
+                            9.8,
+                            10.0,
+                            10.4,
+                            10.1,
+                            8.4,
+                            7.9,
+                            7.7,
+                            7.4,
+                            6.7,
+                            6.5,
+                            6.7,
+                            6.6,
+                            6.6,
+                            6.5
+                           ])
+        polang_degree = np.array([
+                            -14,
+                            -11,
+                            -10,
+                            -10,
+                            -9,
+                            -10,
+                            -10,
+                            -11,
+                            -11,
+                            -12,
+                            -12,
+                            -10,
+                            -8,
+                            -7,
+                            -7,
+                            -8,
+                            -9,
+                            -12,
+                            -13,
+                            -16,
+                            -17,
+                            -24,
+                            -27
+                          ])
 
     windowfreq_dict = {}
     ms.open(vis)
@@ -1622,7 +2154,7 @@ if(mystep in thesteps):
   print ('Step ', mystep, step_title[mystep])
 
   targets           = [
-                       'G31p41pol',
+                       'DMtau',
                       ]
   for field in targets:
 
@@ -1630,7 +2162,7 @@ if(mystep in thesteps):
 
     avgspw      = sciencespw
     keepflags   = False
-    chanavgvis  = field + '_' + Band + 'band_' + config + '_' + EBid + '.21A122.polcal.uvaver.ms'
+    chanavgvis  = field + '_' + Band + 'band_' + config + '_' + EBid + '.19A262.polcal.uvaver.ms'
     width       = 64
     datacolumn  = 'corrected'
     os.system('rm -rf ' + chanavgvis)
