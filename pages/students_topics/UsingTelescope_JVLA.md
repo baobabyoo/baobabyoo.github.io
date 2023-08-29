@@ -211,6 +211,10 @@ Please find the pipeline [here](https://science.nrao.edu/facilities/vla/data-pro
 If you have not done this before, be ready to spend several weeks of full-time working in order to pick this up. Below is a *ALMA script generator style script* that I organized. It is compatible with CASA6 but not with any earlier version of CASA. You need to edit the section *##### Setting the basic information of the script ###########*. This script is not automatic, in particular, there is no automatic flagging. It is recommended to run it step-by-step. If this is the first time you use it, it may be necessary for you to visually check the options/parameters used for the tasks in each step and make sure those are what you really want. You should pay extra care if you would like to perform polarization calibration (you may need to manually update the polarization of the calibrators). And unfortunately, you have to manually created a file `pola_flux.txt` which should be an ASCII file with 2 columns: the first is the index of the spectral window, the second is the flux density of your polarization position angle calibrator. This information can be obtained during step 15 and is loaded in step 16 (i.e., to evaluate Stokes I, Q, U, and V of the calibrator based on the Stokes I flux density, polarization percentage, and polarization position angle).
 {: .fs-2 }
 
+
+If you would like to be benefited by some convenient plotting features, you may have to install and import the [CASA Analyst Utility](https://casaguides.nrao.edu/index.php/Analysis_Utilities). Otherwise, you have to comment out some of the plotting commands in the script before running it.
+{: .fs-2 }
+
 If you use this script for your journal publication, it would be very much appreciated if you could include the following acknowledgement:
 {: .fs-2 }
 
@@ -2178,3 +2182,215 @@ if(mystep in thesteps):
                )
 ```
 {: .fs-2 }
+
+I often use a note like what is in the following to guide myself:
+{: .fs-2 }
+
+```
+aupath = '/home/hyliu/softwares/casaAU/analysis_scripts/'
+import sys
+sys.path.append(aupath)
+import analysisUtils as aU
+es = aU.stuffForScienceDataReduction()
+
+clearstat()
+
+script = 'casa6script3bit_eb33143447.py'
+obsfile   = '16A-197.sb33086059.eb33143447.57753.108495231485'
+#   Observed from   31-Dec-2016/02:36:16.0   to   31-Dec-2016/04:55:46.0 (UTC)
+
+
+# Listobs, plot antennas
+mysteps = [0]
+execfile(script)
+  # Candidates of reference antennae: ea14, ea24, ea25
+  # Integration time is 2 second. Can quack the first integration.
+  # dummy scans: 
+
+
+# Initial flagging and Data inspects
+mysteps = [1]
+execfile(script)
+
+
+
+# Manual flagging
+mysteps = [2]
+execfile(script)
+  # strategy for the 1st pass RFI flagging:
+    # stick with an baseline with strong S/N, and iterate through all
+    # spws, and all "antenna2"
+    # Tip: It is easier to find RFI from a weak or blank field.
+
+
+
+# Save initial flags
+mysteps = [3]
+execfile(script)
+
+
+
+# Absolute flux scaling
+mysteps = [4]
+execfile(script)
+2022-12-30 05:16:18 INFO imager    Using model image /home/hyliu/softwares/CASA/casa-6.5.2-26-py3.8/lib/py/lib/python3.8/site-packages/casadata/__data__/nrao/VLA/CalModels/3C48_A.im
+2022-12-30 05:16:18 INFO imager    Scaling spw(s) [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65]'s model image by channel to  I = 1.01284, 0.83597, 0.713891 Jy @(2.69773e+10, 3.29533e+10, 3.89273e+10)Hz (LSRK) for visibility prediction (a few representative values are shown).
+2022-12-30 05:16:18 INFO imager    The model image's reference pixel is 1.32027e-07 arcsec from J0137+3309's phase center.
+2022-12-30 05:16:18 INFO imager    Will clear any existing model with matching field=J0137+3309 and spw=2~65
+
+
+
+# Generate antenna position, gain curve, Tropospheric opacity, Requantizer gain table
+mysteps = [5]
+execfile(script)
+
+
+
+# First iteration of delay calibration
+mysteps = [6]
+execfile(script)
+  # Delay with the range of -3~3 nsec
+GN_table = obsfile + '.G0'
+plotms(vis=GN_table, xaxis='time', yaxis='phase',
+       spw='2~64', iteraxis='antenna', coloraxis='antenna2', plotrange=[-1,-1,-180,180], customsymbol=True)
+
+
+
+# First iteration of passband calibration
+mysteps = [7]
+execfile(script)
+BP_table = obsfile + '.B0'
+plotms(vis=BP_table, xaxis='freq', yaxis='amp', 
+       spw='2~64', iteraxis='antenna', coloraxis='spw')
+
+plotms(vis=BP_table, xaxis='freq', yaxis='phase', 
+       spw='2~65', iteraxis='antenna', coloraxis='spw', 
+       plotrange=[-1,-1,-180,180], customsymbol=True, 
+       symbolshape='circle',symbolsize=2)
+
+
+
+# Derive flux model for the passband calibrator
+mysteps = [8]
+execfile(script)
+# Fitted spectrum for J0319+4130 with fitorder=1: Flux density = 33.1749 +/- 0.118519 (freq=33.1994 GHz) spidx: a_1 (spectral index) =-0.460571 +/- 0.0281197 covariance matrix for the fit:  covar(0,0)=1.68071e-06 covar(0,1)=1.67252e-05 covar(1,0)=1.67252e-05 covar(1,1)=0.000552064
+
+
+
+# Second iteration of delay and passband calibration
+mysteps = [9]
+execfile(script)
+BP_table = obsfile + '.B0.b'
+plotms(vis=BP_table, xaxis='freq', yaxis='amp',
+       spw='2~65', iteraxis='antenna', coloraxis='spw')
+
+plotms(vis=BP_table, xaxis='freq', yaxis='phase',
+       spw='2~65', iteraxis='antenna', coloraxis='spw',
+       plotrange=[-1,-1,-180,180], customsymbol=True,
+       symbolshape='circle',symbolsize=2)
+
+
+
+# Final manual flaggings
+mysteps = [10]
+execfile(script)
+
+
+
+# Save flags before final gain calibration
+mysteps = [11]
+execfile(script)
+
+
+
+# Per integration gain phase calibration
+mysteps = [12]
+execfile(script)
+GN_table = obsfile + '.G1.int'
+plotms(vis=GN_table, xaxis='time', yaxis='phase',
+       spw='2~65', iteraxis='antenna', coloraxis='spw', plotrange=[-1,-1,-180,180], customsymbol=True)
+
+
+
+# Per scan gain phase calibration
+mysteps = [13]
+execfile(script)
+GN_table = obsfile + '.G1.inf'
+plotms(vis=GN_table, xaxis='time', yaxis='phase',
+       spw='2~65', iteraxis='antenna', coloraxis='spw', plotrange=[-1,-1,-180,180], customsymbol=True)
+
+
+
+# Gain amplitude calibration
+mysteps = [14]
+execfile(script)
+GN_table = obsfile + '.G2'
+plotms(vis=GN_table, xaxis='time', yaxis='amp',
+       spw='2~65', iteraxis='antenna', coloraxis='spw', customsymbol=True)
+
+
+
+# Absolute flux scaling
+mysteps = [15]
+execfile(script)
+# Fitted spectrum for J0552+0313 with fitorder=1: Flux density = 0.973019 +/- 0.00291151 (freq=33.1994 GHz) spidx: a_1 (spectral index) =-0.0973036 +/- 0.024678 covariance matrix for the fit:  covar(0,0)=3.50946e-05 covar(0,1)=0.000292386 covar(1,0)=0.000292386 covar(1,1)=0.012656
+# Fitted spectrum for J0319+4130 with fitorder=1: Flux density = 36.5031 +/- 0.0541186 (freq=33.1994 GHz) spidx: a_1 (spectral index) =-0.341765 +/- 0.0122318 covariance matrix for the fit:  covar(0,0)=7.80212e-07 covar(0,1)=5.82059e-06 covar(1,0)=5.82059e-06 covar(1,1)=0.000281575
+
+
+
+ Set polarizatoin flux standard
+mysteps = [16]
+execfile(script)
+  # need to separately prepare a file named as pola_flux.txt,
+  # with the first column showing window ID and the second column
+  # showing the flux in units of Jy
+  # At some point need to make this automatic
+
+
+
+# Solve crosshand delay
+mysteps = [17]
+execfile(script)
+  # No obvious need of manually changing things.
+  # delay: XXX-XXX ns
+
+
+
+# Set leakage calibrator flux standard
+mysteps = [18]
+execfile(script)
+
+
+
+# Solving for leakage terms
+mysteps = [19]
+execfile(script)
+  # Note: Need to be sure that the POLD calibrator has gain amplitude solution.
+  # script of this part is not yet finished.
+leakage_table = obsfile + '.D1'
+plotms(vis=leakage_table, xaxis='channel', yaxis='amp',
+       spw='2~65', iteraxis='antenna', coloraxis='spw')
+
+
+
+# Solving for the R-L polarization angle
+mysteps = [20]
+execfile(script)
+POLPA_table = obsfile + '.X1'
+plotms(vis=POLPA_table, xaxis='channel', yaxis='phase',
+       spw='2~65', iteraxis='antenna', coloraxis='spw')
+
+
+
+# Applying calibration table
+mysteps = [21]
+execfile(script)
+  # Note: Need to manually edit which sources to be applied with which table.
+
+
+
+# Splitting calibrated data
+mysteps = [22]
+execfile(script)
+  # Note: Need to manually edit the split filenames
+```
