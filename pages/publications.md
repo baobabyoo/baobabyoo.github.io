@@ -7,6 +7,8 @@ has_toc: false
 ---
 
 ### Publications
+[Search on ADS](https://reurl.cc/5OxD7q)
+
 
 ###### As first author
 
