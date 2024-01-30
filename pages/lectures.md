@@ -31,7 +31,7 @@ has_toc: false
 1. [Lecture notes: measurements, vectors, motions](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/measurements_vectors_motions.pdf)
 2. [Lecture notes: force, motion, work](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/force_motion_work.pdf)
 3. [Lecture notes: energy conservation](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/PotentialEnergy_Econservation.pdf)
-4. [Lecture notes: center of mass and momentum](center_of_mass_and_LinearMomentum](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/com_momentum.pdf)
+4. [Lecture notes: center of mass and momentum](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/com_momentum.pdf)
 5. [Lecture notes: rotation](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/rotation.pdf)
 6. [Lecture notes: torque and angular momentum](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/angular_momentum.pdf)
 7. [Lecture notes: gravitation](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/gravitation.pdf)
@@ -42,6 +42,7 @@ has_toc: false
 12. [Lecture notes: temperature, heat](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/thermodynamics.pdf)
 13. [Lecture notes: kinetic theory of gas](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/thermodynamics2.pdf)
 14. [Lecture notes: entropy, 2nd law of thermodynamics](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/thermodynamics3.pdf)
+{: .fs-1 }
 
 ## General Physics (II)
 
