@@ -49,6 +49,9 @@ has_toc: false
 
 ## Radio Interferometry
 
+**2023-Summer @ NSYSU :** *An introduction to Radio Interferometry* ([Lecture Homepage](https://github.com/baobabyoo/interferometryEMI)). This is an online lecture created by me and my students, Pin-Hsien Lai and Ting-Chen Chen.
+{: .fs-1 }
+
 **2022-Oct-5/Nov-30 @ NTNU :** *Practical Radio Interferometry* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_RadioInterferometry_2022Oct)). I am not yet good at using Github. But let's learn this together.
 {: .fs-1 }
 
