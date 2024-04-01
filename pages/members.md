@@ -17,7 +17,6 @@ has_toc: false
 - **Undergraduate (2022-):** Chen, Ting-Chen (陳亭蓁)
 - **Undergraduate (2022-):** Lai, Pin-Hsien (賴品憲)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
-- **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
 - **Ph.D. student (2020-):** Terada, Yuka (寺田由佳; [Publication-1](https://ui.adsabs.harvard.edu/abs/2023arXiv230609013T/abstract))
 - **Postdoc (2023-):** Tsai, An-Li (蔡安理)
 {: .fs-2 }
@@ -25,6 +24,7 @@ has_toc: false
 
 
 *Former Students*
+- **M.D. student (2021-2023):** Chung, Chia-Ying (鍾佳穎)
 - **Ph.D. (2022):** Jiao, Sihan (焦斯汗)
 - **M.D. (2021):** Ko, Chia-Lin (柯嘉琳; topic: *Resolving Linear Polarization due to Emission and Extinction of Aligned Dust Grains on NGC 1333 IRAS4A with JVLA and ALMA*; [Publication](https://ui.adsabs.harvard.edu/abs/2020ApJ...889..172K/abstract))
 - **M.D. (2016):** Li, Jennifer, I-Hsiu (李宜修; topic: *Systematic Analysis of Spectral Energy Distributions and the Dust Opacity Indices for Class 0 Young Stellar Objects*; [Publication](https://ui.adsabs.harvard.edu/abs/2017ApJ...840...72L/abstract))

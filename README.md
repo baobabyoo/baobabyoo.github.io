@@ -31,7 +31,7 @@ More details about my research can be found at [this page](/pages/research).
 
 ### Group Members
 
-I presently host eight students and 1 postdoc:
+I presently host seven students, 1 research assistant, and 1 postdoc:
 {: .fs-2 }
 
 - **Undergraduate (2024-):** Lin, Cyuan-Yong (林詮詠)
@@ -40,8 +40,8 @@ I presently host eight students and 1 postdoc:
 - **Undergraduate (2022-):** Chen, Ting-Chen (陳亭蓁)
 - **Undergraduate (2022-):** Lai, Pin-Hsien (賴品憲)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
-- **M.D. student (2021-):** Chung, Chia-Ying (鍾佳穎)
 - **Ph.D. student (2020-):** Terada, Yuka (寺田由佳)
+- **Research assistant (2024-):** Chung, Chia-Ying (鍾佳穎)
 - **Postdoc (2023-):** Tsai, An-Li (蔡安理)
 {: .fs-2 }
 
