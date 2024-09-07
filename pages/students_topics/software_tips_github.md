@@ -77,6 +77,15 @@ git checkout <branch>
 git remote add origin git@github.com:YOURID/myPythonPackage.git
 git push -u origin main
 
+# list all branches
+git branch
+
+# create a new branch at the current commit
+git branch <branch_name>
+
+# Switch to another branch
+git checkout <bran_name>
+
 # Reset the url to push
 git remote set-url origin git@github.com:User/UserRepo.git
 
