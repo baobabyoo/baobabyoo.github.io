@@ -26,6 +26,8 @@ has_toc: false
 ## General Physics (I)
 
 **2024-Sep-08/2025-Jan-11 @ NSYSU :** *elasticity, fluid, thermal physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_fall))
+{: .fs-1 }
+
 **2023-Sep-04/Dec-22 @ NSYSU :** *rigid body motion, elasticity, fluid, thermal physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept)).
 {: .fs-1 }
 
