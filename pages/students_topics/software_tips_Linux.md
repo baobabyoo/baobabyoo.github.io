@@ -36,3 +36,24 @@ You need to create a bootable USB drive.
 You may use the `dd` command to create it. See the introduction in [this Chinese webpage](https://kb.synology.com/zh-tw/DSM/tutorial/How_do_I_create_a_bootable_USB_drive_for_restoring_Linux), or [this English webpage](https://www.cyberciti.biz/faq/creating-a-bootable-ubuntu-usb-stick-on-a-debian-linux/).
 {: .fs-2 }
 
+
+### 3. Boot menu
+
+In most cases, the boot menu is managed by a program called *grub*. You can set your preferences by editing the file `/etc/default/grub`, using any text editor (for example, *vim*). An example of the content in the /etc/default/grub file is as follows (please google or ask ChatGPT of you would like to understand some of the lines).
+{: .fs-2 }
+
+```
+GRUB_TIMEOUT=-1
+GRUB_TIMEOUT_STYLE=menu
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=1
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M resume=/dev/map
+per/rl-swap rd.lvm.lv=rl/root rd.lvm.lv=rl/swap rhgb quiet"
+GRUB_DISABLE_RECOVERY="true"
+GRUB_ENABLE_BLSCFG=true
+```
+{: .fs-2 }
+
+
