@@ -6,7 +6,7 @@ has_children: false
 has_toc: false
 ---
 
-### Publications (updated on 2024-Aug-26, with 158 peer reviewed journal papers)
+### Publications (updated on 2024-Oct-21, with 160 peer reviewed journal papers)
 [Search on ADS](https://reurl.cc/5OxD7q)
 
 
