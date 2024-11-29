@@ -1,6 +1,6 @@
 This is *Hauyu Baobab Liu* (呂浩宇).
 
-I am a researcher who based mostly on the [Submillimeter Array (SMA)](http://sma1.sma.hawaii.edu/smaoc.html), the [Atacama Large Millimeter Array (ALMA)](https://almascience.nao.ac.jp/) and the [Karl G. Jansky Array (JVLA)](https://science.nrao.edu/facilities/vla) to study various aspects about the interstellar medium. My present research focuses on planet-formation.
+I am a researcher who based mostly on the [Submillimeter Array (SMA)](http://sma1.sma.hawaii.edu/smaoc.html), the [Atacama Large Millimeter Array (ALMA)](https://almascience.nao.ac.jp/) and the [Karl G. Jansky Array (JVLA)](https://science.nrao.edu/facilities/vla) to study various aspects about the interstellar medium. My present research focuses on planet-formation and star-formation.
 {: .fs-2 }
 
 
@@ -31,7 +31,7 @@ More details about my research can be found at [this page](/pages/research).
 
 ### Group Members
 
-I presently host seven students, 0 research assistant, and 1 postdoc:
+I presently host five students, 0 research assistant, and 0 postdoc:
 {: .fs-2 }
 
 - **Undergraduate (2024-):** Lin, Cyuan-Yong (林詮詠)
@@ -39,9 +39,6 @@ I presently host seven students, 0 research assistant, and 1 postdoc:
 - **Undergraduate (2023-):** Huang, Hank Ting-Jing (黃珽靖)
 - **Undergraduate (2022-):** Chen, Ting-Chen (陳亭蓁)
 - **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
-- **Ph.D. student (2020-):** Terada, Yuka (寺田由佳)
-- **Ph.D. (2024-):** Chung, Chia-Ying (鍾佳穎)
-- **Postdoc (2023-):** Tsai, An-Li (蔡安理)
 {: .fs-2 }
 
 A full list of my present and former group members (and some of their journal publications) can be found [here](/pages/members).
@@ -64,7 +61,7 @@ A full list of my present and former group members (and some of their journal pu
 ### Publications
 
 The full lists of my publications can be found at [this page](/pages/publications)
- or [ORCiD](https://orcid.org/0000-0003-2300-2626), or [Publons](https://publons.com/researcher/3928011/hauyu-baobab-liu/).
+ or [Google Scholar](https://scholar.google.com/citations?user=0fwbACkAAAAJ), [ORCiD](https://orcid.org/0000-0003-2300-2626), [Publons](https://publons.com/researcher/3928011/hauyu-baobab-liu/).
  {: .fs-2 }
 
 
