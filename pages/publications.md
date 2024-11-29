@@ -6,7 +6,7 @@ has_children: false
 has_toc: false
 ---
 
-### Publications (updated on 2024-Oct-21, with 160 peer reviewed journal papers)
+### Publications (updated on 2024-Nov-29, with 163 peer reviewed journal papers)
 [Search on ADS](https://reurl.cc/5OxD7q)
 
 
@@ -56,6 +56,9 @@ has_toc: false
 
 
 ###### Other publications
+126. Aso, Y., Ohashi, S., {\bf Liu, H. B.}, Xu, W., "Grain Size in the Class I Protostellar System TMC-1A Constrained with ALMA and VLA Observations", ApJ, in press [ADS](https://ui.adsabs.harvard.edu/abs/2024arXiv241113044A/abstract) (2024)
+125. Lin, L., Zhang, Z.-Y., Wang, J., Papadopoulos, P. P., Shi, Y., Gong, Y., Sun, Y., Sun, Y., Bisbas, T. G., Romano, D., Li, D., **Liu, H. B.**, Li, H.-B., Qiu, K., Liu, L., Luo, G., Tsai, C.-W., Wu, J., Feng, S., Zhang, B., "Inadequate turbulent support in low-metallicity molecular clouds", Nature Astronomy, in press (2024)
+124. Law, C. J., Zhang, Q., Frommer, A., Oberg, K. I., Galvan-Madrid, R., Keto, E., **Liu, H. B.**, Ho, P. T. P., Izquierdo, A. F., Cleeves, L. I., "A wideband chemical survey of massive young stellar objects at subarcsecond resolution with the Submillimeter Array", ApJ in press [ADS](https://ui.adsabs.harvard.edu/abs/2024arXiv241100941L/abstract) (2024)
 123. Beilis, D., Beck, S., Lacy, J., Turner, J., **Liu, H. B.**, Ho, P. T.-P., *The radio-infrared nebula in II Zw 40: clusters forming in colliding filaments*, MNRAS, 535, 1052 [ADS](https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.1052B/abstract) (2024)
 122. Doi, K., Kataoka, A., **Liu, H. B.**, Yoshida, T. C., Benisty, M., Dong, R., Yamato, Y., Hashimoto, J., *Asymmetric dust accumulation of the PDS 70 disk revealed by ALMA Band 3 observations*, ApJL, 974, 25 [ADS](https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..25D/abstract) (2024)
 121. Shen, X., Liu, H., Ren, Z., Tej, A., Li, D., **Liu, H. B.**, Fuller, G., Xie, J., Jiao, S., Koch, P. M., Xu, F., Sanhueza, P., Rawlings, M. G., Lee, C. W., Tatematsu, K., Harsono, D., Eden, D., Kwon, W., Diep, P. N., Tsai, C.-W., White, G. J., Liu, T., Zhang, S., Jiao, W., Yang, D., Das, S. R., Wu, J., Wang, C., Shi, H., *JCMT 850 um continuum observations of density structures in the G35 molecular complex*, ApJ, 974, 239 [ADS](https://ui.adsabs.harvard.edu/abs/2024ApJ...974..239S/abstract) (2024)
