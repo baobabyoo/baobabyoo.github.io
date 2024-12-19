@@ -56,7 +56,7 @@ has_toc: false
 
 
 ###### Other publications
-126. Aso, Y., Ohashi, S., {\bf Liu, H. B.}, Xu, W., "Grain Size in the Class I Protostellar System TMC-1A Constrained with ALMA and VLA Observations", ApJ, in press [ADS](https://ui.adsabs.harvard.edu/abs/2024arXiv241113044A/abstract) (2024)
+126. Aso, Y., Ohashi, S., **Liu, H. B,**, Xu, W., "Grain Size in the Class I Protostellar System TMC-1A Constrained with ALMA and VLA Observations", ApJ, in press [ADS](https://ui.adsabs.harvard.edu/abs/2024arXiv241113044A/abstract) (2024)
 125. Lin, L., Zhang, Z.-Y., Wang, J., Papadopoulos, P. P., Shi, Y., Gong, Y., Sun, Y., Sun, Y., Bisbas, T. G., Romano, D., Li, D., **Liu, H. B.**, Li, H.-B., Qiu, K., Liu, L., Luo, G., Tsai, C.-W., Wu, J., Feng, S., Zhang, B., "Inadequate turbulent support in low-metallicity molecular clouds", Nature Astronomy, in press (2024)
 124. Law, C. J., Zhang, Q., Frommer, A., Oberg, K. I., Galvan-Madrid, R., Keto, E., **Liu, H. B.**, Ho, P. T. P., Izquierdo, A. F., Cleeves, L. I., "A wideband chemical survey of massive young stellar objects at subarcsecond resolution with the Submillimeter Array", ApJ in press [ADS](https://ui.adsabs.harvard.edu/abs/2024arXiv241100941L/abstract) (2024)
 123. Beilis, D., Beck, S., Lacy, J., Turner, J., **Liu, H. B.**, Ho, P. T.-P., *The radio-infrared nebula in II Zw 40: clusters forming in colliding filaments*, MNRAS, 535, 1052 [ADS](https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.1052B/abstract) (2024)
