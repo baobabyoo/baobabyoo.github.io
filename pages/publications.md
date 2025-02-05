@@ -6,9 +6,9 @@ has_children: false
 has_toc: false
 ---
 
-### Publications (updated on 2024-Nov-29, with 163 peer reviewed journal papers)
-[Search on ADS](https://reurl.cc/5OxD7q)
-[Google Scholar](https://scholar.google.com/citations?user=0fwbACkAAAAJ)
+### Publications (updated on 2025-Feb.-05, with 168 peer reviewed journal papers: 27 1st-author papers/24 2nd- or corresponding author papers)(Google Scholar h-index: 45)
+[(Search on ADS)](https://reurl.cc/5OxD7q)
+[(Google Scholar)](https://scholar.google.com/citations?user=0fwbACkAAAAJ)
 
 ###### As first author
 27. **Liu, H. B.**, Casassus, S., Dong, R., Doi, K., Hashimoto, J., Muto, T., *First JVLA Radio Observation on PDS 70*, ApJ, 972, 163 (2024) [ADS](https://ui.adsabs.harvard.edu/abs/2024ApJ...972..163L/abstract)
