@@ -28,7 +28,7 @@ has_toc: false
 **2024-Sep-08/2025-Jan-11 @ NSYSU :** *elasticity, fluid, thermal physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_fall))
 {: .fs-1 }
 
-**2023-Sep-04/Dec-22 @ NSYSU :** *rigid body motion, elasticity, fluid, thermal physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept)).
+**2023-Sep-04/Dec-22 @ NSYSU :** *rigid body motion, elasticity, fluid, thermal physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_fall/tree/2023Sep_ChemDept)).
 {: .fs-1 }
 
 1. [Lecture notes: measurements, vectors, motions](https://github.com/baobabyoo/Lecture_GeneralPhysicsII_2023Sep_ChemDept/blob/main/lecture_notes/measurements_vectors_motions.pdf)
@@ -49,10 +49,13 @@ has_toc: false
 
 ## General Physics (II)
 
-**2024-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_2024Feb)).
+**2025-Feb18/Jun-03 @ NSYSU :** *Quantum Physics, Electromagnetic* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_spring)).
 {: .fs-1 }
 
-**2023-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb)).
+**2024-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_spring/tree/2023Feb)).
+{: .fs-1 }
+
+**2023-Feb-13/May-31 @ NSYSU :** *Special Relativity, Quantum Physics, Electromagnetic, Geometric/Physical Optics, Nuclear Physics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_GeneralPhysics_spring/tree/2023Feb)).
 {: .fs-1 }
 
 1. [Lecture notes: Special relativity Part I](https://github.com/baobabyoo/Lecture_GeneralPhysics_2023Feb/blob/master/lecture_notes/SpecialRelativity_part1.pdf)
