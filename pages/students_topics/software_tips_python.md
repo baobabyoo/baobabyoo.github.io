@@ -72,6 +72,8 @@ conda list
 ### 2. PYTHONPATH
 
 In Linux, you set the environmental variable *PYTHONPATH*, where python can import classes and functions from. For example, I can create a directory `$HOME/bin/python` and then leave a code `test.py` there:
+{: .fs-2 }
+
 ```
 def test_print():
   print('test')
