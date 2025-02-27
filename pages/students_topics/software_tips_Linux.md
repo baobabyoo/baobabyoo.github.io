@@ -34,6 +34,12 @@ You need to create a bootable USB drive.
 In Linux, you may use the `dd` command to create it. See the introduction in [this Chinese webpage](https://kb.synology.com/zh-tw/DSM/tutorial/How_do_I_create_a_bootable_USB_drive_for_restoring_Linux), or [this English webpage](https://www.cyberciti.biz/faq/creating-a-bootable-ubuntu-usb-stick-on-a-debian-linux/).
 {: .fs-2 }
 
+Example:
+{: .fs-2 }
+```
+dd if=xxx.iso of=/dev/sdc
+```
+
 
 ### 3. Boot menu
 
