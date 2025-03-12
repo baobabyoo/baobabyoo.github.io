@@ -67,11 +67,11 @@ GRUB_ENABLE_BLSCFG=true
 ### 4. Installing packages
 
 With CentOS or Rocky Linux, use `yum install`; with Ubuntu Linux, use `apt-get install`.
+{: .fs-2 }
 
+### 5. Accounts
 
-### 4. Accounts
-
-#### root password
+#### 5.1 root password
 ```
 > sudo -i
 (enter password for user)
@@ -79,4 +79,9 @@ New password:
 Retype new password:
 > passwd
 ```
+{: .fs-2 }
+
+### 6. Network environment
+
+Check network status can use `ifconfig` or `ip addr`
 {: .fs-2 }
