@@ -154,3 +154,4 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 > sysctl -p
 > iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -j MASQUERADE
 ```
+{: .fs-2 }
