@@ -83,6 +83,8 @@ Retype new password:
 
 ### 6. Network environment
 
+
+#### 6.0 Basics
 Check network status can use `ifconfig` or `ip addr`
 {: .fs-2 }
 
@@ -110,3 +112,19 @@ if we want mask to be 255.255.255.0, we put cidr to be 24.
 
 We can check active internet connection with the command `> sudo netstat -lntp`
 {: .fs-2 }
+
+#### 6.1 Enable port 22 ssh connection for Ubuntu (CentOS Steam 9 and Rocky Linux 9 does not require this.)
+{: .fs-2 }
+
+```
+# check ufw status
+> sudo ufw status
+
+# enable ufw service
+> sudo ufw enable
+
+# enable port 22 connection
+> sudo ufw allow ssh
+# or
+> sudo ufw 22/tcp
+```
