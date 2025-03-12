@@ -88,7 +88,7 @@ Retype new password:
 Check network status can use `ifconfig` or `ip addr`
 {: .fs-2 }
 
-Set network configuration
+Set network configuration : Ubuntu
 ```
 root> vim /etc/netplan/50-cloud-init.yaml
 
@@ -104,6 +104,8 @@ network:
         addresses: [8.8.8.8,101.101.101.101]
   version: 2
 ```
+{: .fs-2 }
+
 {: .fs-2 }
 
 We run `root> netplan apply` to make the new setup take effect.
@@ -142,3 +144,12 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 > sudo ufw 22/tcp
 ```
 {: .fs-2 }
+
+
+#### 6.2 IP forwarding
+
+```
+> vim /etc/sysctl.conf
+(uncomment) net.ipv4.ip_forward=1
+> sysctl -p
+```
