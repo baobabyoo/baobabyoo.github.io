@@ -128,3 +128,4 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 # or
 > sudo ufw 22/tcp
 ```
+{: .fs-2 }
