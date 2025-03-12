@@ -98,7 +98,7 @@ network:
       dhcp4: false
       addresses: [xxx.xxx.xxx.xxx/cidr]
       nameservers:
-        addresses:
+        addresses: [8.8.8.8,101.101.101.101]
   version: 2
 ```
 {: .fs-2 }
