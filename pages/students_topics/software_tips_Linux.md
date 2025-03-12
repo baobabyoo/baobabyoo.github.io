@@ -85,3 +85,22 @@ Retype new password:
 
 Check network status can use `ifconfig` or `ip addr`
 {: .fs-2 }
+
+Set network configuration
+```
+root> vim /etc/netplan/50-cloud-init.yaml
+
+network:
+  ethernets:
+    enp45s0:
+      dhcp4: true
+    enp46s0:
+      dhcp4: false
+      addresses: [xxx.xxx.xxx.xxx/cidr]
+      nameservers:
+        addresses:
+  version: 2
+```
+We run `>netplan apply` to make the new setup take effect.
+if we want mask to be 255.255.255.0, we put cidr to be 24.
+{: .fs-2 }
