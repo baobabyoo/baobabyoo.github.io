@@ -69,7 +69,39 @@ conda list
 ```
 {: .fs-1 }
 
-### 2. Using Jupyter Notebook from a Remote Server
+### 2. PYTHONPATH
+
+In Linux, you set the environmental variable *PYTHONPATH*, where python can import classes and functions from. For example, I can create a directory `$HOME/bin/python` and then leave a code `test.py` there:
+{: .fs-2 }
+
+```
+def test_print():
+  print('test')
+
+```
+{: .fs-1 }
+
+Then I can include the following lines in the `~/.bashrc` script:
+{: .fs-2 }
+
+```
+PYTHONPATH="$HOME/bin/python:$PYTHONPATH"
+export PYTHONPATH
+```
+{: .fs-1 }
+ 
+Then when launching python command line, I can access the *test()* function by typing 
+{: .fs-2 }
+
+```
+>>> from test import test_print
+>>> test_print()
+
+```
+{: .fs-1 }
+
+
+### 3. Using Jupyter Notebook from a Remote Server
 
 You need to install Jupyter Notebook in the remote sever (e.g., under a conda environment) by typing
 {: .fs-2 }

@@ -31,9 +31,18 @@ Embedded below are some tips.
 You need to create a bootable USB drive.
 {: .fs-2 }
 
+First, insert your USB key. Use the command `fdisk -l` to identify this USB key from a list of devices. Use the following command to re-format the USB key to FAT32 file system, `mkdosfs -I /dev/sdc -F 32` (replace /dev/sdc with the actual device-name of your USB key).
+{: .fs-2 }
+
 In Linux, you may use the `dd` command to create it. See the introduction in [this Chinese webpage](https://kb.synology.com/zh-tw/DSM/tutorial/How_do_I_create_a_bootable_USB_drive_for_restoring_Linux), or [this English webpage](https://www.cyberciti.biz/faq/creating-a-bootable-ubuntu-usb-stick-on-a-debian-linux/).
 {: .fs-2 }
 
+Example:
+{: .fs-2 }
+```
+dd if=xxx.iso of=/dev/sdc
+```
+{: .fs-2 }
 
 ### 3. Boot menu
 
@@ -55,3 +64,6 @@ GRUB_ENABLE_BLSCFG=true
 {: .fs-2 }
 
 
+### 4. Installing packages
+
+With CentOS or Rocky Linux, use `yum install`; with Ubuntu Linux, use `apt-get install`.
