@@ -97,6 +97,7 @@ network:
     enp46s0:
       dhcp4: false
       addresses: [xxx.xxx.xxx.xxx/cidr]
+      gateway4: xxx.xxx.xxx.xxx
       nameservers:
         addresses: [8.8.8.8,101.101.101.101]
   version: 2
