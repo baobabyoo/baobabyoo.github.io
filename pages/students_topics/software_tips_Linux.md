@@ -107,3 +107,6 @@ network:
 We run `root> netplan apply` to make the new setup take effect.
 if we want mask to be 255.255.255.0, we put cidr to be 24.
 {: .fs-2 }
+
+We can check active internet connection with the command `> sudo netstat -lntp`
+{: .fs-2 }
