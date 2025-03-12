@@ -117,6 +117,18 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 {: .fs-2 }
 
 ```
+# install open ssh server
+> sudo apt install openssh-server
+
+# set the connection port (normally, port 22)
+> sudo vim /etc/ssh/sshd_config
+
+# restart ssh service
+> sudo systemctl restart ssh
+> sudo systemctl status ssh
+
+
+# UFW is a simple firewall that is on Ubuntu
 # check ufw status
 > sudo ufw status
 
