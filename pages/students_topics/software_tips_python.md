@@ -3,7 +3,7 @@ layout: default
 title: Python
 parent: Software Tips
 grand_parent: To my students
-nav_order: 1
+nav_order: 2
 ---
 
 ### 1. Maintaining conda environment
