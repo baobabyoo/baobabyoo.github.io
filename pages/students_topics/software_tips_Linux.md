@@ -67,3 +67,16 @@ GRUB_ENABLE_BLSCFG=true
 ### 4. Installing packages
 
 With CentOS or Rocky Linux, use `yum install`; with Ubuntu Linux, use `apt-get install`.
+
+
+### 4. Accounts
+
+#### root password
+```
+> sudo -i
+(enter password for user)
+New password:
+Retype new password:
+> passwd
+```
+{: .fs-2 }
