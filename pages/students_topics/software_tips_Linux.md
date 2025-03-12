@@ -122,6 +122,7 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 
 # set the connection port (normally, port 22)
 > sudo vim /etc/ssh/sshd_config
+(if it is slow to login, try edit useDNS in this file to NO)
 
 # restart ssh service
 > sudo systemctl restart ssh
