@@ -190,7 +190,7 @@ The steps you need to follow are:
 7. You can also connect your printer to a LAN port of the router (if possible). 
 {: .fs-2 }
 
-Here is an example for the `iptables.sh` files:
+Here is an example for the `iptables.sh` files (參考鳥哥的私房菜的例子):
 {: .fs-2 }
 
 ```
