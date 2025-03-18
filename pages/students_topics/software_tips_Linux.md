@@ -226,3 +226,4 @@ iptables-save
 iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -j MASQUERADE
 sysctl -p
 ```
+{: .fs-2 }
