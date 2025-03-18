@@ -158,4 +158,27 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 {: .fs-2 }
 
 
-#### 6.X Practice of setting up Local Area Network (LAN) 區域網路設置實務
+#### 6.X Practice of setting up Local Area Network (LAN) 區域網路設置實務 (Ubuntu)
+
+Here, I assume you have
+- One Ubuntu Linux desktop with two network interface card (網路卡). We call this desktop the **Master node**.
+- One **router** (probably with 1 WAN port and several LAN ports), which can also share WIFI.
+- One Linux desktop with Linux OS systems (e.g., CentOS, Rocky Linux, Ubuntu, etc). We call this desktop the **Computing node**. If you have multiple computing nodes, the setup of each of them will be similar. Usually, each of your computing node only needs one network interface card.
+- One fixed IP, e.g., **140.117.123.456** (you need to obtain this from the IT guy).
+{: .fs-2 }
+
+I assume that what you want to do is connecting from outside (e.g., your home) to your Master node using `ssh`, and then connecting from the Master node to the computing node. In addition, you want the computing nodes to be able to access to to the internet (e.g., check e-mail, browsing, or download files).
+{: .fs-2 }
+
+In this case, on the Master node, you need to use one network interface card to connect to the internet (let's call this card *NIC-global*), and use the other network interface card to connect to the local area network, likely from the router (let's call this card *NIC-local*).
+{: .fs-2 }
+
+The steps you need to follow are:
+1. Connecting the Wide Area Network (WAN) internet cable (i.e., from outside of your office) to *NIC-global*. Then you can set the network configuration of your **Master node** for *NIC-global*.
+   - set IP to 140.117.123.456 (for example). Typically, the netmask is 255.255.255.0, and typically, the gateway is 140.117.123.254 (i.e., change the last three digits of your IP to 254. Note that it is not necessarily this case. In case of problem, you need to consult the IT guy of your institution.)
+    - set the Domain Name System (DNS) server(s) to 8.8.8.8 and/or 101.101.101.101. If you are in NSYSU, you can also include our DNS server, 140.117.11.1.
+    - Apply your setup. Then with a command line, type `> ping 8.8.8.8` and see if you are connected (in this case, to the DNS server of google).
+    {: .fs-2 }
+2. test
+3. test 
+{: .fs-2 }
