@@ -162,7 +162,7 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 
 Here, I assume you have
 - One Ubuntu Linux desktop with two network interface card (網路卡). We call this desktop the **Master node**.
-- One **router** (probably with 1 WAN port and several LAN ports), which can also share WIFI.
+- One **router** (probably with 1 WAN port and several LAN ports; 路由器，亦稱IP分享器), which can also share WIFI.
 - One Linux desktop with Linux OS systems (e.g., CentOS, Rocky Linux, Ubuntu, etc). We call this desktop the **Computing node**. If you have multiple computing nodes, the setup of each of them will be similar. Usually, each of your computing node only needs one network interface card.
 - One fixed IP, e.g., **140.117.123.456** (you need to obtain this from the IT guy).
 {: .fs-2 }
@@ -179,6 +179,49 @@ The steps you need to follow are:
     - set the Domain Name System (DNS) server(s) to 8.8.8.8 and/or 101.101.101.101. If you are in NSYSU, you can also include our DNS server, 140.117.11.1.
     - Apply your setup. Then with a command line, type `> ping 8.8.8.8` and see if you are connected (in this case, to the DNS server of google).
     {: .fs-2 }
-2. test
-3. test 
+2. Connecting another cable from *NIC-local* to your router, and then set the network configuration.
+   - We may set the IP and netmask to 192.168.100.254 and 255.255.255.0. We can leave gateway blank or set it to 192.168.100.254.
+3. Active the IP forwarding service (IP轉發) on the Master node, and properly set the firewall (防火牆). I will first uncomment `net.ipv4.ip_forward=1` in the file `/etc/sysctl.conf` (see also [IP forwarding](https://baobabyoo.github.io/pages/students_topics/software_tips_Linux.html#62-ip-forwarding)). I will then create a text file iptables.sh (e.g., using `vim`) with the following content (if you use other IP for the LAN, you need to edit the IP correspondingly):
+    ```
+#!/bin/bash
+# part 1： 清除規則並設定預設政策
+iptables -F
+iptables -X
+iptables -Z
+iptables -P INPUT   DROP
+iptables -P OUTPUT  ACCEPT
+iptables -P FORWARD ACCEPT
+
+# part 2； 基礎的三條防火牆規則
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
+
+# allow ssh from outside via port 22
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# part 3； 拒絕黑名單、開放白名單的設定
+## 黑名單例子
+# iptables -A INPUT -s 10.30.30.0/24 -j REJECT
+# iptables -A INPUT -i enp1s0 -s 192.168.201.254 -j ACCEPT
+## 中山校內網路設為白名單
+iptables -A INPUT -i enp46s0 -s 140.117.30.0/24 -m state --state NEW -p tcp --dport 22 -j ACCEPT
+## 實驗室內部網路設為白名單
+iptables -A INPUT -i enp45s0 -s 192.168.100.0/24 -m state --state NEW -p tcp --dport 22 -j ACCEPT
+
+
+# part 4： 一般通用放行的網際網路服務
+iptables -A INPUT -m state --state NEW -p tcp --dport  80 -j ACCEPT
+iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -m state --state NEW -p udp --dport  53 -j ACCEPT
+iptables -A INPUT -m state --state NEW -p tcp --dport  53 -j ACCEPT
+
+# part 5： 儲存規則
+iptables-save
+
+# part 6: 允許以及執行IP forwarding
+iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -j MASQUERADE
+sysctl -p
+    ```
+    and then execute this file by typing `> sudo sh iptables.sh`
 {: .fs-2 }
