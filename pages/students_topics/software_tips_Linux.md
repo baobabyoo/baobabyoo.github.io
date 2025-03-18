@@ -183,6 +183,9 @@ The steps you need to follow are:
    - We may set the IP and netmask to 192.168.100.254 and 255.255.255.0. We can leave gateway blank or set it to 192.168.100.254.
 3. Active the IP forwarding service (IP轉發) on the Master node, and properly set the firewall (防火牆). I will first uncomment `net.ipv4.ip_forward=1` in the file `/etc/sysctl.conf` (see also [IP forwarding](https://baobabyoo.github.io/pages/students_topics/software_tips_Linux.html#62-ip-forwarding)). I will then create a text file iptables.sh (e.g., using `vim`) with the content embedded below (if you use other IP for the LAN, you need to edit the IP correspondingly):
     and then execute this file by typing `> sudo sh iptables.sh`
+4. Connect your computing node to a LAN port of your router, and then set the network configuration. You can set the IP, netmask, and gateway to be `192.168.100.ABC`, `255.255.255.0`, and `the LAN IP of your Master node (e.g., 192.168.100.254)`. Here, ABC should be an integer in the range of 002~253 (reserving 000, 001, and 254 for other purposes).
+5. On the computing node, trying pinging 8.8.8.8 and see if you are connected. You can also try using browser.
+6. Test the connection from outside. Since the firewall of NSYSU does not permit ssh connection from outside, you need to pretent being in the domain (網域) of NSYSU using the VPN service (please see the [instruction of the NSYSU VPN](https://lis.nsysu.edu.tw/p/412-1001-7113.php) and download the VPN client to your outside desktop or laptop, which is not your Master or computing node). Activate the VPN service and connect it. Then open an terminal and type `ssh 140.117.123.456` (i.e., ssh to the fixed IP of your Master node) to connect to the Master node. You should be able to ssh from the Master node to any of your computing nodes. 
 {: .fs-2 }
 
 Here is an example for the `iptables.sh` files:
