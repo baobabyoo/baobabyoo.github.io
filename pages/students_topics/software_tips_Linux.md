@@ -189,6 +189,8 @@ The steps you need to follow are:
 {: .fs-2 }
 
 Here is an example for the `iptables.sh` files:
+{: .fs-2 }
+
 ```
 #!/bin/bash
 # part 1： 清除規則並設定預設政策
