@@ -110,6 +110,7 @@ network:
 
 We run `root> netplan apply` to make the new setup take effect.
 if we want mask to be 255.255.255.0, we put cidr to be 24.
+You can also set this using the GUI interface.
 {: .fs-2 }
 
 We can check active internet connection with the command `> sudo netstat -lntp`
@@ -155,3 +156,6 @@ We can check active internet connection with the command `> sudo netstat -lntp`
 > iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -j MASQUERADE
 ```
 {: .fs-2 }
+
+
+#### 6.X Practice of setting up Local Area Network (LAN) 區域網路設置實務
