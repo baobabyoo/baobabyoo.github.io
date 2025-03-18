@@ -181,8 +181,12 @@ The steps you need to follow are:
     {: .fs-2 }
 2. Connecting another cable from *NIC-local* to your router, and then set the network configuration.
    - We may set the IP and netmask to 192.168.100.254 and 255.255.255.0. We can leave gateway blank or set it to 192.168.100.254.
-3. Active the IP forwarding service (IP轉發) on the Master node, and properly set the firewall (防火牆). I will first uncomment `net.ipv4.ip_forward=1` in the file `/etc/sysctl.conf` (see also [IP forwarding](https://baobabyoo.github.io/pages/students_topics/software_tips_Linux.html#62-ip-forwarding)). I will then create a text file iptables.sh (e.g., using `vim`) with the following content (if you use other IP for the LAN, you need to edit the IP correspondingly):
-    ```
+3. Active the IP forwarding service (IP轉發) on the Master node, and properly set the firewall (防火牆). I will first uncomment `net.ipv4.ip_forward=1` in the file `/etc/sysctl.conf` (see also [IP forwarding](https://baobabyoo.github.io/pages/students_topics/software_tips_Linux.html#62-ip-forwarding)). I will then create a text file iptables.sh (e.g., using `vim`) with the content embedded below (if you use other IP for the LAN, you need to edit the IP correspondingly):
+    and then execute this file by typing `> sudo sh iptables.sh`
+{: .fs-2 }
+
+Here is an example for the `iptables.sh` files:
+```
 #!/bin/bash
 # part 1： 清除規則並設定預設政策
 iptables -F
@@ -209,7 +213,6 @@ iptables -A INPUT -i enp46s0 -s 140.117.30.0/24 -m state --state NEW -p tcp --dp
 ## 實驗室內部網路設為白名單
 iptables -A INPUT -i enp45s0 -s 192.168.100.0/24 -m state --state NEW -p tcp --dport 22 -j ACCEPT
 
-
 # part 4： 一般通用放行的網際網路服務
 iptables -A INPUT -m state --state NEW -p tcp --dport  80 -j ACCEPT
 iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT
@@ -222,6 +225,4 @@ iptables-save
 # part 6: 允許以及執行IP forwarding
 iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -j MASQUERADE
 sysctl -p
-    ```
-    and then execute this file by typing `> sudo sh iptables.sh`
-{: .fs-2 }
+```
