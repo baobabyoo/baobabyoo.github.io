@@ -174,6 +174,7 @@ In this case, on the Master node, you need to use one network interface card to 
 {: .fs-2 }
 
 The steps you need to follow are:
+{: .fs-2 }
 1. Connecting the Wide Area Network (WAN) internet cable (i.e., from outside of your office) to *NIC-global*. Then you can set the network configuration of your **Master node** for *NIC-global*.
    - set IP to 140.117.123.456 (for example). Typically, the netmask is 255.255.255.0, and typically, the gateway is 140.117.123.254 (i.e., change the last three digits of your IP to 254. Note that it is not necessarily this case. In case of problem, you need to consult the IT guy of your institution.)
     - set the Domain Name System (DNS) server(s) to 8.8.8.8 and/or 101.101.101.101. If you are in NSYSU, you can also include our DNS server, 140.117.11.1.
