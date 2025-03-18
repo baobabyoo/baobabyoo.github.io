@@ -186,6 +186,7 @@ The steps you need to follow are:
 4. Connect your computing node to a LAN port of your router, and then set the network configuration. You can set the IP, netmask, and gateway to be `192.168.100.ABC`, `255.255.255.0`, and `the LAN IP of your Master node (e.g., 192.168.100.254)`. Here, ABC should be an integer in the range of 002~253 (reserving 000, 001, and 254 for other purposes).
 5. On the computing node, trying pinging 8.8.8.8 and see if you are connected. You can also try using browser.
 6. Test the connection from outside. Since the firewall of NSYSU does not permit ssh connection from outside, you need to pretent being in the domain (網域) of NSYSU using the VPN service (please see the [instruction of the NSYSU VPN](https://lis.nsysu.edu.tw/p/412-1001-7113.php) and download the VPN client to your outside desktop or laptop, which is not your Master or computing node). Activate the VPN service and connect it. Then open an terminal and type `ssh 140.117.123.456` (i.e., ssh to the fixed IP of your Master node) to connect to the Master node. You should be able to ssh from the Master node to any of your computing nodes. 
+7. You can also connect your printer to a LAN port of the router (if possible). 
 {: .fs-2 }
 
 Here is an example for the `iptables.sh` files:
