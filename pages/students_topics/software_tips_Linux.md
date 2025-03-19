@@ -171,8 +171,8 @@ After setting the network configuration, you can let it take effect by typing `>
 {: .fs-2 }
 
 ```
-> ifdown device_ID (e.g., eth0)
-> ifup device_ID
+> ifconfig device_ID down (e.g., > ifconfig eth0 down)
+> ifconfig device_ID up
 ```
 {: .fs-2 }
 
