@@ -167,7 +167,13 @@ MTU=1500                    # maximum transmission unit
 ```
 {: .fs-2 }
 
-After setting the network configuration, you can let it take effect by typing `> /etc/init.d/network restart` in the command line.
+After setting the network configuration, you can let it take effect by typing `> /etc/init.d/network restart` in the command line. Or we can run
+{: .fs-2 }
+
+```
+> ifdown device_ID (e.g., eth0)
+> ifup device_ID
+```
 {: .fs-2 }
 
 注意若要用dhcp取得IP，不要設置gateway!
