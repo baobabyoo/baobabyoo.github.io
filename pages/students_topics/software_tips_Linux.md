@@ -85,13 +85,34 @@ Retype new password:
 
 
 #### 6.0 Basics
-Check network status can use `ifconfig` or `ip addr`
+Check network status can use `ifconfig` or `ip addr`.
+With this, you can also obtain the ID of your network interface card (網路卡代號, e.g., eth0).
 {: .fs-2 }
 
 Check route table can use `route` or `route -n`
 {: .fs-2 }
 
-Set network configuration : Ubuntu
+Restar your network service: `/etc/init.d/network restart`
+{: .fs-2 }
+
+Some important configuration files:
+{: .fs-2 }
+
+```
+/etc/sysconfig/network-scripts/ifcfg-eth0  # device_ID, IP, netmask, gateway, etc for eth0
+/etc/sysconfig/network                     # networking, supporting ipv6, hostname
+/etc/resolv.conf                           # IP of DNS servers
+/etc/hosts                                 # 私有IP 主機名稱 別名
+
+```
+{: .fs-2 }
+
+The simplest way of setting the IP for a network interface card is `ifconfig ID XXX.XXX.XXX.XXX`, for example, `ifconfig eth0 192.168.1.100`.
+{: .fs-2 }
+
+With Ubuntu Linux, more sophisticated way of editing the network configuration is:
+{: .fs-2 }
+
 ```
 root> vim /etc/netplan/50-cloud-init.yaml
 
@@ -111,7 +132,7 @@ network:
 
 {: .fs-2 }
 
-We run `root> netplan apply` to make the new setup take effect.
+We run `root> netplan apply` to make the new setup in the 50-cloud-init.yaml file take effect.
 if we want mask to be 255.255.255.0, we put cidr to be 24.
 You can also set this using the GUI interface.
 {: .fs-2 }
