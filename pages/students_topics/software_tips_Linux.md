@@ -88,6 +88,9 @@ Retype new password:
 Check network status can use `ifconfig` or `ip addr`
 {: .fs-2 }
 
+Check route table can use `route` or `route -n`
+{: .fs-2 }
+
 Set network configuration : Ubuntu
 ```
 root> vim /etc/netplan/50-cloud-init.yaml
