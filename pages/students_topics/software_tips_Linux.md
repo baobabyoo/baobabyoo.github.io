@@ -89,6 +89,9 @@ Check network status can use `ifconfig` or `ip addr`.
 With this, you can also obtain the ID of your network interface card (網路卡代號, e.g., eth0).
 {: .fs-2 }
 
+Check your own hostname can type `hostname`
+{: .fs-2 }
+
 Check route table can use `route` or `route -n`
 {: .fs-2 }
 
@@ -138,6 +141,9 @@ You can also set this using the GUI interface.
 {: .fs-2 }
 
 We can check active internet connection with the command `> sudo netstat -lntp`
+{: .fs-2 }
+
+We can check whether or not DNS is working by typing `dig www.google.com`.
 {: .fs-2 }
 
 With CentOS, more sophisticated way of editing the network configuration (e.g., for eth0) is:
