@@ -93,7 +93,7 @@ If you are using wireless network, you can also try the command `iwconfig`.
 Check your own hostname can type `hostname`
 {: .fs-2 }
 
-Check route table can use `route` or `route -n`
+Check route table can use `route` or `route -n`. The `route` command also allows you to set routes.
 {: .fs-2 }
 
 Restar your network service: `/etc/init.d/network restart`
