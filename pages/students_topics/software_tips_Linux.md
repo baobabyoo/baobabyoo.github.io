@@ -140,6 +140,26 @@ You can also set this using the GUI interface.
 We can check active internet connection with the command `> sudo netstat -lntp`
 {: .fs-2 }
 
+With CentOS, more sophisticated way of editing the network configuration (e.g., for eth0) is:
+{: .fs-2 }
+
+```
+vim /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE="eth0"              
+HWADDR="08:00:27:71:85:BD"  # MAC address
+NM_CONTROLLED="no"          # just use no in typical cases
+ONBOOT="yes"                # active this device when booting
+BOOTPROTO=none              <==取得IP的方式，其實關鍵字只有dhcp，手動可輸入none
+IPADDR=192.168.1.100        # IP
+NETMASK=255.255.255.0       
+GATEWAY=192.168.1.254       
+MTU=1500                    # maximum transmission unit
+```
+{: .fs-2 }
+
+After setting the network configuration, you can let it take effect by typing `> /etc/init.d/network restart` in the command line.
+{: .fs-2 }
+
 #### 6.1 Enable port 22 ssh connection for Ubuntu (CentOS Steam 9 and Rocky Linux 9 does not require this.)
 {: .fs-2 }
 
