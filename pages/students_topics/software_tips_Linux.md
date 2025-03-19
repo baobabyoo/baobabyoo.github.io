@@ -93,7 +93,7 @@ If you are using wireless network, you can also try the command `iwconfig`.
 Check your own hostname can type `hostname`
 {: .fs-2 }
 
-Check route table can use `route` or `route -n`. The `route` command also allows you to set routes.
+Check route table can use `route` or `route -n`. The `route` command also allows you to (tentatively) set default routes.
 {: .fs-2 }
 
 Restar your network service: `/etc/init.d/network restart`
@@ -111,7 +111,7 @@ Some important configuration files:
 ```
 {: .fs-2 }
 
-The simplest way of **tentatively** setting the IP for a network interface card is `ifconfig ID XXX.XXX.XXX.XXX`, for example, `ifconfig eth0 192.168.1.100`.
+The simplest way of **tentatively** setting the IP for a network interface card is `ifconfig ID XXX.XXX.XXX.XXX`, for example, `ifconfig eth0 192.168.1.100`. For example, you can use the command `ifconfig eth0 192.168.1.100; route add default gw 192.168.1.254` to tentatively change your network configuration without altering the configuration file. You can then run `/etc/init.d/network restart` to resume the configuration (in your configuration file).
 {: .fs-2 }
 
 If it takes a long time to login to some nodes within your LAN, you should include those nodes into the `/etc/hosts` file.
