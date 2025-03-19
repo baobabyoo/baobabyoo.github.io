@@ -236,7 +236,7 @@ The steps you need to follow are:
     - Apply your setup. Then with a command line, type `> ping 8.8.8.8` and see if you are connected (in this case, to the DNS server of google).
     {: .fs-2 }
 2. Connecting another cable from *NIC-local* to your router, and then set the network configuration.
-   - We may set the IP and netmask to 192.168.100.254 and 255.255.255.0. We can leave gateway blank or set it to 192.168.100.254.
+   - We may set the IP and netmask to 192.168.100.254 and 255.255.255.0. We can leave gateway blank.
 3. Active the IP forwarding service (IP轉發) on the Master node, and properly set the firewall (防火牆). I will first uncomment `net.ipv4.ip_forward=1` in the file `/etc/sysctl.conf` (see also [IP forwarding](https://baobabyoo.github.io/pages/students_topics/software_tips_Linux.html#62-ip-forwarding)). I will then create a text file iptables.sh (e.g., using `vim`) with the content embedded below (if you use other IP for the LAN, you need to edit the IP correspondingly):
     and then execute this file by typing `> sudo sh iptables.sh`
 4. Connect your computing node to a LAN port of your router, and then set the network configuration. You can set the IP, netmask, and gateway to be `192.168.100.ABC`, `255.255.255.0`, and `the LAN IP of your Master node (e.g., 192.168.100.254)`. Here, ABC should be an integer in the range of 002~253 (reserving 000, 001, and 254 for other purposes).
