@@ -112,6 +112,7 @@ Some important configuration files:
 {: .fs-2 }
 
 The simplest way of setting the IP for a network interface card is `ifconfig ID XXX.XXX.XXX.XXX`, for example, `ifconfig eth0 192.168.1.100`.
+If it takes a long time to login to some nodes within your LAN, you should include those nodes into the `/etc/hosts` file.
 {: .fs-2 }
 
 With Ubuntu Linux, more sophisticated way of editing the network configuration is:
