@@ -87,6 +87,7 @@ Retype new password:
 #### 6.0 Basics
 Check network status can use `ifconfig` or `ip addr`.
 With this, you can also obtain the ID of your network interface card (網路卡代號, e.g., eth0).
+If you are using wireless network, you can also try the command `iwconfig`.
 {: .fs-2 }
 
 Check your own hostname can type `hostname`
@@ -164,6 +165,9 @@ MTU=1500                    # maximum transmission unit
 {: .fs-2 }
 
 After setting the network configuration, you can let it take effect by typing `> /etc/init.d/network restart` in the command line.
+{: .fs-2 }
+
+注意若要用dhcp取得IP，不要設置gateway!
 {: .fs-2 }
 
 #### 6.1 Enable port 22 ssh connection for Ubuntu (CentOS Steam 9 and Rocky Linux 9 does not require this.)
