@@ -305,7 +305,7 @@ If you would like to execute something at a certain time, you can use the `at` c
 
 #### `at`
 
-It require the service, **atd** to be activated. If it is not activated, you can run `> systemctl restart atd `. You can also make it activated when booting by `> systemctl enable atd`
+It require the service, **atd** to be activated. If it is not activated, you can run `> systemctl restart atd `. You can also make it activated when booting by `> systemctl enable atd`. Some useful instructions can see [here](https://hackmd.io/@AlienHackMd/HJnNq_uEn?utm_source=preview-mode&utm_medium=rec#%E8%A8%88%E7%95%AB%E5%9F%B7%E8%A1%8C%EF%BC%9Aat-%E4%BB%8B%E7%B4%B9) and [here](https://linux.vbird.org/linux_basic/centos7/0430cron.php).
 {: .fs-2 }
 
 **Examples** of using `at`:
