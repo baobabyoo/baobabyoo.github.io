@@ -304,6 +304,8 @@ sysctl -p
 ```
 {: .fs-2 }
 
+To tentatively switch off your firewall, use `> /etc/init.d/iptables stop`
+{: .fs-2 }
 
 ### 7. Scheduling your job
 If you would like to execute something at a certain time, you can use the `at` command; if you would like to executing something every certain time period, you can use `crontab`.
