@@ -90,10 +90,10 @@ With this, you can also obtain the ID of your network interface card (網路卡�
 If you are using wireless network, you can also try the command `iwconfig`.
 {: .fs-2 }
 
-Check your own hostname can type `hostname`
+Check your own hostname can type `hostname`. Check other sites' IP can type `host domain_name` (e.g., `host www.google.com`).
 {: .fs-2 }
 
-Check route table can use `route` or `route -n`. The `route` command also allows you to (tentatively) set default routes.
+Check route table can use `route` or `route -n`. The `route` command also allows you to (tentatively) set routes.
 {: .fs-2 }
 
 Restar your network service: `/etc/init.d/network restart`
