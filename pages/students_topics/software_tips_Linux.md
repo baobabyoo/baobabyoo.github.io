@@ -147,7 +147,10 @@ if we want mask to be 255.255.255.0, we put cidr to be 24.
 You can also set this using the GUI interface.
 {: .fs-2 }
 
-We can check active internet connection with the command `> sudo netstat -lntp`
+We can check active internet connection with the command `> sudo netstat -tun`; you can check the activated port on your computer by typing `> sudo netstat -tunl`.
+{: .fs-2 }
+
+We can also can the active port on our computer by typing `> nmap -sTU localhost`; we can scan the computers in your LAN, for example, by typing `nmap -sP 192.168.1.0/24` (change the IP to the domain of your LAN).
 {: .fs-2 }
 
 We can check whether or not DNS is working by typing `dig www.google.com`.
