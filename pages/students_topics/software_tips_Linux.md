@@ -90,7 +90,7 @@ With this, you can also obtain the ID of your network interface card (網路卡�
 If you are using wireless network, you can also try the command `iwconfig`.
 {: .fs-2 }
 
-Check your own hostname can type `hostname`. Check other sites' IP can type `host domain_name` (e.g., `host www.google.com`).
+Check your own hostname can type `hostname`. Check other sites' IP can type `host domain_name` or `nslookup domain_name` (e.g., `host www.google.com`, `nslookup www.google.com`). You can also get to domain name of an IP address by typing `nslookup IP`.
 {: .fs-2 }
 
 Check route table can use `route` or `route -n`. The `route` command also allows you to (tentatively) set routes.
