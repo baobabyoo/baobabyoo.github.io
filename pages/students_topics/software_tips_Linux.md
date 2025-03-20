@@ -297,3 +297,37 @@ iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -j MASQUERADE
 sysctl -p
 ```
 {: .fs-2 }
+
+
+### 7. Scheduling your job
+If you would like to execute something at a certain time, you can use the `at` command; if you would like to executing something every certain time period, you can use `crontab`.
+{: .fs-2 }
+
+#### `at`
+
+It require the service, **atd** to be activated. If it is not activated, you can run `> systemctl restart atd `. You can also make it activated when booting by `> systemctl enable atd`
+{: .fs-2 }
+
+**Examples** of using `at`:
+{: .fs-2 }
+```
+# check active at jobs
+> atq
+
+# remove at job
+atrm job_ID
+
+# executing a certiain scipt now
+> at -f ./XXX.sh now
+
+# executing a certiain scipt 5 minutes from now
+> at -f ./XXX.sh now + 5 minutes
+
+# executing a script at 12:30
+> at -f ./XXX.sh 12:30
+
+# executing a script at 12:30 of 2025-07-30
+> at -f ./XXX.sh 12:30 2025-07-30
+```
+{: .fs-2 }
+
