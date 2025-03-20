@@ -44,6 +44,9 @@ dd if=xxx.iso of=/dev/sdc
 ```
 {: .fs-2 }
 
+If the package manager is `yum`, we can update the Linux system using the commnad `yum update` (we may use *crontab* to update the system regularly, e.g., `root yum -y update && yum clean packages`); if the package manager is `apt-get`, we can run `apt-get update` and then `apt-get upgrade`.
+{: .fs-2 }
+
 ### 3. Boot menu
 
 In most cases, the boot menu is managed by a program called *grub*. You can set your preferences by editing the file `/etc/default/grub`, using any text editor (for example, *vim*). An example of the content in the /etc/default/grub file is as follows (please google or ask ChatGPT of you would like to understand some of the lines).
