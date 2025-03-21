@@ -298,11 +298,14 @@ iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT
 iptables -A INPUT -m state --state NEW -p udp --dport  53 -j ACCEPT
 iptables -A INPUT -m state --state NEW -p tcp --dport  53 -j ACCEPT
 
-# part 5： 列出規則
-iptables-save
-
-# part 6: 允許以及執行IP forwarding
+# part 5: 允許IP forwarding
 iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -j MASQUERADE
+
+# part 6： 列出規則及儲存規則
+iptables-save
+/etc/init.d/iptables save
+
+# 啟動IP forwarding
 sysctl -p
 ```
 {: .fs-2 }
