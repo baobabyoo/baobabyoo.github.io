@@ -298,7 +298,7 @@ iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT
 iptables -A INPUT -m state --state NEW -p udp --dport  53 -j ACCEPT
 iptables -A INPUT -m state --state NEW -p tcp --dport  53 -j ACCEPT
 
-# part 5： 儲存規則
+# part 5： 列出規則
 iptables-save
 
 # part 6: 允許以及執行IP forwarding
