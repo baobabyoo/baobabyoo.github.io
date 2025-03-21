@@ -102,6 +102,9 @@ Check route table can use `route` or `route -n`. The `route` command also allows
 Restar your network service: `/etc/init.d/network restart`
 {: .fs-2 }
 
+You can check the rules of your firewall by `> iptables -L -n` (need to be root).
+{: .fs-2 }
+
 Some important configuration files:
 {: .fs-2 }
 
