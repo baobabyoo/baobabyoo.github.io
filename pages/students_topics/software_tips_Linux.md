@@ -25,6 +25,12 @@ If you would like to install Linux to your laptop, instead of Rocky Linux or Cen
 Embedded below are some tips. 
 {: .fs-2 }
 
+##### 1.1 Frequently used commands
+
+1. connecting to other server: `ssh`, e.g., `ssh -X USER_ID@IP or ssh -X USER_ID@domain_name`.
+2. Downloading or uploading can use `scp` or `rsync`, e.g.,`scp -r USER_ID@domain_name:source_directory local_destination` or `rsync -avh -progress source_directory destination`.
+{: .fs-2 }
+
 
 ### 2. Installing
 
