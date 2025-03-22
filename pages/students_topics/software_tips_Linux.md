@@ -27,10 +27,26 @@ Embedded below are some tips.
 
 ##### 1.1 Frequently used commands
 
-1. connecting to other server: `ssh`, e.g., `ssh -X USER_ID@IP or ssh -X USER_ID@domain_name`.
+0. Text editing can use `vim`.
+1. Connecting to other server: `ssh`, e.g., `ssh -X USER_ID@IP or ssh -X USER_ID@domain_name`.
 2. Downloading or uploading can use `scp` or `rsync`, e.g.,`scp -r USER_ID@domain_name:source_directory local_destination` or `rsync -avh -progress source_directory destination`.
 {: .fs-2 }
 
+
+##### 1.2 ssh
+
+The configuration file is ususally `/etc/ssh/sshd_config` but can be different. For details, see [this webpage](https://linux.vbird.org/linux_server/centos6/0310telnetssh.php).
+{: .fs-2 }
+
+To allow one client compueter to login to the server without typing password, we can first generate a key from the client, and then copy the client's key to the server. The steps are:
+{: .fs-2 }
+
+1. `client> ssh-keygen`. (you may do the following steps simply using vim)
+2. `client> scp ~/.ssh/id_rsa.pub user_ID@server:~`.
+3. `server> cat id_rsa.pub >> .ssh/authorized_keys`.
+4. `server> chmod .ssh/authorized_keys`
+5. on server, you can remove the id_rsa.pub file afterward.
+{: .fs-2 }
 
 ### 2. Installing
 
