@@ -30,6 +30,7 @@ Embedded below are some tips.
 0. Text editing can use `vim`.
 1. Connecting to other server: `ssh`, e.g., `ssh -X USER_ID@IP or ssh -X USER_ID@domain_name`.
 2. Downloading or uploading can use `scp` or `rsync`, e.g.,`scp -r USER_ID@domain_name:source_directory local_destination` or `rsync -avh -progress source_directory destination`.
+3. You can use the `tar` command to compress and package files; `tar -tvf file.tar.gz` can list the files in a *tarball*; `tar -zxvf file.tar.gz` can untar a tarball; `tar -zcvf file.tar.gz ./file` can package everythiing in the ./file directory into the tarball, file.tar.gz. 
 {: .fs-2 }
 
 
