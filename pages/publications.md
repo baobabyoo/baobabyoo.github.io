@@ -42,7 +42,7 @@ has_toc: false
 
 
 ###### Publications as supervisor/advisor or initiator
-11. Chung, C., Tsai, A., Wright, M., Xu, W., Long, F., Gurwell, M., **Liu, H. B.\* **, *The 4--400 GHz Survey for the Class II Disks in the Taurus Molecular Cloud*, ApJS, in press (2025) [ADS](https://ui.adsabs.harvard.edu/abs/2025arXiv250214342C/abstract)
+11. Chung, C., Tsai, A., Wright, M., Xu, W., Long, F., Gurwell, M., **Liu, H. B.**\*, *The 4--400 GHz Survey for the Class II Disks in the Taurus Molecular Cloud*, ApJS, in press (2025) [ADS](https://ui.adsabs.harvard.edu/abs/2025arXiv250214342C/abstract)
 10. Chung, C.-Y., Andrews, S. M., Gurwell, M. A., Wright, M., Long, F., Xu, W., **Liu, H. B.\* **, *SMA 200--400 GHz survey for dust properties in the icy Class II disks in the Taurus molecular cloud*, ApJS, 273, 29 (2024) [ADS](https://ui.adsabs.harvard.edu/abs/2024ApJS..273...29C/abstract)
 9. Terada, Y., **Liu, H. B.\* **, Mkrtichian, D., Sai, J., Konishi, M., Jiang, I.-G., Muto, T., Hashimoto, J., Tamura, M., *Anisotropic Ionizing Illumination from an M-type Pre-main Sequence Star*, ApJ, 953, 147 (2023) [ADS](https://ui.adsabs.harvard.edu/abs/2023ApJ...953..147T/abstract)
 8. Ko, C.-L., **Liu, H. B.**, Lai, S.-P., Ching, T.-C., Rao, R., Girart, J.-M., *Resolving linear polarization due to emission and extinction of aligned dust grains on NGC1333 IRAS4A with JVLA and ALMA*, ApJ, 889, 172 (2020) [ADS](https://ui.adsabs.harvard.edu/abs/2020ApJ...889..172K/abstract)
