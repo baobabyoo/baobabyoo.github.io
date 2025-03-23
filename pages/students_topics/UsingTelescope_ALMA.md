@@ -177,13 +177,32 @@ ALMA staff will execute your observing script and will watch over the observatio
 
 ### 4. Data calibration and imaging
 
+#### 4.0 Using the archival ALMA visibilities or Quality-Assurance 2 (QA2) delivered ALMA visibilities
+
+If you want to use the archival ALMA data, you can first connect to the [ALMA user portal](https://almascience.nao.ac.jp/).
+Then, from the *DATA* tab, you can find the *archive* tab. 
+{: .fs-2 }
+
+In many occasion, you will need to reproduce the calibrated visibilities from the raw ALMA data, using the CASA pipeline.
+An overview of the ALMA pipeline is in [this page](https://almascience.nrao.edu/processing/science-pipeline).
+It will produce a **weblog**, which are html files, for you to review issues in the data calibration.
+The **weblog** is also provided as part of the qa2 delivery, in the qa2 directory.
+The weblogs can be opened with web browsers, for example, firefox.
+Starting from 2022, many web browsers will have some security setup that does not allow you to review the weblog.
+In this case, you need to do the following.
+First, untar it, for example, `untar -zxvf member.uid___A001_X2d1f_X187.hifa_polcal.weblog.tgz`.
+Then, `cd` into the untarred directory, and then `cd` into the html directory.
+Type `python3 -m http.server 8080 --bind localhost`.
+Then open a web browser, and open the link `http://localhost:8080/`.
+{: .fs-2 }
+
 #### 4.1 Software
 
 The official software package for processing ALMA data is the [CASA software package](https://casa.nrao.edu/).
 The CASA-pipeline versions for the data taken from each cycle can be checke [here](https://almascience.nao.ac.jp/processing/science-pipeline).
 {: .fs-2 }
 
-'''
+```
 Cycle-0: ?
 Cycle-1: ?
 Cycle-2: casapy-42.2.30986-pipe-1-64b.tar.gz
@@ -194,7 +213,7 @@ Cycle-6: casa-release-5.4.0-70.el7.tar.gz
 Cycle-7: casa-6.1.1-15-pipeline-2020.1.0.40.tar.xz
 Cycle-8: casa-6.2.1-7-pipeline-2021.2.0.128.tar.xz
 Cycle-9: casa-6.4.1-12-pipeline-2022.2.0.68-py3.6.tar.xz
-'''
+```
 {: .fs-2 }
 
 You can try using the previewer [CARTA](https://cartavis.org/) which can open very large (TB size) image files very quickly/smoothly.
