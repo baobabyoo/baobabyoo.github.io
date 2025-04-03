@@ -428,6 +428,7 @@ In the quotes, we can assign the permission. *ro* is read-only, *rw* is read-wri
 
 # Rocky Linux 8 and beyond (nfs-lock will be activate sutomatically)
 > systemctl start rpcbind.service nfs-server.service
+> systemctl enable nfs-server
 ```
 {: .fs-2 }
 
@@ -443,7 +444,32 @@ To check the shared directories, use the `showmount` command, e.g., `showmount -
 
 
 #### **Client**
-test.
+
+##### Step1: start the rpcbind service
+
+```
+# CentOS 6
+> /etc/init.d/rpcbind start
+> /etc/init.d/nfslock start
+
+# Rocky Linux 8 and beyond (nfs-lock will be activate sutomatically)
+> systemctl start rpcbind.service nfs-server.service
+```
+{: .fs-2 }
+
+In case your rpcbind service is blocked by the firewall, you can run
+{: .fs-2 }
+
+```
+> firewall-cmd --add-service=nfs
+> firewall-cmd --add-service=rpc-bind
+> firewall-cmd --add-service=mountd
+
+# to check which services are allowed:
+> firewall-cmd --get-services | grep -i -E "rpc|nfs"
+```
+{: .fs-2 }
+
 
 
 
