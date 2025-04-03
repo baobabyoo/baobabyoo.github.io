@@ -425,6 +425,9 @@ In the quotes, we can assign the permission. *ro* is read-only, *rw* is read-wri
 > /etc/init.d/rpcbind start
 > /etc/init.d/nfs start
 > /etc/init.d/nfslock start
+> chkconfig rpcbind on
+> chkconfig nfs on
+> chkconfig nfslock on
 
 # Rocky Linux 8 and beyond (nfs-lock will be activate sutomatically)
 > systemctl start rpcbind.service nfs-server.service
