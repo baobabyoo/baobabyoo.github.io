@@ -397,10 +397,15 @@ rpcbind-1.2.5-8.el8.x86_64
 {: .fs-2 }
 
 In case that they have not been installed, we can run `yum install nfs-utils` to install them.
+Then, you first setup the server, and then the client.
 {: .fs-2 }
 
 #### *Server*
-test.
+There are three steps: (1) edit the `/etc/exports` file, (2) activate the `rpcbind` service, and (3) activate `nfs`.
+{: .fs-2 }
+
+##### Step1
+test
 
 #### *Client*
 test.
