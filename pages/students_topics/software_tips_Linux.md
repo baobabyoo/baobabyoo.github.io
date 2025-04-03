@@ -373,12 +373,37 @@ atrm job_ID
 The **server** that shares its filesystem needs to activate the *Remote Procedure Call (RPC)*: (1) the rpcbind service to provide the port mapping, and (2) the nfs-utils program that provides the `rpc.nfsd` and `rpc.mountd` daemons.
 The `rpc.nfsd` daemon which manage the mount and login of the client, while the `rpc.mountd` daemon to manage the permission of the client.
 The **client** needs to active the `rpcbind` and `nfslock` service (the latter is to avoid a file being edited by multiple users simultaneously).
-{: .fs-2 } 
+{: .fs-2 }
+
+We can check whether or not we have installed the `nfs-utils` and `rpcbind` packages by running
+{: .fs-2 }
+
+```
+> rpm -qa | grep nfs
+texlive-mfnfss-20180414-23.el8.noarch
+sssd-nfs-idmap-2.5.2-2.el8_5.4.x86_64
+pcp-pmda-nfsclient-5.3.1-5.el8.x86_64
+nfs-utils-2.3.3-46.el8.x86_64
+libnfsidmap-2.3.3-46.el8.x86_64
+texlive-psnfss-20180414-23.el8.noarch
+nfs4-acl-tools-0.3.5-3.el8.x86_64
+```
+{: .fs-2 }
+
+```
+> rpm -qa | grep rpcbind
+rpcbind-1.2.5-8.el8.x86_64
+```
+{: .fs-2 }
+
+In case that they have not been installed, we can run `yum install nfs-utils` to install them.
+{: .fs-2 }
 
 #### *Server*
+test.
 
 #### *Client*
-
+test.
 
 
 
