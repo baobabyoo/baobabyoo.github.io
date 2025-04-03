@@ -457,22 +457,34 @@ To check the shared directories, use the `showmount` command, e.g., `showmount -
 ```
 {: .fs-2 }
 
-In case your rpcbind service is blocked by the firewall, you can run
+You can then use the `showmount -e IP` or `showmount -e hostname` command to check what have been shared with you.
+{: .fs-2 }
+
+In case your rpcbind service is blocked by the firewall, you can run (should do the same to the server)
 {: .fs-2 }
 
 ```
-> firewall-cmd --add-service=nfs
-> firewall-cmd --add-service=rpc-bind
-> firewall-cmd --add-service=mountd
+> firewall-cmd --permanent --add-service=nfs
+> firewall-cmd --permanent --add-service=rpc-bind
+> firewall-cmd --permanent --add-service=mountd
+> firewall-cmd --reload
 
 # to check which services are allowed:
 > firewall-cmd --get-services | grep -i -E "rpc|nfs"
 ```
 {: .fs-2 }
 
+##### Step2: mount a directory
 
+First, create a mount point by `mkdir test` (for example).
+{: .fs-2 }
 
+Mount the shared directory by `mount -t nfs HOSTNAME:DIRECTORY MOUNTPOINT`, e.g., `mount -t nfs 192.168.100.152:/home/hyliu/temp /home/hyliu/temp/test`
+You can check whether or not it is successfully mounted by `df -h`.
+{: .fs-2 }
 
+To unmount, `umount MOUNTPOINT`, e.g., `umount /home/hyliu/temp/test`.
+{: .fs-2 }
 
 
 
