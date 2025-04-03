@@ -370,7 +370,7 @@ atrm job_ID
 {: .fs-2 }
 
 ### 8. Network File System (NFS: mounting harddisks of other computers)
-The **server** that shares its filesystem needs to activate the *Remote Procedure Call (RPC)*: (1) the rpcbind service to provide the port mapping, and (2) the nfs-utils program that provides the `rpc.nfsd` and `rpc.mountd` daemons.
+The **server** that shares its filesystem needs to activate the *Remote Procedure Call (RPC)*: (1) the `rpcbind` service to provide the port mapping, and (2) the `nfs-utils` program that provides the `rpc.nfsd` and `rpc.mountd` daemons.
 The `rpc.nfsd` daemon which manage the mount and login of the client, while the `rpc.mountd` daemon to manage the permission of the client.
 The **client** needs to active the `rpcbind` and `nfslock` service (the latter is to avoid a file being edited by multiple users simultaneously).
 {: .fs-2 }
@@ -401,11 +401,46 @@ Then, you first setup the server, and then the client.
 {: .fs-2 }
 
 #### **Server**
-There are three steps: (1) edit the `/etc/exports` file, (2) activate the `rpcbind` service, and (3) activate `nfs`.
+There are three steps: (1) edit the `/etc/exports` file, (2) activate the `rpcbind` service, (3) activate `nfs`, (4) activate `nfslock`.
 {: .fs-2 }
 
-##### Step1
-test
+##### Step1: editing /etc/exports
+You can do the edit simply by `vim /etc/exports`
+{: .fs-2 }
+
+```
+# Here, each line include a directory you want to share, e.g., (it can be shared with everyone in a LAN)
+/home/hyliu/temp  192.168.100.0/24(ro)                localhost(rw)                *.nsysu.edu.tw(ro,sync)     192.168.100.151(rw)
+[directory]       [the first computer to share with]  [the 2nd, can use hostname]  [the 3rd, can use wildcard] [the 4th]
+```
+{: .fs-2 }
+
+In the quotes, we can assign the permission. *ro* is read-only, *rw* is read-write; *sync* means data will be written to memory and harddrive, *async* means data will be written to memory first, before writing to harddrive (default is async). There are other options, like *no_root_squash*, *root_squash*, *all_squash*, *anonuid*, *anongid*, which allows you to control whether or not you want to change the user-id of the client to certian values (which is related to security; you can skip this if you are inside of a relatively simple and safe LAN).
+{: .fs-2 }
+
+##### Step2,3,4: (re-)activate nfs
+
+```
+# CentOS 6
+> /etc/init.d/rpcbind start
+> /etc/init.d/nfs start
+> /etc/init.d/nfslock start
+
+# Rocky Linux 8 and beyond (nfs-lock will be activate sutomatically)
+> systemctl start rpcbind.service nfs-server.service
+```
+{: .fs-2 }
+
+You can double-check whether or not they are indeed activated, by running `ps -lef | grep -i -E "rpc|nfs"`.
+You can check the registered ports using the command `rpcinfo`
+{: .fs-2 }
+
+To re-mount all NFS-shared directories without restarting the NFS service, we can run `exportfs -arv`; to umount them all, run `exportfs -auv`.
+{: .fs-2 }
+
+To check the shared directories, use the `showmount` command, e.g., `showmount -e 192.168.100.152`, `showmount -e localhost`.
+{: .fs-2 }
+
 
 #### **Client**
 test.
