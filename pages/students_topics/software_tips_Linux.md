@@ -369,3 +369,31 @@ atrm job_ID
 ```
 {: .fs-2 }
 
+### 8. Network File System (NFS: mounting harddisks of other computers)
+The **server** that shares its filesystem needs to activate the *Remote Procedure Call (RPC)*: (1) the rpcbind service to provide the port mapping, and (2) the nfs-utils program that provides the `rpc.nfsd` and `rpc.mountd` daemons.
+The `rpc.nfsd` daemon which manage the mount and login of the client, while the `rpc.mountd` daemon to manage the permission of the client.
+The **client** needs to active the `rpcbind` and `nfslock` service (the latter is to avoid a file being edited by multiple users simultaneously).
+{: .fs-2 } 
+
+#### *Server*
+
+#### *Client*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
