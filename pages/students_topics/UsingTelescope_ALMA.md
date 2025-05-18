@@ -156,7 +156,7 @@ This means that you have to plan ahead in case you do not find a suitable person
 You need to include your target sources and set the spectral step(s), angular resolution(s), largest recoverable angular scale(s), and sensitivity on the [ALMA-OT](https://almascience.nao.ac.jp/proposing/observing-tool/installer-page) file. If you do not know the rest frequency of the spectral line(s) you want to observe, you can check the [Splatalogue](https://splatalogue.online//), otherwise, consult [chatGPT](https://openai.com/blog/chatgpt).
 {: .fs-2 }
 
-If there is any term on ALMA-OT that you do not know the exact meaning, consult [chatGPT](https://openai.com/blog/chatgpt) and then make your you do understand it. Try not making low-level mistakes and/or leaving it as a duty for your collaborators to go through all technical details again. Close to the ALMA proposal deadline, everybody is very busy. It would be a big favor if anyone help you with the technical details. Request help only when it is really necessary (e.g., when you need to carry out a circular polarization experiment, which is something that most of the users have not been educated with the technical background.)
+If there is any term on ALMA-OT that you do not know the exact meaning, consult [chatGPT](https://openai.com/blog/chatgpt) and then make sure you do understand it. Try not making low-level mistakes and/or leaving it as a duty for your collaborators to go through all technical details again. Close to the ALMA proposal deadline, everybody is very busy. It would be a big favor if anyone help you with the technical details. Request help only when it is really necessary (e.g., when you need to carry out a circular polarization experiment, which is something that most of the users have not been educated with the technical background.)
 {: .fs-2 }
 
 The selected spectral setups, angular resolution(s), and sensitivity also need to be explicitly explained on the ALMA-OT file. The quantitative needs to be quantitative and comprehensive. Do not leave any open question in the technical justifications, e.g., if you say you need to detect your target source at 10-sigma significance, then it would be good to explain why you need it to be 10-sigma instead of 5-sigma: the former requires 4 times longer on-source integration time than the latter!
@@ -177,13 +177,32 @@ ALMA staff will execute your observing script and will watch over the observatio
 
 ### 4. Data calibration and imaging
 
+#### 4.0 Using the archival ALMA visibilities or Quality-Assurance 2 (QA2) delivered ALMA visibilities
+
+If you want to use the archival ALMA data, you can first connect to the [ALMA user portal](https://almascience.nao.ac.jp/).
+Then, from the *DATA* tab, you can find the *archive* tab. 
+{: .fs-2 }
+
+In many occasion, you will need to reproduce the calibrated visibilities from the raw ALMA data, using the CASA pipeline.
+An overview of the ALMA pipeline is in [this page](https://almascience.nrao.edu/processing/science-pipeline).
+It will produce a **weblog**, which are html files, for you to review issues in the data calibration.
+The **weblog** is also provided as part of the qa2 delivery, in the qa2 directory.
+The weblogs can be opened with web browsers, for example, firefox.
+Starting from 2022, many web browsers will have some security setup that does not allow you to review the weblog.
+In this case, you need to do the following.
+First, untar it, for example, `untar -zxvf member.uid___A001_X2d1f_X187.hifa_polcal.weblog.tgz`.
+Then, `cd` into the untarred directory, and then `cd` into the html directory.
+Type `python3 -m http.server 8080 --bind localhost`.
+Then open a web browser, and open the link `http://localhost:8080/`.
+{: .fs-2 }
+
 #### 4.1 Software
 
 The official software package for processing ALMA data is the [CASA software package](https://casa.nrao.edu/).
 The CASA-pipeline versions for the data taken from each cycle can be checke [here](https://almascience.nao.ac.jp/processing/science-pipeline).
 {: .fs-2 }
 
-'''
+```
 Cycle-0: ?
 Cycle-1: ?
 Cycle-2: casapy-42.2.30986-pipe-1-64b.tar.gz
@@ -194,7 +213,7 @@ Cycle-6: casa-release-5.4.0-70.el7.tar.gz
 Cycle-7: casa-6.1.1-15-pipeline-2020.1.0.40.tar.xz
 Cycle-8: casa-6.2.1-7-pipeline-2021.2.0.128.tar.xz
 Cycle-9: casa-6.4.1-12-pipeline-2022.2.0.68-py3.6.tar.xz
-'''
+```
 {: .fs-2 }
 
 You can try using the previewer [CARTA](https://cartavis.org/) which can open very large (TB size) image files very quickly/smoothly.

@@ -25,6 +25,30 @@ If you would like to install Linux to your laptop, instead of Rocky Linux or Cen
 Embedded below are some tips. 
 {: .fs-2 }
 
+##### 1.1 Frequently used commands
+
+0. Text editing can use `vim`.
+1. Connecting to other server: `ssh`, e.g., `ssh -X USER_ID@IP or ssh -X USER_ID@domain_name`.
+2. Downloading or uploading can use `scp` or `rsync`, e.g.,`scp -r USER_ID@domain_name:source_directory local_destination` or `rsync -avh -progress source_directory destination`.
+3. You can use the `tar` command to compress and package files; `tar -tvf file.tar.gz` can list the files in a *tarball*; `tar -zxvf file.tar.gz` can untar a tarball; `tar -zcvf file.tar.gz ./file` can package everythiing in the ./file directory into the tarball, file.tar.gz.
+4. You can use the `arp` command to check the MAC address of a certain IP or hostname, e.g., `arp 192.168.100.1`.
+{: .fs-2 }
+
+
+##### 1.2 ssh
+
+The configuration file is ususally `/etc/ssh/sshd_config` but can be different. For details, see [this webpage](https://linux.vbird.org/linux_server/centos6/0310telnetssh.php).
+{: .fs-2 }
+
+To allow one client compueter to login to the server without typing password, we can first generate a key from the client, and then copy the client's key to the server. The steps are:
+{: .fs-2 }
+
+1. `client> ssh-keygen`. (you may do the following steps simply using vim)
+2. `client> scp ~/.ssh/id_rsa.pub user_ID@server:~`.
+3. `server> cat id_rsa.pub >> .ssh/authorized_keys`.
+4. `server> chmod .ssh/authorized_keys`
+5. on server, you can remove the id_rsa.pub file afterward.
+{: .fs-2 }
 
 ### 2. Installing
 
@@ -344,4 +368,138 @@ atrm job_ID
 > at -f ./XXX.sh 12:30 2025-07-30
 ```
 {: .fs-2 }
+
+### 8. Network File System (NFS: mounting harddisks of other computers)
+The **server** that shares its filesystem needs to activate the *Remote Procedure Call (RPC)*: (1) the `rpcbind` service to provide the port mapping, and (2) the `nfs-utils` program that provides the `rpc.nfsd` and `rpc.mountd` daemons.
+The `rpc.nfsd` daemon which manage the mount and login of the client, while the `rpc.mountd` daemon to manage the permission of the client.
+The **client** needs to active the `rpcbind` and `nfslock` service (the latter is to avoid a file being edited by multiple users simultaneously).
+{: .fs-2 }
+
+We can check whether or not we have installed the `nfs-utils` and `rpcbind` packages by running
+{: .fs-2 }
+
+```
+> rpm -qa | grep nfs
+texlive-mfnfss-20180414-23.el8.noarch
+sssd-nfs-idmap-2.5.2-2.el8_5.4.x86_64
+pcp-pmda-nfsclient-5.3.1-5.el8.x86_64
+nfs-utils-2.3.3-46.el8.x86_64
+libnfsidmap-2.3.3-46.el8.x86_64
+texlive-psnfss-20180414-23.el8.noarch
+nfs4-acl-tools-0.3.5-3.el8.x86_64
+```
+{: .fs-2 }
+
+```
+> rpm -qa | grep rpcbind
+rpcbind-1.2.5-8.el8.x86_64
+```
+{: .fs-2 }
+
+In case that they have not been installed, we can run `yum install nfs-utils` to install them.
+Then, you first setup the server, and then the client.
+{: .fs-2 }
+
+#### **Server**
+There are three steps: (1) edit the `/etc/exports` file, (2) activate the `rpcbind` service, (3) activate `nfs`, (4) activate `nfslock`.
+{: .fs-2 }
+
+##### Step1: editing /etc/exports
+You can do the edit simply by `vim /etc/exports`
+{: .fs-2 }
+
+```
+# Here, each line include a directory you want to share, e.g., (it can be shared with everyone in a LAN)
+/home/hyliu/temp  192.168.100.0/24(ro)                localhost(rw)                *.nsysu.edu.tw(ro,sync)     192.168.100.151(rw)
+[directory]       [the first computer to share with]  [the 2nd, can use hostname]  [the 3rd, can use wildcard] [the 4th]
+```
+{: .fs-2 }
+
+In the quotes, we can assign the permission. *ro* is read-only, *rw* is read-write; *sync* means data will be written to memory and harddrive, *async* means data will be written to memory first, before writing to harddrive (default is async). There are other options, like *no_root_squash*, *root_squash*, *all_squash*, *anonuid*, *anongid*, which allows you to control whether or not you want to change the user-id of the client to certian values (which is related to security; you can skip this if you are inside of a relatively simple and safe LAN).
+{: .fs-2 }
+
+##### Step2,3,4: (re-)activate nfs
+
+```
+# CentOS 6
+> /etc/init.d/rpcbind start
+> /etc/init.d/nfs start
+> /etc/init.d/nfslock start
+> chkconfig rpcbind on
+> chkconfig nfs on
+> chkconfig nfslock on
+
+# Rocky Linux 8 and beyond (nfs-lock will be activate sutomatically)
+> systemctl start rpcbind.service nfs-server.service
+> systemctl enable nfs-server
+```
+{: .fs-2 }
+
+You can double-check whether or not they are indeed activated, by running `ps -lef | grep -i -E "rpc|nfs"`.
+You can check the registered ports using the command `rpcinfo`
+{: .fs-2 }
+
+To re-mount all NFS-shared directories without restarting the NFS service, we can run `exportfs -arv`; to umount them all, run `exportfs -auv`.
+{: .fs-2 }
+
+To check the shared directories, use the `showmount` command, e.g., `showmount -e 192.168.100.152`, `showmount -e localhost`.
+{: .fs-2 }
+
+
+#### **Client**
+
+##### Step1: start the rpcbind service
+
+```
+# CentOS 6
+> /etc/init.d/rpcbind start
+> /etc/init.d/nfslock start
+
+# Rocky Linux 8 and beyond (nfs-lock will be activate sutomatically)
+> systemctl start rpcbind.service nfs-server.service
+```
+{: .fs-2 }
+
+You can then use the `showmount -e IP` or `showmount -e hostname` command to check what have been shared with you.
+{: .fs-2 }
+
+In case your rpcbind service is blocked by the firewall, you can run (should do the same to the server)
+{: .fs-2 }
+
+```
+> firewall-cmd --permanent --add-service=nfs
+> firewall-cmd --permanent --add-service=rpc-bind
+> firewall-cmd --permanent --add-service=mountd
+> firewall-cmd --reload
+
+# to check which services are allowed:
+> firewall-cmd --get-services | grep -i -E "rpc|nfs"
+```
+{: .fs-2 }
+
+##### Step2: mount a directory
+
+First, create a mount point by `mkdir test` (for example).
+{: .fs-2 }
+
+Mount the shared directory by `mount -t nfs HOSTNAME:DIRECTORY MOUNTPOINT`, e.g., `mount -t nfs 192.168.100.152:/home/hyliu/temp /home/hyliu/temp/test`
+You can check whether or not it is successfully mounted by `df -h`.
+{: .fs-2 }
+
+To unmount, `umount MOUNTPOINT`, e.g., `umount /home/hyliu/temp/test`.
+{: .fs-2 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
