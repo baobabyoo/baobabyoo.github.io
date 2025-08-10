@@ -50,6 +50,19 @@ To allow one client compueter to login to the server without typing password, we
 5. on server, you can remove the id_rsa.pub file afterward.
 {: .fs-2 }
 
+
+##### 1.3 Remotely execute program
+
+To remotely execute program on a Linux workstation but avoid terminating the program upon disconnection, there are three options:
+{: .fs-2 }
+
+1. The simplest method is to include `nohup` at the beginning of your command, e.g., `nohup python myprogram.py`. To obtain a logger, you can do `nohup python myprogram.py > output.log 2>&1 &`. However, with this method, you cannot recover the status of your terminal after reconnecting to your workstation.
+2. The second method, which is recommended, is to use `screen`. If you do not have this command, you can install it by `sudo yum install screen`, for example (it might be necessary to run `sudo yum install epel-release` first). After ssh to your workstation, to create and attach to a screen session, try `screen -S session_name`, for example. To detach, press `Crtl + a d`. To re-attach to it later, run `screen -r session_name`. To list all screen session, run `sreen -ls`. To kill a screen session, first list them, and then, for example, run `screen -XS session_ID quit`.
+3. The third method is to use `tmux`, which is similar to `screen`.
+{: .fs-2 }
+
+
+
 ### 2. Installing
 
 You need to create a bootable USB drive.
