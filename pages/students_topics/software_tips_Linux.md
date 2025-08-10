@@ -504,7 +504,16 @@ To unmount, `umount MOUNTPOINT`, e.g., `umount /home/hyliu/temp/test`.
 
 
 
+##### 8.1 NAS (Network-Attached Storage)
 
+To mount a NAS on other Linux workstation (usually, we need to check the document, e.g., for ASUSTOR NAS can check [here](https://www.asustor.com/zh-tw/knowledge/detail?id=5&group_id=508)), first, we need to enable the NFS service on the NAS by logging onto the NAS. Then, on the linux workstation that you want to mount the NAS, you can type `mount -t nfs NAS_IP:Remote_Shared_Directory Local_Mount_Point`, for example, `mount -t nfs 192.168.1.104:/volume1/Public /mnt/pub`. 
+{: .fs-2 }
+
+To unmount, `umount MOUNTPOINT`.
+{: .fs-2 }
+
+Sometimes, NAS may not be unmounted correctly. In that case, `df -h` will be hanning forever. In this case, try `> sudo umount -l /nas` to unmount the device.
+{: .fs-2 }
 
 
 
