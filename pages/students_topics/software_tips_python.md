@@ -69,6 +69,26 @@ conda list
 ```
 {: .fs-1 }
 
+You can use the [conda-pack](https://conda.github.io/conda-pack/) package to create a tarball of a specific conda environment.
+{: .fs-2 }
+
+```
+# installing conda-pack
+# option 1
+conda install conda-pack
+conda install -c conda-forge conda-pack
+# option 2
+pip install conda-pack
+
+# To create an tarball of a environment
+conda pack -n my_env -o out_name.tar.gz
+
+# To use the environment, untall the tarball into the directory where your environments are located, e.g.,
+# /home/you_account/softwares/python/anaconda3/envs
+```
+
+
+
 ### 2. PYTHONPATH
 
 In Linux, you set the environmental variable *PYTHONPATH*, where python can import classes and functions from. For example, I can create a directory `$HOME/bin/python` and then leave a code `test.py` there:
