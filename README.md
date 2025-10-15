@@ -53,7 +53,9 @@ A full list of my present and former group members (and some of their journal pu
 {: .fs-2 }
 
 ###### Students
+- 2023 Excellent Thesis Award (研究生學位論文獎佳作), The Physical Society of Taiwan (Chia-Ying Chung 鍾佳穎)
 - 2022 ASROC Excellent Poster (Yuka Terada 寺田由佳)
+- 2019 Chien-Shiung Wu Prize (吳健雄獎), The Physical Society of Taiwan (Chia-Lin Ko 柯嘉琳)
 {: .fs-2 }
 
 {: .fs-2 }
