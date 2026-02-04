@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Data Modelings
+title: Radiative Transfer
 parent: Basic Astrophysics
 grand_parent: To my students
 nav_order: 4
