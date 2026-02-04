@@ -9,14 +9,17 @@ has_toc: false
 ## Classical Dynamics (I) (Graduate)
 
 **2026-Feb-X/May-X @ NSYSU :**
+{: .fs-1 }
 
 ## Quantum Physics (II) (Under)
 
 **2026-Feb-X/May-X @ NSYSU :**
+{: .fs-1 }
 
 ## Quantum Physics (I) (Under)
 
 **2025-Sep-10/Dec-26 @ NSYSU :**  *Wave function, time-independent Schrodinger eq., formalism, QM in three dimensions, linear algebra* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_QuantumMechanics))
+{: .fs-1 }
 
 ## Scientific Writing
 
