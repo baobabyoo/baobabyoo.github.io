@@ -31,14 +31,7 @@ More details about my research can be found at [this page](/pages/research).
 
 ### Group Members
 
-I presently host five students, 0 research assistant, and 0 postdoc:
-{: .fs-2 }
-
-- **Undergraduate (2024-):** Lin, Cyuan-Yong (林詮詠)
-- **Undergraduate (2023-):** Hong, Yi-Ping (洪懌平)
-- **Undergraduate (2023-):** Huang, Hank Ting-Jing (黃珽靖)
-- **Undergraduate (2022-):** Chen, Ting-Chen (陳亭蓁)
-- **M.D. student (2022-):** Siu, Greta Hiu Lam (蕭曉琳)
+I presently host 3 students, 0 research assistant, and 1 postdoc:
 {: .fs-2 }
 
 A full list of my present and former group members (and some of their journal publications) can be found [here](/pages/members).
