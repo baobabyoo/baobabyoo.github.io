@@ -6,6 +6,35 @@ has_children: false
 has_toc: false
 ---
 
+## Classical Dynamics (I) (Graduate)
+
+**2026-Feb-X/May-X @ NSYSU :**
+
+## Quantum Physics (II) (Under)
+
+**2026-Feb-X/May-X @ NSYSU :**
+
+## Quantum Physics (I) (Under)
+
+**2025-Sep-10/Dec-26 @ NSYSU :**  *Wave function, time-independent Schrodinger eq., formalism, QM in three dimensions, linear algebra* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_QuantumMechanics))
+
+## Scientific Writing
+
+**2025-Sep-10/Dec-26 @ NSYSU :** *Position/award applications, posters, E-mails, recommend letters, abstract, paper/thesis, making figures* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_ScientificWriting)).
+{: .fs-1 }
+
+1. [Lecture notes: Overview](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week1.pdf)
+2. [Lecture notes: E-mails and recommend letters](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week2.pdf)
+3. [Lecture notes: Poster, Abstract, Oral presentation](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week3.pdf)
+4. [Lecture notes: Position application (Ph.D./postdoc)](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week4.pdf)
+5. [Lecture notes: Award and proposal for other resources](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week5.pdf)
+6. [Lecture notes: Paper/Thesis: Concept, and breaking down the problem](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week6.pdf)
+7. [Lecture notes: Paper/Thesis: Outlining](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week7.pdf)
+8. [Lecture notes: Paper/Thesis: Making figures and composing captions](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week8.pdf)
+9. [Lecture notes: Paper/Thesis: Composing caption and result sections](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week9.pdf)
+10. [Lecture notes: Discussion section](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week10.pdf)
+11. [Lecture notes: Introduction section](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week11.pdf)
+
 ## Data Analysis
 
 **2023-Mar.03/07 @ NSYSU :** *Data Analysis*
