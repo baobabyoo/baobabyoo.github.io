@@ -190,6 +190,9 @@ In general, I do not recommend observing your target source at lower than 20 deg
  Also, if your proposal rating is high (e.g., A ranked), you can try to limit the LST range for your scheduling blocks, such that the observations are carried out at >40 degree elevation in the case of D configuration observations, and at >25 degree elevation in the case of C array configuration. This is to avoid the mutual shadowing of antennae. However, the more limited LST range you use, the less chance for your observations to be dynamically scheduled. So there is this trade-off. If you are not sure about what is an optimal choice, please ask experienced observers.
 {: .fs-2 }
 
+Finally, you can use the online too [here](https://science.nrao.edu/facilities/vla/docs/manuals/obsguide/dynsched/avoiding-the-sun) to check solar avoidance.
+{: .fs-2 }
+
 ###### 2.3.4.1 Validation, submission, and linking scheduling blocks
 
 After changing the scans such that there is no errors, click into `Validation and Submission` to validate your scheduling block and submit it. Then an internal staff will review your scheduling blocks and give some feedback if necessary. **Remember to logout the OPT to allow the staff to login to your project.** In many cases, you have to un-submit your scheduling blocks and make edits accordingly. **Prepare and submit your scheduling block early. It takes time to iterate through these. The earlier the scheduling blocks are queued, the higher relative priority they will have (i.e., they will be more likely to be executed). This is particularly important when you are carrying out C-rated high-frequency observations (e.g., >20 GHz).**

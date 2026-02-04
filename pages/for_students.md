@@ -46,7 +46,8 @@ A minimal skill set you need would be: Linux operation system, LaTEX, one progra
     4. *Various optical or infrared telescopes:* Mostly in March or September every year.
     5. *Others :* I may once in a while notify you (by E-mails) something worth trying.
 - **List of Star-formation related conference and workshops**
-    1. [Star-Formation News Letters](https://www.starformation.news/community/meetings).
+    1. [CADC List of Astronomy Meetings](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/meetings/).
+    2. [Star-Formation News Letters](https://www.starformation.news/community/meetings).
 - **(Sub)millimeter molecular line tools**
     1. [Splatologue](https://splatalogue.online//): Complete, but no visualization.
     2. [SMA Passband Visualizer](http://sma1.sma.hawaii.edu/smaPassbandViewer/smaPassbandVis2020A.html): Handy, if you are proposing to the SMA or ALMA Band 5, 6, 7, and 8.

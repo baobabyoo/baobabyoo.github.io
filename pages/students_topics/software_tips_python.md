@@ -86,7 +86,7 @@ conda pack -n my_env -o out_name.tar.gz
 # To use the environment, untall the tarball into the directory where your environments are located, e.g.,
 # /home/you_account/softwares/python/anaconda3/envs
 ```
-
+{: .fs-2 }
 
 
 ### 2. PYTHONPATH

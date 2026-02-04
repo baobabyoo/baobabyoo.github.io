@@ -109,6 +109,13 @@ GRUB_ENABLE_BLSCFG=true
 With CentOS or Rocky Linux, use `yum install`; with Ubuntu Linux, use `apt-get install`.
 {: .fs-2 }
 
+If you do not have root access, and if you would like to use some `.so` files, you can leave them in certain directories you created, and add the directory to the `LD_LIBRARY_PATH` by including the following line in your `.bashrc` file (for example).
+{: .fs-2 }
+```
+export LD_LIBRARY_PATH=/home/YOUR_ACCOUNT/so_files:$LD_LIBRARY_PATH
+```
+
+
 ### 5. Accounts
 
 #### 5.1 root password
