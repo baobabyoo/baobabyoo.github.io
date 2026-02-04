@@ -37,6 +37,7 @@ has_toc: false
 9. [Lecture notes: Paper/Thesis: Composing caption and result sections](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week9.pdf)
 10. [Lecture notes: Discussion section](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week10.pdf)
 11. [Lecture notes: Introduction section](https://github.com/baobabyoo/Lecture_ScientificWriting/blob/main/PDF/week11.pdf)
+{: .fs-1 }
 
 ## Data Analysis
 
