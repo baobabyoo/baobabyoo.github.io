@@ -149,6 +149,9 @@ Restar your network service: `/etc/init.d/network restart`
 You can check the rules of your firewall by `> iptables -L -n` or `iptables-save` (need to be root).
 {: .fs-2 }
 
+You can check the status if your software RAID by `cat /proc/mdstat`
+{: .fs-2 }
+
 Some important configuration files:
 {: .fs-2 }
 
