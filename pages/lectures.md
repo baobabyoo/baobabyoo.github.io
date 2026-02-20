@@ -13,7 +13,7 @@ has_toc: false
 
 ## Quantum Physics (II) (Under)
 
-**2026-Feb-X/May-X @ NSYSU :** 
+**2026-Feb-X/May-X @ NSYSU :** *spatial translational symmetry, parity; identical particles; rotational symmetry and selection rule; time-independent perturbation theory; the fine structure of hydrogen, and Zeeman effect; variational principle; WKB approximation; scattering; quantum dynamics* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_QuantumMechanics/tree/main))
 {: .fs-1 }
 
 ## Quantum Physics (I) (Under)
