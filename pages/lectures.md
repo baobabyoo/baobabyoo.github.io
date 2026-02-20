@@ -8,12 +8,12 @@ has_toc: false
 
 ## Classical Dynamics (I) (Graduate)
 
-**2026-Feb-X/May-X @ NSYSU :**
+**2026-Feb-X/May-X @ NSYSU :** *variational principle and Lagrange's equations, central force problem, Hamilton equations of motions, canonical transformation, Lagrangian and Hamiltonian formulations for continuous systems and fields* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_ClassicalDynamics/tree/main))
 {: .fs-1 }
 
 ## Quantum Physics (II) (Under)
 
-**2026-Feb-X/May-X @ NSYSU :**
+**2026-Feb-X/May-X @ NSYSU :** 
 {: .fs-1 }
 
 ## Quantum Physics (I) (Under)
