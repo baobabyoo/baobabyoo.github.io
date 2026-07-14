@@ -6,7 +6,7 @@ has_children: false
 has_toc: false
 ---
 
-### Publications (updated on 2026-May-08, with 198 peer reviewed journal papers: 28 1st-author papers/30 2nd- or corresponding author papers)(Google Scholar h-index: 48)
+### Publications (updated on 2026-Jul-14, with 203 peer reviewed journal papers: 28 1st-author papers/31 2nd- or corresponding author papers)(Google Scholar h-index: 50)
 [(Search on ADS)](https://reurl.cc/5OxD7q)
 [(Google Scholar)](https://scholar.google.com/citations?user=0fwbACkAAAAJ)
 
