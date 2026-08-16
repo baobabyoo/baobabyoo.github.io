@@ -62,6 +62,17 @@ To remotely execute program on a Linux workstation but avoid terminating the pro
 {: .fs-2 }
 
 
+##### 1.4 Download from Google Drive using command line
+
+1. Run `pip install gdown`
+2. Download files using the command `gdown $GOOGLEDRIVE_LINK -o $LOCAL_DIR --fuzzy`
+{: .fs-2 }
+
+Example:
+{: .fs-2 }
+```
+gdown "https://drive.google.com/file/d/1LCGMMs_f83BQVOZjF0AGgRM96uXxMj90/view" -O ./test --fuzzy
+```
 
 ### 2. Installing
 
