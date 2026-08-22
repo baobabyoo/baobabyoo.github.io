@@ -6,6 +6,10 @@ has_children: false
 has_toc: false
 ---
 
+## Classical Mechanics (I) (Under)
+**2026-Sep-07/Dec-25 @ NSYSU :** *Mathematics, Newtons laws, harmonic oscillations, chaos, gravitation, variational principle, Lagrangian and Hamiltonian formulations, special relativity* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_UGClassicalMechanics))
+{: .fs-1 }
+
 ## Classical Dynamics (I) (Graduate)
 
 **2026-Feb-X/May-X @ NSYSU :** *variational principle and Lagrange's equations, central force problem, Hamilton equations of motions, canonical transformation, Lagrangian and Hamiltonian formulations for continuous systems and fields* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_ClassicalDynamics/tree/main))
@@ -22,6 +26,9 @@ has_toc: false
 {: .fs-1 }
 
 ## Scientific Writing
+
+**2026-Sep-07/Dec-26 @ NSYSU :** *Position/award applications, posters, E-mails, recommend letters, abstract, paper/thesis, making figures* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_ScientificWriting)).
+{: .fs-1 }
 
 **2025-Sep-10/Dec-26 @ NSYSU :** *Position/award applications, posters, E-mails, recommend letters, abstract, paper/thesis, making figures* ([Lecture Homepage](https://github.com/baobabyoo/Lecture_ScientificWriting)).
 {: .fs-1 }
