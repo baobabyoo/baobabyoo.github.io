@@ -35,7 +35,7 @@ has_toc: false
 {: .fs-2 }
 
 *Other closely collaborated students*
-- Linjing Feng (NAOC; [Publication-1](https://baobabyoo.github.io/pages/publications.html))
+- Linjing Feng (NAOC; [Publication-1](https://ui.adsabs.harvard.edu/abs/2026ApJ...998..224F/abstract))
 - Joaquin Zamponi (MPE; [Publication-1](https://ui.adsabs.harvard.edu/abs/2021MNRAS.508.2583Z/abstract), [Publication-2](https://ui.adsabs.harvard.edu/abs/2024A%26A...682A..56Z/abstract))
 - Paolo Cazzoletti (Leiden; [Publication](https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..11C/abstract))
 - Kristina Monsch (MPE; [Publication](https://ui.adsabs.harvard.edu/abs/2018ApJ...861...77M/abstract))
