@@ -10,8 +10,6 @@ has_toc: false
 [(Search on ADS)](https://reurl.cc/5OxD7q)
 [(Google Scholar)](https://scholar.google.com/citations?user=0fwbACkAAAAJ)
 
-Citation counts are from NASA ADS, retrieved 2026-11-17T08:13:24.486843+00:00; 0 unavailable counts are recorded as zero by request. Google Scholar h-index checked on 2026-11-17. An asterisk after my name marks corresponding or co-corresponding authorship. IF is the journal’s two-year Journal Impact Factor for the publication year in the matched ADS record; 38 unavailable or inapplicable values are shown as N/A. Historical values and source URLs were checked on 2026-11-17 ([IF sources](scripts/journal_impact_factors_2026Nov17.json)).
-
 ###### As first author
 28. **Liu, H. B.**\*, Doi, K., Casassus, S., Kataoka, A., Dong, R., Hashimoto, J., Webber, P., *Coagulation of Ice-coated particles is limited*, A\&A, 708, 95 (2026) [ADS](https://ui.adsabs.harvard.edu/abs/2026A%26A...708A..95L/abstract) (citations: <span style="color: red;">6</span>, IF: <span style="color: red;" title="2026 Journal Impact Factor not yet available">N/A</span>)
 27. **Liu, H. B.**\*, Casassus, S., Dong, R., Doi, K., Hashimoto, J., Muto, T., *First JVLA Radio Observation on PDS 70*, ApJ, 972, 163 (2024) [ADS](https://ui.adsabs.harvard.edu/abs/2024ApJ...972..163L/abstract) (citations: <span style="color: red;">12</span>, IF: <span style="color: red;" title="2024 Journal Impact Factor; The Astrophysical Journal">5.4</span>)
