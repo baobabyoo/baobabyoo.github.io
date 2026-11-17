@@ -41,6 +41,8 @@ A full list of my present and former group members (and some of their journal pu
 ### Honor and Awards
 
 ###### PI
+- 2026 NSYSU 校級特聘年輕學者
+- 2023 NSYSU 校級特聘年輕學者
 - 2022 NSTC Ta-You Wu Memorial Award
 - 2015-2018 ESO Fellow
 {: .fs-2 }
